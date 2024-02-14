@@ -1,7 +1,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import { BiHome, BiMenu } from "react-icons/bi";
-import { FiShoppingBag, FiSend } from "react-icons/fi";
+import { FiShoppingBag, FiSend, FiSidebar } from "react-icons/fi";
 // import { LiaShoppingBasketSolid } from "react-icons/lia";
 import { useState } from "react";
 
@@ -30,6 +30,11 @@ export const Sidebar = () => {
       name: "VENTAS",
       path: "/ventas",
       icon: <FiSend />,
+    },
+    {
+      name: "ABERTURAS",
+      path: "/aberturas",
+      icon: <FiSidebar />,
     },
   ];
 

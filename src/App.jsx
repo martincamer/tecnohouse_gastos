@@ -18,6 +18,13 @@ import { GastosProvider } from "./context/GastosProvider";
 import { Ventas } from "./routes/pages/protected/Ventas";
 import { VentasProvider } from "./context/VentasProvider";
 import { ViewVenta } from "./routes/pages/protected/ViewVenta";
+import { AberturasCostos } from "./routes/pages/protected/AberturasCostos";
+import { AberturasProvider } from "./context/AberturasProvider";
+import { Perfiles } from "./routes/pages/protected/Perfiles";
+import { PerfilesProvider } from "./context/PerfilesProvider";
+import { AccesoriosProvider } from "./context/AccesoriosProvider";
+import { Accesorios } from "./routes/pages/protected/Accesorios";
+import { PreciosProvider } from "./context/PreciosProvider";
 
 function App() {
   const { isAuth } = useAuth();
@@ -40,19 +47,30 @@ function App() {
               element={
                 <GastosProvider>
                   <VentasProvider>
-                    <main className="flex gap-2 h-full">
-                      <Sidebar />
-                      <Outlet />
-                    </main>
+                    <AberturasProvider>
+                      <PerfilesProvider>
+                        <AccesoriosProvider>
+                          <PreciosProvider>
+                            <main className="flex gap-2 h-full">
+                              <Sidebar />
+                              <Outlet />
+                            </main>
+                          </PreciosProvider>
+                        </AccesoriosProvider>
+                      </PerfilesProvider>
+                    </AberturasProvider>
                   </VentasProvider>
                 </GastosProvider>
               }
             >
               <Route index path="/" element={<Home />} />
-              <Route index path="/gastos" element={<Gastos />} />
-              <Route index path="/ventas" element={<Ventas />} />
-              <Route index path="/gastos/:id" element={<ViewGasto />} />
-              <Route index path="/ventas/:id" element={<ViewVenta />} />
+              <Route path="/gastos" element={<Gastos />} />
+              <Route path="/ventas" element={<Ventas />} />
+              <Route path="/perfiles" element={<Perfiles />} />
+              <Route path="/accesorios" element={<Accesorios />} />
+              <Route path="/aberturas" element={<AberturasCostos />} />
+              <Route path="/gastos/:id" element={<ViewGasto />} />
+              <Route path="/ventas/:id" element={<ViewVenta />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
