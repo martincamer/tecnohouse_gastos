@@ -11,11 +11,17 @@ export const ModalCrearGastos = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm();
 
   const onSubmit = handleSubmit(async (data) => {
+    const precioUnidadNumerico = parseInt(data.total.replace(/[^\d]/g, ""), 10);
+
+    // Actualiza el valor en el objeto data
+    data.total = precioUnidadNumerico;
+
     const res = await crearGastoNuevo(data);
 
     setTimeout(() => {
@@ -92,24 +98,24 @@ export const ModalCrearGastos = () => {
                   CREAR NUEVO GASTO
                 </Dialog.Title>
                 <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
-                  <form onSubmit={onSubmit} className="flex flex-col gap-6">
-                    <div className="flex items-center gap-2 w-full">
+                  <form onSubmit={onSubmit} className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-1">
                       <label className="font-semibold text-gray-700" htmlFor="">
                         DETALLE:
                       </label>{" "}
                       <textarea
                         {...register("detalle")}
                         placeholder="DETALLE.."
-                        className="w-full py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
                       />
                     </div>
-                    <div className="flex items-center gap-2 w-full">
+                    <div className="flex flex-col gap-1 w-1/5">
                       <label className="font-semibold text-gray-700" htmlFor="">
                         TIPO GASTO:
                       </label>{" "}
                       <select
                         {...register("tipo")}
-                        className="w-1/2 py-2 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none bg-white"
                       >
                         <option value="">SELECCIONAR</option>
                         <option value="insumos">INSUMOS</option>
@@ -122,28 +128,56 @@ export const ModalCrearGastos = () => {
                         <option value="pagos">PAGOS</option>
                       </select>
                     </div>
-                    <div className="flex items-center gap-2 w-full">
+                    <div className="flex flex-col gap-1">
                       <label className="font-semibold text-gray-700" htmlFor="">
                         NUMERO FACTURA O OTRA COSA:
                       </label>{" "}
                       <input
                         {...register("numero")}
                         placeholder="N° 000-12244"
-                        className="w-1/3 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
                       />
                     </div>
-                    <div className="flex items-center gap-2 w-full">
-                      <label className="font-semibold text-gray-700" htmlFor="">
-                        TOTAL INGRESO:
-                      </label>{" "}
+                    <div className="flex flex-col gap-1">
+                      <label className="font-semibold text-base">
+                        TOTAL INGRESO
+                      </label>
                       <input
-                        {...register("total")}
-                        placeholder="TOTAL GASTO $"
-                        className="w-1/2 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        type="text"
+                        placeholder="TOTAL GASTO"
+                        {...register("total", {
+                          validate: (value) => {
+                            const numeroLimpiado = value.replace(/[^0-9]/g, "");
+                            return !!numeroLimpiado || "El gasto es requerido";
+                          },
+                        })}
+                        onChange={(e) => {
+                          const inputPrecio = e.target.value;
+
+                          // Remover caracteres no numéricos
+                          const numeroLimpiado = inputPrecio.replace(
+                            /[^0-9]/g,
+                            ""
+                          );
+
+                          // Formatear como moneda
+                          const precioFormateado = new Intl.NumberFormat(
+                            "es-CO",
+                            {
+                              style: "currency",
+                              currency: "ARS",
+                              minimumFractionDigits: 0,
+                            }
+                          ).format(numeroLimpiado);
+
+                          // Asignar el valor formateado al campo
+                          e.target.value = precioFormateado;
+                        }}
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
                       />
                     </div>
                     <div className="flex items-start">
-                      <button className="font-bold bg-teal-300 text-steal-950 py-2 px-12 rounded-full text-center shadow">
+                      <button className="font-bold bg-teal-500 text-white py-2 px-12 rounded-lg text-center shadow">
                         CREAR NUEVO GASTO
                       </button>
                     </div>

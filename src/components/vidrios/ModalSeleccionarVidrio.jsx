@@ -2,40 +2,48 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { Search } from "../ui/Search";
 import { Link } from "react-router-dom";
-// import { useFacturaContext } from "../../context/FacturaProvider";
 import { useAberturasContext } from "../../context/AberturasProvider";
-import { usePerfilesContex } from "../../context/PerfilesProvider";
 import { ModalSeleccionarCantidadPerfil } from "./ModalSeleccionarCantidadPerfil";
+// import { usePerfilesContex } from "../../context/PerfilesProvider";
+// import { useFacturaContext } from "../../context/FacturaProvider";
 
-export const ModalSeleccionarPerfil = ({
+export const ModalSeleccionarVidrio = ({
   closeModalProductos,
   isOpenProductos,
 }) => {
   //   const { search, searcher, results } = useAluminioContext();
-  const { handleSeleccionarProducto } = useAberturasContext();
-  const { results, searcher, search } = usePerfilesContex();
+  const { addToVidrio } = useAberturasContext();
+  // const { perfiles } = usePerfilesContex();
 
-  let [isOpenModal, setIsModal] = useState(false);
+  // let [isOpenModal, setIsModal] = useState(false);
 
-  function closeModalCantidad() {
-    setIsModal(false);
-  }
+  // function closeModalCantidad() {
+  //   setIsModal(false);
+  // }
 
-  function openModalCantidad() {
-    setIsModal(true);
-  }
+  // function openModalCantidad() {
+  //   setIsModal(true);
+  // }
 
-  const itemsPerPage = 5; // Cantidad de elementos por página
-  const [currentPage, setCurrentPage] = useState(1);
+  const [ancho, setAncho] = useState("");
+  const [alto, setAlto] = useState("");
+  const [cantidad, setCantidad] = useState("");
+  const [categoria, setCategoria] = useState("");
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentResults = results.slice(indexOfFirstItem, indexOfLastItem);
+  const handleChangeAncho = (event) => {
+    setAncho(event.target.value);
+  };
 
-  const totalPages = Math.ceil(results.length / itemsPerPage);
+  const handleChangeAlto = (event) => {
+    setAlto(event.target.value);
+  };
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
+  const handleChangeCantidad = (event) => {
+    setCantidad(event.target.value);
+  };
+
+  const handleChangeCategoria = (event) => {
+    setCategoria(event.target.value);
   };
 
   return (
@@ -92,21 +100,103 @@ export const ModalSeleccionarPerfil = ({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
                 >
-                  Elegir Perfil
+                  Elegir Vidrio / en cm
                 </Dialog.Title>
-                <Search
+                {/* <Search
                   variable={"Buscar por el codigo o detalle..."}
                   search={search}
                   searcher={searcher}
-                />
+                /> */}
 
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
+                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex gap-6 w-full py-10 px-10 overflow-y-scroll">
+                  <div className="flex gap-2 items-center">
+                    <label
+                      className="uppercase text-teal-500 font-semibold"
+                      htmlFor=""
+                    >
+                      Ancho
+                    </label>
+                    <input
+                      value={ancho}
+                      onChange={handleChangeAncho}
+                      type="text"
+                      placeholder="ANCHO DEL VIDRIO"
+                      className="border-[1px] border-gray-200 rounded-lg shadow shadow-black/20 py-1 px-3 placeholder:text-sm outline-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-2 items-center">
+                    <label
+                      className="uppercase text-teal-500 font-semibold"
+                      htmlFor=""
+                    >
+                      Alto
+                    </label>
+                    <input
+                      value={alto}
+                      onChange={handleChangeAlto}
+                      type="text"
+                      placeholder="ALTO DEL VIDRIO"
+                      className="border-[1px] border-gray-200 rounded-lg shadow shadow-black/20 py-1 px-3 placeholder:text-sm outline-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-2 items-center">
+                    <label
+                      className="uppercase text-teal-500 font-semibold"
+                      htmlFor=""
+                    >
+                      Cantidad
+                    </label>
+                    <input
+                      value={cantidad}
+                      onChange={handleChangeCantidad}
+                      type="text"
+                      placeholder="CANTIDAD DE VIDRIOS"
+                      className="border-[1px] border-gray-200 rounded-lg shadow shadow-black/20 py-1 px-3 placeholder:text-sm outline-none"
+                    />
+                  </div>
+
+                  <div className="flex gap-2 items-center">
+                    <label
+                      className="uppercase text-teal-500 font-semibold"
+                      htmlFor=""
+                    >
+                      Seleccionar
+                    </label>
+                    <select
+                      value={categoria}
+                      onChange={handleChangeCategoria}
+                      type="text"
+                      placeholder="CANTIDAD DE VIDRIOS"
+                      className="border-[1px] border-gray-200 bg-white rounded-lg shadow shadow-black/20 py-2 px-3 placeholder:text-sm outline-none"
+                    >
+                      <option>SELECCIONAR</option>
+                      <option>6 mls</option>
+                      <option>3 mls</option>
+                      <option>4 mls</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    className="bg-teal-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold"
+                    type="button"
+                    onClick={() => {
+                      addToVidrio(ancho, alto, cantidad, categoria),
+                        closeModalProductos();
+                    }}
+                  >
+                    Crear vidrio
+                  </button>
+                </div>
+                {/* <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
                   <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
                     <thead>
                       <tr>
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center">
                           Numero
-                        </th> */}
+                        </th>
                         <th className="p-2 text-sm font-extrabold text-center">
                           Codigo
                         </th>
@@ -128,11 +218,11 @@ export const ModalSeleccionarPerfil = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {currentResults?.map((c) => (
+                      {perfiles.map((c) => (
                         <tr key={c.id}>
-                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
+                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
                             {c.id}
-                          </th> */}
+                          </th>
                           <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.codigo}
                           </th>
@@ -165,32 +255,14 @@ export const ModalSeleccionarPerfil = ({
                         </tr>
                       ))}
                     </tbody>
-                  </table>
-
-                  {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
-                      {Array.from({ length: totalPages }).map((_, index) => (
-                        <button
-                          key={index}
-                          className={`mx-1 px-3 py-1 rounded ${
-                            currentPage === index + 1
-                              ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
-                              : "bg-gray-100 shadow shadow-black/20"
-                          }`}
-                          onClick={() => handlePageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <ModalSeleccionarCantidadPerfil
+                  </table> */}
+                {/* </div> */}
+                {/* <ModalSeleccionarCantidadPerfil
                   isOpenModal={isOpenModal}
                   closeModalCantidad={closeModalCantidad}
                   openModalCantidad={openModalCantidad}
                   closeModalProductos={closeModalProductos}
-                />
+                /> */}
                 <button
                   type="button"
                   className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer uppercase"

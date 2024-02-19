@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { ModalCrearNuevoPerfil } from "../../../components/perfiles/ModalCrearNuevoPerfil";
 import { ModalEliminarPerfil } from "../../../components/perfiles/ModalEliminarPerfil";
 import { Search } from "../../../components/ui/Search";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
+import { ModalEditarPerfil } from "../../../components/perfiles/ModalEditarPerfil";
 
 export const Perfiles = () => {
   const {
@@ -11,7 +13,38 @@ export const Perfiles = () => {
     perfiles,
     openModalEliminar,
     obtenerParamsId,
+    results,
+    search,
+    searcher,
   } = usePerfilesContex();
+
+  const [isOpenEditar, setIsOpenEditar] = useState(false);
+  const [obtenerId, setObtenerId] = useState("");
+
+  function openEditarPerfil() {
+    setIsOpenEditar(true);
+  }
+
+  function closeEditarPerfil() {
+    setIsOpenEditar(false);
+  }
+
+  const handleObtenerId = (id) => {
+    setObtenerId(id);
+  };
+
+  const itemsPerPage = 8; // Cantidad de elementos por página
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(results?.length / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-20">
@@ -44,7 +77,7 @@ export const Perfiles = () => {
             CREAR NUEVO PERFIL
           </button>
 
-          <button
+          {/* <button
             // onClick={() => openModal()}
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
@@ -70,11 +103,15 @@ export const Perfiles = () => {
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
             VER COLORES
-          </button>
+          </button> */}
         </div>
         {/* FIN CATEGORIAS */}
         <div className="mt-10">
-          <Search variable={"Buscar por el detalle, codigo..."} />
+          <Search
+            value={search}
+            searcher={searcher}
+            variable={"Buscar por el detalle, codigo..."}
+          />
         </div>
         {/* TABLA DE PERFILES  */}
         <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm">
@@ -90,7 +127,7 @@ export const Perfiles = () => {
             </tr>
           </thead>
           <tbody>
-            {perfiles?.map((p) => (
+            {currentResults?.map((p) => (
               <tr>
                 <th className="border-[1px] border-gray-300 p-3 text-sm uppercase text-teal-500 font-semibold">
                   {p?.codigo}
@@ -107,27 +144,53 @@ export const Perfiles = () => {
                 <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
                   {p.peso_barra_6_mts}
                 </th>
-                <th className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-teal-200 text-teal-800 hover:bg-teal-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer">
-                  <button>EDITAR</button>
+                <th
+                  onClick={() => {
+                    handleObtenerId(p.id), openEditarPerfil();
+                  }}
+                  className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-teal-200 text-teal-800 hover:bg-teal-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer"
+                >
+                  <button type="button">EDITAR</button>
                 </th>
-                <th className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-red-100 text-red-600 hover:text-white hover:bg-red-500 transition-all ease-in-out  font-semibold cursor-pointer">
-                  <button
-                    onClick={() => {
-                      obtenerParamsId(p.id), openModalEliminar();
-                    }}
-                    type="button"
-                  >
-                    ELIMINAR
-                  </button>
+                <th
+                  onClick={() => {
+                    obtenerParamsId(p.id), openModalEliminar();
+                  }}
+                  className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-red-100 text-red-600 hover:text-white hover:bg-red-500 transition-all ease-in-out  font-semibold cursor-pointer"
+                >
+                  <button type="button">ELIMINAR</button>
                 </th>
               </tr>
             ))}
           </tbody>
         </table>
         {/* FIN TABLA */}
+
+        {totalPages > 1 && (
+          <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                className={`mx-1 px-3 py-1 rounded ${
+                  currentPage === index + 1
+                    ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                    : "bg-gray-100 shadow shadow-black/20"
+                }`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <ModalCrearNuevoPerfil isOpen={isOpen} closeModal={closeModal} />
       <ModalEliminarPerfil />
+      <ModalEditarPerfil
+        obtenerId={obtenerId}
+        closeEditarPerfil={closeEditarPerfil}
+        isOpenEditar={isOpenEditar}
+      />
     </section>
   );
 };

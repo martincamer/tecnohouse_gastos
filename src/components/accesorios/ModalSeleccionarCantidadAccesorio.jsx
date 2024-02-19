@@ -3,17 +3,14 @@ import { Fragment, useState } from "react";
 import { toast } from "react-toastify";
 import { useAberturasContext } from "../../context/AberturasProvider";
 
-export const ModalSeleccionarCantidadPerfil = ({
+export const ModalSeleccionarCantidadAccesorio = ({
   isOpenModal,
   closeModalCantidad,
   closeModalProductos,
 }) => {
   const [cantidad, setCantidad] = useState(0);
-  const [precio, setPrecio] = useState(0);
-  const [totalKgFinal, setTotalKgFinal] = useState(0);
 
-  const { productoUnicoState, addToPerfiles } = useAberturasContext();
-  //   const [error, setError] = useState(false);
+  const { accesorioUnicoState, addToAccesorio } = useAberturasContext();
 
   return (
     <Menu as="div" className="z-50">
@@ -69,7 +66,7 @@ export const ModalSeleccionarCantidadPerfil = ({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
                 >
-                  Elegir Cantidad Producto
+                  Elegir Cantidad
                 </Dialog.Title>
 
                 <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full">
@@ -80,19 +77,16 @@ export const ModalSeleccionarCantidadPerfil = ({
                           Numero
                         </th> */}
                         <th className="p-2 text-sm font-extrabold text-center">
-                          Codigo
+                          Numero
                         </th>
                         <th className="p-2 text-sm font-extrabold text-center">
                           Detalle
+                        </th>{" "}
+                        <th className="p-2 text-sm font-extrabold text-center">
+                          Categoria
                         </th>
                         <th className="p-2 text-sm font-extrabold text-center">
-                          Color
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Peso de la barra
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Cantidad de barras
+                          Cantidad
                         </th>
                       </tr>
                     </thead>
@@ -101,32 +95,13 @@ export const ModalSeleccionarCantidadPerfil = ({
                         {productoUnicoState.id}
                       </th> */}
                       <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
-                        {productoUnicoState.codigo}
+                        {accesorioUnicoState.id}
                       </th>
                       <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
-                        {productoUnicoState.detalle}
+                        {accesorioUnicoState.detalle}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
-                        {productoUnicoState.color}
-                      </th>
-
                       <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
-                        <div className="flex gap-5 items-center justify-center">
-                          Peso neto -{" "}
-                          {productoUnicoState?.peso_barra_6_mts?.toLocaleString(
-                            "arg",
-                            {
-                              minimumFractionDigits: 2,
-                            }
-                          )}
-                          kg
-                          <input
-                            onChange={(e) => setTotalKgFinal(e.target.value)}
-                            type="text"
-                            value={totalKgFinal}
-                            className="border-[1px] border-black/30 rounded p-2 w-[100px] outline-none"
-                          />
-                        </div>
+                        {accesorioUnicoState.categoria}
                       </th>
                       <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[100px]">
                         <input
@@ -142,20 +117,17 @@ export const ModalSeleccionarCantidadPerfil = ({
                 <div>
                   <button
                     onClick={() => {
-                      addToPerfiles(
-                        productoUnicoState.id,
-                        productoUnicoState.codigo,
-                        productoUnicoState.color,
-                        productoUnicoState.detalle,
-                        productoUnicoState.categoria,
-                        cantidad,
-                        totalKgFinal * cantidad
+                      addToAccesorio(
+                        accesorioUnicoState.id,
+                        accesorioUnicoState.detalle,
+                        accesorioUnicoState.categoria,
+                        cantidad
                       ),
                         closeModalCantidad();
                     }}
                     className="bg-secondary text-white py-2 px-2 rounded font-bold hover:shadow-md hover:shadow-black/20 hover:translate-x-1 transition-all ease-in-out uppercase text-sm"
                   >
-                    Crear producto facturar
+                    Crear accesorio
                   </button>
                 </div>
                 <button

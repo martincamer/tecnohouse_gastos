@@ -1,15 +1,12 @@
 import axios from "./axios";
 
-// export const crearCategorias = (data) =>
-//   axios.post("/categoria-perfiles", data);
+export const crearNuevoPrecio = (data) => axios.post("/precios", data);
 
 export const obtenerPrecios = () => axios.get("/precios");
 
-// export const editarCategoria = (obtenerId, data) =>
-//   axios.put(`/categoria-perfiles/${obtenerId}`, data);
+export const obtenerPrecio = (obtenerId) => axios.get(`/precios/${obtenerId}`);
 
-// export const obtenerUnicaCategoria = (id) =>
-//   axios.get(`/categoria-perfiles/${id}`);
+export const editarPrecio = (obtenerId, data) =>
+  axios.put(`/precios/${obtenerId}`, data);
 
-// export const eliminarCategoria = (id) =>
-//   axios.delete(`/categoria-perfiles/${id}`);
+export const eliminarPrecio = (id) => axios.delete(`/precios/${id}`);

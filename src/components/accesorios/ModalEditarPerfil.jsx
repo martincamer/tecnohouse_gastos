@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { crearNuevoAccesorio } from "../../api/accesorios.api";
+import {
+  editarAccesorio,
+  obtenerUnicoAccesorio,
+} from "../../api/accesorios.api";
 import { obtenerCategorias } from "../../api/categorias.api";
 
-export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    getValues,
-    setValue,
-  } = useForm();
-
+export const ModalEditarPerfil = ({
+  closeEditarPerfil,
+  isOpenEditar,
+  obtenerId,
+}) => {
   const [categorias, setCategorias] = useState([]);
 
   useEffect(() => {
@@ -26,6 +24,27 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
 
     loadData();
   }, []);
+
+  //submit crear perfil
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
+
+  //obtener precio
+  useEffect(() => {
+    async function loadData() {
+      const res = await obtenerUnicoAccesorio(obtenerId);
+
+      setValue("detalle", res?.data?.detalle);
+      setValue("categoria", res?.data?.categoria);
+      setValue("precio_unidad", res?.data?.precio_unidad);
+    }
+
+    loadData();
+  }, [obtenerId]);
 
   const crearNuevoAccesorioSubmit = handleSubmit(async (data) => {
     try {
@@ -40,9 +59,9 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
 
       // Resto del código...
 
-      const res = await crearNuevoAccesorio(data);
+      const res = await editarAccesorio(obtenerId, data);
 
-      toast.success("¡Accesorio creado correctamente!", {
+      toast.success("¡Accesorio editado correctamente!", {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: false,
@@ -66,11 +85,11 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
   return (
     <Menu as="div" className="z-50">
       <ToastContainer />
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isOpenEditar} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}
+          onClose={closeEditarPerfil}
         >
           <Transition.Child
             as={Fragment}
@@ -115,7 +134,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
                   <div className="font-semibold text-teal-500 text-lg border-b-[1px] w-full border-gray-300">
-                    CREAR NUEVO ACCESORIO
+                    EDITAR ACCESORIO
                   </div>
 
                   <form
@@ -141,7 +160,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                         className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
-                        {categorias.map((c) => (
+                        {categorias?.map((c) => (
                           <option key={c.id}>{c.categoria}</option>
                         ))}
                       </select>
@@ -191,7 +210,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                         className="bg-teal-500 text-white font-semibold py-2 px-8 hover:bg-teal-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
                         type="submit"
                       >
-                        CREAR ACCESORIO
+                        EDITAR ACCESORIO
                       </button>
                     </div>
                   </form>
@@ -201,7 +220,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeModal}
+                    onClick={closeEditarPerfil}
                   >
                     Cerrar Ventana
                   </button>

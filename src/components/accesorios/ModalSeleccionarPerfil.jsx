@@ -4,16 +4,17 @@ import { Search } from "../ui/Search";
 import { Link } from "react-router-dom";
 // import { useFacturaContext } from "../../context/FacturaProvider";
 import { useAberturasContext } from "../../context/AberturasProvider";
-import { usePerfilesContex } from "../../context/PerfilesProvider";
-import { ModalSeleccionarCantidadPerfil } from "./ModalSeleccionarCantidadPerfil";
+import { useAccesoriosContext } from "../../context/AccesoriosProvider";
+import { ModalSeleccionarCantidadAccesorio } from "./ModalSeleccionarCantidadAccesorio";
+// import { ModalSeleccionarCantidadPerfil } from "./ModalSeleccionarCantidadPerfil";
 
-export const ModalSeleccionarPerfil = ({
+export const ModalSeleccionarAccesorio = ({
   closeModalProductos,
   isOpenProductos,
 }) => {
   //   const { search, searcher, results } = useAluminioContext();
   const { handleSeleccionarProducto } = useAberturasContext();
-  const { results, searcher, search } = usePerfilesContex();
+  const { searcher, search, results } = useAccesoriosContext();
 
   let [isOpenModal, setIsModal] = useState(false);
 
@@ -92,11 +93,11 @@ export const ModalSeleccionarPerfil = ({
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
                 >
-                  Elegir Perfil
+                  Elegir ACCESORIOS
                 </Dialog.Title>
                 <Search
-                  variable={"Buscar por el codigo o detalle..."}
-                  search={search}
+                  variable={"Buscar por el detalle..."}
+                  value={search}
                   searcher={searcher}
                 />
 
@@ -107,20 +108,18 @@ export const ModalSeleccionarPerfil = ({
                         {/* <th className="p-2 text-sm font-extrabold text-center">
                           Numero
                         </th> */}
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Codigo
-                        </th>
+                        {/* <th className="p-2 text-sm font-extrabold text-center">
+                          Numero
+                        </th> */}
                         <th className="p-2 text-sm font-extrabold text-center">
                           Detalle
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Color
-                        </th>
+
                         <th className="p-2 text-sm font-extrabold text-center">
                           Categoria
                         </th>
                         <th className="p-2 text-sm font-extrabold text-center">
-                          Peso Barra
+                          Precio x unidad
                         </th>
                         <th className="p-2 text-sm font-extrabold text-center">
                           Seleccionar
@@ -133,23 +132,24 @@ export const ModalSeleccionarPerfil = ({
                           {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
                             {c.id}
                           </th> */}
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.codigo}
-                          </th>
+                          </th> */}
                           <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.detalle}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.color}
-                          </th>
+                          </th> */}
                           <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.categoria}
                           </th>
                           <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c?.peso_barra_6_mts?.toLocaleString("arg", {
+                            {Number(c?.precio_unidad)?.toLocaleString("es-ar", {
+                              style: "currency",
+                              currency: "ARS",
                               minimumFractionDigits: 2,
-                            })}{" "}
-                            kg
+                            })}
                           </th>
                           <th className="border-[1px] border-gray-300 p-2 text-sm w-[120px] text-center">
                             <Link
@@ -166,7 +166,6 @@ export const ModalSeleccionarPerfil = ({
                       ))}
                     </tbody>
                   </table>
-
                   {totalPages > 1 && (
                     <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
                       {Array.from({ length: totalPages }).map((_, index) => (
@@ -185,7 +184,7 @@ export const ModalSeleccionarPerfil = ({
                     </div>
                   )}
                 </div>
-                <ModalSeleccionarCantidadPerfil
+                <ModalSeleccionarCantidadAccesorio
                   isOpenModal={isOpenModal}
                   closeModalCantidad={closeModalCantidad}
                   openModalCantidad={openModalCantidad}

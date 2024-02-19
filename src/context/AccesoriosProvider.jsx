@@ -14,8 +14,8 @@ export const useAccesoriosContext = () => {
 
 export const AccesoriosProvider = ({ children }) => {
   const [accesorios, setAccesorios] = useState([]);
-  const [obtenerId, setObtenerId] = useState("");
   const [obtenerParams, setObtenerParams] = useState("");
+  const [obtenerId, setObtenerId] = useState("");
   //modales
   let [isOpen, setIsOpen] = useState(false);
   let [isOpenEliminar, setIsOpenEliminar] = useState(false);
@@ -70,6 +70,34 @@ export const AccesoriosProvider = ({ children }) => {
     }, 1500);
   };
 
+  const [results, setResults] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const searcher = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+
+    // Verifica si el término de búsqueda está vacío
+    if (!searchTerm) {
+      // Si está vacío, muestra todos los perfiles
+      setResults(accesorios);
+    } else {
+      // Si hay un término de búsqueda, filtra los perfiles
+      const resultadosFiltrados = accesorios?.filter((acc) => {
+        return acc.detalle.toLowerCase().includes(searchTerm);
+      });
+
+      // Actualiza el state con los resultados filtrados
+      setResults(resultadosFiltrados || []);
+    }
+  };
+
+  // Asegúrate de que results tenga todos los perfiles si está vacío al principio
+  useEffect(() => {
+    if (!search && accesorios) {
+      setResults(accesorios);
+    }
+  }, [search, accesorios]);
+
   return (
     <AccesoriosContext.Provider
       value={{
@@ -83,6 +111,9 @@ export const AccesoriosProvider = ({ children }) => {
         obtenerParams,
         handleEliminarAccesorio,
         accesorios,
+        results,
+        search,
+        searcher,
       }}
     >
       {children}

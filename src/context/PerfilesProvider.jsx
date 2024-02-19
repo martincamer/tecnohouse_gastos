@@ -70,6 +70,36 @@ export const PerfilesProvider = ({ children }) => {
     }, 1500);
   };
 
+  const [results, setResults] = useState([]);
+  const [search, setSearch] = useState("");
+
+  const searcher = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+
+    // Verifica si el término de búsqueda está vacío
+    if (!searchTerm) {
+      // Si está vacío, muestra todos los perfiles
+      setResults(perfiles || []);
+    } else {
+      // Si hay un término de búsqueda, filtra los perfiles
+      const resultadosFiltrados = perfiles?.filter((perfil) => {
+        return (
+          perfil.detalle.toLowerCase().includes(searchTerm) ||
+          perfil.codigo.toLowerCase().includes(searchTerm)
+        );
+      });
+
+      // Actualiza el state con los resultados filtrados
+      setResults(resultadosFiltrados || []);
+    }
+  };
+
+  // Asegúrate de que results tenga todos los perfiles si está vacío al principio
+  useEffect(() => {
+    if (!search && perfiles) {
+      setResults(perfiles);
+    }
+  }, [search, perfiles]);
   return (
     <PerfilesContext.Provider
       value={{
@@ -83,6 +113,8 @@ export const PerfilesProvider = ({ children }) => {
         obtenerParamsId,
         obtenerParams,
         handleEliminarPerfil,
+        results,
+        searcher,
       }}
     >
       {children}

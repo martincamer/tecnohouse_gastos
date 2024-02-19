@@ -61,7 +61,7 @@ export const Home = () => {
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-20">
       <div className="grid grid-cols-5 gap-4 border-[1px] shadow-md rounded py-10 px-4">
-        <div className="bg-gray-100/30 shadow-md shadow-black/50 py-4 px-4 border-[1px] border-black/5 rounded-md space-y-2 text-center">
+        <div className="bg-gray-100/30 shadow-md shadow-black/20 py-4 px-4 border-[1px] border-black/10 rounded-md space-y-2 text-center">
           <p className="font-semibold text-2xl text-teal-400 text-center">
             TOTAL GASTOS
           </p>
@@ -74,21 +74,21 @@ export const Home = () => {
           </p>
         </div>
 
-        <div className="bg-gray-100/30 shadow-md shadow-black/50 py-4 px-4 border-[1px] border-black/5 rounded-md space-y-2 text-center">
+        <div className="bg-gray-100/30 shadow-md shadow-black/20 py-4 px-4 border-[1px] border-black/10 rounded-md space-y-2 text-center">
           <p className="font-semibold text-2xl text-teal-400 text-center">
             TOTAL DE GASTOS
           </p>
           <p className="text-xl font-semibold">{gastos.length}</p>
         </div>
 
-        <div className="bg-gray-100/30 shadow-md shadow-black/50 py-4 px-4 border-[1px] border-black/5 rounded-md space-y-2 text-center">
+        <div className="bg-gray-100/30 shadow-md shadow-black/20 py-4 px-4 border-[1px] border-black/10 rounded-md space-y-2 text-center">
           <p className="font-semibold text-2xl text-teal-400 text-center">
             MES
           </p>
           <p className="text-xl font-semibold uppercase">{nombreMesActual}</p>
         </div>
 
-        <div className="bg-gray-100/30 shadow-md shadow-black/50 py-4 px-4 border-[1px] border-black/5 rounded-md space-y-2 text-center">
+        <div className="bg-gray-100/30 shadow-md shadow-black/20 py-4 px-4 border-[1px] border-black/10 rounded-md space-y-2 text-center">
           <p className="font-semibold text-2xl text-teal-400 text-center">
             TOTAL VENTAS
           </p>
@@ -101,7 +101,7 @@ export const Home = () => {
           </p>
         </div>
 
-        <div className="bg-gray-100/30 shadow-md shadow-black/50 py-4 px-4 border-[1px] border-black/5 rounded-md space-y-2 text-center">
+        <div className="bg-gray-100/30 shadow-md shadow-black/20 py-4 px-4 border-[1px] border-black/10 rounded-md space-y-2 text-center">
           <p className="font-semibold text-2xl text-teal-400 text-center">
             TOTAL DE VENTAS
           </p>

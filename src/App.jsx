@@ -9,11 +9,6 @@ import { Register } from "./routes/pages/Register";
 import { Home } from "./routes/pages/protected/Home";
 import { Gastos } from "./routes/pages/protected/Gastos";
 import { ViewGasto } from "./routes/pages/protected/ViewGasto";
-
-//import normales
-import RutaProtegida from "./layouts/RutaProtejida";
-import "react-toastify/dist/ReactToastify.css";
-import "react-toastify/dist/ReactToastify.min.css";
 import { GastosProvider } from "./context/GastosProvider";
 import { Ventas } from "./routes/pages/protected/Ventas";
 import { VentasProvider } from "./context/VentasProvider";
@@ -25,6 +20,11 @@ import { PerfilesProvider } from "./context/PerfilesProvider";
 import { AccesoriosProvider } from "./context/AccesoriosProvider";
 import { Accesorios } from "./routes/pages/protected/Accesorios";
 import { PreciosProvider } from "./context/PreciosProvider";
+import { ViewAbertura } from "./routes/pages/protected/ViewAbertura";
+//import normales
+import RutaProtegida from "./layouts/RutaProtejida";
+import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   const { isAuth } = useAuth();
@@ -71,6 +71,7 @@ function App() {
               <Route path="/aberturas" element={<AberturasCostos />} />
               <Route path="/gastos/:id" element={<ViewGasto />} />
               <Route path="/ventas/:id" element={<ViewVenta />} />
+              <Route path="/aberturas/:id" element={<ViewAbertura />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

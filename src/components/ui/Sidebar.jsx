@@ -57,7 +57,7 @@ export const Sidebar = () => {
       >
         <BiMenu
           onClick={handleClick}
-          className="text-primary hover:text-white text-[45px] hover:bg-teal-400 rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
+          className="text-primary hover:text-white text-[40px] hover:bg-teal-400 rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
         />
       </div>
       <div className={`w-full flex flex-col gap-12`}>
@@ -72,7 +72,7 @@ export const Sidebar = () => {
               <div className="flex items-center max-md:justify-center gap-4 hover:translate-x-2 max-md:hover:translate-x-1 transition-all ease duration-300">
                 <Link
                   to={path}
-                  className="text-4xl max-md:text-2xl text-teal-950"
+                  className="text-3xl max-md:text-2xl text-teal-950"
                 >
                   {icon}
                 </Link>
@@ -82,7 +82,7 @@ export const Sidebar = () => {
                     click
                       ? "hidden transition-all ease-in-out duration-300"
                       : "block transition-all ease-in-out duration-300 text-teal-950"
-                  } text-xl font-extrabold text-teal-950`}
+                  } text-lg font-extrabold text-teal-950`}
                 >
                   {name}
                 </Link>

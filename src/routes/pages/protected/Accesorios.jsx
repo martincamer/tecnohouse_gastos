@@ -2,6 +2,10 @@ import { ModalCrearNuevoAccesorio } from "../../../components/accesorios/ModalCr
 import { ModalEliminarAccesorios } from "../../../components/accesorios/ModalEliminarAccesorios";
 import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { Search } from "../../../components/ui/Search";
+import { useState } from "react";
+import { ModalEditarPerfil } from "../../../components/accesorios/ModalEditarPerfil";
+import { ModalCrearCategoria } from "../../../components/accesorios/ModalCrearCategoria";
+import { ModalVerCat } from "../../../components/accesorios/ModalVerCat";
 
 export const Accesorios = () => {
   const {
@@ -11,7 +15,56 @@ export const Accesorios = () => {
     accesorios,
     openModalEliminar,
     obtenerParamsId,
+    results,
+    search,
+    searcher,
   } = useAccesoriosContext();
+
+  const [isOpenEditar, setIsOpenEditar] = useState(false);
+  const [isOpenCrearCategoria, setIsOpenCrearCategoria] = useState(false);
+  const [isOpenVerCat, setIsOpenVerCat] = useState(false);
+  const [obtenerId, setObtenerId] = useState("");
+
+  function openEditarPerfil() {
+    setIsOpenEditar(true);
+  }
+
+  function closeEditarPerfil() {
+    setIsOpenEditar(false);
+  }
+
+  function openCrearCategoria() {
+    setIsOpenCrearCategoria(true);
+  }
+
+  function closeCrearCategoria() {
+    setIsOpenCrearCategoria(false);
+  }
+
+  function openVerCategorias() {
+    setIsOpenVerCat(true);
+  }
+
+  function closeVerCategorias() {
+    setIsOpenVerCat(false);
+  }
+
+  const handleObtenerId = (id) => {
+    setObtenerId(id);
+  };
+
+  const itemsPerPage = 8; // Cantidad de elementos por página
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(results?.length / itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-20">
@@ -45,36 +98,40 @@ export const Accesorios = () => {
           </button>
 
           <button
-            // onClick={() => openModal()}
+            onClick={() => openCrearCategoria()}
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
             CREAR NUEVA CATEGORIA
           </button>
 
-          <button
+          {/* <button
             // onClick={() => openModal()}
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
             CREAR NUEVO COLOR
-          </button>
+          </button> */}
 
           <button
-            // onClick={() => openModal()}
+            onClick={() => openVerCategorias()}
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
             VER CATEGORIAS
           </button>
 
-          <button
+          {/* <button
             // onClick={() => openModal()}
             className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
           >
             VER COLORES
-          </button>
+          </button> */}
         </div>
         {/* FIN CATEGORIAS */}
         <div className="mt-10">
-          <Search variable={"BUSCAR POR EL DETALLE, NUMERO..."} />
+          <Search
+            value={search}
+            searcher={searcher}
+            variable={"BUSCAR POR EL DETALLE, NUMERO..."}
+          />
         </div>
         {/* TABLA DE PERFILES  */}
         <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm">
@@ -89,7 +146,7 @@ export const Accesorios = () => {
             </tr>
           </thead>
           <tbody>
-            {accesorios?.map((p) => (
+            {currentResults?.map((p) => (
               <tr>
                 <th className="border-[1px] border-gray-300 p-3 text-sm uppercase text-teal-500 font-semibold">
                   {p?.id}
@@ -101,9 +158,18 @@ export const Accesorios = () => {
                   {p.categoria}
                 </th>
                 <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
-                  $ {p.precio_unidad}
+                  {Number(p.precio_unidad).toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}
                 </th>
-                <th className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-teal-200 text-teal-800 hover:bg-teal-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer">
+                <th
+                  onClick={() => {
+                    handleObtenerId(p.id), openEditarPerfil();
+                  }}
+                  className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-teal-200 text-teal-800 hover:bg-teal-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer"
+                >
                   <button>EDITAR</button>
                 </th>
                 <th className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-red-100 text-red-600 hover:text-white hover:bg-red-500 transition-all ease-in-out  font-semibold cursor-pointer">
@@ -120,10 +186,41 @@ export const Accesorios = () => {
             ))}
           </tbody>
         </table>
+
+        {totalPages > 1 && (
+          <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <button
+                key={index}
+                className={`mx-1 px-3 py-1 rounded ${
+                  currentPage === index + 1
+                    ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                    : "bg-gray-100 shadow shadow-black/20"
+                }`}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+        )}
         {/* FIN TABLA */}
       </div>
       <ModalCrearNuevoAccesorio isOpen={isOpen} closeModal={closeModal} />
       <ModalEliminarAccesorios />
+      <ModalEditarPerfil
+        obtenerId={obtenerId}
+        closeEditarPerfil={closeEditarPerfil}
+        isOpenEditar={isOpenEditar}
+      />
+      <ModalCrearCategoria
+        closeCrearCategoria={closeCrearCategoria}
+        isOpenCrearCategoria={isOpenCrearCategoria}
+      />
+      <ModalVerCat
+        isOpenVerCat={isOpenVerCat}
+        closeVerCategorias={closeVerCategorias}
+      />
     </section>
   );
 };

@@ -126,7 +126,7 @@ const GastosChart = ({ gastos, ventas }) => {
   return (
     <div>
       <canvas id="graficoGastos" width="400" height="200"></canvas>
-      <p className="text-xl font-normal">
+      <p className="text-lg font-normal mt-4">
         <span className="text-teal-500 uppercase font-bold">
           Cantidad total de gastos:
         </span>{" "}
@@ -136,8 +136,8 @@ const GastosChart = ({ gastos, ventas }) => {
           minimumFractionDigits: 2,
         })}
       </p>
-      <p className="text-xl font-normal">
-        <span className="text-red-500 uppercase font-bold">
+      <p className="text-lg font-normal">
+        <span className="text-gray-700 uppercase font-bold">
           Cantidad total de ventas:
         </span>{" "}
         {totalVentas.toLocaleString("es-AR", {

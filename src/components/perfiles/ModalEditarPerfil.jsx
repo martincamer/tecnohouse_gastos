@@ -1,48 +1,50 @@
-import React, { useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { crearNuevoAccesorio } from "../../api/accesorios.api";
-import { obtenerCategorias } from "../../api/categorias.api";
+import {
+  crearNuevoPerfil,
+  editarPerfil,
+  obtenerUnicoPerfil,
+} from "../../api/perfiles.api";
 
-export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
+export const ModalEditarPerfil = ({
+  closeEditarPerfil,
+  isOpenEditar,
+  obtenerId,
+}) => {
+  // const { setPerfiles } = usePerfilesContex();
+
+  //submit crear perfil
   const {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
     setValue,
   } = useForm();
 
-  const [categorias, setCategorias] = useState([]);
-
+  //obtener precio
   useEffect(() => {
     async function loadData() {
-      const res = await obtenerCategorias();
+      const res = await obtenerUnicoPerfil(obtenerId);
 
-      setCategorias(res.data);
+      setValue("codigo", res?.data?.codigo);
+      setValue("detalle", res?.data?.detalle);
+      setValue("categoria", res?.data?.categoria);
+      setValue("color", res?.data?.color);
+      setValue("peso_barra_6_mts", res?.data?.peso_barra_6_mts);
     }
 
     loadData();
-  }, []);
+  }, [obtenerId]);
 
-  const crearNuevoAccesorioSubmit = handleSubmit(async (data) => {
+  const crearNuevoPerfilSubmit = handleSubmit(async (data) => {
     try {
-      // Limpia la cadena de precio_unidad y conviértela a número entero
-      const precioUnidadNumerico = parseInt(
-        data.precio_unidad.replace(/[^\d]/g, ""),
-        10
-      );
+      const res = await editarPerfil(obtenerId, data);
 
-      // Actualiza el valor en el objeto data
-      data.precio_unidad = precioUnidadNumerico;
+      // setPerfiles(data);
 
-      // Resto del código...
-
-      const res = await crearNuevoAccesorio(data);
-
-      toast.success("¡Accesorio creado correctamente!", {
+      toast.success("Perfil editado correctamente!", {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: false,
@@ -57,20 +59,21 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
         location.reload();
       }, 1500);
 
-      closeModal();
+      //   closeModal();
     } catch (error) {
-      console.log(error);
+      // setError(error.response.data);
+      console.log(error.response.data);
     }
   });
 
   return (
     <Menu as="div" className="z-50">
       <ToastContainer />
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isOpenEditar} as={Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}
+          onClose={closeEditarPerfil}
         >
           <Transition.Child
             as={Fragment}
@@ -97,6 +100,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
               <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
+            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -115,13 +119,20 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
                   <div className="font-semibold text-teal-500 text-lg border-b-[1px] w-full border-gray-300">
-                    CREAR NUEVO ACCESORIO
+                    CREAR NUEVO PERFIL
                   </div>
 
-                  <form
-                    onSubmit={crearNuevoAccesorioSubmit}
-                    className="space-y-4"
-                  >
+                  <form onSubmit={crearNuevoPerfilSubmit} className="space-y-4">
+                    <div className="flex flex-col gap-1">
+                      <label className="font-semibold text-base">CODIGO</label>
+                      <input
+                        {...register("codigo", { required: true })}
+                        placeholder="CODIGO DEL PERFIL"
+                        type="text"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                      />
+                    </div>
+
                     <div className="flex flex-col gap-1">
                       <label className="font-semibold text-base">DETALLE</label>
                       <input
@@ -141,47 +152,33 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                         className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
-                        {categorias.map((c) => (
-                          <option key={c.id}>{c.categoria}</option>
-                        ))}
+                        <option>HERRERO</option>
+                        <option>MODENA</option>
+                        <option>MADERA</option>
+                      </select>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label className="font-semibold text-base">COLOR</label>
+                      <select
+                        {...register("color", { required: true })}
+                        className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
+                      >
+                        <option>SELECCIONAR</option>
+                        <option>BLANCO</option>
+                        <option>NEGRO</option>
+                        <option>BLANCO ALUAR</option>
                       </select>
                     </div>
 
                     <div className="flex flex-col gap-1">
                       <label className="font-semibold text-base">
-                        PRECIO POR UNIDAD
+                        PESO DE LA BARRA 6 MTS
                       </label>
                       <input
+                        {...register("peso_barra_6_mts", { required: true })}
+                        placeholder="PESO NETO DE LA BARRA"
                         type="text"
-                        placeholder="Precio"
-                        {...register("precio_unidad", {
-                          validate: (value) => {
-                            const numeroLimpiado = value.replace(/[^0-9]/g, "");
-                            return !!numeroLimpiado || "El precio es requerido";
-                          },
-                        })}
-                        onChange={(e) => {
-                          const inputPrecio = e.target.value;
-
-                          // Remover caracteres no numéricos
-                          const numeroLimpiado = inputPrecio.replace(
-                            /[^0-9]/g,
-                            ""
-                          );
-
-                          // Formatear como moneda
-                          const precioFormateado = new Intl.NumberFormat(
-                            "es-CO",
-                            {
-                              style: "currency",
-                              currency: "ARS",
-                              minimumFractionDigits: 0,
-                            }
-                          ).format(numeroLimpiado);
-
-                          // Asignar el valor formateado al campo
-                          e.target.value = precioFormateado;
-                        }}
                         className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
                       />
                     </div>
@@ -191,7 +188,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                         className="bg-teal-500 text-white font-semibold py-2 px-8 hover:bg-teal-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
                         type="submit"
                       >
-                        CREAR ACCESORIO
+                        EDITAR PERFIL
                       </button>
                     </div>
                   </form>
@@ -201,7 +198,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                   <button
                     type="button"
                     className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeModal}
+                    onClick={closeEditarPerfil}
                   >
                     Cerrar Ventana
                   </button>
