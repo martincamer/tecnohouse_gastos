@@ -125,7 +125,8 @@ export const ViewAbertura = () => {
       const alto = Number(vidrio.alto);
 
       // Calcula el precio final multiplicando cantidad, ancho, alto y precio
-      const precioFinal = (ancho + alto) * cantidad * precioNumber;
+      const precioFinal =
+        Number(ancho * alto) * Number(cantidad) * precioNumber;
 
       return {
         ...vidrio,

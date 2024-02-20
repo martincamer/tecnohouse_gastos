@@ -75,7 +75,8 @@ export const TableAberturas = () => {
 
       if (precioItem) {
         // const precio = parseFloat(precioItem.precio);
-        const subtotal = (alto + ancho) * cantidad * Number(precioItem.precio);
+        const subtotal =
+          Number(alto * ancho) * Number(cantidad) * Number(precioItem?.precio);
         return subtotal;
       }
 
