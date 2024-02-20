@@ -121,9 +121,10 @@ export const ModalCrearNuevaAbertura = () => {
       const ancho = Number(vidrioSeleccionado[0]?.ancho);
       const cantidad = Number(vidrioSeleccionado[0]?.cantidad);
 
+      const precioPorMetroCuadrado = Number(precioVidrio?.precio);
+
       // Calcular el total del vidrio
-      const totalVidrio =
-        (alto + ancho) * cantidad * Number(precioVidrio?.precio);
+      const totalVidrio = (alto + ancho) * cantidad * precioPorMetroCuadrado;
 
       // Actualizar el estado con el resultado
       setTotalVidrio(totalVidrio);
