@@ -13,17 +13,6 @@ export const ModalSeleccionarVidrio = ({
 }) => {
   //   const { search, searcher, results } = useAluminioContext();
   const { addToVidrio } = useAberturasContext();
-  // const { perfiles } = usePerfilesContex();
-
-  // let [isOpenModal, setIsModal] = useState(false);
-
-  // function closeModalCantidad() {
-  //   setIsModal(false);
-  // }
-
-  // function openModalCantidad() {
-  //   setIsModal(true);
-  // }
 
   const [ancho, setAncho] = useState("");
   const [alto, setAlto] = useState("");
@@ -45,6 +34,8 @@ export const ModalSeleccionarVidrio = ({
   const handleChangeCategoria = (event) => {
     setCategoria(event.target.value);
   };
+
+  let id;
 
   return (
     <Menu as="div" className="z-50">
@@ -182,9 +173,33 @@ export const ModalSeleccionarVidrio = ({
                   <button
                     className="bg-teal-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold"
                     type="button"
+                    // onClick={() => {
+                    //   addToVidrio(ancho, alto, cantidad, categoria),
+                    //     closeModalProductos();
+                    // }}
+
                     onClick={() => {
-                      addToVidrio(ancho, alto, cantidad, categoria),
-                        closeModalProductos();
+                      const anchoMeters = parseFloat(ancho) / 1000; // Convert width to meters
+                      const altoMeters = parseFloat(alto) / 1000; // Convert height to meters
+                      const cantidadTwo = parseInt(cantidad, 10);
+
+                      console.log(altoMeters);
+
+                      // Calculate square meters for one glass
+                      const metrosCuadradosUnidad = anchoMeters * altoMeters;
+
+                      // Calculate total square meters for the given quantity
+                      const totalMetrosCuadrados =
+                        metrosCuadradosUnidad * cantidadTwo;
+
+                      addToVidrio(
+                        ancho,
+                        alto,
+                        cantidad,
+                        totalMetrosCuadrados,
+                        categoria
+                      );
+                      closeModalProductos();
                     }}
                   >
                     Crear vidrio

@@ -86,11 +86,11 @@ export const ViewAbertura = () => {
 
     if (precioEncontrado) {
       const precioNumber = Number(precioEncontrado.precio);
-      const cantidad = Number(perfil.cantidad);
+      // const cantidad = Number(perfil.cantidad);
       const totalKG = Number(perfil.totalKG);
 
       // Calcula el precio final multiplicando cantidad, totalKG y precio
-      const precioFinal = cantidad * totalKG * precioNumber;
+      const precioFinal = totalKG * precioNumber;
 
       return {
         ...perfil,
@@ -106,8 +106,6 @@ export const ViewAbertura = () => {
     (perfil) => calcularPrecioFinal(perfil)
   );
 
-  console.log(perfilesConPrecioFinal);
-
   // Calcula el precio total sumando los precios finales de todos los perfiles
   const precioTotal = perfilesConPrecioFinal?.reduce(
     (total, perfil) => total + (perfil?.precioFinal || 0),
@@ -120,13 +118,12 @@ export const ViewAbertura = () => {
 
     if (precioEncontrado) {
       const precioNumber = Number(precioEncontrado.precio);
-      const cantidad = Number(vidrio.cantidad);
-      const ancho = Number(vidrio.ancho);
-      const alto = Number(vidrio.alto);
+      const totalMetros = Number(vidrio.metrosCuadrados);
+      // const ancho = Number(vidrio.ancho);
+      // const alto = Number(vidrio.alto);
 
       // Calcula el precio final multiplicando cantidad, ancho, alto y precio
-      const precioFinal =
-        Number(ancho * alto) * Number(cantidad) * precioNumber;
+      const precioFinal = totalMetros * precioNumber;
 
       return {
         ...vidrio,
@@ -168,7 +165,14 @@ export const ViewAbertura = () => {
 
   // Filtra los precios adicionales relevantes (luz, agua, empleados)
   const preciosAdicionalesFiltrados = precios.filter((precioAdicional) =>
-    ["luz", "agua", "empleados"].includes(precioAdicional.categoria)
+    [
+      "luz",
+      "agua",
+      "produccion",
+      "wifi",
+      "alquiler",
+      "gasto adicional",
+    ].includes(precioAdicional.categoria)
   );
 
   // Suma los precios adicionales filtrados
@@ -444,7 +448,9 @@ export const ViewAbertura = () => {
                 {perfil?.categoria}
               </p>
               <p className="text-sm py-3 uppercase w-[350px]">
-                {perfil?.totalKG}
+                {perfil?.totalKG.toLocaleString("es-ar", {
+                  minimumFractionDigits: 2,
+                })}
               </p>
               <p className="text-sm py-3 uppercase w-[350px]">
                 {perfil?.cantidad}

@@ -42,32 +42,76 @@ export const TableAberturas = () => {
     return calculateTotalPrice(accesoriosSelect, accesorios);
   });
 
-  const calculateTotalPriceTwo = (perfilesSelect, precios, vidrioSelect) => {
-    // Calculate prices for perfilesSelect items
-    const perfilesTotal = perfilesSelect.reduce((total, item) => {
-      const cantidad = parseInt(item.cantidad, 10);
-      const totalKG = parseFloat(item.totalKG);
-      const categoria = item.categoria.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+  console.log(obtenerAberturas);
 
+  const calculateTotalPriceTwo = (perfilesSelect, precios, vidrioSelect) => {
+    // // Calculate prices for perfilesSelect items
+    // const perfilesTotal = perfilesSelect.reduce((total, item) => {
+    //   const cantidad = parseInt(item.cantidad, 10);
+    //   const totalKG = parseFloat(item.totalKG);
+    //   const categoria = item.categoria.toLowerCase(); // Convert to lowercase for case-insensitive comparison
+
+    //   const precioItem = precios.find(
+    //     (p) => p.categoria.toLowerCase() === categoria
+    //   );
+
+    //   if (precioItem) {
+    //     const precio = parseFloat(precioItem.precio);
+    //     const subtotal = cantidad * totalKG * precio;
+    //     return total + subtotal;
+    //   }
+
+    //   return total;
+    // }, 0);
+
+    // // Calculate prices for perfilesSelect items
+    // const perfilesTotal = perfilesSelect.reduce((total, item) => {
+    //   const cantidad = parseInt(item.cantidad, 10);
+    //   const totalKG = parseFloat(item.totalKG);
+    //   const largo = parseFloat(item.largo); // Assuming the length is provided in millimeters
+    //   const categoria = item.categoria.toLowerCase();
+
+    //   const precioItem = precios.find(
+    //     (p) => p.categoria.toLowerCase() === categoria
+    //   );
+
+    //   if (precioItem) {
+    //     const precio = parseFloat(precioItem.precio);
+    //     // Calculate total KG for the given length and quantity
+    //     const totalKGForItem = (largo / 1000) * cantidad * totalKG;
+    //     const subtotal = totalKGForItem * precio;
+    //     return total + subtotal;
+    //   }
+
+    //   return total;
+    // }, 0);
+
+    // Calculate total KG for perfilesSelect items by multiplying cantidad, totalKG, and precio
+    const perfilesTotal = perfilesSelect.reduce((totalKG, item) => {
+      // const cantidad = parseInt(item.cantidad, 10);
+      const totalKGItem = parseFloat(item.totalKG);
+
+      const categoria = item.categoria.toLowerCase();
       const precioItem = precios.find(
         (p) => p.categoria.toLowerCase() === categoria
       );
 
       if (precioItem) {
         const precio = parseFloat(precioItem.precio);
-        const subtotal = cantidad * totalKG * precio;
-        return total + subtotal;
+        const totalKGForItem = totalKGItem * precio;
+        return totalKG + totalKGForItem;
       }
 
-      return total;
+      return totalKG;
     }, 0);
+
+    // return perfilesTotal;
 
     // Calculate prices for vidrioSelect items
     const vidrioTotal = vidrioSelect.reduce((total, item) => {
-      const cantidad = parseInt(item.cantidad, 10);
-      const ancho = parseFloat(item.ancho);
-      const alto = parseFloat(item.alto);
       const categoria = item.categoria.toLowerCase();
+
+      const metroCuadrado = Number(item.metrosCuadrados);
 
       const precioItem = precios.find(
         (p) => p.categoria.toLowerCase() === categoria
@@ -75,8 +119,7 @@ export const TableAberturas = () => {
 
       if (precioItem) {
         // const precio = parseFloat(precioItem.precio);
-        const subtotal =
-          Number(alto * ancho) * Number(cantidad) * Number(precioItem?.precio);
+        const subtotal = metroCuadrado * Number(precioItem?.precio);
         return subtotal;
       }
 
@@ -127,14 +170,6 @@ export const TableAberturas = () => {
     };
   });
 
-  // const calculateTotalCostForIndex = (index) => {
-  //   const totalAccesorios = Number(totalsByIndex[index]?.totalAccesorios) || 0;
-  //   const totalPerfilesVidrio =
-  //     Number(totalsByIndex[index]?.totalPerfilesVidrio) || 0;
-
-  //   return totalAccesorios + totalPerfilesVidrio;
-  // };
-
   const calculateTotalCostForIndex = (index, totalAveragePrice) => {
     const totalAccesorios = Number(totalsByIndex[index]?.totalAccesorios) || 0;
     const totalPerfilesVidrio =
@@ -146,7 +181,16 @@ export const TableAberturas = () => {
   //
 
   const categoryAverages = precios
-    .filter((precio) => ["empleados", "luz", "agua"].includes(precio.categoria))
+    .filter((precio) =>
+      [
+        "luz",
+        "agua",
+        "produccion",
+        "wifi",
+        "alquiler",
+        "gasto adicional",
+      ].includes(precio.categoria)
+    )
     .reduce((averages, precio) => {
       const categoria = precio.categoria;
       const precioNumber = Number(precio.precio);

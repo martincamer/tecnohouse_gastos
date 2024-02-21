@@ -10,6 +10,8 @@ export const ModalSeleccionarCantidadPerfil = ({
 }) => {
   const [cantidad, setCantidad] = useState(0);
   const [precio, setPrecio] = useState(0);
+  const [largo, setLargo] = useState(0);
+
   const [totalKgFinal, setTotalKgFinal] = useState(0);
 
   const { productoUnicoState, addToPerfiles } = useAberturasContext();
@@ -94,6 +96,9 @@ export const ModalSeleccionarCantidadPerfil = ({
                         <th className="p-2 text-sm font-extrabold text-center">
                           Cantidad de barras
                         </th>
+                        <th className="p-2 text-sm font-extrabold text-center">
+                          Largo de la barra en mm
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -136,12 +141,45 @@ export const ModalSeleccionarCantidadPerfil = ({
                           placeholder="cantidad"
                         />
                       </th>
+
+                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[100px]">
+                        <input
+                          onChange={(e) => setLargo(e.target.value)}
+                          type="text"
+                          className="border-[1px] border-black/30 rounded p-2 w-[100px] outline-none"
+                          placeholder="largo"
+                        />
+                      </th>
                     </tbody>
                   </table>
                 </div>
                 <div>
                   <button
+                    // onClick={() => {
+                    //   addToPerfiles(
+                    //     productoUnicoState.id,
+                    //     productoUnicoState.codigo,
+                    //     productoUnicoState.color,
+                    //     productoUnicoState.detalle,
+                    //     productoUnicoState.categoria,
+                    //     cantidad,
+                    //     totalKgFinal * cantidad,
+                    //     largo
+                    //   ),
+                    //     closeModalCantidad();
+                    // }}
                     onClick={() => {
+                      // const cantidad = parseInt(
+                      //   productoUnicoState.cantidad,
+                      //   10
+                      // );
+                      const totalKG = parseFloat(totalKgFinal);
+                      const largoSeleccionado = parseFloat(largo); // Assuming largo is a property of productoUnicoState
+
+                      // Calculate total KG for the given length and quantity
+                      const totalKGForItem =
+                        (largo / 1000) * cantidad * totalKG;
+
                       addToPerfiles(
                         productoUnicoState.id,
                         productoUnicoState.codigo,
@@ -149,9 +187,11 @@ export const ModalSeleccionarCantidadPerfil = ({
                         productoUnicoState.detalle,
                         productoUnicoState.categoria,
                         cantidad,
-                        totalKgFinal * cantidad
-                      ),
-                        closeModalCantidad();
+                        totalKGForItem, // Pass the calculated totalKGForItem instead of subtotal
+                        largoSeleccionado
+                      );
+
+                      closeModalCantidad();
                     }}
                     className="bg-secondary text-white py-2 px-2 rounded font-bold hover:shadow-md hover:shadow-black/20 hover:translate-x-1 transition-all ease-in-out uppercase text-sm"
                   >

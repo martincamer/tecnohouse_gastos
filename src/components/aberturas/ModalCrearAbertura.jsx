@@ -42,32 +42,6 @@ export const ModalCrearNuevaAbertura = () => {
 
   const { accesorios } = useAccesoriosContext();
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm();
-
-  // const onSubmit = handleSubmit(async (data) => {
-  //   const res = await crearGastoNuevo(data);
-
-  //   setTimeout(() => {
-  //     location.reload();
-  //   }, 1500);
-
-  //   toast.success("Gasto creado correctamente!", {
-  //     position: "top-right",
-  //     autoClose: 1500,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-  // });
-
   // Crear un objeto para almacenar la suma total de KG por categoría
   const sumaTotalPorCategoria = {};
 
@@ -117,15 +91,11 @@ export const ModalCrearNuevaAbertura = () => {
 
     if (precioVidrio) {
       // Convertir las dimensiones del vidrio y la cantidad a números
-      const alto = Number(vidrioSeleccionado[0]?.alto);
-      const ancho = Number(vidrioSeleccionado[0]?.ancho);
-      const cantidad = Number(vidrioSeleccionado[0]?.cantidad);
-
+      const metroCuadrado = Number(vidrioSeleccionado[0]?.metrosCuadrados);
       const precioPorMetroCuadrado = Number(precioVidrio?.precio);
 
       // Calcular el total del vidrio
-      const totalVidrio =
-        Number(alto * ancho) * Number(cantidad) * Number(precioVidrio?.precio);
+      const totalVidrio = metroCuadrado * precioPorMetroCuadrado;
 
       // Actualizar el estado con el resultado
       setTotalVidrio(totalVidrio);
@@ -135,6 +105,7 @@ export const ModalCrearNuevaAbertura = () => {
     }
   }, [precios, vidrioSeleccionado]);
 
+  console.log(vidrioSeleccionado);
   return (
     <Menu as="div" className="z-50">
       <ToastContainer />

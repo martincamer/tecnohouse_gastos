@@ -136,6 +136,7 @@ export const AberturasProvider = ({ children }) => {
       ancho: e.ancho,
       cantidad: e.cantidad,
       categoria: e.categoria,
+      metrosCuadrados: e.metrosCuadrados,
     };
   });
 
@@ -231,7 +232,8 @@ export const AberturasProvider = ({ children }) => {
     detalle,
     categoria,
     cantidad,
-    totalKG
+    totalKG,
+    largo
   ) => {
     const newProducto = {
       id,
@@ -241,6 +243,7 @@ export const AberturasProvider = ({ children }) => {
       categoria,
       cantidad,
       totalKG,
+      largo,
     };
 
     productoSeleccionado.find((item) => {
@@ -319,15 +322,22 @@ export const AberturasProvider = ({ children }) => {
     return randomNumber.toString();
   };
 
-  const addToVidrio = (ancho, alto, cantidad, categoria) => {
+  const addToVidrio = (ancho, alto, cantidad, metrosCuadrados, categoria) => {
     // Genera un nuevo ID aleatorio
     const newId = generarIdAleatorio();
+
+    // anchoMillimeters,
+    //   altoMillimeters,
+    //   metrosCuadrados,
+    //   cantidadTwo,
+    //   categoria;
 
     const newProducto = {
       id: newId,
       ancho,
       alto,
       cantidad,
+      metrosCuadrados,
       categoria,
     };
 
