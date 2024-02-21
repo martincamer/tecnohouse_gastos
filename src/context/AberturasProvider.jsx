@@ -274,22 +274,6 @@ export const AberturasProvider = ({ children }) => {
     setObtenerProductoId(id);
   };
 
-  const deleteAccesorio = (id, detalle, categoria) => {
-    const itemIndex = accesorioSeleccionado?.findIndex(
-      (item) =>
-        item.id === id &&
-        item.detalle === detalle &&
-        item.categoria === categoria &&
-        item.cantidad === cantidad
-    );
-
-    if (itemIndex) {
-      const newItem = [...accesorioSeleccionado];
-      newItem.splice(itemIndex);
-      setAccesorioSeleccionado(newItem);
-    }
-  };
-
   //ACCESORIOS ADD TO
   const addToAccesorio = (id, detalle, categoria, cantidad) => {
     const newProducto = {
@@ -317,6 +301,22 @@ export const AberturasProvider = ({ children }) => {
     setAccesorioSeleccionado([...accesorioSeleccionado, newProducto]);
   };
 
+  const deleteAccesorio = (id, detalle, categoria, cantidad) => {
+    const itemIndex = accesorioSeleccionado?.findIndex(
+      (item) =>
+        item.id === id &&
+        item.detalle === detalle &&
+        item.categoria === categoria &&
+        item.cantidad === cantidad
+    );
+
+    if (itemIndex) {
+      const newItem = [...accesorioSeleccionado];
+      newItem.splice(itemIndex);
+      setAccesorioSeleccionado(newItem);
+    }
+  };
+
   const generarIdAleatorio = () => {
     // Genera un número aleatorio entre 1 y 100000 y lo convierte a cadena
     const randomNumber = Math.floor(Math.random() * 100000) + 1;
@@ -326,12 +326,6 @@ export const AberturasProvider = ({ children }) => {
   const addToVidrio = (ancho, alto, cantidad, metrosCuadrados, categoria) => {
     // Genera un nuevo ID aleatorio
     const newId = generarIdAleatorio();
-
-    // anchoMillimeters,
-    //   altoMillimeters,
-    //   metrosCuadrados,
-    //   cantidadTwo,
-    //   categoria;
 
     const newProducto = {
       id: newId,
@@ -355,6 +349,31 @@ export const AberturasProvider = ({ children }) => {
       setVidrioSeleccionado([...vidrioSeleccionado, newProducto]);
     }
   };
+
+  const deleteVidrio = (
+    id,
+    ancho,
+    alto,
+    cantidad,
+    metrosCuadrados,
+    categoria
+  ) => {
+    const itemIndex = vidrioSeleccionado?.findIndex(
+      (item) =>
+        item.id === id &&
+        item.ancho === ancho &&
+        item.alto === alto &&
+        item.metrosCuadrados === metrosCuadrados &&
+        item.categoria === categoria
+    );
+
+    if (itemIndex) {
+      const newItem = [...vidrioSeleccionado];
+      newItem.splice(itemIndex);
+      setVidrioSeleccionado(newItem);
+    }
+  };
+
   useEffect(() => {
     async function productoUnico() {
       const res = await obtenerUnicoPerfil(obtenerProductoId);
@@ -486,6 +505,8 @@ export const AberturasProvider = ({ children }) => {
         categoriaSeleccionada,
         handleTipoChange,
         tipoSeleccionado,
+        deleteAccesorio,
+        deleteVidrio,
       }}
     >
       {children}

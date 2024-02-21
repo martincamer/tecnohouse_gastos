@@ -36,6 +36,8 @@ export const ModalCrearNuevaAbertura = () => {
     ancho,
     alto,
     deleteProducto,
+    deleteAccesorio,
+    deleteVidrio,
   } = useAberturasContext();
 
   const { precios } = usePreciosContext();
@@ -372,7 +374,7 @@ export const ModalCrearNuevaAbertura = () => {
                                 {p.cantidad}
                               </th>
                               <th
-                                onClick={() => deleteProducto(p.id)}
+                                onClick={() => deleteAccesorio(p.id)}
                                 className="border-[1px] border-red-300 p-3 text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
                               >
                                 ELIMINAR
@@ -426,7 +428,7 @@ export const ModalCrearNuevaAbertura = () => {
                                 {v.categoria}
                               </th>
                               <th
-                                onClick={() => deleteProducto(p.id)}
+                                onClick={() => deleteVidrio(v.id)}
                                 className="border-[1px] border-red-300 p-3 text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
                               >
                                 ELIMINAR
