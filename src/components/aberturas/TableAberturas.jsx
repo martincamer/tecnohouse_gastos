@@ -247,10 +247,10 @@ export const TableAberturas = () => {
             <th className="p-3">Categoria</th>
             <th className="p-3">Ancho</th>
             <th className="p-3">Alto</th>
-            <th className="p-3">Accesorios Total</th>
+            {/* <th className="p-3">Accesorios Total</th>
             <th className="p-3">Aluminio total</th>
             <th className="p-3">Vidrio Total</th>
-            <th className="p-3">Total</th>
+            <th className="p-3">Total</th> */}
             <th className="p-3">Eliminar</th>
             <th className="p-3">Ver</th>
           </tr>
@@ -295,9 +295,8 @@ export const TableAberturas = () => {
                 ))}
               </div>
             </th> */}
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
                 <div className="">
-                  {/* Display the total cost for each "abertura" using the function */}
                   <p>
                     {results[index]
                       ?.reduce((sum, result) => sum + result.totalPrecio, 0)
@@ -346,7 +345,6 @@ export const TableAberturas = () => {
               </th>
               <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
                 <div className="font-semibold">
-                  {/* Asegúrate de proporcionar el índice y totalAveragePrice a la función */}
                   <p>
                     {calculateTotalCostForIndex(
                       index,
@@ -358,12 +356,9 @@ export const TableAberturas = () => {
                     })}
                   </p>
                 </div>
-              </th>
+              </th> */}
               <th
-                onClick={() =>
-                  // handleSeleccionarId(g.id), openModalEliminar();
-                  handleEliminarAbertura(g.id)
-                }
+                onClick={() => handleEliminarAbertura(g.id)}
                 className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase"
               >
                 <p className="border-red-500 border-[1px] rounded shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
