@@ -194,7 +194,7 @@ export const ViewAbertura = () => {
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-8">
       <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-12 px-10 w-full flex flex-col gap-8 items-start">
-        <article className="flex gap-6">
+        <article className="flex items-start gap-6">
           <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2">
             <p className="text-teal-500 font-semibold text-base uppercase">
               DETALLE:{" "}
@@ -300,10 +300,10 @@ export const ViewAbertura = () => {
             </p>
           </div>
 
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2">
-            <div className="flex gap-2">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg gap-4 flex flex-col">
+            <div className="h-full space-y-[0.2px]">
               {precios.map((p) => (
-                <div className="flex gap-2">
+                <>
                   <div className="flex gap-1 uppercase text-sm">
                     <p className="text-teal-500 font-bold">
                       {p.categoria == "luz" && p.categoria}
@@ -334,10 +334,10 @@ export const ViewAbertura = () => {
                   </div>
                   <div className="flex gap-1 uppercase text-sm">
                     <p className="text-teal-500 font-bold">
-                      {p.categoria == "empleados" && p.categoria}
+                      {p.categoria == "produccion" && p.categoria}
                     </p>
                     <p>
-                      {p.categoria == "empleados" && (
+                      {p.categoria == "produccion" && (
                         <span className="">
                           {Number(p.precio).toLocaleString("es-ar", {
                             style: "currency",
@@ -348,32 +348,85 @@ export const ViewAbertura = () => {
                       )}
                     </p>
                   </div>
-                </div>
+
+                  <div className="flex gap-1 uppercase text-sm">
+                    <p className="text-teal-500 font-bold">
+                      {p.categoria == "wifi" && p.categoria}
+                    </p>
+                    <p>
+                      {p.categoria == "wifi" && (
+                        <span className="">
+                          {Number(p.precio).toLocaleString("es-ar", {
+                            style: "currency",
+                            currency: "ARS",
+                            minimumFractionDigits: 2,
+                          })}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-1 uppercase text-sm">
+                    <p className="text-teal-500 font-bold">
+                      {p.categoria == "alquiler" && p.categoria}
+                    </p>
+                    <p>
+                      {p.categoria == "alquiler" && (
+                        <span className="">
+                          {Number(p.precio).toLocaleString("es-ar", {
+                            style: "currency",
+                            currency: "ARS",
+                            minimumFractionDigits: 2,
+                          })}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-1 uppercase text-sm">
+                    <p className="text-teal-500 font-bold">
+                      {p.categoria == "gasto adicional" && p.categoria}
+                    </p>
+                    <p>
+                      {p.categoria == "gasto adicional" && (
+                        <span className="">
+                          {Number(p.precio).toLocaleString("es-ar", {
+                            style: "currency",
+                            currency: "ARS",
+                            minimumFractionDigits: 2,
+                          })}
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                </>
               ))}
             </div>
-            <p className="text-teal-500 font-semibold text-base uppercase">
-              SIN PRODUCCIÓN, AGUA, LUZ:{" "}
-              <span className="font-normal text-gray-900">
-                {precioTotalAbertura.toLocaleString("es-ar", {
-                  style: "currency",
-                  currency: "ARS",
-                  minimumFractionDigits: 2,
-                })}{" "}
-                ARS
-              </span>
-            </p>
+            <div className="flex flex-col gap-2">
+              <p className="text-teal-500 font-semibold text-base uppercase">
+                SIN PRODUCCIÓN, AGUA, LUZ, ETC:{" "}
+                <span className="font-normal text-gray-900">
+                  {precioTotalAbertura.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}{" "}
+                  ARS
+                </span>
+              </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
-              CON PRODUCCIÓN, LUZ, AGUA:{" "}
-              <span className="font-bold text-gray-900">
-                {precioFinalAbertura.toLocaleString("es-ar", {
-                  style: "currency",
-                  currency: "ARS",
-                  minimumFractionDigits: 2,
-                })}{" "}
-                ARS
-              </span>
-            </p>
+              <p className="text-teal-500 font-semibold text-base uppercase">
+                CON PRODUCCIÓN, LUZ, AGUA, ETC:{" "}
+                <span className="font-bold text-gray-900">
+                  {precioFinalAbertura.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}{" "}
+                  ARS
+                </span>
+              </p>
+            </div>
           </div>
         </article>
 
