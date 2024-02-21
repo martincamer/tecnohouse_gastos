@@ -117,6 +117,7 @@ export const AberturasProvider = ({ children }) => {
       color: e.color,
       detalle: e.detalle,
       totalKG: e.totalKG,
+      largo: e.largo,
     };
   });
 

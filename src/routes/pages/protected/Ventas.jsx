@@ -1,6 +1,6 @@
 import { CrearGastosCategorias } from "../../../components/ventas/CrearGastosCategorias";
 import { GastosIntro } from "../../../components/ventas/GastosIntro";
-import { ModalCrearGastos } from "../../../components/ventas/ModalCrearGastos";
+import { ModalCrearVenta } from "../../../components/ventas/ModalCrearGastos";
 import { ModalEliminarGasto } from "../../../components/ventas/ModalEliminarGasto";
 import { TableGastos } from "../../../components/ventas/TableGastos";
 import { Search } from "../../../components/ui/Search";
@@ -39,7 +39,7 @@ export const Ventas = () => {
         />
       </div>
       <TableGastos />
-      <ModalCrearGastos />
+      <ModalCrearVenta />
       <ModalEliminarGasto />
     </section>
   );

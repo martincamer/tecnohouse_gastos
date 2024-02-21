@@ -114,13 +114,13 @@ export const ViewGasto = () => {
           <div className="w-1/6 border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10">
             <button
               onClick={() => openModal()}
-              className="bg-teal-500 w-full  text-white font-semibold text-lg px-5 py-2 rounded-lg shadow shadow-black/20"
+              className="bg-teal-500   text-white font-semibold text-sm px-3 py-1 rounded-lg shadow shadow-black/20"
             >
               EDITAR GASTO
             </button>
           </div>
           <div className="w-[430px]  border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10">
-            <button className="bg-teal-500 w-full  text-white font-semibold text-lg px-5 py-2 rounded-lg shadow shadow-black/20">
+            <button className="bg-teal-500   text-white font-semibold text-sm px-3 py-1 rounded-lg shadow shadow-black/20">
               <PDFDownloadLink
                 document={<PdfDescargarGastoUno gasto={gasto} />}
               >

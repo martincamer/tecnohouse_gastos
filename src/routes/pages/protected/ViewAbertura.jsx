@@ -195,7 +195,7 @@ export const ViewAbertura = () => {
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-8">
       <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-12 px-10 w-full flex flex-col gap-8 items-start">
         <article className="flex items-start gap-6">
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
             <p className="text-teal-500 font-semibold text-base uppercase">
               DETALLE:{" "}
               <span className="font-normal text-gray-900">
@@ -227,12 +227,12 @@ export const ViewAbertura = () => {
             <p className="text-teal-500 font-semibold text-base uppercase">
               TAMAÑO:{" "}
               <span className="font-normal text-gray-900">
-                {abertura?.ancho}x{abertura?.alto}
+                {abertura?.ancho}x{abertura?.alto} mm
               </span>
             </p>
           </div>
 
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
             <p className="text-teal-500 font-semibold text-base uppercase">
               TOTAL EN ALUMINIO:{" "}
               <span className="font-normal text-gray-900">
@@ -485,6 +485,7 @@ export const ViewAbertura = () => {
             <p className="text-gray-600 font-semibold w-[350px]">CATEGORIA</p>
             <p className="text-gray-600 font-semibold w-[350px]">KILOS</p>
             <p className="text-gray-600 font-semibold w-[350px]">CANTIDAD</p>
+            <p className="text-gray-600 font-semibold w-[350px]">LARGO</p>
             <p className="text-gray-600 font-semibold w-[350px]">
               PRECIO X UNIDAD
             </p>
@@ -507,6 +508,10 @@ export const ViewAbertura = () => {
               </p>
               <p className="text-sm py-3 uppercase w-[350px]">
                 {perfil?.cantidad}
+              </p>
+              <p className="text-sm py-3 uppercase w-[350px]">
+                {perfil?.largo} mm
+                {/* {console.log(abertura)} */}
               </p>
               <p className="text-sm py-3 uppercase w-[350px]">
                 {perfil?.precioFinal?.toLocaleString("es-ar", {
@@ -544,7 +549,7 @@ export const ViewAbertura = () => {
                 {perfil?.cantidad}
               </p>
               <p className="text-sm py-3 uppercase w-[300px]">
-                {perfil?.ancho} x {perfil?.alto}
+                {perfil?.ancho} mm x {perfil?.alto} mm
               </p>
               <p className="text-sm py-3 uppercase w-[300px]">
                 {perfil?.precioFinal?.toLocaleString("es-ar", {
