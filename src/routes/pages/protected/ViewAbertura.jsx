@@ -422,7 +422,7 @@ export const ViewAbertura = () => {
               <p className="text-teal-500 font-semibold text-base uppercase">
                 CON PRODUCCIÓN, AGUA, LUZ, Y SIN EL 40%, ETC:{" "}
                 <span className="font-normal text-gray-900">
-                  {precioFinalAbertura.toLocaleString("es-ar", {
+                  {precioFinalAberturaSin.toLocaleString("es-ar", {
                     style: "currency",
                     currency: "ARS",
                     minimumFractionDigits: 2,
@@ -434,7 +434,7 @@ export const ViewAbertura = () => {
               <p className="text-teal-500 font-semibold text-base uppercase">
                 CON PRODUCCIÓN, LUZ, AGUA, Y EL 40%, ETC:{" "}
                 <span className="font-bold text-gray-900">
-                  {precioFinalAberturaSin.toLocaleString("es-ar", {
+                  {precioFinalAbertura.toLocaleString("es-ar", {
                     style: "currency",
                     currency: "ARS",
                     minimumFractionDigits: 2,
