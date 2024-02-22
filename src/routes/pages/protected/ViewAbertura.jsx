@@ -185,7 +185,10 @@ export const ViewAbertura = () => {
 
   // Suma el precio total de la abertura con los precios adicionales
   const precioFinalAbertura =
-    (precioTotalAbertura + precioTotalAdicionales) * 1.4;
+    (precioTotalAbertura + precioTotalAdicionales) * Number(1.4);
+
+  // Suma el precio total de la abertura con los precios adicionales
+  const precioFinalAberturaSin = precioTotalAbertura + precioTotalAdicionales;
 
   console.log(
     "Precio final de la abertura con adicionales:",
@@ -417,9 +420,21 @@ export const ViewAbertura = () => {
               </p>
 
               <p className="text-teal-500 font-semibold text-base uppercase">
-                CON PRODUCCIÓN, LUZ, AGUA, ETC:{" "}
-                <span className="font-bold text-gray-900">
+                CON PRODUCCIÓN, AGUA, LUZ, Y SIN EL 40%, ETC:{" "}
+                <span className="font-normal text-gray-900">
                   {precioFinalAbertura.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}{" "}
+                  ARS
+                </span>
+              </p>
+
+              <p className="text-teal-500 font-semibold text-base uppercase">
+                CON PRODUCCIÓN, LUZ, AGUA, Y EL 40%, ETC:{" "}
+                <span className="font-bold text-gray-900">
+                  {precioFinalAberturaSin.toLocaleString("es-ar", {
                     style: "currency",
                     currency: "ARS",
                     minimumFractionDigits: 2,
