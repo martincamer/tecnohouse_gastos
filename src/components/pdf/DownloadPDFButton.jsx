@@ -32,11 +32,33 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
       {Object.entries(aberturasPorTipo).map(([tipo, aberturas], pageIndex) => (
         <Page key={pageIndex} size="A4" style={styles.body}>
           <View style={styles.tecnohouse_intro}>
-            <Text style={styles.title}>TECNOHOUSE ABERTURAS</Text>
-            <Text style={styles.title_two}>RESUMEN DEL GASTO</Text>
+            <Text style={styles.titleTwo}>TECNOHOUSE ABERTURAS</Text>
+            <Text style={styles.title_two}>INVENTARIO</Text>
           </View>
           <View style={styles.tecnohouse_intro}>
             {/* ... Resto del contenido ... */}
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "bold",
+                fontSize: "10px",
+                textTransform: "uppercase",
+              }}
+            >
+              Fecha Actual
+            </Text>
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "normal",
+                fontSize: "10px",
+                textTransform: "uppercase",
+                textDecoration: "underline",
+              }}
+            >
+              {fechaActual?.toLocaleString("es-AR", { month: "long" })},{" "}
+              {fechaActual?.toLocaleString("es-AR", { year: "numeric" })}
+            </Text>
           </View>
           <View
             style={{
@@ -57,6 +79,7 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
                   fontWeight: "semibold",
                   fontSize: "14px",
                   color: "#00AEAE",
+                  marginBottom: "10px",
                 }}
               >
                 {tipo.toUpperCase()}S
@@ -69,7 +92,7 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
                       style={styles.cell}
                     >{`Color: ${abertura.color} / Categoria: ${abertura.categoria} / ${abertura.ancho}x${abertura.alto}`}</Text>
                   </View>
-                  <View style={styles.row}>
+                  <View style={styles.rowTwo}>
                     <Text
                       style={styles.cell}
                     >{`Precio final: ${abertura.totalConAumento.toLocaleString(
@@ -117,7 +140,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     gap: "15px",
   },
-  title: {
+  titleTwo: {
     fontFamily: "Montserrat",
     fontWeight: "semibold",
     fontSize: "12px",
@@ -140,6 +163,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     marginBottom: 10,
+    fontFamily: "Montserrat",
+    fontWeight: "semibold",
   },
   table: {
     display: "table",
@@ -154,11 +179,21 @@ const styles = StyleSheet.create({
     height: 30,
     fontSize: 12,
   },
+  rowTwo: {
+    flexDirection: "row",
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#000",
+    alignItems: "center",
+    height: 30,
+    fontSize: 12,
+  },
   cell: {
     flexGrow: 1,
     padding: 5,
     textTransform: "uppercase",
     fontSize: "8px",
+    fontFamily: "Montserrat",
+    fontWeight: "semibold",
   },
 });
 
