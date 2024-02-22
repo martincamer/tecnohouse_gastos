@@ -12,7 +12,7 @@
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@headlessui/react": "^1.7.17",
-    "@react-pdf/renderer": "^3.1.13",
+    "@react-pdf/renderer": "^3.3.8",
     "@tanstack/react-table": "^8.10.6",
     "axios": "^1.5.1",
     "chart.js": "^4.4.1",

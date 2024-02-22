@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { usePreciosContext } from "../../context/PreciosProvider";
 import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 import { useState } from "react";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { DownloadPDFButton } from "../pdf/DownloadPDFButton";
 
 export const TableAberturas = () => {
   const {
@@ -235,6 +237,255 @@ export const TableAberturas = () => {
     setCurrentPage(newPage);
   };
 
+  //abertura con detalles
+  // const aberturasConDetalles = currentResults.map((abertura) => {
+  //   const accesoriosPrecioTotal = abertura.datos.accesoriosSelect.reduce(
+  //     (total, accesorio) => {
+  //       const accesorioEncontrado = accesorios.find(
+  //         (a) => a.detalle === accesorio.detalle
+  //       );
+  //       return (
+  //         total +
+  //         (accesorioEncontrado
+  //           ? accesorioEncontrado.precio_unidad * accesorio.cantidad
+  //           : 0)
+  //       );
+  //     },
+  //     0
+  //   );
+
+  //   const perfilesTotalKG = abertura.datos.perfilesSelect.reduce(
+  //     (total, perfil) => {
+  //       return total + perfil.totalKG;
+  //     },
+  //     0
+  //   );
+
+  //   console.log(perfilesTotalKG);
+
+  //   const precioPerfiles = precios.find(
+  //     (precio) => precio.categoria === abertura.datos.categoria
+  //   );
+
+  //   console.log(precioPerfiles);
+
+  //   const perfilesPrecioTotal = precioPerfiles
+  //     ? perfilesTotalKG * precioPerfiles.precio
+  //     : 0;
+
+  //   const vidriosTotalMetrosCuadrados = abertura.datos.vidrioSelect.reduce(
+  //     (total, vidrio) => {
+  //       const precioVidrio = precios.find(
+  //         (precio) => precio.categoria === vidrio.categoria
+  //       );
+  //       return (
+  //         total +
+  //         (precioVidrio ? vidrio.metrosCuadrados * precioVidrio.precio : 0)
+  //       );
+  //     },
+  //     0
+  //   );
+
+  //   const precioTotal =
+  //     accesoriosPrecioTotal + perfilesPrecioTotal + vidriosTotalMetrosCuadrados;
+
+  //   return {
+  //     ...abertura,
+  //     datos: {
+  //       ...abertura.datos,
+  //       accesoriosSelect: {
+  //         ...abertura.datos.accesoriosSelect,
+  //         precioTotal: accesoriosPrecioTotal,
+  //       },
+  //       perfilesSelect: {
+  //         ...abertura.datos.perfilesSelect,
+  //         precioTotal: perfilesPrecioTotal,
+  //       },
+  //       vidrioSelect: {
+  //         ...abertura.datos.vidrioSelect,
+  //         precioTotal: vidriosTotalMetrosCuadrados,
+  //       },
+  //     },
+  //     precioTotal,
+  //   };
+  // });
+
+  // console.log(aberturasConDetalles);
+
+  // const aberturasConPreciosFinales = currentResults.map((abertura) => {
+  //   const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
+  //     const precioVidrio = precios.find(
+  //       (precio) => precio.categoria === vidrio.categoria
+  //     );
+  //     const precio = precioVidrio
+  //       ? vidrio.metrosCuadrados * precioVidrio.precio
+  //       : 0;
+  //     return {
+  //       ...vidrio,
+  //       precio,
+  //     };
+  //   });
+
+  //   const accesoriosConPrecio = abertura.datos.accesoriosSelect.map(
+  //     (accesorio) => {
+  //       const accesorioEncontrado = accesorios.find(
+  //         (a) => a.detalle === accesorio.detalle
+  //       );
+  //       const precio = accesorioEncontrado
+  //         ? accesorioEncontrado.precio_unidad * accesorio.cantidad
+  //         : 0;
+  //       return {
+  //         ...accesorio,
+  //         precio,
+  //       };
+  //     }
+  //   );
+  //   const perfilesConPrecio = abertura.datos.perfilesSelect.map((perfil) => {
+  //     const precioPerfil = precios.find(
+  //       (precio) =>
+  //         precio.categoria.toLowerCase() === perfil.categoria.toLowerCase()
+  //     );
+  //     const precio = precioPerfil ? perfil.totalKG * precioPerfil.precio : 0;
+  //     return {
+  //       ...perfil,
+  //       precio,
+  //     };
+  //   });
+
+  //   const vidriosPrecioTotal = vidriosConPrecio.reduce(
+  //     (total, vidrio) => total + vidrio.precio,
+  //     0
+  //   );
+  //   const accesoriosPrecioTotal = accesoriosConPrecio.reduce(
+  //     (total, accesorio) => total + accesorio.precio,
+  //     0
+  //   );
+  //   const perfilesPrecioTotal = perfilesConPrecio.reduce(
+  //     (total, perfil) => total + perfil.precio,
+  //     0
+  //   );
+
+  //   const precioFinal =
+  //     vidriosPrecioTotal + accesoriosPrecioTotal + perfilesPrecioTotal;
+
+  //   return {
+  //     ...abertura,
+  //     datos: {
+  //       ...abertura.datos,
+  //       vidrioSelect: vidriosConPrecio,
+  //       accesoriosSelect: accesoriosConPrecio,
+  //       perfilesSelect: perfilesConPrecio,
+  //     },
+  //     precioFinal,
+  //   };
+  // });
+
+  // console.log(
+  //   aberturasConPreciosFinales.map((p) =>
+  //     p.precioFinal.toLocaleString("es-ar", {
+  //       style: "currency",
+  //       currency: "ARS",
+  //       minimumFractionDigits: 2,
+  //     })
+  //   )
+  // );
+
+  const aberturasConPreciosFinales = currentResults.map((abertura) => {
+    const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
+      const precioVidrio = precios.find(
+        (precio) => precio.categoria === vidrio.categoria
+      );
+      const precio = precioVidrio
+        ? vidrio.metrosCuadrados * precioVidrio.precio
+        : 0;
+      return {
+        ...vidrio,
+        precio,
+      };
+    });
+
+    const accesoriosConPrecio = abertura.datos.accesoriosSelect.map(
+      (accesorio) => {
+        const accesorioEncontrado = accesorios.find(
+          (a) => a.detalle === accesorio.detalle
+        );
+        const precio = accesorioEncontrado
+          ? accesorioEncontrado.precio_unidad * accesorio.cantidad
+          : 0;
+        return {
+          ...accesorio,
+          precio,
+        };
+      }
+    );
+    const perfilesConPrecio = abertura.datos.perfilesSelect.map((perfil) => {
+      const precioPerfil = precios.find(
+        (precio) =>
+          precio.categoria.toLowerCase() === perfil.categoria.toLowerCase()
+      );
+      const precio = precioPerfil ? perfil.totalKG * precioPerfil.precio : 0;
+      return {
+        ...perfil,
+        precio,
+      };
+    });
+
+    const vidriosPrecioTotal = vidriosConPrecio.reduce(
+      (total, vidrio) => total + vidrio.precio,
+      0
+    );
+    const accesoriosPrecioTotal = accesoriosConPrecio.reduce(
+      (total, accesorio) => total + accesorio.precio,
+      0
+    );
+    const perfilesPrecioTotal = perfilesConPrecio.reduce(
+      (total, perfil) => total + perfil.precio,
+      0
+    );
+
+    // Filtrar los precios que coinciden con las categorías a sumar
+    const categoriasAsumar = [
+      "luz",
+      "agua",
+      "produccion",
+      "wifi",
+      "alquiler",
+      "gasto adicional",
+    ];
+
+    const preciosASumar = precios.filter((precio) =>
+      categoriasAsumar.includes(precio.categoria)
+    );
+
+    // Calcular la suma de los precios
+    const sumaPrecios = preciosASumar.reduce((total, precio) => {
+      return total + parseFloat(precio.precio);
+    }, 0);
+
+    const precioFinal =
+      vidriosPrecioTotal +
+      accesoriosPrecioTotal +
+      perfilesPrecioTotal +
+      sumaPrecios;
+
+    // Calcular el 40% de totalConAumento
+    const totalConAumento = precioFinal * 1.4;
+
+    return {
+      ...abertura,
+      datos: {
+        ...abertura.datos,
+        vidrioSelect: vidriosConPrecio,
+        accesoriosSelect: accesoriosConPrecio,
+        perfilesSelect: perfilesConPrecio,
+      },
+      precioFinal,
+      totalConAumento,
+      sumaPrecios,
+    };
+  });
+  console.log(aberturasConPreciosFinales);
+
   return (
     <div>
       <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
@@ -400,6 +651,20 @@ export const TableAberturas = () => {
           ))}
         </div>
       )}
+      <div className="mt-5 flex">
+        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md shadow hover:shadow-black/10 hover:border-teal-400">
+          <PDFDownloadLink
+            document={
+              <DownloadPDFButton
+                aberturasConPreciosFinales={aberturasConPreciosFinales}
+              />
+            }
+          >
+            {" "}
+            DESCARGAR INVENTARIO
+          </PDFDownloadLink>
+        </button>
+      </div>
     </div>
   );
 };
