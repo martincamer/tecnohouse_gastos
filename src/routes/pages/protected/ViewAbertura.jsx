@@ -185,7 +185,7 @@ export const ViewAbertura = () => {
 
   // Suma el precio total de la abertura con los precios adicionales
   const precioFinalAbertura =
-    precioTotalAbertura + precioTotalAdicionales * 1.4;
+    (precioTotalAbertura + precioTotalAdicionales) * 1.4;
 
   console.log(
     "Precio final de la abertura con adicionales:",
