@@ -21,6 +21,7 @@ import { AccesoriosProvider } from "./context/AccesoriosProvider";
 import { Accesorios } from "./routes/pages/protected/Accesorios";
 import { PreciosProvider } from "./context/PreciosProvider";
 import { ViewAbertura } from "./routes/pages/protected/ViewAbertura";
+import { GenerarPresupuesto } from "./routes/pages/protected/GenerarPresupuesto";
 //import normales
 import RutaProtegida from "./layouts/RutaProtejida";
 import "react-toastify/dist/ReactToastify.css";
@@ -68,6 +69,7 @@ function App() {
               <Route path="/ventas" element={<Ventas />} />
               <Route path="/perfiles" element={<Perfiles />} />
               <Route path="/accesorios" element={<Accesorios />} />
+              <Route path="/presupuestos" element={<GenerarPresupuesto />} />
               <Route path="/aberturas" element={<AberturasCostos />} />
               <Route path="/gastos/:id" element={<ViewGasto />} />
               <Route path="/ventas/:id" element={<ViewVenta />} />
