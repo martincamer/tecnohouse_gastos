@@ -189,6 +189,9 @@ const styles = StyleSheet.create({
   },
   cell: {
     flexGrow: 1,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    display: "flex",
     padding: 5,
     textTransform: "uppercase",
     fontSize: "8px",
