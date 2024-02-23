@@ -86,11 +86,17 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
               </Text>
               {aberturas.map((abertura, index) => (
                 <View style={styles.table} key={index}>
+                  <Text style={styles.cell}>{abertura.detalle}</Text>
                   <View style={styles.row}>
-                    <Text style={styles.cell}>{abertura.detalle}</Text>
                     <Text
                       style={styles.cell}
-                    >{`Color: ${abertura.color} / Categoria: ${abertura.categoria} / ${abertura.ancho}x${abertura.alto}`}</Text>
+                    >{`Color: ${abertura.color}`}</Text>
+                    <Text
+                      style={styles.cell}
+                    >{`Categoria: ${abertura.categoria}`}</Text>
+                    <Text
+                      style={styles.cell}
+                    >{`Medida: ${abertura.ancho}x${abertura.alto}`}</Text>
                   </View>
                   <View style={styles.rowTwo}>
                     <Text
