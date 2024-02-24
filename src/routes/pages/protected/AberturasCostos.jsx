@@ -3,6 +3,7 @@ import { CrearAberturasCategorias } from "../../../components/aberturas/CrearAbe
 import { ModalCrearNuevaAbertura } from "../../../components/aberturas/ModalCrearAbertura";
 import { TableAberturas } from "../../../components/aberturas/TableAberturas";
 import { ModalPrecios } from "../../../components/precios/ModalPrecios";
+import ColorFilter from "../../../components/ui/ColorFilter";
 import { Search } from "../../../components/ui/Search";
 import { SearchSelectCategory } from "../../../components/ui/SearchSelectCategory";
 import { SearchSelectTipo } from "../../../components/ui/SearchSelectTipo";
@@ -16,6 +17,8 @@ export const AberturasCostos = () => {
     categoriaSeleccionada,
     handleTipoChange,
     tipoSeleccionado,
+    colorSeleccionado,
+    handleColorChange,
   } = useAberturasContext();
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-5">
@@ -34,6 +37,10 @@ export const AberturasCostos = () => {
         <SearchSelectTipo
           handleTipoChange={handleTipoChange}
           tipoSeleccionado={tipoSeleccionado}
+        />
+        <ColorFilter
+          colorSeleccionado={colorSeleccionado}
+          handleColorChange={handleColorChange}
         />
       </div>
       <TableAberturas />

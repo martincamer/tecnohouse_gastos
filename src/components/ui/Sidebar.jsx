@@ -36,6 +36,11 @@ export const Sidebar = () => {
       path: "/aberturas",
       icon: <FiSidebar />,
     },
+    {
+      name: "PRESUPUESTOS",
+      path: "/presupuestos",
+      icon: <FiShoppingBag />,
+    },
   ];
 
   return (

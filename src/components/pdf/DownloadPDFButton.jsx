@@ -33,7 +33,7 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
         <Page key={pageIndex} size="A4" style={styles.body}>
           <View style={styles.tecnohouse_intro}>
             <Text style={styles.titleTwo}>TECNOHOUSE ABERTURAS</Text>
-            <Text style={styles.title_two}>INVENTARIO</Text>
+            <Text style={styles.title_two}>RESUMEN TOTAL</Text>
           </View>
           <View style={styles.tecnohouse_intro}>
             {/* ... Resto del contenido ... */}

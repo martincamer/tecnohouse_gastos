@@ -26,6 +26,7 @@ import { GenerarPresupuesto } from "./routes/pages/protected/GenerarPresupuesto"
 import RutaProtegida from "./layouts/RutaProtejida";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import { PresupuestoProvider } from "./context/PresupuestoProvider";
 
 function App() {
   const { isAuth } = useAuth();
@@ -52,10 +53,12 @@ function App() {
                       <PerfilesProvider>
                         <AccesoriosProvider>
                           <PreciosProvider>
-                            <main className="flex gap-2 h-full">
-                              <Sidebar />
-                              <Outlet />
-                            </main>
+                            <PresupuestoProvider>
+                              <main className="flex gap-2 h-full">
+                                <Sidebar />
+                                <Outlet />
+                              </main>
+                            </PresupuestoProvider>
                           </PreciosProvider>
                         </AccesoriosProvider>
                       </PerfilesProvider>

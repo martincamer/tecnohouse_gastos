@@ -417,11 +417,12 @@ export const AberturasProvider = ({ children }) => {
     });
   };
 
-  //SEARCH
+  // SEARCH
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
   const [tipoSeleccionado, setTipoSeleccionado] = useState("");
+  const [colorSeleccionado, setColorSeleccionado] = useState("");
 
   useEffect(() => {
     const resultadosFiltrados = obtenerAberturas?.filter((dato) => {
@@ -429,6 +430,7 @@ export const AberturasProvider = ({ children }) => {
         (categoriaSeleccionada === "" ||
           dato.categoria === categoriaSeleccionada) &&
         (tipoSeleccionado === "" || dato.tipo === tipoSeleccionado) &&
+        (colorSeleccionado === "" || dato.color === colorSeleccionado) &&
         (search === "" ||
           dato.detalle.toLowerCase().includes(search.toLowerCase()));
 
@@ -436,7 +438,13 @@ export const AberturasProvider = ({ children }) => {
     });
 
     setResults(resultadosFiltrados || []);
-  }, [categoriaSeleccionada, tipoSeleccionado, search, obtenerAberturas]);
+  }, [
+    categoriaSeleccionada,
+    tipoSeleccionado,
+    colorSeleccionado,
+    search,
+    obtenerAberturas,
+  ]);
 
   const handleCategoriaChange = (e) => {
     const nuevaCategoria = e.target.value;
@@ -448,6 +456,11 @@ export const AberturasProvider = ({ children }) => {
   const handleTipoChange = (e) => {
     const nuevoTipo = e.target.value;
     setTipoSeleccionado(nuevoTipo === "TODOS LOS TIPOS" ? "" : nuevoTipo);
+  };
+
+  const handleColorChange = (e) => {
+    const nuevoColor = e.target.value;
+    setColorSeleccionado(nuevoColor === "TODOS LOS COLORES" ? "" : nuevoColor);
   };
 
   const searcher = (e) => {
@@ -507,6 +520,8 @@ export const AberturasProvider = ({ children }) => {
         tipoSeleccionado,
         deleteAccesorio,
         deleteVidrio,
+        colorSeleccionado,
+        handleColorChange,
       }}
     >
       {children}

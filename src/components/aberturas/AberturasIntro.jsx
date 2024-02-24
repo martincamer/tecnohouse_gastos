@@ -11,7 +11,6 @@ export const AberturasIntro = () => {
   //   );
 
   const fechaActual = new Date();
-  console.log(fechaActual);
 
   return (
     <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-10 px-10 flex justify-between items-center">

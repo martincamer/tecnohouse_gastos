@@ -390,7 +390,7 @@ export const TableAberturas = () => {
   //   )
   // );
 
-  const aberturasConPreciosFinales = currentResults.map((abertura) => {
+  const aberturasConPreciosFinales = resultados.map((abertura) => {
     const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
       const precioVidrio = precios.find(
         (precio) => precio.categoria === vidrio.categoria
@@ -484,7 +484,8 @@ export const TableAberturas = () => {
       sumaPrecios,
     };
   });
-  console.log(aberturasConPreciosFinales);
+
+  const fechaActual = new Date();
 
   return (
     <div>
@@ -654,6 +655,10 @@ export const TableAberturas = () => {
       <div className="mt-5 flex">
         <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md shadow hover:shadow-black/10 hover:border-teal-400">
           <PDFDownloadLink
+            fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
+              "es-AR",
+              { month: "long" }
+            )}`}
             document={
               <DownloadPDFButton
                 aberturasConPreciosFinales={aberturasConPreciosFinales}
