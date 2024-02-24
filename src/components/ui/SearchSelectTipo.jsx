@@ -9,7 +9,7 @@ export const SearchSelectTipo = ({ handleTipoChange, tipoSeleccionado }) => {
         <option>TODOS LOS TIPOS</option>
         <option value="ventana">VENTANA</option>
         <option value="puerta">PUERTA</option>
-        <option value="rajas de abrir">RAJAS DE ABRIR</option>
+        <option value="rajas de abrir">RAJA DE ABRIR</option>
         <option value="paño fijo">PAÑO FIJO</option>
         <option value="portones">PORTONES</option>
         <option value="celosias de abrir">CELOSIAS DE ABRIR</option>
