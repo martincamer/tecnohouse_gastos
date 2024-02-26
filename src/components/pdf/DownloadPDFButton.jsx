@@ -78,7 +78,7 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
                   fontSize: "14px",
-                  color: "#00AEAE",
+                  color: "#4338CA",
                   marginBottom: "10px",
                 }}
               >

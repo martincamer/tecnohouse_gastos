@@ -26,7 +26,7 @@ export const Login = () => {
   });
 
   return (
-    <section className="flex items-center gap-12 h-screen pt-[300px] bg-gray-100 flex-col relative">
+    <section className="flex items-center gap-12 h-screen pt-[200px] bg-gray-100 flex-col relative">
       <div className="absolute top-14">
         <img className="h-[100px]" src={"./logoempresa.png"} />
       </div>
