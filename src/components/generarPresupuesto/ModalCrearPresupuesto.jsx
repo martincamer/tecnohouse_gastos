@@ -61,21 +61,72 @@ export const ModalCrearPresupuesto = () => {
                     <label>CLIENTE</label>
                     <input
                       placeholder="CLIENTE"
-                      className="py-2 px-3 bg-gray-100/10 rounded-lg shadow-black/10 shadow-md border-[1px] border-gray-100 outline-none"
+                      className="w-1/3 py-2 px-3 bg-slate-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-slate-300 outline-none"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
                     <label>LOCALIDAD</label>
                     <input
                       placeholder="LOCALIDAD"
-                      className="py-2 px-3 bg-gray-100/10 rounded-lg shadow-black/10 shadow-md border-[1px] border-gray-100 outline-none"
+                      className="w-1/3 py-2 px-3 bg-slate-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-slate-300 outline-none"
                     />
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 items-start">
                     <button
                       type="button"
-                      className="py-2 px-3 bg-gray-100/10 rounded-lg shadow-black/10 shadow-md border-[1px] border-gray-100 outline-none"
-                    />
+                      className="py-2 px-3 bg-indigo-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-indigo-500 text-indigo-700 outline-none text-sm"
+                    >
+                      Seleccionar aberturas
+                    </button>
+                  </div>
+
+                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
+                    <thead>
+                      <tr className="text-left">
+                        {/* <th className="p-3 border-b-[1px]">Numero</th> */}
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          DETALLE
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          MEDIDA
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          COLOR
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          CATEGORIA
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          PRECIO UND.
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          CANT
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          TOTAL
+                        </th>
+                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          ELIMINAR
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left">
+                        <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
+                          1
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div className="flex gap-2">
+                    <p className="text-slate-700">Total aberturas</p>
+                    <p className="text-indigo-500">5</p>
+                  </div>
+
+                  <div className="flex gap-2">
+                    <p className="text-slate-700">Total generado</p>
+                    <p className="text-indigo-500">$12.000.000,55</p>
                   </div>
                 </form>
                 <div className="mt-4">

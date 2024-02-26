@@ -23,6 +23,7 @@ export const GenerarPresupuesto = () => {
           handleTipoChange={handleTipoChange}
           tipoSeleccionado={tipoSeleccionado}
         /> */}
+
         <ModalCrearPresupuesto />
       </div>
     </section>
