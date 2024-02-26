@@ -174,7 +174,7 @@ export const ModalSeleccionarPerfil = ({
                           key={index}
                           className={`mx-1 px-3 py-1 rounded ${
                             currentPage === index + 1
-                              ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                              ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
                               : "bg-gray-100 shadow shadow-black/20"
                           }`}
                           onClick={() => handlePageChange(index + 1)}

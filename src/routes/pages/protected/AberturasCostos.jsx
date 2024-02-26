@@ -24,7 +24,7 @@ export const AberturasCostos = () => {
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-5">
       <AberturasIntro />
       <CrearAberturasCategorias /*results={results}*/ />
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center">
+      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center bg-slate-100">
         <Search
           variable={"Buscar por el detalle..."}
           search={search}

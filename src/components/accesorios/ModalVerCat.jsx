@@ -92,7 +92,7 @@ export const ModalVerCat = ({ isOpenVerCat, closeVerCategorias }) => {
             >
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-teal-500 text-lg border-b-[1px] w-full border-gray-300">
+                  <div className="font-semibold text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
                     VER CATEGORIAS CREADAS
                   </div>
 
@@ -104,7 +104,7 @@ export const ModalVerCat = ({ isOpenVerCat, closeVerCategorias }) => {
                       >
                         <p>{c.categoria}</p>
                         <button
-                          className="bg-teal-100 px-2 text-sm rounded-lg border-[1px] border-teal-400 text-teal-800"
+                          className="bg-indigo-100 px-2 text-sm rounded-lg border-[1px] border-indigo-500 text-indigo-800"
                           type="button"
                         >
                           E

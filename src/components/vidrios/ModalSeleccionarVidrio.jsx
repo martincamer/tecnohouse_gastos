@@ -102,7 +102,7 @@ export const ModalSeleccionarVidrio = ({
                 <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex gap-6 w-full py-10 px-10 overflow-y-scroll">
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-teal-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold"
                       htmlFor=""
                     >
                       Ancho
@@ -118,7 +118,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-teal-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold"
                       htmlFor=""
                     >
                       Alto
@@ -134,7 +134,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-teal-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold"
                       htmlFor=""
                     >
                       Cantidad
@@ -150,7 +150,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-teal-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold"
                       htmlFor=""
                     >
                       Seleccionar
@@ -171,7 +171,7 @@ export const ModalSeleccionarVidrio = ({
                 </div>
                 <div>
                   <button
-                    className="bg-teal-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold"
+                    className="bg-indigo-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold"
                     type="button"
                     // onClick={() => {
                     //   addToVidrio(ancho, alto, cantidad, categoria),

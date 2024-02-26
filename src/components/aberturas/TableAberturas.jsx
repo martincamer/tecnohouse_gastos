@@ -493,45 +493,48 @@ export const TableAberturas = () => {
         <thead>
           <tr>
             {/* <th className="p-3">Numero</th> */}
-            <th className="p-3">Tipo</th>
-            <th className="p-3">Detalle</th>
-            <th className="p-3">Color</th>
-            <th className="p-3">Categoria</th>
-            <th className="p-3">Ancho</th>
-            <th className="p-3">Alto</th>
-            {/* <th className="p-3">Accesorios Total</th>
-            <th className="p-3">Aluminio total</th>
-            <th className="p-3">Vidrio Total</th>
-            <th className="p-3">Total</th> */}
-            <th className="p-3">Eliminar</th>
-            <th className="p-3">Ver</th>
+            <th className="p-3 border-b-[1px]">Tipo</th>
+            <th className="p-3 border-b-[1px]">Detalle</th>
+            <th className="p-3 border-b-[1px]">Color</th>
+            <th className="p-3 border-b-[1px]">Categoria</th>
+            <th className="p-3 border-b-[1px]">Ancho</th>
+            <th className="p-3 border-b-[1px]">Alto</th>
+            {/* <th className="p-3 border-b-[1px]">Accesorios Total</th>
+            <th className="p-3 border-b-[1px]">Aluminio total</th>
+            <th className="p-3 border-b-[1px]">Vidrio Total</th>
+            <th className="p-3 border-b-[1px]">Total</th> */}
+            <th className="p-3 border-b-[1px]">Eliminar</th>
+            <th className="p-3 border-b-[1px]">Ver</th>
           </tr>
         </thead>
         <tbody>
           {currentResults?.map((g, index) => (
-            <tr key={g.id}>
+            <tr
+              className="hover:bg-slate-100  transition-all ease-in-out duration-200 cursor-pointer"
+              key={g.id}
+            >
               {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
               {g.id}
             </th> */}
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.tipo}
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.detalle}
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.color}
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.categoria}
               </th>{" "}
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.ancho}
               </th>{" "}
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 {g.alto}
               </th>
-              {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              {/* <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
               <div className="h-[40px] overflow-y-scroll">
                 {results[index]?.map((result, i) => (
                   <div key={i}>
@@ -547,7 +550,7 @@ export const TableAberturas = () => {
                 ))}
               </div>
             </th> */}
-              {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              {/* <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <div className="">
                   <p>
                     {results[index]
@@ -560,7 +563,7 @@ export const TableAberturas = () => {
                   </p>
                 </div>
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <div className="h-[40px] overflow-y-scroll flex items-center justify-center">
                   {resultsTwo?.[index] && (
                     <>
@@ -577,7 +580,7 @@ export const TableAberturas = () => {
                   )}
                 </div>
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <div className="h-[40px] overflow-y-scroll flex items-center justify-center">
                   {resultsTwo?.[index] && (
                     <>
@@ -595,7 +598,7 @@ export const TableAberturas = () => {
                   )}
                 </div>
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <div className="font-semibold">
                   <p>
                     {calculateTotalCostForIndex(
@@ -611,16 +614,16 @@ export const TableAberturas = () => {
               </th> */}
               <th
                 onClick={() => handleEliminarAbertura(g.id)}
-                className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase"
+                className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase"
               >
                 <p className="border-red-500 border-[1px] rounded shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
                   ELIMINAR
                 </p>
               </th>
-              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <Link
                   to={`/aberturas/${g.id}`}
-                  className="border-teal-500 border-[1px] rounded shadow py-[3px] px-5 bg-teal-100 text-center text-teal-800 cursor-pointer"
+                  className="border-indigo-500 border-[1px] rounded shadow py-[3px] px-5 bg-indigo-100 text-center text-indigo-800 cursor-pointer"
                 >
                   VER
                 </Link>
@@ -642,7 +645,7 @@ export const TableAberturas = () => {
               key={index}
               className={`mx-1 px-3 py-1 rounded ${
                 currentPage === index + 1
-                  ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                  ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
                   : "bg-gray-100 shadow shadow-black/20"
               }`}
               onClick={() => handlePageChange(index + 1)}
@@ -653,7 +656,7 @@ export const TableAberturas = () => {
         </div>
       )}
       <div className="mt-5 flex">
-        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md shadow hover:shadow-black/10 hover:border-teal-400">
+        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",

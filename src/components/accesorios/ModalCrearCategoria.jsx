@@ -91,7 +91,7 @@ export const ModalCrearCategoria = ({
             >
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-teal-500 text-lg border-b-[1px] w-full border-gray-300">
+                  <div className="font-semibold text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
                     CREAR NUEVO ACCESORIO
                   </div>
 
@@ -113,7 +113,7 @@ export const ModalCrearCategoria = ({
 
                     <div>
                       <button
-                        className="bg-teal-500 text-white font-semibold py-2 px-8 hover:bg-teal-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
+                        className="bg-indigo-500 text-white font-semibold py-2 px-8 hover:bg-indigo-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
                         type="submit"
                       >
                         CREAR CATEGORIA

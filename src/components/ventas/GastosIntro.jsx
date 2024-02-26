@@ -16,31 +16,31 @@ export const GastosIntro = () => {
   // const diaActual = fechaActual.getDate();
 
   return (
-    <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-10 px-10 flex justify-between items-center">
+    <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-10 px-10 flex justify-between items-center bg-slate-100">
       <div className="text-xl font-bold text-gray-700">
         VENTAS DE TECNOHOUSE
       </div>
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10">
+      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">MES/FECHA:</p>{" "}
-          <p className="font-semibold text-teal-600 text-md uppercase">
+          <p className="font-semibold text-indigo-600 text-md uppercase">
             {fechaActual.toLocaleString("es-AR", { month: "long" })}
           </p>
         </div>
       </div>
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10">
+      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">DIA:</p>{" "}
-          <p className="font-semibold text-teal-600 text-md uppercase">
+          <p className="font-semibold text-indigo-600 text-md uppercase">
             {fechaActual.toLocaleString("es-AR", { weekday: "long" })}
           </p>
         </div>
       </div>
 
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10">
+      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">TOTAL VENTAS:</p>{" "}
-          <p className="font-semibold text-teal-600 text-md">
+          <p className="font-semibold text-indigo-600 text-md">
             {total.toLocaleString("es-ar", {
               style: "currency",
               currency: "ARS",
@@ -52,7 +52,7 @@ export const GastosIntro = () => {
           <p className="text-md font-bold text-gray-700">
             TOTAL VENTAS CARGADOS:
           </p>{" "}
-          <p className="font-semibold text-teal-600 text-md">
+          <p className="font-semibold text-indigo-600 text-md">
             {results.length}
           </p>
         </div>

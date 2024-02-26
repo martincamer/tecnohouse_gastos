@@ -75,7 +75,7 @@ export const ModalEliminarGasto = () => {
                   <button
                     onClick={() => closeModalEliminar()}
                     type="button"
-                    className="w-full bg-teal-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
+                    className="w-full bg-indigo-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-indigo-950 font-bold"
                   >
                     CERRAR
                   </button>

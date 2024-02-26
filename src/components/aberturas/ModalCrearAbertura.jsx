@@ -280,7 +280,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalProductos()}
-                        className="text-base bg-teal-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
                       >
                         SELECCIONAR PERFILES
                       </button>
@@ -341,7 +341,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={openModalAccesorios}
                         type="button"
-                        className="text-base bg-teal-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
                       >
                         SELECCIONAR ACCESORIOS
                       </button>
@@ -389,7 +389,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalVidrios()}
-                        className="text-base bg-teal-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
                       >
                         SELECCIONAR VIDRIO POR METRO
                       </button>
@@ -400,8 +400,8 @@ export const ModalCrearNuevaAbertura = () => {
                         <thead>
                           <tr>
                             <th className="p-3">CODIGO</th>
-                            <th className="p-3">ALTO</th>
                             <th className="p-3">ANCHO</th>
+                            <th className="p-3">ALTO</th>
                             <th className="p-3">CANTIDAD</th>
                             <th className="p-3">CATEGORIA</th>
                             <th className="p-3">Eliminar</th>
@@ -414,10 +414,12 @@ export const ModalCrearNuevaAbertura = () => {
                                 {v.id}
                               </th>
                               <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
-                                {v.alto}
+                                {Number(v.ancho).toLocaleString("es-ar", {
+                                  minimumFractionDigits: 2,
+                                })}
                               </th>
                               <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
-                                {Number(v.ancho).toLocaleString("es-ar", {
+                                {Number(v.alto).toLocaleString("es-ar", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
@@ -444,7 +446,7 @@ export const ModalCrearNuevaAbertura = () => {
                         <p className="font-semibold text-gray-800">
                           TOTAL EN ACCESORIOS:{" "}
                         </p>
-                        <p className="bg-teal-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
+                        <p className="bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
                           <p>
                             {sumaTotal.toLocaleString("es-ar", {
                               style: "currency",
@@ -459,11 +461,11 @@ export const ModalCrearNuevaAbertura = () => {
                         <p className="font-semibold text-gray-800">
                           TOTAL EN ALUMINIO:{" "}
                         </p>
-                        <p className="font-semibold text-teal-500 text-xl">
+                        <p className="font-semibold text-indigo-500 text-xl">
                           {Object.entries(costoTotalPorCategoria).map(
                             ([categoria, costo]) => (
                               <li
-                                className="list-none bg-teal-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base"
+                                className="list-none bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base"
                                 key={categoria}
                               >
                                 {categoria}:
@@ -482,10 +484,10 @@ export const ModalCrearNuevaAbertura = () => {
                         <p className="font-semibold text-gray-800">
                           TOTAL EN VIDRIO:{" "}
                         </p>
-                        <p className="font-semibold text-teal-500 text-xl">
+                        <p className="font-semibold text-indigo-500 text-xl">
                           <div>
                             {
-                              <p className="bg-teal-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
+                              <p className="bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
                                 {totalVidrio?.toLocaleString("es-ar", {
                                   style: "currency",
                                   currency: "ARS",
@@ -502,7 +504,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={() => handleSubmitAbertura()}
                         type="button"
-                        className="font-bold bg-teal-500 text-white text-steal-950 py-2 px-12 rounded-full text-center shadow"
+                        className="font-bold bg-indigo-500 text-white py-2 px-8 rounded-lg text-center shadow"
                       >
                         CREAR NUEVA ABERTURA
                       </button>

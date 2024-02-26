@@ -2,7 +2,6 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import { BiHome, BiMenu } from "react-icons/bi";
 import { FiShoppingBag, FiSend, FiSidebar } from "react-icons/fi";
-// import { LiaShoppingBasketSolid } from "react-icons/lia";
 import { useState } from "react";
 
 export const Sidebar = () => {
@@ -62,7 +61,7 @@ export const Sidebar = () => {
       >
         <BiMenu
           onClick={handleClick}
-          className="text-primary hover:text-white text-[40px] hover:bg-teal-400 rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
+          className="text-primary hover:text-white text-[40px] hover:bg-indigo-400 rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
         />
       </div>
       <div className={`w-full flex flex-col gap-12`}>
@@ -71,23 +70,25 @@ export const Sidebar = () => {
             <div
               key={path}
               className={`${
-                location.pathname === path && "bg-teal-400"
+                location.pathname === path && "bg-indigo-500"
               } w-full py-3 px-8 max-md:px-4 `}
             >
               <div className="flex items-center max-md:justify-center gap-4 hover:translate-x-2 max-md:hover:translate-x-1 transition-all ease duration-300">
                 <Link
                   to={path}
-                  className="text-3xl max-md:text-2xl text-teal-950"
+                  className={`${
+                    location.pathname === path && "text-white"
+                  } text-3xl max-md:text-2xl text-teal-950`}
                 >
                   {icon}
                 </Link>
                 <Link
                   to={path}
-                  className={`${
+                  className={`${location.pathname === path && "text-white"}   ${
                     click
                       ? "hidden transition-all ease-in-out duration-300"
                       : "block transition-all ease-in-out duration-300 text-teal-950"
-                  } text-lg font-extrabold text-teal-950`}
+                  } text-lg  text-teal-950`}
                 >
                   {name}
                 </Link>

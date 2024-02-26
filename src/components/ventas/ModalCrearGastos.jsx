@@ -177,7 +177,7 @@ export const ModalCrearVenta = () => {
                       />
                     </div>
                     <div className="flex items-start">
-                      <button className="font-bold bg-teal-500 text-white py-2 px-12 rounded-lg text-center shadow">
+                      <button className="font-bold bg-indigo-500 text-white py-2 px-12 rounded-lg text-center shadow">
                         CREAR NUEVO GASTO
                       </button>
                     </div>

@@ -81,8 +81,8 @@ const GastosChart = ({ gastos, ventas }) => {
       const datosGastos = [
         {
           label: "Gastos Mensuales",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderColor: "rgba(75, 192, 192, 1)",
+          backgroundColor: "#A8AAFF",
+          borderColor: "#6366F1",
           borderWidth: 1,
           data: montosGastos,
         },
@@ -127,7 +127,7 @@ const GastosChart = ({ gastos, ventas }) => {
     <div>
       <canvas id="graficoGastos" width="400" height="200"></canvas>
       <p className="text-lg font-normal mt-4">
-        <span className="text-teal-500 uppercase font-bold">
+        <span className="text-indigo-500 uppercase font-bold">
           Cantidad total de gastos:
         </span>{" "}
         {totalGastos.toLocaleString("es-AR", {
@@ -137,7 +137,7 @@ const GastosChart = ({ gastos, ventas }) => {
         })}
       </p>
       <p className="text-lg font-normal">
-        <span className="text-gray-700 uppercase font-bold">
+        <span className="text-slate-700 uppercase font-bold">
           Cantidad total de ventas:
         </span>{" "}
         {totalVentas.toLocaleString("es-AR", {

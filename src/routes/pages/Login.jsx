@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
-import img from "../../../public/06.jpg";
+import { Label } from "../../components/formularios/Label";
+import { Input } from "../../components/formularios/Input";
+import { Button } from "../../components/formularios/Button";
 
 export const Login = () => {
   const { signin, error } = useAuth();
@@ -19,87 +21,62 @@ export const Login = () => {
     const user = await signin(data);
 
     if (user) {
-      navigate("/");
+      navigate("/home");
     }
   });
 
   return (
-    <section className="flex items-center gap-12 h-screen bg-gray-200">
-      <div className="h-full w-2/4">
-        <img
-          src="https://www.viviendastecnohouse.com.ar/storage/img/modelos/30.jpg"
-          alt=""
-          className="h-full"
-        />
+    <section className="flex items-center gap-12 h-screen pt-[300px] bg-gray-100 flex-col relative">
+      <div className="absolute top-14">
+        <img className="h-[100px]" src={"./logoempresa.png"} />
       </div>
-      <form
-        onSubmit={onSubmit}
-        className="bg-white py-16 px-12 w-1/3 rounded-lg shadow-lg shadow-black/30 relative mx-auto"
-      >
-        <div className="space-y-2">
-          {error &&
-            error.map((err) => (
-              <p className="uppercase text-sm bg-red-100 text-red-600 py-2 px-2 rounded w-3/4 mx-auto text-center border-[1px] border-red-200">
-                {err}
-              </p>
-            ))}
-
-          <p className="text-lg text-center font-semibold uppercase">
-            Ingreso al sistema
-          </p>
-        </div>
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <label className="text-lg font-bold uppercase">Email</label>
-            <input
-              {...register("email", { required: true })}
-              type="text"
-              placeholder="Email"
-              className="bg-gray-200 rounded-lg shadow-md shadow-black/30 py-3 px-2 placeholder:text-black/50 outline-none"
-            />
-            {errors.email && (
-              <span className="uppercase text-sm bg-red-100 text-red-600 py-2 px-2 rounded w-1/3 text-center shadow border-[1px] border-red-200">
-                El email es requerido
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-lg font-bold uppercase">Contraseña</label>
-            <input
-              {...register("password", { required: true })}
-              type="password"
-              placeholder="Contraseña de usuario"
-              className="bg-gray-200 rounded-lg shadow-md shadow-black/30 py-3 px-2 placeholder:text-black/50 outline-none"
-            />
-            {errors.password && (
-              <span className="uppercase text-sm bg-red-100 text-red-600 py-2 px-2 rounded w-1/2 text-center shadow border-[1px] border-red-200">
-                El password es requerido
-              </span>
-            )}
-          </div>
+      {/* <div className="h-[300px] rounded-full absolute top-10 left-[300px] w-[300px] bg-indigo-700 shadow-lg"></div> */}
+      <form onSubmit={onSubmit} className="flex w-1/4 flex-col gap-4">
+        {
           <div>
-            <input
-              type="submit"
-              value="Ingresar"
-              className="bg-emerald-500 text-white rounded-full hover:shadow-md hover:shadow-black/30 hover:translate-x-1 transition-all ease-in-out py-3 px-12 font-bold uppercase text-center outline-none cursor-pointer"
-            />
+            <div className="flex flex-col gap-1">
+              {error?.map((e) => (
+                <span className="bg-red-500/10 rounded-lg px-2 py-1 text-red-600 text-sm border-[1px] border-red-500/30">
+                  {e}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="flex justify-between text-sm font-semibold">
-            {/* <Link
-              className="hover:underline transition-all ease-in-out"
-              to={"/password-change"}
-            >
-              ¿Olvidaste tu contraseña?
-            </Link> */}
-            {/* <Link
-              className="hover:underline transition-all ease-in-out"
-              to={"/register"}
-            >
-              ¿No te registraste? Registrase
-            </Link> */}
-          </div>
+        }
+        <div className="flex flex-col gap-2">
+          <Label label="Email del registro" />
+          <Input
+            // registro={{ ...register("email", { required: true }) }}
+            register={register}
+            placeholder={"emailregistro@email.com"}
+            type={"email"}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label label="Contraseña del registro" />
+          <Input
+            register={register}
+            // registro={{ ...register("password", { required: true }) }}
+            placeholder={""}
+            type={"password"}
+          />
+        </div>
+        <div>
+          <Button type={"submit"} titulo={"Iniciar Sesión"} />
         </div>
       </form>
+
+      <svg
+        className="absolute bottom-[-50px]"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+      >
+        <path
+          fill="#6366F1"
+          fill-opacity="1"
+          d="M0,192L48,170.7C96,149,192,107,288,85.3C384,64,480,64,576,90.7C672,117,768,171,864,170.7C960,171,1056,117,1152,80C1248,43,1344,21,1392,10.7L1440,0L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+        ></path>
+      </svg>
     </section>
   );
 };

@@ -68,38 +68,38 @@ export const Accesorios = () => {
 
   return (
     <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-20">
-      <div className="bg-gray-100/30 py-10 px-10 rounded-lg shadow shadow-black/20 border-[0.5px] border-gray-200">
+      <div className="bg-slate-100 py-10 px-10 rounded-lg shadow shadow-black/20 border-[0.5px] border-gray-200">
         {/*  INTRO */}
         <div className="flex items-center justify-between">
           <p
             className="
-        text-xl font-semibold text-gray-600"
+        text-xl font-semibold text-slate-700"
           >
             ACCESORIOS
           </p>
-          <div className="border-[0.5px] shadow-md shadow-black/20 rounded-lg px-4 py-2">
+          <div className="border-[0.5px] shadow-md shadow-black/20 rounded-lg px-4 py-2 bg-white">
             <p
               className="
-        text-lg font-semibold text-gray-700"
+        text-lg font-semibold text-slate-700"
             >
               TOTAL ACCESORIOS CARGADOS: <span>{accesorios.length}</span>
             </p>
           </div>
         </div>
         {/* FIN INTRO */}
-        <hr className="my-10 bg-teal-500 h-[2px]" />
+        <hr className="my-10 bg-indigo-500 h-[2px]" />
         {/* CATEGORIAS */}
         <div className="flex gap-10">
           <button
             onClick={() => openModal()}
-            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
+            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
           >
             CREAR NUEVO ACCESORIO
           </button>
 
           <button
             onClick={() => openCrearCategoria()}
-            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
+            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
           >
             CREAR NUEVA CATEGORIA
           </button>
@@ -113,7 +113,7 @@ export const Accesorios = () => {
 
           <button
             onClick={() => openVerCategorias()}
-            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
+            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
           >
             VER CATEGORIAS
           </button>
@@ -134,7 +134,7 @@ export const Accesorios = () => {
           />
         </div>
         {/* TABLA DE PERFILES  */}
-        <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm">
+        <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm bg-white">
           <thead>
             <tr>
               <th className="p-3 text-gray-700">NUMERO</th>
@@ -148,7 +148,7 @@ export const Accesorios = () => {
           <tbody>
             {currentResults?.map((p) => (
               <tr>
-                <th className="border-[1px] border-gray-300 p-3 text-sm uppercase text-teal-500 font-semibold">
+                <th className="border-[1px] border-gray-300 p-3 text-sm uppercase text-indigo-500 font-semibold">
                   {p?.id}
                 </th>
                 <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
@@ -168,7 +168,7 @@ export const Accesorios = () => {
                   onClick={() => {
                     handleObtenerId(p.id), openEditarPerfil();
                   }}
-                  className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-teal-200 text-teal-800 hover:bg-teal-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer"
+                  className="border-[1px] border-gray-300 p-3 text-sm uppercase bg-indigo-300 text-indigo-800 hover:bg-indigo-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer"
                 >
                   <button>EDITAR</button>
                 </th>
@@ -194,7 +194,7 @@ export const Accesorios = () => {
                 key={index}
                 className={`mx-1 px-3 py-1 rounded ${
                   currentPage === index + 1
-                    ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                    ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
                     : "bg-gray-100 shadow shadow-black/20"
                 }`}
                 onClick={() => handlePageChange(index + 1)}

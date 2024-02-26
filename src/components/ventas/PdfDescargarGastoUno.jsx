@@ -42,7 +42,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "10px",
-                color: "#00AEAE",
+                color: "#4F46E5",
               }}
             >
               {new Date(gasto?.created_at).toLocaleDateString("arg")}
@@ -69,7 +69,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "10px",
-                color: "#00AEAE",
+                color: "#4F46E5",
               }}
             >
               {gasto?.total?.toLocaleString("es-ar", {
@@ -99,10 +99,10 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "14px",
-                color: "#00AEAE",
+                color: "#4F46E5",
               }}
             >
-              TODAS LAS VENTAS
+              VENTA UNICA
             </Text>
           </View>
           <View
@@ -128,7 +128,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
+                  fontSize: "8px",
                   color: "black",
                 }}
               >
@@ -138,8 +138,8 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
-                  color: "#00AEAE",
+                  fontSize: "8px",
+                  color: "#4F46E5",
                 }}
               >
                 {gasto?.id}
@@ -157,7 +157,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
+                  fontSize: "8px",
                   color: "black",
                 }}
               >
@@ -167,8 +167,8 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
-                  color: "#00AEAE",
+                  fontSize: "8px",
+                  color: "#4F46E5",
                   textTransform: "uppercase",
                 }}
               >
@@ -187,7 +187,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
+                  fontSize: "8px",
                   color: "black",
                 }}
               >
@@ -197,8 +197,8 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
-                  color: "#00AEAE",
+                  fontSize: "8px",
+                  color: "#4F46E5",
                   textTransform: "uppercase",
                 }}
               >
@@ -217,7 +217,7 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
+                  fontSize: "8px",
                   color: "black",
                 }}
               >
@@ -227,12 +227,46 @@ export const PdfDescargarGastoUno = ({ gasto }) => {
                 style={{
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
-                  fontSize: "10px",
-                  color: "#00AEAE",
+                  fontSize: "8px",
+                  color: "#4F46E5",
                   textTransform: "uppercase",
                 }}
               >
                 N° {gasto?.numero}
+              </Text>
+            </View>
+
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "3px",
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  fontSize: "8px",
+                  color: "black",
+                }}
+              >
+                TOTAL:
+              </Text>{" "}
+              <Text
+                style={{
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  fontSize: "8px",
+                  color: "#4F46E5",
+                  textTransform: "uppercase",
+                }}
+              >
+                {gasto?.total?.toLocaleString("es-ar", {
+                  style: "currency",
+                  currency: "ARS",
+                  minimumFractionDigits: 2,
+                })}
               </Text>
             </View>
           </View>

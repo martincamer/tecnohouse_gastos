@@ -128,7 +128,7 @@ export const ModalPrecios = () => {
                 </Dialog.Title>
                 <div
                   onClick={() => openCrearPrecio()}
-                  className="text-sm bg-teal-500 text-white inline-block px-4 py-2 rounded-lg shadow shadow-black/20 font-semibold cursor-pointer"
+                  className="text-sm bg-indigo-500 text-white inline-block px-4 py-2 rounded-lg shadow shadow-black/20 font-semibold cursor-pointer"
                 >
                   CREAR NUEVO VALOR
                 </div>
@@ -167,7 +167,7 @@ export const ModalPrecios = () => {
                             onClick={() => {
                               handleObtenerId(p.id), openEditarPrecio();
                             }}
-                            className="border-b-[1px] py-4 px-5 font-semibold text-sm uppercase bg-teal-500 text-white text-center"
+                            className="border-b-[1px] py-4 px-5 font-semibold text-sm uppercase bg-indigo-500 text-white text-center"
                           >
                             EDITAR
                           </th>
@@ -189,7 +189,7 @@ export const ModalPrecios = () => {
                           key={index}
                           className={`mx-1 px-3 py-1 rounded ${
                             currentPage === index + 1
-                              ? "bg-teal-500 hover:bg-teal-600 transition-all ease-in-out text-white shadow shadow-black/20"
+                              ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
                               : "bg-gray-100 shadow shadow-black/20"
                           }`}
                           onClick={() => handlePageChange(index + 1)}

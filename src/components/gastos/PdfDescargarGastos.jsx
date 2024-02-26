@@ -26,7 +26,7 @@ export const PdfDescargarGastos = ({ results }) => {
       <Page style={styles.body}>
         <View style={styles.tecnohouse_intro}>
           <Text style={styles.title}>TECNOHOUSE ABERTURAS</Text>
-          <Text style={styles.title_two}>RESUMEN DEL GASTO</Text>
+          <Text style={styles.title_two}>RESUMEN GASTOS MENSUAL</Text>
         </View>
         <View style={styles.tecnohouse_intro}>
           <View
@@ -50,7 +50,7 @@ export const PdfDescargarGastos = ({ results }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "10px",
-                color: "#00AEAE",
+                color: "#4338CA",
                 textTransform: "uppercase",
               }}
             >
@@ -79,7 +79,7 @@ export const PdfDescargarGastos = ({ results }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "10px",
-                color: "#00AEAE",
+                color: "#4338CA",
               }}
             >
               {total?.toLocaleString("es-ar", {
@@ -109,10 +109,10 @@ export const PdfDescargarGastos = ({ results }) => {
                 fontFamily: "Montserrat",
                 fontWeight: "semibold",
                 fontSize: "14px",
-                color: "#00AEAE",
+                color: "#4338CA",
               }}
             >
-              TODOS LOS GASTOS
+              GASTOS MENSUALES
             </Text>
           </View>
           {results.map((g) => (
@@ -140,7 +140,7 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
+                    fontSize: "8px",
                     color: "black",
                   }}
                 >
@@ -150,8 +150,8 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
-                    color: "#00AEAE",
+                    fontSize: "8px",
+                    color: "#4338CA",
                   }}
                 >
                   {g.id}
@@ -169,7 +169,7 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
+                    fontSize: "8px",
                     color: "black",
                   }}
                 >
@@ -179,8 +179,8 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
-                    color: "#00AEAE",
+                    fontSize: "8px",
+                    color: "#4338CA",
                     textTransform: "uppercase",
                   }}
                 >
@@ -199,7 +199,7 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
+                    fontSize: "8px",
                     color: "black",
                   }}
                 >
@@ -209,8 +209,8 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
-                    color: "#00AEAE",
+                    fontSize: "8px",
+                    color: "#4338CA",
                     textTransform: "uppercase",
                   }}
                 >
@@ -229,7 +229,7 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
+                    fontSize: "8px",
                     color: "black",
                   }}
                 >
@@ -239,12 +239,46 @@ export const PdfDescargarGastos = ({ results }) => {
                   style={{
                     fontFamily: "Montserrat",
                     fontWeight: "semibold",
-                    fontSize: "10px",
-                    color: "#00AEAE",
+                    fontSize: "8px",
+                    color: "#4338CA",
                     textTransform: "uppercase",
                   }}
                 >
                   N° {g.numero}
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: "3px",
+                }}
+              >
+                <Text
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "semibold",
+                    fontSize: "8px",
+                    color: "black",
+                  }}
+                >
+                  TOTAL:
+                </Text>{" "}
+                <Text
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "semibold",
+                    fontSize: "8px",
+                    color: "#4338CA",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {g.total.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}
                 </Text>
               </View>
             </View>

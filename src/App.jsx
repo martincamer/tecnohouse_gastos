@@ -37,7 +37,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route
-            element={<RutaProtegida isAllowed={!isAuth} redirectTo={"/"} />}
+            element={<RutaProtegida isAllowed={!isAuth} redirectTo={"/pm"} />}
           >
             <Route index path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

@@ -3,29 +3,6 @@ import { useAuth } from "../context/AuthProvider";
 import { BiCloset, BiMenu } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 
-// const rutasPrivadas = [
-//   {
-//     name: "Inicio",
-//     path: "/",
-//   },
-//   {
-//     name: "Perfiles",
-//     path: "/productos",
-//   },
-//   {
-//     name: "Clientes",
-//     path: "/clientes",
-//   },
-//   {
-//     name: "Presupuestos",
-//     path: "/presupuestos",
-//   },
-//   {
-//     name: "Realizar Venta",
-//     path: "/ventas-clientes",
-//   },
-// ];
-
 const rutasuno = [
   {
     name: "SALIR",
@@ -57,9 +34,9 @@ export const Navbar = () => {
         <div className="flex gap-4 items-center">
           <Link
             to={"/"}
-            className="text-2xl font-extrabold text-teal-400 max-md:text-lg"
+            className="text-2xl font-semibold text-indigo-500 max-md:text-lg"
           >
-            TECNOHOUSE <span className="text-gray-700">ABERTURAS.</span>
+            Tecnohouse <span className="text-gray-700">Aberturas.</span>
           </Link>
           <div
             onClick={() => setClickProvider(!clickProvider)}
@@ -79,7 +56,7 @@ export const Navbar = () => {
         {isAuth ? (
           ""
         ) : (
-          <div className="font-bold text-2xl uppercase text-teal-400">
+          <div className="font-normal text-2xl uppercase text-indigo-500">
             Administración De Gastos
           </div>
         )}
@@ -88,12 +65,12 @@ export const Navbar = () => {
           {isAuth
             ? rutasuno.map(({ path, name }) => (
                 <div className="flex items-center gap-4">
-                  <div className="font-bold text-medium bg-teal-400 shadow text-black p-1 rounded-full px-4 max-md:text-sm uppercase">
-                    USUARIO: {user?.username}
+                  <div className="font-normal bg-indigo-500 shadow text-white text-sm p-1 rounded-full px-4 max-md:text-sm capitalize">
+                    <span className="font-bold">Usuario:</span> {user?.username}
                   </div>
                   <Link
                     onClick={() => signout()}
-                    className="text-[17px] max-md:text-sm max-md:font-bold max-md:py-1 font-semibold transition-all ease-in-out duration-300 bg-gray-600 px-10 rounded-full py-2 text-white hover:shadow-md hover:shadow-black/20 hover:scale-[1.02]"
+                    className="text-[15px] max-md:text-sm max-md:font-bold max-md:py-1 font-semibold transition-all ease-in-out duration-300 bg-indigo-50/10 border-[1px] border-indigo-500 px-8 rounded-2xl py-2 text-indigo-500 hover:shadow-md hover:shadow-black/20 hover:scale-[1.02]"
                     //o={path}
                     key={path}
                   >

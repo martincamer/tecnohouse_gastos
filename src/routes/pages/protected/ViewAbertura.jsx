@@ -200,35 +200,35 @@ export const ViewAbertura = () => {
       <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-12 px-10 w-full flex flex-col gap-8 items-start">
         <article className="flex items-start gap-6">
           <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               DETALLE:{" "}
               <span className="font-normal text-gray-900">
                 {abertura?.detalle}
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               COLOR:{" "}
               <span className="font-normal text-gray-900">
                 {abertura?.color}
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               CATEGORIA:{" "}
               <span className="font-normal text-gray-900">
                 {abertura?.categoria}
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TIPO:{" "}
               <span className="font-normal text-gray-900">
                 {abertura?.tipo}
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TAMAÑO:{" "}
               <span className="font-normal text-gray-900">
                 {abertura?.ancho}x{abertura?.alto} mm
@@ -237,7 +237,7 @@ export const ViewAbertura = () => {
           </div>
 
           <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN ALUMINIO:{" "}
               <span className="font-normal text-gray-900">
                 {perfilesConPrecioFinal
@@ -251,7 +251,7 @@ export const ViewAbertura = () => {
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN KG:{" "}
               <span className="font-normal text-gray-900">
                 {perfilesConPrecioFinal
@@ -263,7 +263,7 @@ export const ViewAbertura = () => {
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN VIDRIO:{" "}
               <span className="font-normal text-gray-900">
                 {vidriosConPrecioFinal
@@ -277,7 +277,7 @@ export const ViewAbertura = () => {
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN ACCESORIO:{" "}
               <span className="font-normal text-gray-900">
                 {results
@@ -291,7 +291,7 @@ export const ViewAbertura = () => {
               </span>
             </p>
 
-            <p className="text-teal-500 font-semibold text-base uppercase">
+            <p className="text-indigo-500 font-semibold text-base uppercase">
               PRECIO FINAL ABERTURA:{" "}
               <span className="font-normal text-gray-900">
                 {precioTotalAbertura.toLocaleString("es-ar", {
@@ -309,7 +309,7 @@ export const ViewAbertura = () => {
               {precios.map((p) => (
                 <>
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "luz" && p.categoria}
                     </p>
                     {p.categoria == "luz" && (
@@ -323,7 +323,7 @@ export const ViewAbertura = () => {
                     )}
                   </div>
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "agua" && p.categoria}
                     </p>
                     {p.categoria == "agua" && (
@@ -337,7 +337,7 @@ export const ViewAbertura = () => {
                     )}
                   </div>
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "produccion" && p.categoria}
                     </p>
                     <p>
@@ -354,7 +354,7 @@ export const ViewAbertura = () => {
                   </div>
 
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "wifi" && p.categoria}
                     </p>
                     <p>
@@ -371,7 +371,7 @@ export const ViewAbertura = () => {
                   </div>
 
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "alquiler" && p.categoria}
                     </p>
                     <p>
@@ -388,7 +388,7 @@ export const ViewAbertura = () => {
                   </div>
 
                   <div className="flex gap-1 uppercase text-sm">
-                    <p className="text-teal-500 font-bold">
+                    <p className="text-indigo-500 font-bold">
                       {p.categoria == "gasto adicional" && p.categoria}
                     </p>
                     <p>
@@ -407,7 +407,7 @@ export const ViewAbertura = () => {
               ))}
             </div>
             <div className="flex flex-col gap-2">
-              <p className="text-teal-500 font-semibold text-base uppercase">
+              <p className="text-indigo-500 font-semibold text-base uppercase">
                 SIN PRODUCCIÓN, AGUA, LUZ, ETC:{" "}
                 <span className="font-normal text-gray-900">
                   {precioTotalAbertura.toLocaleString("es-ar", {
@@ -419,7 +419,7 @@ export const ViewAbertura = () => {
                 </span>
               </p>
 
-              <p className="text-teal-500 font-semibold text-base uppercase">
+              <p className="text-indigo-500 font-semibold text-base uppercase">
                 CON PRODUCCIÓN, AGUA, LUZ, Y SIN EL 40%, ETC:{" "}
                 <span className="font-normal text-gray-900">
                   {precioFinalAberturaSin.toLocaleString("es-ar", {
@@ -431,7 +431,7 @@ export const ViewAbertura = () => {
                 </span>
               </p>
 
-              <p className="text-teal-500 font-semibold text-base uppercase">
+              <p className="text-indigo-500 font-semibold text-base uppercase">
                 CON PRODUCCIÓN, LUZ, AGUA, Y EL 40%, ETC:{" "}
                 <span className="font-bold text-gray-900">
                   {precioFinalAbertura.toLocaleString("es-ar", {
@@ -447,7 +447,7 @@ export const ViewAbertura = () => {
         </article>
 
         <div className="flex flex-col w-full items-start max-w-[1350px]">
-          <div className="mb-7 text-lg font-bold text-gray-800 border-b-2 border-teal-400">
+          <div className="mb-7 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             ACCESORIOS DE LA ABERTURA
           </div>
 
@@ -492,7 +492,7 @@ export const ViewAbertura = () => {
         </div>
 
         <div className="flex flex-col w-full items-start max-w-[1350px]">
-          <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-teal-400">
+          <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             PERFILES DE LA ABERTURA
           </div>
 
@@ -541,7 +541,7 @@ export const ViewAbertura = () => {
         </div>
 
         <div className="flex flex-col w-full items-start max-w-[1350px]">
-          <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-teal-400">
+          <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             VIDRIOS DE LA ABERTURA
           </div>
 

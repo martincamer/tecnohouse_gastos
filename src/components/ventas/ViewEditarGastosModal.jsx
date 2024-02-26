@@ -75,7 +75,7 @@ export const ViewEditarGastosModal = ({ register, onSubmit }) => {
                       <textarea
                         {...register("detalle")}
                         placeholder="DETALLE.."
-                        className="w-full py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="w-full py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] outline-none"
                       />
                     </div>
                     <div className="flex items-center gap-2 w-full">
@@ -84,7 +84,7 @@ export const ViewEditarGastosModal = ({ register, onSubmit }) => {
                       </label>{" "}
                       <select
                         {...register("tipo")}
-                        className="w-1/2 py-2 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="w-1/2 py-2 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] outline-none"
                       >
                         <option value="">SELECCIONAR</option>
                         <option value="INTERNO">INTERNO</option>
@@ -98,7 +98,7 @@ export const ViewEditarGastosModal = ({ register, onSubmit }) => {
                       <input
                         {...register("numero")}
                         placeholder="N° 000-12244"
-                        className="w-1/3 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="w-1/3 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] outline-none"
                       />
                     </div>
                     <div className="flex items-center gap-2 w-full">
@@ -108,10 +108,10 @@ export const ViewEditarGastosModal = ({ register, onSubmit }) => {
                       <input
                         {...register("total")}
                         placeholder="TOTAL GASTO $"
-                        className="w-1/2 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] border-teal-300 outline-none"
+                        className="w-1/2 py-1 px-2 bg-gray-100 rounded shadow-md shadow-black/20 border-[1px] outline-none"
                       />
                     </div>
-                    <div className="font-bold bg-teal-300 text-steal-950 py-2 px-2 rounded-full w-3/5 text-center shadow">
+                    <div className="font-bold bg-indigo-500 text-white py-2 px-2 rounded-xl w-3/5 text-center shadow">
                       <button>EDITAR VENTA</button>
                     </div>
                   </form>
