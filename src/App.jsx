@@ -27,6 +27,7 @@ import RutaProtegida from "./layouts/RutaProtejida";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import { PresupuestoProvider } from "./context/PresupuestoProvider";
+import { ViewPresupuesto } from "./routes/pages/protected/ViewPresupuesto";
 
 function App() {
   const { isAuth } = useAuth();
@@ -77,6 +78,7 @@ function App() {
               <Route path="/gastos/:id" element={<ViewGasto />} />
               <Route path="/ventas/:id" element={<ViewVenta />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
+              <Route path="/presupuesto/:id" element={<ViewPresupuesto />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

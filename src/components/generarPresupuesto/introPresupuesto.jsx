@@ -1,4 +1,9 @@
+import { usePresupuestoContext } from "../../context/PresupuestoProvider";
+
 export const IntroPresupuesto = () => {
+  const { resultadosFiltrados } = usePresupuestoContext();
+  console.log(resultadosFiltrados);
+
   const fechaActual = new Date();
 
   return (
@@ -27,7 +32,7 @@ export const IntroPresupuesto = () => {
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">TOTAL PRESUPUESTOS:</p>{" "}
           <p className="font-semibold text-indigo-600 text-md">
-            {/* {obtenerAberturas.length} */}
+            {resultadosFiltrados?.length}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -35,7 +40,7 @@ export const IntroPresupuesto = () => {
             TOTAL PRESUPUESTOS CARGADOS:
           </p>{" "}
           <p className="font-semibold text-indigo-600 text-md">
-            {/* {obtenerAberturas.length} */}
+            {resultadosFiltrados?.length}
           </p>
         </div>
       </div>

@@ -474,6 +474,8 @@ export const AberturasProvider = ({ children }) => {
     }
   }, [categoriaSeleccionada, obtenerAberturas, setResults]);
 
+  console.log(results);
+
   return (
     <AberturasContext.Provider
       value={{
