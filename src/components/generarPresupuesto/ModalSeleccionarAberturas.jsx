@@ -27,7 +27,7 @@ export const ModalSeleccionarAberturas = ({
     setObtenerId(id);
   };
 
-  const itemsPerPage = 2; // Cantidad de elementos por página
+  const itemsPerPage = 10; // Cantidad de elementos por página
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
