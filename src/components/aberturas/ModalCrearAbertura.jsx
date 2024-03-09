@@ -225,13 +225,13 @@ export const ModalCrearNuevaAbertura = () => {
                         className="py-3 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
-                        <option value={"puerta"}>PUERTA</option>
-                        <option value={"ventana"}>VENTANA</option>
-                        <option value={"raja de abrir"}>RAJA DE ABRIR</option>
-                        <option value={"paño fijo"}>PAÑO FIJO</option>
+                        <option value={"puertas"}>PUERTAS</option>
+                        <option value={"ventanas"}>VENTANAS</option>
+                        <option value={"rajas de abrir"}>RAJAS DE ABRIR</option>
+                        <option value={"paños fijo"}>PAÑOS FIJO</option>
                         <option value={"portones"}>PORTONES</option>
-                        <option value={"puerta de abrir"}>
-                          PUERTA DE ABRIR
+                        <option value={"puertas de abrir"}>
+                          PUERTAS DE ABRIR
                         </option>
                         <option value={"celosias de abrir"}>
                           CELOSIAS DE ABRIR
