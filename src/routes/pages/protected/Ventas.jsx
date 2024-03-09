@@ -4,39 +4,39 @@ import { ModalCrearVenta } from "../../../components/ventas/ModalCrearGastos";
 import { ModalEliminarGasto } from "../../../components/ventas/ModalEliminarGasto";
 import { TableGastos } from "../../../components/ventas/TableGastos";
 import { Search } from "../../../components/ui/Search";
-import { SearchSelect } from "../../../components/ui/SearchSelect";
-import { SearchSelectAnio } from "../../../components/ui/SearchSelectAnio";
 import { useVentasContext } from "../../../context/VentasProvider";
+// import { SearchSelect } from "../../../components/ui/SearchSelect";
+// import { SearchSelectAnio } from "../../../components/ui/SearchSelectAnio";
 
 export const Ventas = () => {
   const {
     search,
     searcher,
-    categoriaSeleccionada,
-    handleCategoriaChange,
-    anioSeleccionado,
-    handleAnioChange,
     results,
+    // categoriaSeleccionada,
+    // handleCategoriaChange,
+    // anioSeleccionado,
+    // handleAnioChange,
   } = useVentasContext();
 
   return (
-    <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-8">
+    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-8">
       <GastosIntro />
       <CrearGastosCategorias results={results} />
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center bg-slate-100">
+      <div className="border-slate-300 rounded-xl border-[1px] shadow py-5 px-10 flex gap-12 items-center bg-white">
         <Search
           variable={"Buscar tipo de venta..."}
           search={search}
           searcher={searcher}
         />
-        <SearchSelect
+        {/* <SearchSelect
           categoriaSeleccionada={categoriaSeleccionada}
           handleCategoriaChange={handleCategoriaChange}
         />
         <SearchSelectAnio
           anioSeleccionado={anioSeleccionado}
           handleAnioChange={handleAnioChange}
-        />
+        /> */}
       </div>
       <TableGastos />
       <ModalCrearVenta />

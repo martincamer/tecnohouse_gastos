@@ -59,7 +59,7 @@ export const ViewVenta = () => {
   });
 
   return (
-    <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-8">
+    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-8">
       <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center w-full bg-slate-100">
         <div className="flex flex-col gap-6 w-full" key={venta?.id}>
           <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-2 w-1/3 text-center bg-white">

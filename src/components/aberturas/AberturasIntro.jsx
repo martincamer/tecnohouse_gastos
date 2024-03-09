@@ -13,11 +13,11 @@ export const AberturasIntro = () => {
   const fechaActual = new Date();
 
   return (
-    <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-10 px-10 flex justify-between items-center bg-slate-100">
+    <div className="border-slate-300 rounded-xl border-[1px] shadow py-10 px-10 flex justify-between items-center bg-white">
       <div className="text-xl font-bold text-gray-700">
         ABERTURAS ALUMINIO TECNOHOUSE
       </div>
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
+      <div className="border-slate-300 rounded-xl border-[1px] shadow py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">MES/FECHA:</p>{" "}
           <p className="font-semibold text-indigo-600 text-md uppercase">
@@ -25,7 +25,7 @@ export const AberturasIntro = () => {
           </p>
         </div>
       </div>
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
+      <div className="border-slate-300 rounded-xl border-[1px] shadow py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">DIA:</p>{" "}
           <p className="font-semibold text-indigo-600 text-md uppercase">
@@ -34,7 +34,7 @@ export const AberturasIntro = () => {
         </div>
       </div>
 
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-3 px-3 flex gap-10 bg-white">
+      <div className="border-slate-300 rounded-xl border-[1px] shadow py-3 px-3 flex gap-10 bg-white">
         <div className="flex items-center gap-2">
           <p className="text-md font-bold text-gray-700">TOTAL ABERTURAS:</p>{" "}
           <p className="font-semibold text-indigo-600 text-md">

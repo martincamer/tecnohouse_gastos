@@ -15,6 +15,7 @@ export const ModalSeleccionarAberturaFinal = ({
   const [cantidad, setCantidad] = useState(0);
   const { accesorios } = useAccesoriosContext();
   const { precios } = usePreciosContext();
+  const [applyAdditionalCost, setApplyAdditionalCost] = useState(true);
 
   const { addToAbertura, productoSeleccionado } = usePresupuestoContext();
 
@@ -189,23 +190,25 @@ export const ModalSeleccionarAberturaFinal = ({
     0
   );
 
-  console.log("Precio total de adicionales:", precioTotalAdicionales);
-
   // Suma el precio total de la abertura con los precios adicionales
-  const precioFinalAbertura =
-    (precioTotalAbertura + precioTotalAdicionales) * Number(1.4);
 
   // Suma el precio total de la abertura con los precios adicionales
   const precioFinalAberturaSin = precioTotalAbertura + precioTotalAdicionales;
 
-  console.log(
-    "Precio final de la abertura con adicionales:",
-    precioFinalAbertura
-  );
+  const calculateFinalPrice = () => {
+    const additionalCostMultiplier = applyAdditionalCost ? 1.4 : 1.0;
+    return (
+      (precioTotalAbertura + precioTotalAdicionales) * additionalCostMultiplier
+    );
+  };
 
-  const finalPrice = precioFinalAbertura * cantidad;
+  const precioFinalAbertura = calculateFinalPrice();
 
-  console.log(productoSeleccionado);
+  const finalPrice = calculateFinalPrice() * cantidad;
+
+  const toggleAdditionalCost = () => {
+    setApplyAdditionalCost(!applyAdditionalCost);
+  };
 
   return (
     <Menu as="div" className="z-50">
@@ -258,7 +261,7 @@ export const ModalSeleccionarAberturaFinal = ({
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-1/2 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <div className="max-w-2xl mx-auto p-8 bg-slate-100 shadow-md shadow-slate-400 rounded-md">
+                <div className=" mx-auto p-8 bg-white shadow border-[1px] bor-slate-300 rounded-xl w-full">
                   <h2 className="text-2xl font-bold mb-4">
                     Detalles de la Abertura
                   </h2>
@@ -266,7 +269,7 @@ export const ModalSeleccionarAberturaFinal = ({
                   <div className="mb-4">
                     <h3 className="flex gap-2 text-base text-indigo-500 font-normal mb-2">
                       DETALLE -
-                      <span className="text-slate-700">
+                      <span className="text-slate-700 uppercase">
                         {abertura?.detalle}
                       </span>
                     </h3>
@@ -286,7 +289,7 @@ export const ModalSeleccionarAberturaFinal = ({
 
                   {/* Repite la estructura anterior para vidrios y accesorios */}
 
-                  <div className="mt-4">
+                  <div className="mt-4 w-2/3">
                     <h3 className="text-xl font-bold mb-2">Totales</h3>
                     <div className="flex justify-between items-center mb-2">
                       <span>Total Abertura</span>
@@ -341,6 +344,14 @@ export const ModalSeleccionarAberturaFinal = ({
                       className="px-4 bg-slate-200 py-1 rounded-lg shadow-sm shadow-slate-400 outline-none"
                     />
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={toggleAdditionalCost}
+                    className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase my-5"
+                  >
+                    {applyAdditionalCost ? "Quitar 40%" : "Aplicar 40%"}
+                  </button>
 
                   <div className="mt-6 flex items-start justify-between gap-2">
                     <button

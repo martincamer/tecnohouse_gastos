@@ -28,6 +28,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import { PresupuestoProvider } from "./context/PresupuestoProvider";
 import { ViewPresupuesto } from "./routes/pages/protected/ViewPresupuesto";
+import { ViewPdf } from "./routes/pages/protected/ViewPdf";
 
 function App() {
   const { isAuth } = useAuth();
@@ -79,6 +80,7 @@ function App() {
               <Route path="/ventas/:id" element={<ViewVenta />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
               <Route path="/presupuesto/:id" element={<ViewPresupuesto />} />
+              <Route path="/view-pdf" element={<ViewPdf />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

@@ -1,14 +1,6 @@
 //imports
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  editarGasto,
-  eliminarGasto,
-  obtenerGastos,
-  obtenerUnicoGasto,
-} from "../api/gastos";
-import { toast } from "react-toastify";
-import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { eliminarGasto, obtenerGastosMensuales } from "../api/gastos";
 
 // import axios from "../api/axios";
 // import { toast } from "react-toastify";
@@ -64,7 +56,7 @@ export const GastosProvider = ({ children }) => {
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        const response = await obtenerGastos();
+        const response = await obtenerGastosMensuales();
         setGastos(response.data);
       } catch (error) {
         console.error("Error al obtener los gastos:", error);

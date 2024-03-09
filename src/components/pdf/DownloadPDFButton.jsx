@@ -5,7 +5,9 @@ import {
   Font,
   StyleSheet,
   Page,
+  Image,
 } from "@react-pdf/renderer";
+import logo from "../../../public/logo.png";
 
 import montserratBold from "../../fonts/Montserrat-Bold.ttf";
 import montserratSemiBold from "../../fonts/Montserrat-SemiBold.ttf";
@@ -31,9 +33,15 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
     <Document>
       {Object.entries(aberturasPorTipo).map(([tipo, aberturas], pageIndex) => (
         <Page key={pageIndex} size="A4" style={styles.body}>
+          <Image
+            style={{
+              width: "100px",
+            }}
+            src={logo}
+          />
           <View style={styles.tecnohouse_intro}>
-            <Text style={styles.titleTwo}>TECNOHOUSE ABERTURAS</Text>
-            <Text style={styles.title_two}>RESUMEN TOTAL</Text>
+            <Text style={styles.titleTwo}>TECNOHOUSE FABRICA ABERTURAS</Text>
+            <Text style={styles.title_two}>LISTA DE PRECIOS</Text>
           </View>
           <View style={styles.tecnohouse_intro}>
             {/* ... Resto del contenido ... */}
@@ -78,37 +86,123 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
                   fontSize: "14px",
-                  color: "#4338CA",
+                  color: "#bf616a",
                   marginBottom: "10px",
                 }}
               >
-                {tipo.toUpperCase()}S
+                {tipo.toUpperCase()}
               </Text>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Text
+                  style={{
+                    width: "68%",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontFamily: "Montserrat",
+                    fontSize: "8px",
+                  }}
+                >
+                  Detalle
+                </Text>
+                <Text
+                  style={{
+                    width: "20%",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontFamily: "Montserrat",
+                    fontSize: "8px",
+                  }}
+                >
+                  Linea
+                </Text>
+                <Text
+                  style={{
+                    width: "20%",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontFamily: "Montserrat",
+                    fontSize: "8px",
+                  }}
+                >
+                  Color
+                </Text>
+                <Text
+                  style={{
+                    width: "20%",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontFamily: "Montserrat",
+                    fontSize: "8px",
+                  }}
+                >
+                  Precio Und
+                </Text>
+              </View>
               {aberturas.map((abertura, index) => (
-                <View style={styles.table} key={index}>
-                  <Text style={styles.cell}>{abertura.detalle}</Text>
-                  <View style={styles.row}>
+                <View key={index}>
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      borderBottom: "1px",
+                      borderStyle: "solid",
+                      borderBottomWidth: "0.8px",
+                      padding: "5px",
+                    }}
+                  >
                     <Text
-                      style={styles.cell}
-                    >{`Color: ${abertura.color}`}</Text>
+                      style={{
+                        width: "68%",
+                        fontWeight: "normal",
+                        textTransform: "uppercase",
+                        fontFamily: "Montserrat",
+                        fontSize: "7px",
+                      }}
+                    >
+                      {abertura.detalle}
+                    </Text>
                     <Text
-                      style={styles.cell}
-                    >{`Categoria: ${abertura.categoria}`}</Text>
+                      style={{
+                        width: "20%",
+                        fontWeight: "normal",
+                        textTransform: "uppercase",
+                        fontFamily: "Montserrat",
+                        fontSize: "7px",
+                      }}
+                    >
+                      {abertura.categoria}
+                    </Text>
                     <Text
-                      style={styles.cell}
-                    >{`Medida: ${abertura.ancho}x${abertura.alto}`}</Text>
-                  </View>
-                  <View style={styles.rowTwo}>
+                      style={{
+                        width: "20%",
+                        fontWeight: "normal",
+                        textTransform: "uppercase",
+                        fontFamily: "Montserrat",
+                        fontSize: "7px",
+                      }}
+                    >
+                      {abertura.color}
+                    </Text>
                     <Text
-                      style={styles.cell}
-                    >{`Precio final: ${abertura.totalConAumento.toLocaleString(
-                      "es-ar",
-                      {
+                      style={{
+                        width: "20%",
+                        fontWeight: "normal",
+                        textTransform: "uppercase",
+                        fontFamily: "Montserrat",
+                        fontSize: "7px",
+                      }}
+                    >
+                      {abertura.totalConAumento.toLocaleString("es-ar", {
                         style: "currency",
                         currency: "ARS",
                         minimumFractionDigits: 2,
-                      }
-                    )}`}</Text>
+                      })}
+                    </Text>
                   </View>
                 </View>
               ))}

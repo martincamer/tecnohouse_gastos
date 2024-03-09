@@ -21,10 +21,10 @@ export const AberturasCostos = () => {
     handleColorChange,
   } = useAberturasContext();
   return (
-    <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-5">
+    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-5">
       <AberturasIntro />
       <CrearAberturasCategorias /*results={results}*/ />
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center bg-slate-100">
+      <div className="border-slate-300 rounded-xl border-[1px] shadow py-5 px-10 flex gap-12 items-center bg-white">
         <Search
           variable={"Buscar por el detalle..."}
           search={search}

@@ -196,7 +196,7 @@ export const ViewAbertura = () => {
   );
 
   return (
-    <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-8">
+    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-8">
       <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-12 px-10 w-full flex flex-col gap-8 items-start">
         <article className="flex items-start gap-6">
           <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">

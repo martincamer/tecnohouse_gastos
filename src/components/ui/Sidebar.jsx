@@ -46,7 +46,7 @@ export const Sidebar = () => {
     <div
       className={`${
         click
-          ? "w-[100px] max-md:w-[44px] transition-all ease-in-out duration-300"
+          ? "w-[70px] max-md:w-[44px] transition-all ease-in-out duration-300"
           : "w-1/5 transition-all ease-in-out duration-300"
       } w-1/5 bg-gray-200/90 shadow-md shadow-black/30 min-h-screen max-h-full block ${
         clickProvider ? "max-md:block" : "max-md:hidden"
@@ -59,28 +59,44 @@ export const Sidebar = () => {
             : "justify-end transition-all ease-in-out duration-300"
         } w-full flex px-4 py-2 cursor-pointer`}
       >
-        <BiMenu
-          onClick={handleClick}
-          className="text-primary hover:text-white text-[40px] hover:bg-indigo-400 rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
-        />
+        <Link className="t group relative">
+          <BiMenu
+            onClick={handleClick}
+            className="text-primary hover:text-white text-[40px] hover:bg-indigo-500 rounded-xl py-[5px] transition-all ease-in-out duration-300 max-md:hidden"
+          />
+
+          <span className="invisible absolute left-10 top-4 ml-5 -translate-y-1/2 rounded bg-slate-900 px-4 w-[150px] flex justify-center py-2 text-xs text-white group-hover:visible font-bold uppercase shadow">
+            {click ? "Abrir menu" : "Cerrar menu"}
+          </span>
+        </Link>
       </div>
-      <div className={`w-full flex flex-col gap-12`}>
+      <div
+        className={`w-full ${
+          click ? "items-center" : ""
+        }  flex flex-col gap-12`}
+      >
         <div>
           {navegacion.map(({ name, path, icon }) => (
             <div
               key={path}
               className={`${
                 location.pathname === path && "bg-indigo-500"
-              } w-full py-3 px-8 max-md:px-4 `}
+              } w-full py-3 px-6 max-md:px-4 `}
             >
-              <div className="flex items-center max-md:justify-center gap-4 hover:translate-x-2 max-md:hover:translate-x-1 transition-all ease duration-300">
+              <div className="t group flex items-center max-md:justify-center gap-4  transition-all ease duration-300">
                 <Link
                   to={path}
                   className={`${
                     location.pathname === path && "text-white"
-                  } text-3xl max-md:text-2xl text-teal-950`}
+                  } text-2xl max-md:text-2xl text-teal-950 relative`}
                 >
                   {icon}
+
+                  {click && (
+                    <span className="invisible absolute left-10 top-4 ml-5 -translate-y-1/2 rounded bg-slate-900 px-4 w-[150px] flex justify-center py-2 text-xs text-white group-hover:visible font-bold uppercase shadow">
+                      {name}
+                    </span>
+                  )}
                 </Link>
                 <Link
                   to={path}
@@ -88,7 +104,7 @@ export const Sidebar = () => {
                     click
                       ? "hidden transition-all ease-in-out duration-300"
                       : "block transition-all ease-in-out duration-300 text-teal-950"
-                  } text-lg  text-teal-950`}
+                  } text-sm  text-teal-950`}
                 >
                   {name}
                 </Link>

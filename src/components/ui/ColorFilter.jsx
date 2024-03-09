@@ -9,7 +9,7 @@ const ColorFilter = ({ colorSeleccionado, handleColorChange }) => {
         id="colorFilter"
         value={colorSeleccionado}
         onChange={handleColorChange}
-        className="bg-white max-md:text-sm border-[1px] border-gray-300 text-gray-700 font-bold rounded-md shadow-black/20 shadow-md py-3 px-3 w-[200px] placeholder:text-gray-500/90 outline-none uppercase"
+        className="bg-white max-md:text-sm border-[1px] border-slate-300 text-gray-700 font-bold rounded-xl shadow-black/20 shadow-md py-3 px-3 w-[230px] placeholder:text-gray-500/90 outline-none uppercase"
       >
         <option value="">Todos los colores</option>
         {colores.map((color) => (

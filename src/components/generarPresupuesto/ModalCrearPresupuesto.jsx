@@ -14,7 +14,6 @@ export const ModalCrearPresupuesto = () => {
     cliente,
     localidad,
     total,
-    // totalCantidad,
     setCliente,
     setLocalidad,
     setTotal,
@@ -104,7 +103,7 @@ export const ModalCrearPresupuesto = () => {
                       value={cliente}
                       onChange={(e) => setCliente(e.target.value)}
                       placeholder="CLIENTE"
-                      className="w-1/3 py-2 px-3 bg-slate-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-slate-300 outline-none"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -113,7 +112,7 @@ export const ModalCrearPresupuesto = () => {
                       value={localidad}
                       onChange={(e) => setLocalidad(e.target.value)}
                       placeholder="LOCALIDAD"
-                      className="w-1/3 py-2 px-3 bg-slate-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-slate-300 outline-none"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none"
                     />
                   </div>
                   <div className="flex flex-col gap-2 items-start">

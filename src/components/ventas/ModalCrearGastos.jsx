@@ -97,7 +97,7 @@ export const ModalCrearVenta = () => {
                 >
                   CREAR NUEVO GASTO
                 </Dialog.Title>
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
+                <div className="border-[1px] border-slate-300 rounded-xl shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
                   <form onSubmit={onSubmit} className="flex flex-col gap-4">
                     <div className="flex flex-col gap-1">
                       <label className="font-semibold text-gray-700" htmlFor="">
@@ -106,7 +106,7 @@ export const ModalCrearVenta = () => {
                       <textarea
                         {...register("detalle")}
                         placeholder="DETALLE.."
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl shadow shadow-black/10 outline-none"
                       />
                     </div>
                     <div className="flex flex-col gap-1 w-1/5">
@@ -115,7 +115,7 @@ export const ModalCrearVenta = () => {
                       </label>{" "}
                       <select
                         {...register("tipo")}
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none bg-white"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl shadow shadow-black/10 outline-none bg-white"
                       >
                         <option value="">SELECCIONAR</option>
                         <option value="insumos">INSUMOS</option>
@@ -135,7 +135,7 @@ export const ModalCrearVenta = () => {
                       <input
                         {...register("numero")}
                         placeholder="N° 000-12244"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl shadow shadow-black/10 outline-none"
                       />
                     </div>
                     <div className="flex flex-col gap-1">
@@ -173,11 +173,11 @@ export const ModalCrearVenta = () => {
                           // Asignar el valor formateado al campo
                           e.target.value = precioFormateado;
                         }}
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl shadow shadow-black/10 outline-none"
                       />
                     </div>
                     <div className="flex items-start">
-                      <button className="font-bold bg-indigo-500 text-white py-2 px-12 rounded-lg text-center shadow">
+                      <button className="font-bold bg-indigo-500 text-white py-2 px-12 rounded-xl text-center shadow">
                         CREAR NUEVO GASTO
                       </button>
                     </div>

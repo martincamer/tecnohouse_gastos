@@ -221,6 +221,11 @@ function dateTime(data) {
 }
 
 export const DescargarPresupuesto = ({ datos }) => {
+  const fechaOriginal = new Date(datos.created_at);
+
+  // Sumar 5 días a la fecha original
+  const fechaSumada = new Date(fechaOriginal);
+  fechaSumada.setDate(fechaSumada.getDate() + 5);
   return (
     <Document pageMode="fullScreen">
       <Page size={"A4"} style={styles.content}>
@@ -564,7 +569,7 @@ export const DescargarPresupuesto = ({ datos }) => {
                         color: "#000",
                       }}
                     >
-                      {dateTime(datos?.created_at)}
+                      {fechaSumada.toLocaleDateString("es-AR")}
                     </Text>{" "}
                   </Text>
                 </View>

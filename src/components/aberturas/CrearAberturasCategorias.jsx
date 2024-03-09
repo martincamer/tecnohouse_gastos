@@ -11,17 +11,17 @@ export const CrearAberturasCategorias = (/*{ results }*/) => {
   const { openModalPrecios } = usePreciosContext();
 
   return (
-    <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 mx-auto w-full bg-slate-100">
+    <div className="border-slate-300 rounded-md border-[1px] shadow py-5 px-10 flex gap-12 mx-auto w-full bg-white">
       <button
         onClick={() => openModal()}
-        className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
+        className="border-slate-300 shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
       >
         CREAR NUEVA ABERTURA
       </button>
 
       <button
         onClick={() => openModalPrecios()}
-        className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
+        className="border-slate-300 shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
       >
         MODIFICAR LOS PRECIOS TOTAL ABERTURAS.
       </button>
@@ -29,14 +29,14 @@ export const CrearAberturasCategorias = (/*{ results }*/) => {
       <Link
         to={"/perfiles"}
         // onClick={() => openModal()}
-        className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
+        className="border-slate-300 shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
       >
         VER PERFILES
       </Link>
       <Link
         to={"/accesorios"}
         // onClick={() => openModal()}
-        className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
+        className="border-slate-300 shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500 bg-white"
       >
         VER ACCESORIOS
       </Link>

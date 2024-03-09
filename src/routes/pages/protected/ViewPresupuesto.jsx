@@ -17,22 +17,31 @@ export const ViewPresupuesto = () => {
     loadData();
   }, [params?.id]);
 
-  console.log(datos);
+  const fechaOriginal = new Date(datos.created_at);
+
+  // Sumar 5 días a la fecha original
+  const fechaSumada = new Date(fechaOriginal);
+  fechaSumada.setDate(fechaSumada.getDate() + 5);
+
+  const capitalize = (str) => {
+    return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+  const clienteCapitalized = datos?.cliente ? capitalize(datos.cliente) : "";
 
   return (
-    <section className="mx-10 my-16 bg-slate-100 h-full w-full rounded-lg shadow-black/10 border-slate-300 border-[1px]">
-      <div className="flex flex-col gap-2 border-[1px] rounded-md border-slate-300 px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
+    <section className="mx-10 my-24 bg-white h-full w-full rounded-xl shadow border-slate-300 border-[1px]">
+      <div className="flex flex-col gap-2 border-[1px] rounded-xl border-slate-300 px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
         <div>
           <p className="text-indigo-500 font-bold text-2xl">
             Presupuesto N°{" "}
             <span className="text-slate-700">0000-000{datos?.id}</span>
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <div>
             <PDFDownloadLink
-              className="text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-1 rounded-lg text-indigo-700 hover:shadow-md transiton-all ease-in-out duration-200 cursor-pointer"
-              fileName={`${datos?.clientes}_0000-000${datos?.id}`}
+              className="text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-[6px] rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
+              fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
               Descargar presupuesto
@@ -40,7 +49,7 @@ export const ViewPresupuesto = () => {
           </div>
           <div>
             <button
-              className="text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-1 rounded-lg text-indigo-700 hover:shadow-md transiton-all ease-in-out duration-200"
+              className="text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-1 rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
               type="button"
             >
               Ver presupuesto
@@ -49,10 +58,10 @@ export const ViewPresupuesto = () => {
         </div>
       </div>
 
-      <div className="flex flex-row justify-between border-[1px] rounded-md border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className="flex flex-row justify-between border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="flex flex-col gap-2">
           <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3">
-            TOTAL FACTURADO
+            TOTAL PRESUPUESTADO
             <span className="text-slate-700 text-base">
               {Number(datos?.total).toLocaleString("es-ar", {
                 style: "currency",
@@ -64,7 +73,7 @@ export const ViewPresupuesto = () => {
         </div>
         <div className="flex flex-col gap-2">
           <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3">
-            TOTAL FACTURADO
+            TOTAL PRESUPUESTADO
             <span className="text-slate-700 text-base">
               {Number(datos?.total).toLocaleString("es-ar", {
                 style: "currency",
@@ -78,19 +87,19 @@ export const ViewPresupuesto = () => {
         <div className="flex flex-col gap-2">
           <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3">
             ESTADO
-            <span className="text-slate-700 text-base">ACEPTADO</span>
+            <span className="text-slate-700 text-base">{""}</span>
           </p>
         </div>
       </div>
 
-      <div className=" flex flex-col gap-3 border-[1px] rounded-md border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className=" flex flex-col gap-3 border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="relative">
           <div className="text-center">
             <p className="text-center text-indigo-700 text-lg">
               Tecnohouse Aberturas
             </p>
-            <p className="text-center">+ 3462</p>
-            <p className="text-center">@email</p>
+            <p className="text-center">+ 3462693961</p>
+            <p className="text-center">tecnohouseaberturas@gmail.com</p>
           </div>
 
           <p className="text-slate-700 font-bold absolute right-1 top-0 text-xl">
@@ -102,7 +111,7 @@ export const ViewPresupuesto = () => {
           <div className="border-b-[1px] border-slate-300 flex justify-between">
             <div className="flex gap-5">
               <p className="text-slate-700">Cliente</p>
-              <p className="text-indigo-500">{datos?.cliente}</p>
+              <p className="text-indigo-500 uppercase">{datos?.cliente}</p>
             </div>
 
             <div className="flex gap-5">
@@ -115,20 +124,20 @@ export const ViewPresupuesto = () => {
           <div className="border-b-[1px] border-slate-300 flex justify-between">
             <div className="flex gap-5">
               <p className="text-slate-700">Localidad</p>
-              <p className="text-indigo-500">{datos?.localidad}</p>
+              <p className="text-indigo-500 uppercase">{datos?.localidad}</p>
             </div>
 
             <div className="flex gap-5">
               <p className="text-slate-700">Fecha Vencimiento</p>
               <p className="text-indigo-500">
-                {new Date(datos.created_at).toLocaleDateString("arg")}
+                {fechaSumada.toLocaleDateString("es-AR")}
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className=" flex flex-col gap-3 border-[1px] rounded-md border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className=" flex flex-col gap-3 border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="flex gap-5">
           <div className="w-1/3 font-bold text-slate-700 text-sm">DETALLE</div>
           <div className="w-1/5 font-bold text-slate-700 text-sm">COLOR</div>
@@ -182,7 +191,7 @@ export const ViewPresupuesto = () => {
         ))}
       </div>
 
-      <div className="border-[1px] rounded-md border-slate-300 px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8">
+      <div className="border-[1px] rounded-xl border-slate-300 px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8">
         <div className="text-slate-700 flex flex-row items-center gap-3   w-[1220px] mx-auto h-full">
           Total final{" "}
           <span className="font-semibold text-indigo-700 text-lg">
@@ -195,7 +204,7 @@ export const ViewPresupuesto = () => {
         </div>
 
         <div className="text-slate-700 flex flex-row items-center gap-3   w-[1220px] mx-auto h-full">
-          Total aberturas{" "}
+          Total aberturas
           <span className="font-semibold text-indigo-700 text-lg">
             {datos?.datos?.resultado.reduce(
               (total, item) => total + parseInt(item.cantidad, 10),
