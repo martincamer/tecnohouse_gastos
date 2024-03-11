@@ -67,7 +67,7 @@ export const TableGastos = () => {
                 }}
                 className=" py-4 px-3 font-medium text-sm uppercase"
               >
-                <p className="border-red-500 border-[1px] rounded shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
+                <p className="border-red-300 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
                   ELIMINAR
                 </p>
               </th>

@@ -69,7 +69,7 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                     }}
                     className="border-b-[1px] border-gray-300 px-3 font-medium text-sm uppercase"
                   >
-                    <p className="border-red-500 border-[1px] rounded shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
+                    <p className="border-red-200 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
                       ELIMINAR
                     </p>
                   </th>
@@ -78,7 +78,7 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                     className="border-b-[1px] border-gray-300 px-3"
                   >
                     <Link
-                      className="border-indigo-500 border-[1px] rounded shadow px-[10px] py-1 bg-indigo-100 text-center text-indigo-800 cursor-pointer"
+                      className="bg-indigo-500 rounded-xl shadow px-6 py-2  text-center text-white cursor-pointer"
                       to={`/presupuesto/${g.id}`}
                     >
                       Ver Presupuesto

@@ -5,6 +5,7 @@ import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 import { useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { DownloadPDFButton } from "../pdf/DownloadPDFButton";
+import * as XLSX from "xlsx";
 
 export const TableAberturas = () => {
   const {
@@ -295,6 +296,46 @@ export const TableAberturas = () => {
 
   const fechaActual = new Date();
 
+  const downloadAberturasAsExcel = () => {
+    const aberturasData = aberturasConPreciosFinales.map((abertura) => {
+      // Customize the data structure based on your needs
+      return {
+        TIPO: abertura.tipo.toUpperCase(),
+        DETALLE: abertura.detalle.toUpperCase(),
+        COLOR: abertura.color.toUpperCase(),
+        CATEGORIA: abertura.categoria.toUpperCase(),
+        ANCHO: abertura.ancho,
+        ALTO: abertura.alto,
+        // Add more fields as needed
+        "PRECIO UND": abertura.precioFinal.toLocaleString("es-AR", {
+          style: "currency",
+          currency: "ARS",
+          minimumFractionDigits: 2,
+        }),
+        // TotalConAumento: abertura.totalConAumento.toLocaleString("es-AR", {
+        //   style: "currency",
+        //   currency: "ARS",
+        //   minimumFractionDigits: 2,
+        // }),
+        // SumaPrecios: abertura.sumaPrecios.toLocaleString("es-AR", {
+        //   style: "currency",
+        //   currency: "ARS",
+        //   minimumFractionDigits: 2,
+        // }),
+      };
+    });
+
+    // Create a worksheet with the aberturas data
+    const ws = XLSX.utils.json_to_sheet(aberturasData);
+
+    // Create a workbook and add the worksheet
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Aberturas");
+
+    // Save the file
+    XLSX.writeFile(wb, `aberturas_data.xlsx`);
+  };
+
   return (
     <div>
       <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
@@ -424,16 +465,16 @@ export const TableAberturas = () => {
                 onClick={() => handleEliminarAbertura(g.id)}
                 className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase"
               >
-                <p className="border-red-500 border-[1px] rounded shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
+                <p className="border-red-300 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
                   ELIMINAR
                 </p>
               </th>
               <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
                 <Link
                   to={`/aberturas/${g.id}`}
-                  className="border-indigo-500 border-[1px] rounded shadow py-[3px] px-5 bg-indigo-100 text-center text-indigo-800 cursor-pointer"
+                  className="rounded-xl shadow py-2 px-5 bg-indigo-500 text-center text-white cursor-pointer font-bold "
                 >
-                  VER
+                  VER Abertura
                 </Link>
               </th>
               {/* <th
@@ -485,6 +526,12 @@ export const TableAberturas = () => {
             {" "}
             DESCARGAR INVENTARIO
           </PDFDownloadLink>
+        </button>
+        <button
+          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500"
+          onClick={downloadAberturasAsExcel}
+        >
+          DESCARGAR ABERTURAS EN EXCEL
         </button>
       </div>
     </div>
