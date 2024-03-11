@@ -307,7 +307,7 @@ export const TableAberturas = () => {
         ANCHO: abertura.ancho,
         ALTO: abertura.alto,
         // Add more fields as needed
-        "PRECIO UND": abertura.precioFinal.toLocaleString("es-AR", {
+        "PRECIO UND": abertura.totalConAumento.toLocaleString("es-AR", {
           style: "currency",
           currency: "ARS",
           minimumFractionDigits: 2,
