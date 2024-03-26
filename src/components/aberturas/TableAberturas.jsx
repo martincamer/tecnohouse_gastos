@@ -364,18 +364,20 @@ export const TableAberturas = () => {
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
+                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase md:block max-md:hidden">
+                  {g.tipo}
+                </th>
                 <th
-                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase"
+                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase max-md:block md:hidden"
                   onClick={() => toggleDetail(index)}
                 >
                   {showDetail[index] ? (
                     g.detalle
                   ) : (
-                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 max-md:block md:hidden">
                       CLICK
                     </span>
-                  )}{" "}
-                  {/* Mostrar el detalle solo si showDetail es true */}
+                  )}
                 </th>
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.color}
