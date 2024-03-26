@@ -96,7 +96,7 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-1/3 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+              <div className="w-1/3 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6 max-md:w-full">
                 <Dialog.Title
                   as="h3"
                   className="text-lg leading-6 text-gray-700 font-bold"

@@ -88,40 +88,35 @@ export const ModalSeleccionarAccesorio = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-3/4 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="w-3/4 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
                 >
                   Elegir ACCESORIOS
                 </Dialog.Title>
-                <Search
-                  variable={"Buscar por el detalle..."}
-                  value={search}
-                  searcher={searcher}
-                />
-
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
+                <div>
+                  <Search
+                    variable={"Buscar por el detalle..."}
+                    value={search}
+                    searcher={searcher}
+                  />
+                </div>
+                <div className="max-md:w-full border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
                   <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
                     <thead>
                       <tr>
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th> */}
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th> */}
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Detalle
                         </th>
 
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Categoria
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Precio x unidad
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Seleccionar
                         </th>
                       </tr>
@@ -135,29 +130,29 @@ export const ModalSeleccionarAccesorio = ({
                           {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
                             {c.codigo}
                           </th> */}
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
                             {c.detalle}
                           </th>
-                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
                             {c.color}
                           </th> */}
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
                             {c.categoria}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
+                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
                             {Number(c?.precio_unidad)?.toLocaleString("es-ar", {
                               style: "currency",
                               currency: "ARS",
                               minimumFractionDigits: 2,
                             })}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm w-[120px] text-center">
+                          <th className="border-[1px] border-gray-300 p-2 text-sm w-[120px] text-center max-md:text-xs">
                             <Link
                               onClick={() => {
                                 openModalCantidad(),
                                   handleSeleccionarProducto(c.id);
                               }}
-                              className="bg-secondary py-1 px-2 text-center text-white rounded-md"
+                              className="bg-secondary py-1 px-2 text-center text-white rounded-md max-md:text-xs"
                             >
                               Seleccionar
                             </Link>

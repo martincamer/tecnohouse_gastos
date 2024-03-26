@@ -66,7 +66,7 @@ export const ModalSeleccionarCantidadPerfil = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-4/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="w-4/5 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
@@ -74,29 +74,29 @@ export const ModalSeleccionarCantidadPerfil = ({
                   Elegir Cantidad Producto
                 </Dialog.Title>
 
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full">
+                <div className="overflow-x-scroll border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full">
                   <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
                     <thead>
                       <tr>
                         {/* <th className="p-2 text-sm font-extrabold text-center">
                           Numero
                         </th> */}
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Codigo
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Detalle
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Color
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Peso de la barra
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Cantidad de barras
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Largo de la barra en mm
                         </th>
                       </tr>
@@ -105,17 +105,17 @@ export const ModalSeleccionarCantidadPerfil = ({
                       {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
                         {productoUnicoState.id}
                       </th> */}
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[20px]">
                         {productoUnicoState.codigo}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[50px]">
                         {productoUnicoState.detalle}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[20px]">
                         {productoUnicoState.color}
                       </th>
 
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[50px]">
                         <div className="flex gap-5 items-center justify-center">
                           Peso neto -{" "}
                           {productoUnicoState?.peso_barra_6_mts?.toLocaleString(
@@ -133,7 +133,7 @@ export const ModalSeleccionarCantidadPerfil = ({
                           />
                         </div>
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[100px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[100px]">
                         <input
                           onChange={(e) => setCantidad(e.target.value)}
                           type="number"
@@ -142,7 +142,7 @@ export const ModalSeleccionarCantidadPerfil = ({
                         />
                       </th>
 
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[100px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[100px]">
                         <input
                           onChange={(e) => setLargo(e.target.value)}
                           type="text"

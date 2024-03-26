@@ -158,17 +158,20 @@ export const ModalCrearNuevaAbertura = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-3/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+              <div className="w-3/5 max-md:w-full h-[70vh] overflow-y-scroll inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold"
+                  className="text-base leading-6 text-gray-700 font-bold underline"
                 >
                   CREAR NUEVA ABERTURA
                 </Dialog.Title>
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
+                <div className="max-md:border-none max-md:shadow-none max-md:px-2 max-md:py-1 border-[1px] border-slate-300 rounded-xl shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
                   <form className="flex flex-col gap-6">
                     <div className="flex flex-col gap-2 w-full">
-                      <label className="font-semibold text-gray-700" htmlFor="">
+                      <label
+                        className="font-semibold text-gray-700 max-md:text-sm"
+                        htmlFor=""
+                      >
                         DETALLE
                       </label>
                       <input
@@ -176,19 +179,22 @@ export const ModalCrearNuevaAbertura = () => {
                         onChange={handleChange}
                         value={detalle}
                         placeholder="DETALLE DE LA ABERTURA - PUERTA FRENTE ETC"
-                        className="py-2 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none"
+                        className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2 w-full">
-                      <label className="font-semibold text-gray-700" htmlFor="">
+                      <label
+                        className="font-semibold text-gray-700 max-md:text-sm"
+                        htmlFor=""
+                      >
                         COLOR
                       </label>
                       <select
                         name="color"
                         onChange={handleChange}
                         value={color}
-                        className="py-3 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none uppercase"
+                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
                         <option value={"blanco"}>BLANCO</option>
@@ -198,14 +204,17 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="flex flex-col gap-2 w-full">
-                      <label className="font-semibold text-gray-700" htmlFor="">
+                      <label
+                        className="font-semibold text-gray-700 max-md:text-sm"
+                        htmlFor=""
+                      >
                         CATEGORIA
                       </label>
                       <select
                         name="categoria"
                         onChange={handleChange}
                         value={categoria}
-                        className="py-3 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none uppercase"
+                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
                         <option value={"herrero"}>HERRERO</option>
@@ -215,14 +224,17 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="flex flex-col gap-2 w-full">
-                      <label className="font-semibold text-gray-700" htmlFor="">
+                      <label
+                        className="font-semibold text-gray-700 max-md:text-sm"
+                        htmlFor=""
+                      >
                         TIPO
                       </label>
                       <select
                         name="tipo"
                         onChange={handleChange}
                         value={tipo}
-                        className="py-3 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none uppercase"
+                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
                         <option value={"puertas"}>PUERTAS</option>
@@ -245,7 +257,7 @@ export const ModalCrearNuevaAbertura = () => {
                     <div className="flex flex-row gap-2 w-full">
                       <div className="flex flex-col gap-2">
                         <label
-                          className="font-semibold text-gray-700"
+                          className="font-semibold text-gray-700 max-md:text-sm"
                           htmlFor=""
                         >
                           ANCHO
@@ -255,13 +267,13 @@ export const ModalCrearNuevaAbertura = () => {
                           onChange={handleChange}
                           value={ancho}
                           placeholder="ANCHO"
-                          className="py-2 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none"
+                          className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
                         />
                       </div>
 
                       <div className="flex flex-col gap-2">
                         <label
-                          className="font-semibold text-gray-700"
+                          className="font-semibold text-gray-700 max-md:text-sm"
                           htmlFor=""
                         >
                           ALTO
@@ -271,7 +283,7 @@ export const ModalCrearNuevaAbertura = () => {
                           onChange={handleChange}
                           value={alto}
                           placeholder="ALTO"
-                          className="py-2 px-3 bg-gray-100 rounded-lg shadow shadow-black/20 w-full outline-none"
+                          className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
                         />
                       </div>
                     </div>
@@ -280,46 +292,46 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalProductos()}
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
                       >
                         SELECCIONAR PERFILES
                       </button>
                     </div>
 
-                    <div>
+                    <div className="overflow-x-scroll">
                       <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
                         <thead>
                           <tr>
-                            <th className="p-3">CODIGO</th>
-                            <th className="p-3">COLOR</th>
-                            <th className="p-3">DETALLE</th>
-                            <th className="p-3">CATEGORIA</th>
-                            <th className="p-3">CANTIDAD</th>
-                            <th className="p-3">TOTAL KG</th>
-                            <th className="p-3">ELIMINAR</th>
+                            <th className="p-3 max-md:text-xs">CODIGO</th>
+                            <th className="p-3 max-md:text-xs">COLOR</th>
+                            <th className="p-3 max-md:text-xs">DETALLE</th>
+                            <th className="p-3 max-md:text-xs">CATEGORIA</th>
+                            <th className="p-3 max-md:text-xs">CANTIDAD</th>
+                            <th className="p-3 max-md:text-xs">TOTAL KG</th>
+                            <th className="p-3 max-md:text-xs">ELIMINAR</th>
                           </tr>
                         </thead>
                         <tbody>
                           {productoSeleccionado?.map((p) => (
                             <tr key={p.id}>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.codigo}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.color}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.detalle}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.categoria}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.cantidad}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.totalKG.toLocaleString("arg", {
                                   minimumFractionDigits: 2,
@@ -327,7 +339,7 @@ export const ModalCrearNuevaAbertura = () => {
                               </th>
                               <th
                                 onClick={() => deleteProducto(p.id)}
-                                className="border-[1px] border-red-300 p-3 text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
+                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
                               >
                                 ELIMINAR
                               </th>
@@ -341,41 +353,43 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={openModalAccesorios}
                         type="button"
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
                       >
                         SELECCIONAR ACCESORIOS
                       </button>
                     </div>
 
-                    <div>
+                    <div className="overflow-x-scroll">
                       <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
                         <thead>
                           <tr>
-                            <th className="p-3">NUMERO</th>
-                            <th className="p-3">DETALLE</th>
-                            <th className="p-3">CATEGORIA</th>
-                            <th className="p-3">TOTAL CANTIDADES</th>
-                            <th className="p-3">Eliminar</th>
+                            <th className="p-3 max-md:text-xs">NUMERO</th>
+                            <th className="p-3 max-md:text-xs">DETALLE</th>
+                            <th className="p-3 max-md:text-xs">CATEGORIA</th>
+                            <th className="p-3 max-md:text-xs">
+                              TOTAL CANTIDADES
+                            </th>
+                            <th className="p-3 max-md:text-xs">Eliminar</th>
                           </tr>
                         </thead>
                         <tbody>
                           {accesorioSeleccionado?.map((p) => (
                             <tr key={p.id}>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.id}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.detalle}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.categoria}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.cantidad}
                               </th>
                               <th
                                 onClick={() => deleteAccesorio(p.id)}
-                                className="border-[1px] border-red-300 p-3 text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
+                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
                               >
                                 ELIMINAR
                               </th>
@@ -389,49 +403,49 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalVidrios()}
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold"
+                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
                       >
                         SELECCIONAR VIDRIO POR METRO
                       </button>
                     </div>
 
-                    <div>
+                    <div className="overflow-x-scroll">
                       <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
                         <thead>
                           <tr>
-                            <th className="p-3">CODIGO</th>
-                            <th className="p-3">ANCHO</th>
-                            <th className="p-3">ALTO</th>
-                            <th className="p-3">CANTIDAD</th>
-                            <th className="p-3">CATEGORIA</th>
-                            <th className="p-3">Eliminar</th>
+                            <th className="p-3 max-md:text-xs">CODIGO</th>
+                            <th className="p-3 max-md:text-xs">ANCHO</th>
+                            <th className="p-3 max-md:text-xs">ALTO</th>
+                            <th className="p-3 max-md:text-xs">CANTIDAD</th>
+                            <th className="p-3 max-md:text-xs">CATEGORIA</th>
+                            <th className="p-3 max-md:text-xs">Eliminar</th>
                           </tr>
                         </thead>
                         <tbody>
                           {vidrioSeleccionado.map((v) => (
                             <tr>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.id}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {Number(v.ancho).toLocaleString("es-ar", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {Number(v.alto).toLocaleString("es-ar", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.cantidad}
                               </th>{" "}
-                              <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.categoria}
                               </th>
                               <th
                                 onClick={() => deleteVidrio(v.id)}
-                                className="border-[1px] border-red-300 p-3 text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
+                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
                               >
                                 ELIMINAR
                               </th>
@@ -442,12 +456,12 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <div className="flex gap-2 items-center">
+                      <div className="flex gap-2 items-center max-md:text-sm">
                         <p className="font-semibold text-gray-800">
                           TOTAL EN ACCESORIOS:{" "}
                         </p>
                         <p className="bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
-                          <p>
+                          <p className="max-md:text-sm">
                             {sumaTotal.toLocaleString("es-ar", {
                               style: "currency",
                               currency: "ARS",
@@ -458,14 +472,14 @@ export const ModalCrearNuevaAbertura = () => {
                       </div>
 
                       <div className="flex gap-2 items-center">
-                        <p className="font-semibold text-gray-800">
+                        <p className="font-semibold text-gray-800 max-md:text-sm">
                           TOTAL EN ALUMINIO:{" "}
                         </p>
                         <p className="font-semibold text-indigo-500 text-xl">
                           {Object.entries(costoTotalPorCategoria).map(
                             ([categoria, costo]) => (
                               <li
-                                className="list-none bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base"
+                                className="list-none bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base max-md:text-sm"
                                 key={categoria}
                               >
                                 {categoria}:
@@ -481,13 +495,13 @@ export const ModalCrearNuevaAbertura = () => {
                       </div>
 
                       <div className="flex gap-2 items-center">
-                        <p className="font-semibold text-gray-800">
+                        <p className="font-semibold text-gray-800 max-md:text-sm">
                           TOTAL EN VIDRIO:{" "}
                         </p>
-                        <p className="font-semibold text-indigo-500 text-xl">
+                        <p className="font-semibold text-indigo-500 text-xl max-md:text-sm">
                           <div>
                             {
-                              <p className="bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold">
+                              <p className="bg-indigo-500 text-white rounded-lg shadow px-4 py-1 uppercase text-base font-semibold max-md:text-sm">
                                 {totalVidrio?.toLocaleString("es-ar", {
                                   style: "currency",
                                   currency: "ARS",
@@ -504,7 +518,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={() => handleSubmitAbertura()}
                         type="button"
-                        className="font-bold bg-indigo-500 text-white py-2 px-8 rounded-lg text-center shadow"
+                        className="font-bold bg-indigo-500 text-white py-2 px-8 rounded-lg text-center shadow max-md:text-sm"
                       >
                         CREAR NUEVA ABERTURA
                       </button>

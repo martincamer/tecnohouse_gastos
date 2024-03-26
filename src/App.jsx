@@ -29,6 +29,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { PresupuestoProvider } from "./context/PresupuestoProvider";
 import { ViewPresupuesto } from "./routes/pages/protected/ViewPresupuesto";
 import { ViewPdf } from "./routes/pages/protected/ViewPdf";
+import { MenuMobile } from "./components/MenuMobile";
 
 function App() {
   const { isAuth } = useAuth();
@@ -49,29 +50,30 @@ function App() {
           >
             <Route
               element={
-                <GastosProvider>
-                  <VentasProvider>
-                    <AberturasProvider>
-                      <PerfilesProvider>
-                        <AccesoriosProvider>
-                          <PreciosProvider>
-                            <PresupuestoProvider>
-                              <main className="flex gap-2 h-full">
-                                <Sidebar />
-                                <Outlet />
-                              </main>
-                            </PresupuestoProvider>
-                          </PreciosProvider>
-                        </AccesoriosProvider>
-                      </PerfilesProvider>
-                    </AberturasProvider>
-                  </VentasProvider>
-                </GastosProvider>
+                // <GastosProvider>
+                //   <VentasProvider>
+                <AberturasProvider>
+                  <PerfilesProvider>
+                    <AccesoriosProvider>
+                      <PreciosProvider>
+                        <PresupuestoProvider>
+                          <main className="flex gap-2 h-full">
+                            <MenuMobile />
+                            <Sidebar />
+                            <Outlet />
+                          </main>
+                        </PresupuestoProvider>
+                      </PreciosProvider>
+                    </AccesoriosProvider>
+                  </PerfilesProvider>
+                </AberturasProvider>
+                //   </VentasProvider>
+                // </GastosProvider>
               }
             >
               <Route index path="/" element={<Home />} />
-              <Route path="/gastos" element={<Gastos />} />
-              <Route path="/ventas" element={<Ventas />} />
+              {/* <Route path="/gastos" element={<Gastos />} />
+              <Route path="/ventas" element={<Ventas />} /> */}
               <Route path="/perfiles" element={<Perfiles />} />
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />

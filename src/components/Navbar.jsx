@@ -25,13 +25,13 @@ export const Navbar = () => {
   const { isAuth, signout, user, clickProvider, setClickProvider } = useAuth();
 
   return (
-    <header className="fixed w-full z-[0] py-4 px-6 max-md:px-2">
+    <header className="fixed w-full z-[0] py-4 px-6 max-md:px-2 max-md:static">
       <div
         className={`flex justify-between items-center gap-4 max-md:flex-col ${
           !isAuth ? "w-[1220px]" : "w-full max-md:px-2"
         } mx-auto`}
       >
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center max-md:hidden">
           {/* <Link
             to={"/"}
             className="text-2xl font-semibold text-indigo-500 max-md:text-lg"

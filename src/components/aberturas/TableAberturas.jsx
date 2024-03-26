@@ -312,16 +312,6 @@ export const TableAberturas = () => {
           currency: "ARS",
           minimumFractionDigits: 2,
         }),
-        // TotalConAumento: abertura.totalConAumento.toLocaleString("es-AR", {
-        //   style: "currency",
-        //   currency: "ARS",
-        //   minimumFractionDigits: 2,
-        // }),
-        // SumaPrecios: abertura.sumaPrecios.toLocaleString("es-AR", {
-        //   style: "currency",
-        //   currency: "ARS",
-        //   minimumFractionDigits: 2,
-        // }),
       };
     });
 
@@ -336,157 +326,90 @@ export const TableAberturas = () => {
     XLSX.writeFile(wb, `aberturas_data.xlsx`);
   };
 
+  const [showDetail, setShowDetail] = useState(
+    Array(resultados.length).fill(false)
+  ); // Inicializa un array de estados locales, uno para cada fila
+
+  const toggleDetail = (index) => {
+    const newShowDetail = [...showDetail]; // Crea una copia del array de estados locales
+    newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
+    setShowDetail(newShowDetail); // Actualiza el estado
+  };
   return (
     <div>
-      <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
-        <thead>
-          <tr>
-            {/* <th className="p-3">Numero</th> */}
-            <th className="p-3 border-b-[1px]">Tipo</th>
-            <th className="p-3 border-b-[1px]">Detalle</th>
-            <th className="p-3 border-b-[1px]">Color</th>
-            <th className="p-3 border-b-[1px]">Categoria</th>
-            <th className="p-3 border-b-[1px]">Ancho</th>
-            <th className="p-3 border-b-[1px]">Alto</th>
-            {/* <th className="p-3 border-b-[1px]">Accesorios Total</th>
-            <th className="p-3 border-b-[1px]">Aluminio total</th>
-            <th className="p-3 border-b-[1px]">Vidrio Total</th>
-            <th className="p-3 border-b-[1px]">Total</th> */}
-            <th className="p-3 border-b-[1px]">Eliminar</th>
-            <th className="p-3 border-b-[1px]">Ver</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentResults?.map((g, index) => (
-            <tr
-              className="hover:bg-slate-100  transition-all ease-in-out duration-200 cursor-pointer"
-              key={g.id}
-            >
-              {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
+      {" "}
+      <div className="overflow-x-scroll">
+        <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 ">
+          <thead>
+            <tr>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Tipo</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Detalle</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Color</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Categoria</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Ancho</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Alto</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Eliminar</th>
+              <th className="p-3 max-md:text-xs border-b-[1px]">Ver</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentResults?.map((g, index) => (
+              <tr
+                className="hover:bg-slate-100 transition-all ease-in-out duration-200 cursor-pointer"
+                key={g.id}
+              >
+                {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
               {g.id}
             </th> */}
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.tipo}
-              </th>
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.detalle}
-              </th>
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.color}
-              </th>
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.categoria}
-              </th>{" "}
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.ancho}
-              </th>{" "}
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                {g.alto}
-              </th>
-              {/* <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-              <div className="h-[40px] overflow-y-scroll">
-                {results[index]?.map((result, i) => (
-                  <div key={i}>
-                    {`${result.detalle}: ${
-                      result.cantidad
-                    } x ${result.totalPrecio.toLocaleString("es-ar", {
-                      style: "currency",
-                      currency: "ARS",
-                      minimumFractionDigits: 2,
-                    })}`}{" "}
-                    Assuming totalPrecio and cantidad are numeric values
-                  </div>
-                ))}
-              </div>
-            </th> */}
-              {/* <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                <div className="">
-                  <p>
-                    {results[index]
-                      ?.reduce((sum, result) => sum + result.totalPrecio, 0)
-                      .toLocaleString("es-ar", {
-                        style: "currency",
-                        currency: "ARS",
-                        minimumFractionDigits: 2,
-                      })}
-                  </p>
-                </div>
-              </th>
-              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                <div className="h-[40px] overflow-y-scroll flex items-center justify-center">
-                  {resultsTwo?.[index] && (
-                    <>
-                      {resultsTwo[index]?.perfilesTotal && (
-                        <div>{`${resultsTwo[
-                          index
-                        ]?.perfilesTotal.toLocaleString("es-ar", {
-                          style: "currency",
-                          currency: "ARS",
-                          minimumFractionDigits: 2,
-                        })}`}</div>
-                      )}
-                    </>
-                  )}
-                </div>
-              </th>
-              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                <div className="h-[40px] overflow-y-scroll flex items-center justify-center">
-                  {resultsTwo?.[index] && (
-                    <>
-                      {resultsTwo[index]?.vidrioTotal && (
-                        <div>{`${resultsTwo[index]?.vidrioTotal.toLocaleString(
-                          "es-ar",
-                          {
-                            style: "currency",
-                            currency: "ARS",
-                            minimumFractionDigits: 2,
-                          }
-                        )}`}</div>
-                      )}
-                    </>
-                  )}
-                </div>
-              </th>
-              <th className="border-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                <div className="font-semibold">
-                  <p>
-                    {calculateTotalCostForIndex(
-                      index,
-                      totalAveragePrice
-                    )?.toLocaleString("es-ar", {
-                      style: "currency",
-                      currency: "ARS",
-                      minimumFractionDigits: 2,
-                    })}
-                  </p>
-                </div>
-              </th> */}
-              <th
-                onClick={() => handleEliminarAbertura(g.id)}
-                className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase"
-              >
-                <p className="border-red-300 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
-                  ELIMINAR
-                </p>
-              </th>
-              <th className="border-b-[1px] border-gray-300 py-4 px-3 font-medium text-sm uppercase">
-                <Link
-                  to={`/aberturas/${g.id}`}
-                  className="rounded-xl shadow py-2 px-5 bg-indigo-500 text-center text-white cursor-pointer font-bold "
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.tipo}
+                </th>
+                <th
+                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase"
+                  onClick={() => toggleDetail(index)}
                 >
-                  VER Abertura
-                </Link>
-              </th>
-              {/* <th
-              onClick={() => obtenerParamsId(g.id)}
-              className="border-[1px] border-gray-300 p-3 font-semibold text-sm uppercase bg-teal-500 text-white cursor-pointer"
-            >
-              <Link to={`/gastos/${g.id}`}>VER GASTO</Link>
-            </th> */}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  {showDetail[index] ? (
+                    g.detalle
+                  ) : (
+                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                      CLICK
+                    </span>
+                  )}{" "}
+                  {/* Mostrar el detalle solo si showDetail es true */}
+                </th>
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.color}
+                </th>
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.categoria}
+                </th>{" "}
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.ancho}
+                </th>{" "}
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.alto}
+                </th>
+                <th
+                  onClick={() => handleEliminarAbertura(g.id)}
+                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase"
+                >
+                  <p className="border-red-300 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
+                    ELIMINAR
+                  </p>
+                </th>
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  <Link
+                    to={`/aberturas/${g.id}`}
+                    className="rounded-xl shadow py-2 px-5 bg-indigo-500 text-center text-white cursor-pointer font-bold "
+                  >
+                    Ver
+                  </Link>
+                </th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {totalPages > 1 && (
         <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
           {Array.from({ length: totalPages }).map((_, index) => (
@@ -504,14 +427,14 @@ export const TableAberturas = () => {
           ))}
         </div>
       )}
-      <div className="mt-5 flex gap-5">
+      <div className="mt-5 flex gap-5 max-md:flex-col max-md:text-sm max-md:items-start">
         <button
-          className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500"
+          className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl"
           onClick={() => setApplyAumento(!applyAumento)}
         >
           {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
         </button>
-        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500">
+        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",
@@ -528,7 +451,7 @@ export const TableAberturas = () => {
           </PDFDownloadLink>
         </button>
         <button
-          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500"
+          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl"
           onClick={downloadAberturasAsExcel}
         >
           DESCARGAR ABERTURAS EN EXCEL

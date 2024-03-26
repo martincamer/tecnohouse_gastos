@@ -1,6 +1,6 @@
 export const Search = ({ search, searcher, variable }) => {
   return (
-    <div className="flex justify-between items-center bg-white max-md:text-sm border-[1px] border-slate-300 rounded-xl shadow py-2 px-3 w-[450px] placeholder:text-gray-500/90 outline-none">
+    <div className="flex justify-between items-center bg-white max-md:text-sm border-[1px] border-slate-300 rounded-xl shadow py-2 px-3 w-[450px] placeholder:text-gray-500/90 outline-none max-md:w-[250px]">
       <input
         value={search}
         onChange={searcher}

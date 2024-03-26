@@ -119,7 +119,7 @@ export const ModalPrecios = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-3/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+              <div className="w-3/5 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
                   className="text-lg leading-6 text-gray-700 font-bold"
@@ -132,16 +132,28 @@ export const ModalPrecios = () => {
                 >
                   CREAR NUEVO VALOR
                 </div>
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
-                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-sm">
+                <div className="max-md:py-0 max-md:rounded-xl max-md:shadow-none max-md:px-0 border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10 max-md:overflow-x-scroll">
+                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow max-md:shadow-none shadow-black/20 text-sm">
                     <thead>
                       <tr>
-                        <th className="py-4 px-5 border-b-[1px]">precio</th>
-                        <th className="py-4 px-5 border-b-[1px]">categoria</th>
-                        <th className="py-4 px-5 border-b-[1px]">detalle</th>
-                        <th className="py-4 px-5 border-b-[1px]">color</th>
-                        <th className="py-4 px-5 border-b-[1px]">editar</th>
-                        <th className="py-4 px-5 border-b-[1px]">eliminar</th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          precio
+                        </th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          categoria
+                        </th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          detalle
+                        </th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          color
+                        </th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          editar
+                        </th>
+                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                          eliminar
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -154,26 +166,26 @@ export const ModalPrecios = () => {
                               minimumFractionDigits: 2,
                             })}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.categoria}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.detalle}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.color}
                           </th>
                           <th
                             onClick={() => {
                               handleObtenerId(p.id), openEditarPrecio();
                             }}
-                            className="border-b-[1px] py-4 px-5 font-semibold text-sm uppercase bg-indigo-500 text-white text-center"
+                            className="border-b-[1px] py-4 px-5 font-semibold text-sm max-md:text-xs uppercase bg-indigo-500 text-white text-center"
                           >
                             EDITAR
                           </th>
                           <th
                             onClick={() => handleEliminar(p.id)}
-                            className="border-b-[1px] border-gray-300 py-4 px-5 font-semibold text-sm uppercase bg-red-500 hover:bg-red-300 transition-all ease-in-out hover:text-red-600 text-white text-center"
+                            className="border-b-[1px] border-gray-300 py-4 px-5 font-semibold text-sm max-md:text-xs uppercase bg-red-500 hover:bg-red-300 transition-all ease-in-out hover:text-red-600 text-white text-center"
                           >
                             ELIMINAR
                           </th>

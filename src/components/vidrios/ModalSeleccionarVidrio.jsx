@@ -86,7 +86,7 @@ export const ModalSeleccionarVidrio = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-3/4 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-3/4 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
@@ -99,7 +99,7 @@ export const ModalSeleccionarVidrio = ({
                   searcher={searcher}
                 /> */}
 
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex gap-6 w-full py-10 px-10 overflow-y-scroll">
+                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow max-md:py-5 flex gap-6 w-full py-10 px-10 overflow-y-scroll">
                   <div className="flex gap-2 items-center">
                     <label
                       className="uppercase text-indigo-500 font-semibold"
@@ -118,7 +118,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-indigo-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold max-md:text-sm"
                       htmlFor=""
                     >
                       Alto
@@ -134,7 +134,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-indigo-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold max-md:text-sm"
                       htmlFor=""
                     >
                       Cantidad
@@ -150,7 +150,7 @@ export const ModalSeleccionarVidrio = ({
 
                   <div className="flex gap-2 items-center">
                     <label
-                      className="uppercase text-indigo-500 font-semibold"
+                      className="uppercase text-indigo-500 font-semibold max-md:text-sm"
                       htmlFor=""
                     >
                       Seleccionar
@@ -171,13 +171,8 @@ export const ModalSeleccionarVidrio = ({
                 </div>
                 <div>
                   <button
-                    className="bg-indigo-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold"
+                    className="bg-indigo-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold max-md:text-sm"
                     type="button"
-                    // onClick={() => {
-                    //   addToVidrio(ancho, alto, cantidad, categoria),
-                    //     closeModalProductos();
-                    // }}
-
                     onClick={() => {
                       const anchoMeters = parseFloat(ancho) / 1000; // Convert width to meters
                       const altoMeters = parseFloat(alto) / 1000; // Convert height to meters

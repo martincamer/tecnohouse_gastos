@@ -61,7 +61,7 @@ export const ModalSeleccionarCantidadAccesorio = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-4/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-4/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900 uppercase"
@@ -76,38 +76,38 @@ export const ModalSeleccionarCantidadAccesorio = ({
                         {/* <th className="p-2 text-sm font-extrabold text-center">
                           Numero
                         </th> */}
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Numero
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Detalle
                         </th>{" "}
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Categoria
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
+                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Cantidad
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
+                      {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[20px]">
                         {productoUnicoState.id}
                       </th> */}
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[20px]">
                         {accesorioUnicoState.id}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[50px]">
                         {accesorioUnicoState.detalle}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[50px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[50px]">
                         {accesorioUnicoState.categoria}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[100px]">
+                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[100px]">
                         <input
                           onChange={(e) => setCantidad(e.target.value)}
                           type="number"
-                          className="border-[1px] border-black/30 rounded p-2 w-[100px] outline-none"
+                          className="border-[1px] border-black/30 rounded p-2 w-[100px] outline-none max-md:text-xs"
                           placeholder="cantidad"
                         />
                       </th>
