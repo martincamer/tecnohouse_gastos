@@ -138,7 +138,7 @@ export const ModalSeleccionarAberturas = ({
                           key={r?.id}
                           className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
                         >
-                          <th
+                          {/*<th
                             onClick={() => toggleDetail(index)}
                             className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden max-md:block"
                           >
@@ -149,9 +149,9 @@ export const ModalSeleccionarAberturas = ({
                                 CLICK
                               </span>
                             )}
-                          </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden">
-                             {r.detalle}
+                          </th>*/}
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                            {r?.detalle}
                           </th>
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.ancho}x{r?.alto}
