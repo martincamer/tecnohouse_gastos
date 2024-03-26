@@ -361,10 +361,10 @@ export const TableAberturas = () => {
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
-                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase md:block max-md:hidden">
+                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.detalle}
                 </th>
-                <th
+                {/*<th
                   className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase max-md:block md:hidden"
                   onClick={() => toggleDetail(index)}
                 >
@@ -375,7 +375,7 @@ export const TableAberturas = () => {
                       CLICK
                     </span>
                   )}
-                </th>
+                </th>*/}
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.color}
                 </th>
