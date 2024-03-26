@@ -140,7 +140,7 @@ export const ModalSeleccionarAberturas = ({
                         >
                           <th
                             onClick={() => toggleDetail(index)}
-                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase"
+                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden"
                           >
                             {showDetail[index] ? (
                               r.detalle
@@ -149,6 +149,11 @@ export const ModalSeleccionarAberturas = ({
                                 CLICK
                               </span>
                             )}{" "}
+                          </th>
+                           <th
+                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden"
+                          >
+                             {r.detalle}
                           </th>
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.ancho}x{r?.alto}
