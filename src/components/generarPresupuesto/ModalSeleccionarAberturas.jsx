@@ -138,17 +138,20 @@ export const ModalSeleccionarAberturas = ({
                           key={r?.id}
                           className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
                         >
-                          <th
+                          {/*<th
                             onClick={() => toggleDetail(index)}
-                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase"
+                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden max-md:block"
                           >
                             {showDetail[index] ? (
                               r.detalle
                             ) : (
-                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 md:hidden max-md:block">
                                 CLICK
                               </span>
-                            )}{" "}
+                            )}
+                          </th>*/}
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                            {r?.detalle}
                           </th>
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.ancho}x{r?.alto}
@@ -159,7 +162,6 @@ export const ModalSeleccionarAberturas = ({
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.categoria}
                           </th>
-
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             <button
                               onClick={() => {

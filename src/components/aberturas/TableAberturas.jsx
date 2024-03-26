@@ -357,26 +357,25 @@ export const TableAberturas = () => {
               <tr
                 className="hover:bg-slate-100 transition-all ease-in-out duration-200 cursor-pointer"
                 key={g.id}
-              >
-                {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
-              {g.id}
-            </th> */}
+                >
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
-                <th
-                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase"
+                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                  {g.detalle}
+                </th>
+                {/*<th
+                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase max-md:block md:hidden"
                   onClick={() => toggleDetail(index)}
                 >
                   {showDetail[index] ? (
                     g.detalle
                   ) : (
-                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 max-md:block md:hidden">
                       CLICK
                     </span>
-                  )}{" "}
-                  {/* Mostrar el detalle solo si showDetail es true */}
-                </th>
+                  )}
+                </th>*/}
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.color}
                 </th>
