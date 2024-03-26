@@ -140,18 +140,18 @@ export const ModalSeleccionarAberturas = ({
                         >
                           <th
                             onClick={() => toggleDetail(index)}
-                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden"
+                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden max-md:block"
                           >
                             {showDetail[index] ? (
                               r.detalle
                             ) : (
-                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 md:hidden max-md:block">
                                 CLICK
                               </span>
                             )}{" "}
                           </th>
                            <th
-                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden"
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden">
                           >
                              {r.detalle}
                           </th>
