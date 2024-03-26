@@ -148,11 +148,9 @@ export const ModalSeleccionarAberturas = ({
                               <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 md:hidden max-md:block">
                                 CLICK
                               </span>
-                            )}{" "}
+                            )}
                           </th>
-                           <th
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden">
-                          >
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:block max-md:hidden">
                              {r.detalle}
                           </th>
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
@@ -164,7 +162,6 @@ export const ModalSeleccionarAberturas = ({
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.categoria}
                           </th>
-
                           <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             <button
                               onClick={() => {
