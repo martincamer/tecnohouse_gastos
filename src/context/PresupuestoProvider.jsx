@@ -80,7 +80,7 @@ export const PresupuestoProvider = ({ children }) => {
       setProductoSeleccionado([...productoSeleccionado, newProducto]);
 
       toast.success("¡Creado correctamente!", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
         closeOnClick: true,

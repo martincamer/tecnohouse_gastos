@@ -61,10 +61,10 @@ export const ModalEliminarAccesorios = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-1/2 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="w-1/2 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold"
+                  className="max-md:text-base  text-lg leading-6 text-gray-700 font-bold"
                 >
                   ELIMINAR GASTO
                 </Dialog.Title>
@@ -79,7 +79,7 @@ export const ModalEliminarAccesorios = () => {
                   <button
                     onClick={() => closeModalEliminar()}
                     type="button"
-                    className="w-full bg-teal-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
+                    className="w-full bg-indigo-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
                   >
                     CERRAR
                   </button>

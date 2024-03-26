@@ -92,15 +92,17 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block max-md:w-full w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
+                  <div className="font-semibold max-md:text-base text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
                     CREAR NUEVO PERFIL
                   </div>
 
                   <form onSubmit={crearNuevoPerfilSubmit} className="space-y-4">
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">CODIGO</label>
+                      <label className="font-semibold text-base max-md:text-sm">
+                        CODIGO
+                      </label>
                       <input
                         {...register("codigo", { required: true })}
                         placeholder="CODIGO DEL PERFIL"
@@ -110,7 +112,9 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">DETALLE</label>
+                      <label className="font-semibold text-base max-md:text-sm">
+                        DETALLE
+                      </label>
                       <input
                         {...register("detalle", { required: true })}
                         placeholder="DETALLE DEL PERFIL"
@@ -120,7 +124,7 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">
+                      <label className="font-semibold text-base max-md:text-sm">
                         CATEGORIA
                       </label>
                       <select
@@ -135,7 +139,9 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">COLOR</label>
+                      <label className="font-semibold text-base max-md:text-sm">
+                        COLOR
+                      </label>
                       <select
                         {...register("color", { required: true })}
                         className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
@@ -148,7 +154,7 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">
+                      <label className="font-semibold text-base max-md:text-sm">
                         PESO DE LA BARRA 6 MTS
                       </label>
                       <input
@@ -161,7 +167,7 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
 
                     <div>
                       <button
-                        className="bg-indigo-500 text-white font-semibold py-2 px-8 hover:bg-indigo-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
+                        className="bg-indigo-500 max-md:text-xs text-white font-semibold py-2 px-8 hover:bg-indigo-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
                         type="submit"
                       >
                         CREAR PERFIL

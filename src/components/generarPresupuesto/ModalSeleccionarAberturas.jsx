@@ -8,6 +8,7 @@ import { Search } from "../ui/Search";
 export const ModalSeleccionarAberturas = ({
   openSeleccionar,
   closeModalSeleccionar,
+  closeModal,
 }) => {
   const { results, search, searcher } = useAberturasContext();
 
@@ -38,6 +39,16 @@ export const ModalSeleccionarAberturas = ({
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+  };
+
+  const [showDetail, setShowDetail] = useState(
+    Array(results.length).fill(false)
+  ); // Inicializa un array de estados locales, uno para cada fila
+
+  const toggleDetail = (index) => {
+    const newShowDetail = [...showDetail]; // Crea una copia del array de estados locales
+    newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
+    setShowDetail(newShowDetail); // Actualiza el estado
   };
 
   return (
@@ -90,7 +101,7 @@ export const ModalSeleccionarAberturas = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-5/6 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="inline-block max-md:w-full w-5/6 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="mb-5">
                   <Search
                     variable="Buscar por el detalle..."
@@ -98,56 +109,65 @@ export const ModalSeleccionarAberturas = ({
                     searcher={searcher}
                   />
                 </div>
-                <form className="space-y-3">
+                <form className="space-y-3 overflow-x-scroll">
                   <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
                     <thead>
                       <tr className="text-left">
                         {/* <th className="p-3 border-b-[1px]">Numero</th> */}
-                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                           DETALLE
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                           MEDIDA
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                           COLOR
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                           CATEGORIA
                         </th>
 
-                        <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                           Seleccionar
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {currentResults?.map((r) => (
+                      {currentResults?.map((r, index) => (
                         <tr
                           key={r?.id}
                           className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
                         >
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
-                            {r?.detalle}
+                          <th
+                            onClick={() => toggleDetail(index)}
+                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase"
+                          >
+                            {showDetail[index] ? (
+                              r.detalle
+                            ) : (
+                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                                CLICK
+                              </span>
+                            )}{" "}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.ancho}x{r?.alto}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.color}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.categoria}
                           </th>
 
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm uppercase">
+                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             <button
                               onClick={() => {
                                 handleId(r?.id),
                                   openModalSeleccionarAberturaFinal();
                               }}
                               type="button"
-                              className="bg-indigo-500 text-white px-4 py-1 text-sm rounded-lg shadow"
+                              className="bg-indigo-500 text-white px-4 py-1 text-sm max-md:text-xs rounded-lg shadow"
                             >
                               Seleccionar
                             </button>
@@ -158,15 +178,15 @@ export const ModalSeleccionarAberturas = ({
                   </table>
                 </form>
                 {totalPages > 1 && (
-                  <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
+                  <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
                     {Array.from({ length: totalPages }).map((_, index) => (
                       <button
                         type="button"
                         key={index}
                         className={`mx-1 px-3 py-1 rounded ${
                           currentPage === index + 1
-                            ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
-                            : "bg-gray-100 shadow shadow-black/20"
+                            ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
+                            : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
                         }`}
                         onClick={() => handlePageChange(index + 1)}
                       >
@@ -190,6 +210,7 @@ export const ModalSeleccionarAberturas = ({
             <ModalSeleccionarAberturaFinal
               obtenerId={obtenerId}
               seleccionarAberturaFinal={seleccionarAberturaFinal}
+              closeModalSeleccionar={closeModalSeleccionar}
               closeModalSeleccionarAberturaFinal={
                 closeModalSeleccionarAberturaFinal
               }

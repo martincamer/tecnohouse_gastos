@@ -45,6 +45,16 @@ export const ModalCrearPresupuesto = () => {
   setTotalCantidad(cantidadTotal);
   setTotal(precioFinalTotal);
 
+  const [showDetail, setShowDetail] = useState(
+    Array(productoSeleccionado.length).fill(false)
+  ); // Inicializa un array de estados locales, uno para cada fila
+
+  const toggleDetail = (index) => {
+    const newShowDetail = [...showDetail]; // Crea una copia del array de estados locales
+    newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
+    setShowDetail(newShowDetail); // Actualiza el estado
+  };
+
   return (
     <Menu as="div" className="z-50">
       {/* <ToastContainer /> */}
@@ -95,30 +105,30 @@ export const ModalCrearPresupuesto = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-2/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="max-md:w-full inline-block w-2/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <form className="space-y-3">
                   <div className="flex flex-col gap-2">
-                    <label>CLIENTE</label>
+                    <label className="max-md:text-sm">CLIENTE</label>
                     <input
                       value={cliente}
                       onChange={(e) => setCliente(e.target.value)}
                       placeholder="CLIENTE"
-                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label>LOCALIDAD</label>
+                    <label className="max-md:text-sm">LOCALIDAD</label>
                     <input
                       value={localidad}
                       onChange={(e) => setLocalidad(e.target.value)}
                       placeholder="LOCALIDAD"
-                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm"
                     />
                   </div>
                   <div className="flex flex-col gap-2 items-start">
                     <Link
                       onClick={() => openModalSeleccionar()}
-                      className="py-2 px-3 bg-indigo-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-indigo-500 text-indigo-700 outline-none text-sm"
+                      className="py-2 px-3 max-md:rounded-xl bg-indigo-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-indigo-500 text-indigo-700 outline-none text-sm"
                     >
                       Seleccionar aberturas
                     </Link>
@@ -129,28 +139,28 @@ export const ModalCrearPresupuesto = () => {
                       <thead>
                         <tr className="text-left">
                           {/* <th className="p-3 border-b-[1px]">Numero</th> */}
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             DETALLE
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             COLOR
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             MEDIDA
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             CATEGORIA
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             CANT
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             Precio Und
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             Precio Final
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm text-slate-700">
+                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
                             ELIMINAR
                           </th>
                         </tr>
@@ -161,36 +171,45 @@ export const ModalCrearPresupuesto = () => {
                             key={index}
                             className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
                           >
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
-                              {p?.detalle}
+                            <th
+                              onClick={() => toggleDetail(index)}
+                              className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase"
+                            >
+                              {showDetail[index] ? (
+                                p.detalle
+                              ) : (
+                                <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
+                                  CLICK
+                                </span>
+                              )}{" "}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
                               {p?.color}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
                               {p?.ancho}x{p?.alto}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
                               {p?.categoria}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
                               {p?.cantidad}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
                               {p?.precioUnidad?.toLocaleString("es-ar", {
                                 style: "currency",
                                 currency: "ARS",
                                 minimumFractionDigits: 2,
                               })}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-semibold text-indigo-600 text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-semibold text-indigo-600 text-[13px] uppercase">
                               {p?.precioFinal?.toLocaleString("es-ar", {
                                 style: "currency",
                                 currency: "ARS",
                                 minimumFractionDigits: 2,
                               })}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 font-semibold text-red-600 text-[13px] uppercase">
+                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-semibold text-red-600 text-[13px] uppercase">
                               <button
                                 onClick={() => eliminarAberturaPorId(p?.id)}
                                 type="button"
@@ -206,14 +225,18 @@ export const ModalCrearPresupuesto = () => {
                   </div>
 
                   <div className="flex gap-2">
-                    <p className="text-slate-700">Total aberturas</p>
+                    <p className="text-slate-700 max-md:uppercase max-md:text-sm">
+                      Total aberturas
+                    </p>
                     <p className="text-indigo-600 font-semibold">
                       {cantidadTotal}
                     </p>
                   </div>
 
                   <div className="flex gap-2">
-                    <p className="text-slate-700">Total generado</p>
+                    <p className="text-slate-700 max-md:uppercase max-md:text-sm">
+                      Total generado
+                    </p>
                     <p className="text-indigo-600 font-semibold">
                       {precioFinalTotal?.toLocaleString("es-ar", {
                         style: "currency",
@@ -246,6 +269,7 @@ export const ModalCrearPresupuesto = () => {
             </Transition.Child>
           </div>
           <ModalSeleccionarAberturas
+            closeModal={closeModal}
             openSeleccionar={openSeleccionar}
             closeModalSeleccionar={closeModalSeleccionar}
           />

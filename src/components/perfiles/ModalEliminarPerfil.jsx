@@ -61,25 +61,25 @@ export const ModalEliminarPerfil = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-1/2 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-1/2 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold"
+                  className="text-lg leading-6 text-gray-700 font-bold max-md:text-sm"
                 >
-                  ELIMINAR GASTO
+                  ELIMINAR PERFIL
                 </Dialog.Title>
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex gap-3 w-full py-10 px-10">
+                <div className="border-[1px] max-md:py-4 border-gray-200 rounded shadow-black/10 shadow flex gap-3 w-full py-10 px-10">
                   <button
                     onClick={() => handleEliminarPerfil(obtenerParams)}
                     type="button"
-                    className="w-full bg-red-200 py-2 px-4 rounded-md shadow border-red-500 border-[1px] text-red-500 font-bold"
+                    className="max-md:text-xs w-full bg-red-200 py-2 px-4 rounded-md shadow border-red-500 border-[1px] text-red-500 font-bold"
                   >
                     ELIMINAR
                   </button>
                   <button
                     onClick={() => closeModalEliminar()}
                     type="button"
-                    className="w-full bg-teal-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
+                    className="max-md:text-xs w-full bg-teal-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
                   >
                     CERRAR
                   </button>

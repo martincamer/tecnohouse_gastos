@@ -10,6 +10,7 @@ export const ModalSeleccionarAberturaFinal = ({
   seleccionarAberturaFinal,
   closeModalSeleccionarAberturaFinal,
   obtenerId,
+  closeModalSeleccionar,
 }) => {
   const [abertura, setAbertura] = useState([]);
   const [cantidad, setCantidad] = useState(0);
@@ -260,28 +261,28 @@ export const ModalSeleccionarAberturaFinal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-1/2 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="max-md:h-[60vh] max-md:overflow-y-scroll max-md:w-full inline-block w-1/2 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className=" mx-auto p-8 bg-white shadow border-[1px] bor-slate-300 rounded-xl w-full">
-                  <h2 className="text-2xl font-bold mb-4">
+                  <h2 className="text-2xl font-bold mb-4 max-md:text-base max-md:uppercase max-md:underline">
                     Detalles de la Abertura
                   </h2>
 
-                  <div className="mb-4">
-                    <h3 className="flex gap-2 text-base text-indigo-500 font-normal mb-2">
+                  <div className="mb-4 max-md:flex-col max-md:flex max-md:gap-1">
+                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2">
                       DETALLE -
-                      <span className="text-slate-700 uppercase">
+                      <span className="text-slate-700 uppercase max-md:text-sm">
                         {abertura?.detalle}
                       </span>
                     </h3>
-                    <h3 className="flex gap-2 text-base text-indigo-500 font-normal mb-2">
+                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2">
                       CATEGORIA -
-                      <span className="text-slate-700 uppercase">
+                      <span className="text-slate-700 uppercase max-md:text-sm">
                         {abertura?.categoria}
                       </span>
                     </h3>
-                    <h3 className="flex gap-2 text-base text-indigo-500 font-normal mb-2">
+                    <h3 className="flex gap-2 max-md:flex-col max-md:gap-1 text-base text-indigo-500 font-normal mb-2">
                       COLOR -
-                      <span className="text-slate-700 uppercase">
+                      <span className="text-slate-700 uppercase max-md:text-sm">
                         {abertura?.color}
                       </span>
                     </h3>
@@ -290,9 +291,13 @@ export const ModalSeleccionarAberturaFinal = ({
                   {/* Repite la estructura anterior para vidrios y accesorios */}
 
                   <div className="mt-4 w-2/3">
-                    <h3 className="text-xl font-bold mb-2">Totales</h3>
-                    <div className="flex justify-between items-center mb-2">
-                      <span>Total Abertura</span>
+                    <h3 className="text-2xl font-bold mb-4 max-md:text-base max-md:uppercase max-md:underline">
+                      Totales
+                    </h3>
+                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
+                      <span className="max-md:uppercase max-md:text-sm">
+                        Total Abertura
+                      </span>
                       <span className="text-indigo-700">
                         {precioTotalAbertura.toLocaleString("es-ar", {
                           style: "currency",
@@ -301,8 +306,10 @@ export const ModalSeleccionarAberturaFinal = ({
                         })}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span>Total Adicionales</span>
+                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
+                      <span className="max-md:uppercase max-md:text-sm">
+                        Total Adicionales
+                      </span>
                       <span className="text-indigo-700">
                         {precioTotalAdicionales.toLocaleString("es-ar", {
                           style: "currency",
@@ -311,8 +318,10 @@ export const ModalSeleccionarAberturaFinal = ({
                         })}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span>Precio Final Abertura (sin adicional)</span>
+                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
+                      <span className="max-md:uppercase max-md:text-sm">
+                        Precio Final Abertura (sin adicional)
+                      </span>
                       <span className="text-indigo-700">
                         {precioFinalAberturaSin.toLocaleString("es-ar", {
                           style: "currency",
@@ -321,8 +330,10 @@ export const ModalSeleccionarAberturaFinal = ({
                         })}
                       </span>
                     </div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span>Precio Final Abertura (con 40% adicional)</span>
+                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-3 max-md:gap-1">
+                      <span className="max-md:uppercase max-md:text-sm">
+                        Precio Final Abertura (con 40% adicional)
+                      </span>
                       <span className="text-indigo-700 font-semibold">
                         {precioFinalAbertura.toLocaleString("es-ar", {
                           style: "currency",
@@ -333,7 +344,10 @@ export const ModalSeleccionarAberturaFinal = ({
                     </div>
                   </div>
                   <div className="mt-4 flex flex-col items-start gap-2">
-                    <label htmlFor="" className="text-indigo-500">
+                    <label
+                      htmlFor=""
+                      className="text-indigo-500 max-md:uppercase max-md:font-bold"
+                    >
                       Seleccionar cantidad
                     </label>
                     <input
@@ -348,12 +362,14 @@ export const ModalSeleccionarAberturaFinal = ({
                   <button
                     type="button"
                     onClick={toggleAdditionalCost}
-                    className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase my-5"
+                    className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase my-5 max-md:text-sm"
                   >
-                    {applyAdditionalCost ? "Quitar 40%" : "Aplicar 40%"}
+                    {applyAdditionalCost
+                      ? "Click Quitar 40%"
+                      : "Click Aplicar 40%"}
                   </button>
 
-                  <div className="mt-6 flex items-start justify-between gap-2">
+                  <div className="mt-6 flex items-start justify-between gap-2 max-md:flex-col">
                     <button
                       type="button"
                       onClick={() => {
@@ -368,13 +384,14 @@ export const ModalSeleccionarAberturaFinal = ({
                           finalPrice
                         ),
                           closeModalSeleccionarAberturaFinal();
+                        closeModalSeleccionar();
                       }}
-                      className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase"
+                      className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase max-md:text-sm"
                     >
                       Generar abertura
                     </button>
 
-                    <p className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase">
+                    <p className="bg-indigo-500 text-white py-1 px-4 rounded-lg shadow-lg uppercase max-md:text-sm max-md:font-bold">
                       {finalPrice.toLocaleString("es-ar", {
                         style: "currency",
                         currency: "ARS",
