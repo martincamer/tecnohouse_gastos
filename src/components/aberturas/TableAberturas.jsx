@@ -357,15 +357,12 @@ export const TableAberturas = () => {
               <tr
                 className="hover:bg-slate-100 transition-all ease-in-out duration-200 cursor-pointer"
                 key={g.id}
-              >
-                {/* <th className="border-[1px] border-gray-300 p-3 font-medium text-sm uppercase">
-              {g.id}
-            </th> */}
+                >
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
                  <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase md:block max-md:hidden">
-                  {g.tipo}
+                  {g.detalle}
                 </th>
                 <th
                   className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase max-md:block md:hidden"
