@@ -1,16 +1,13 @@
 import Chart from "react-apexcharts";
 
 const RemuneracionesColumnChart = ({ datos }) => {
-  // Extracting data for the chart
   const fechas = datos.map(
     (remuneracion) => remuneracion.created_at.split("T")[0]
-  ); // Extracting only date, removing time
-
+  );
   const remuneracionesData = datos.map((remuneracion) =>
     parseFloat(remuneracion.total)
-  ); // Convert to ARS (considering 1 USD = 97 ARS)
+  );
 
-  // Configuring chart options
   const options = {
     chart: {
       type: "bar",
@@ -34,10 +31,11 @@ const RemuneracionesColumnChart = ({ datos }) => {
             style: "currency",
             currency: "ARS",
             minimumIntegerDigits: 2,
-          }); // Add currency symbol to y-axis labels and format as currency
+          });
         },
         style: {
           fontSize: "12px",
+          colors: "#000000", // Cambiar color del texto a negro
         },
       },
     },
@@ -69,7 +67,6 @@ const RemuneracionesColumnChart = ({ datos }) => {
     ],
   };
 
-  // Configuring chart series
   const series = [
     {
       name: "Total en presupuestos",
@@ -78,14 +75,14 @@ const RemuneracionesColumnChart = ({ datos }) => {
   ];
 
   return (
-    <div className="w-full">
-      {" "}
+    <div className="w-full overflow-x-auto">
       <Chart
         options={options}
         series={series}
         type="bar"
-        width="100%" // Adjust chart width as needed
-        height={500} // Adjust chart height as needed
+        // width="1000"
+        className="w-[100%] max-md:w-[1000px]"
+        height={500}
       />
     </div>
   );

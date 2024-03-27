@@ -205,7 +205,7 @@ export const Home = () => {
       </div>
 
       <div className="w-full">
-        <div className="border-slate-200 border-[1px] rounded-xl shadow py-10 max-md:py-5 px-5 max-md:px-2 flex flex-col items-center w-full">
+        <div className="border-slate-200 border-[1px] rounded-xl shadow py-10 max-md:py-5 px-5 max-md:px-2 flex flex-col items-center w-full  overflow-x-scroll">
           <div className="font-bold text-slate-700 mb-16 max-md:text-sm">
             GRAFICO DE REMUNERACIONES
           </div>
