@@ -22,14 +22,14 @@ import { Accesorios } from "./routes/pages/protected/Accesorios";
 import { PreciosProvider } from "./context/PreciosProvider";
 import { ViewAbertura } from "./routes/pages/protected/ViewAbertura";
 import { GenerarPresupuesto } from "./routes/pages/protected/GenerarPresupuesto";
-//import normales
-import RutaProtegida from "./layouts/RutaProtejida";
-import "react-toastify/dist/ReactToastify.css";
-import "react-toastify/dist/ReactToastify.min.css";
 import { PresupuestoProvider } from "./context/PresupuestoProvider";
 import { ViewPresupuesto } from "./routes/pages/protected/ViewPresupuesto";
 import { ViewPdf } from "./routes/pages/protected/ViewPdf";
 import { MenuMobile } from "./components/MenuMobile";
+//import normales
+import RutaProtegida from "./layouts/RutaProtejida";
+import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function App() {
   const { isAuth } = useAuth();
@@ -40,7 +40,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route
-            element={<RutaProtegida isAllowed={!isAuth} redirectTo={"/pm"} />}
+            element={<RutaProtegida isAllowed={!isAuth} redirectTo={"/"} />}
           >
             <Route index path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -72,8 +72,6 @@ function App() {
               }
             >
               <Route index path="/" element={<Home />} />
-              {/* <Route path="/gastos" element={<Gastos />} />
-              <Route path="/ventas" element={<Ventas />} /> */}
               <Route path="/perfiles" element={<Perfiles />} />
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />

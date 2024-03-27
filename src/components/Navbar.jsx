@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
-import { BiCloset, BiMenu } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 
 const rutasuno = [
