@@ -337,8 +337,43 @@ export const TableAberturas = () => {
   };
   return (
     <div>
-      {" "}
-      <div className="overflow-x-scroll">
+      <div className="md:hidden max-md:flex  flex-col gap-4">
+        {currentResults?.map((g, index) => (
+          <div
+            className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
+            key={index}
+          >
+            <div className="flex justify-between gap-2">
+              <div className="flex flex-col gap-2">
+                <p className="text-slate-700 text-xs font-semibold uppercase">
+                  {g.tipo} {g.categoria}
+                </p>
+
+                <p className="text-slate-700 text-xs uppercase">{g.detalle}</p>
+                <p className="text-slate-700 text-xs uppercase">{g.color}</p>
+                <p className="text-slate-700 text-xs uppercase">
+                  {g.ancho}x{g.alto}
+                </p>
+              </div>
+              <div className="flex flex-col gap-4 items-center justify-center">
+                <span onClick={() => handleEliminarAbertura(g.id)}>
+                  <span className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer">
+                    ELIMINAR
+                  </span>
+                </span>
+
+                <Link
+                  to={`/aberturas/${g.id}`}
+                  className="rounded-xl uppercase shadow py-2 px-6 text-xs bg-indigo-500 text-center text-white cursor-pointer"
+                >
+                  Ver
+                </Link>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>{" "}
+      <div className="overflow-x-scroll max-md:hidden md:block">
         <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 ">
           <thead>
             <tr>
@@ -357,25 +392,13 @@ export const TableAberturas = () => {
               <tr
                 className="hover:bg-slate-100 transition-all ease-in-out duration-200 cursor-pointer"
                 key={g.id}
-                >
+              >
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
-                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.detalle}
                 </th>
-                {/*<th
-                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase max-md:block md:hidden"
-                  onClick={() => toggleDetail(index)}
-                >
-                  {showDetail[index] ? (
-                    g.detalle
-                  ) : (
-                    <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 max-md:block md:hidden">
-                      CLICK
-                    </span>
-                  )}
-                </th>*/}
                 <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   {g.color}
                 </th>
@@ -410,14 +433,14 @@ export const TableAberturas = () => {
         </table>
       </div>
       {totalPages > 1 && (
-        <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
+        <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}
               className={`mx-1 px-3 py-1 rounded ${
                 currentPage === index + 1
-                  ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
-                  : "bg-gray-100 shadow shadow-black/20"
+                  ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
+                  : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -426,14 +449,14 @@ export const TableAberturas = () => {
           ))}
         </div>
       )}
-      <div className="mt-5 flex gap-5 max-md:flex-col max-md:text-sm max-md:items-start">
+      <div className="mt-5 flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start">
         <button
-          className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl"
+          className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2"
           onClick={() => setApplyAumento(!applyAumento)}
         >
           {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
         </button>
-        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl">
+        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",
@@ -450,7 +473,7 @@ export const TableAberturas = () => {
           </PDFDownloadLink>
         </button>
         <button
-          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl"
+          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2"
           onClick={downloadAberturasAsExcel}
         >
           DESCARGAR ABERTURAS EN EXCEL

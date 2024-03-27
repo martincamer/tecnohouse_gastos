@@ -86,7 +86,51 @@ export const Perfiles = () => {
           />
         </div>
         {/* TABLA DE PERFILES  */}
-        <div className="max-md:overflow-x-scroll ">
+        <div className="md:hidden max-md:flex  flex-col gap-4 max-md:mt-3">
+          {currentResults?.map((g, index) => (
+            <div
+              className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
+              key={index}
+            >
+              <div className="flex justify-between gap-2">
+                <div className="flex flex-col gap-2">
+                  <p className="text-slate-700 text-xs font-semibold uppercase">
+                    {g.codigo}
+                  </p>
+
+                  <p className="text-slate-700 text-xs uppercase">
+                    {g.detalle}
+                  </p>
+                  <p className="text-slate-700 text-xs uppercase">{g.color}</p>
+                  <p className="text-slate-700 text-xs uppercase">
+                    {g.peso_barra_6_mts}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-4 items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleObtenerId(g.id), openEditarPerfil();
+                    }}
+                    className="border-indigo-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-indigo-100 text-center text-indigo-800 cursor-pointer"
+                  >
+                    EDITAR
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      obtenerParamsId(g.id), openModalEliminar();
+                    }}
+                    className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer"
+                  >
+                    ELIMINAR
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>{" "}
+        <div className="max-md:overflow-x-scroll max-md:hidden md:block">
           <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm bg-white">
             <thead>
               <tr>
@@ -141,7 +185,6 @@ export const Perfiles = () => {
           </table>
         </div>
         {/* FIN TABLA */}
-
         {totalPages > 1 && (
           <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
             {Array.from({ length: totalPages }).map((_, index) => (

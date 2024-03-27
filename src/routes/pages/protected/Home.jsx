@@ -113,7 +113,7 @@ export const Home = () => {
                  `}
               >
                 ultimo presupuesto del día, el total es de{" "}
-                {Number(ultimaVentaDelDia?.total).toLocaleString("es-AR", {
+                {Number(ultimaVentaDelDia?.total || 0).toLocaleString("es-AR", {
                   style: "currency",
                   currency: "ARS",
                   minimumIntegerDigits: 2,

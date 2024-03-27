@@ -35,7 +35,7 @@ const RemuneracionesColumnChart = ({ datos }) => {
         },
         style: {
           fontSize: "12px",
-          colors: "#000000", // Cambiar color del texto a negro
+          colors: "#000000", 
         },
       },
     },

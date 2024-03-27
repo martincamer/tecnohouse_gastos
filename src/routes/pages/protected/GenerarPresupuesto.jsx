@@ -17,7 +17,7 @@ export const GenerarPresupuesto = () => {
   } = usePresupuestoContext();
 
   return (
-    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-5 max-md:py-2 max-md:pb-4">
+    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-5 max-md:py-2 max-md:mb-28">
       <ToastContainer />
       <IntroPresupuesto />
       <CrearNuevosPresupuestosCats />

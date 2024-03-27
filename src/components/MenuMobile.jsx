@@ -67,7 +67,7 @@ export const MenuMobile = () => {
   const location = useLocation();
 
   return (
-    <div className="md:hidden max-md:flex justify-center gap-2 mx-auto items-center fixed bottom-0 py-3 px-3 bg-white w-full shadow border-t-[1px] border-slate-300">
+    <div className="md:hidden max-md:flex justify-center gap-2 mx-auto items-center fixed bottom-0 py-3 px-3 bg-white w-full shadow border-t-[1px] border-slate-300 z-[100]">
       {navegacion.map(({ path, icon, name }) => (
         <Link
           to={path}
