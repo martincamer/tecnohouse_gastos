@@ -29,7 +29,7 @@ export const ModalSeleccionarCantidadAccesorio = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -61,31 +61,50 @@ export const ModalSeleccionarCantidadAccesorio = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:w-full w-4/5 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-5/6 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalCantidad}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 uppercase"
+                  className="text-sm uppercase font-bold leading-6 "
                 >
                   Elegir Cantidad
                 </Dialog.Title>
 
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full">
-                  <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
-                    <thead>
+                <div className="border-slate-300 border-[1px] rounded-2xl">
+                  <table className="min-w-full w-full uppercase">
+                    <thead className="border-b-[2px] border-slate-300">
                       <tr>
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th> */}
-                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
+                        <th className="px-3 py-3 text-sm font-extrabold text-left max-md:text-xs">
                           Numero
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
+                        <th className="px-3 py-3 text-sm font-extrabold text-left max-md:text-xs">
                           Detalle
                         </th>{" "}
-                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
+                        <th className="px-3 py-3 text-sm font-extrabold text-left max-md:text-xs">
                           Categoria
                         </th>
-                        <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
+                        <th className="px-3 py-3 text-sm font-extrabold text-left max-md:text-xs">
                           Cantidad
                         </th>
                       </tr>
@@ -94,16 +113,16 @@ export const ModalSeleccionarCantidadAccesorio = ({
                       {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[20px]">
                         {productoUnicoState.id}
                       </th> */}
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[20px]">
+                      <th className="px-3 py-3 text-sm text-lefts max-md:text-xs font-normal w-[20px]">
                         {accesorioUnicoState.id}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[50px]">
+                      <th className="px-3 py-3 text-sm text-lefts max-md:text-xs font-normal w-[50px]">
                         {accesorioUnicoState.detalle}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[50px]">
+                      <th className="px-3 py-3 text-sm text-lefts max-md:text-xs font-normal w-[50px]">
                         {accesorioUnicoState.categoria}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs w-[100px]">
+                      <th className="px-3 py-3 text-sm text-lefts max-md:text-xs font-normal w-[100px]">
                         <input
                           onChange={(e) => setCantidad(e.target.value)}
                           type="number"
@@ -125,18 +144,11 @@ export const ModalSeleccionarCantidadAccesorio = ({
                       ),
                         closeModalCantidad();
                     }}
-                    className="bg-secondary text-white py-2 px-2 rounded font-bold hover:shadow-md hover:shadow-black/20 hover:translate-x-1 transition-all ease-in-out uppercase text-sm"
+                    className="bg-indigo-100 text-indigo-600 py-3 px-5 rounded-xl uppercase text-sm"
                   >
                     Crear accesorio
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer uppercase"
-                  onClick={closeModalCantidad}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

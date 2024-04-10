@@ -1,10 +1,10 @@
 export const Search = ({ search, searcher, variable }) => {
   return (
-    <div className="flex justify-between items-center bg-white max-md:text-sm border-[1px] border-slate-300 rounded-xl shadow py-2 px-3 w-[450px] placeholder:text-gray-500/90 outline-none max-md:w-[250px]">
+    <div className="flex justify-between items-center bg-white max-md:text-sm border-[1px] border-slate-300 rounded-xl shadow py-1.5 px-3 text-sm uppercase placeholder:text-gray-500/90 outline-none">
       <input
         value={search}
         onChange={searcher}
-        className="w-full placeholder:text-gray-500/90 outline-none"
+        className="w-full placeholder:text-gray-500/90 outline-none uppercase"
         placeholder={`${variable}`}
       />
 

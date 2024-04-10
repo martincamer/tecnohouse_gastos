@@ -55,7 +55,7 @@ export const ModalSeleccionarPerfil = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -88,9 +88,31 @@ export const ModalSeleccionarPerfil = ({
               leaveTo="opacity-0 scale-95"
             >
               <div className="w-3/4 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalProductos}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 uppercase"
+                  className="font-bold leading-6 text-gray-700 text-sm uppercase"
                 >
                   Elegir Perfil
                 </Dialog.Title>
@@ -100,64 +122,58 @@ export const ModalSeleccionarPerfil = ({
                   searcher={searcher}
                 />
 
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
-                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase">
-                    <thead>
+                <div className="border-slate-300 border-[1px] rounded-2xl">
+                  <table className="min-w-full w-full uppercase">
+                    <thead className="border-b-[2px] border-slate-300">
                       <tr>
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th> */}
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Codigo
                         </th>
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Detalle
                         </th>
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Color
                         </th>
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Categoria
                         </th>
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Peso Barra
                         </th>
-                        <th className="p-2 max-md:text-xs text-sm font-extrabold text-center">
+                        <th className="px-2 py-4 max-md:text-xs text-sm font-extrabold text-center">
                           Seleccionar
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-slate-300 divide-y-[1px]">
                       {currentResults?.map((c) => (
                         <tr key={c.id}>
-                          {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
-                            {c.id}
-                          </th> */}
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm text-center max-md:text-xs font-bold">
                             {c.codigo}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm text-center max-md:text-xs font-normal">
                             {c.detalle}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm text-center max-md:text-xs font-normal">
                             {c.color}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm text-center max-md:text-xs font-normal">
                             {c.categoria}
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm text-center max-md:text-xs font-normal">
                             {c?.peso_barra_6_mts?.toLocaleString("arg", {
-                              minimumFractionDigits: 2,
+                              minimumFractionDigits: 3,
                             })}{" "}
                             kg
                           </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm w-[120px] text-center max-md:text-xs">
+                          <th className="py-4 px-3 text-sm w-[120px] text-center max-md:text-xs font-normal">
                             <Link
                               onClick={() => {
                                 openModalCantidad(),
                                   handleSeleccionarProducto(c.id);
                               }}
-                              className="bg-secondary py-1 px-2 text-center text-white rounded-md max-md:text-xs"
+                              className="bg-green-100 text-green-700 py-2 px-4 rounded-xl shadow-md"
                             >
                               Seleccionar
                             </Link>
@@ -166,38 +182,32 @@ export const ModalSeleccionarPerfil = ({
                       ))}
                     </tbody>
                   </table>
-
-                  {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
-                      {Array.from({ length: totalPages }).map((_, index) => (
-                        <button
-                          key={index}
-                          className={`mx-1 px-3 py-1 rounded ${
-                            currentPage === index + 1
-                              ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
-                              : "bg-gray-100 shadow shadow-black/20"
-                          }`}
-                          onClick={() => handlePageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                    </div>
-                  )}
                 </div>
+
+                {totalPages > 1 && (
+                  <div className="flex flex-wrap justify-center mt-4 mb-4 gap-1">
+                    {Array.from({ length: totalPages }).map((_, index) => (
+                      <button
+                        key={index}
+                        className={`mx-1 px-3 py-1 rounded ${
+                          currentPage === index + 1
+                            ? "bg-green-500 text-white rounded-xl"
+                            : "bg-white text-slate-700 border-[1px] border-slate-300 rounded-xl"
+                        }`}
+                        onClick={() => handlePageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
                 <ModalSeleccionarCantidadPerfil
                   isOpenModal={isOpenModal}
                   closeModalCantidad={closeModalCantidad}
                   openModalCantidad={openModalCantidad}
                   closeModalProductos={closeModalProductos}
                 />
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer uppercase"
-                  onClick={closeModalProductos}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

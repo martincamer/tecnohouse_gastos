@@ -107,10 +107,8 @@ export const ModalCrearNuevaAbertura = () => {
     }
   }, [precios, vidrioSeleccionado]);
 
-  console.log(vidrioSeleccionado);
   return (
     <Menu as="div" className="z-50">
-      <ToastContainer />
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -126,7 +124,7 @@ export const ModalCrearNuevaAbertura = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-40" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -158,149 +156,188 @@ export const ModalCrearNuevaAbertura = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-3/5 max-md:w-full h-[70vh] overflow-y-scroll inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+              <div className="w-4/5 max-md:w-full inline-block p-6 my-8 text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModal}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-base leading-6 text-gray-700 font-bold underline"
+                  className="text-sm leading-6 text-gray-700 font-bold underline uppercase"
                 >
-                  CREAR NUEVA ABERTURA
+                  CARGAR NUEVA ABERTURA PARA EL SISTEMA
                 </Dialog.Title>
-                <div className="max-md:border-none max-md:shadow-none max-md:px-2 max-md:py-1 border-[1px] border-slate-300 rounded-xl shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10">
-                  <form className="flex flex-col gap-6">
-                    <div className="flex flex-col gap-2 w-full">
-                      <label
-                        className="font-semibold text-gray-700 max-md:text-sm"
-                        htmlFor=""
-                      >
-                        DETALLE
-                      </label>
-                      <input
-                        name="detalle"
-                        onChange={handleChange}
-                        value={detalle}
-                        placeholder="DETALLE DE LA ABERTURA - PUERTA FRENTE ETC"
-                        className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-2 w-full">
-                      <label
-                        className="font-semibold text-gray-700 max-md:text-sm"
-                        htmlFor=""
-                      >
-                        COLOR
-                      </label>
-                      <select
-                        name="color"
-                        onChange={handleChange}
-                        value={color}
-                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
-                      >
-                        <option>SELECCIONAR</option>
-                        <option value={"blanco"}>BLANCO</option>
-                        <option value={"negro"}>NEGRO</option>
-                        <option value={"natural"}>NATURAL</option>
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col gap-2 w-full">
-                      <label
-                        className="font-semibold text-gray-700 max-md:text-sm"
-                        htmlFor=""
-                      >
-                        CATEGORIA
-                      </label>
-                      <select
-                        name="categoria"
-                        onChange={handleChange}
-                        value={categoria}
-                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
-                      >
-                        <option>SELECCIONAR</option>
-                        <option value={"herrero"}>HERRERO</option>
-                        <option value={"modena"}>MODENA</option>
-                        <option value={"modena a30"}>MODENA A30</option>
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col gap-2 w-full">
-                      <label
-                        className="font-semibold text-gray-700 max-md:text-sm"
-                        htmlFor=""
-                      >
-                        TIPO
-                      </label>
-                      <select
-                        name="tipo"
-                        onChange={handleChange}
-                        value={tipo}
-                        className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
-                      >
-                        <option>SELECCIONAR</option>
-                        <option value={"puertas"}>PUERTAS</option>
-                        <option value={"ventanas"}>VENTANAS</option>
-                        <option value={"rajas de abrir"}>RAJAS DE ABRIR</option>
-                        <option value={"paños fijo"}>PAÑOS FIJO</option>
-                        <option value={"portones"}>PORTONES</option>
-                        <option value={"puertas de abrir"}>
-                          PUERTAS DE ABRIR
-                        </option>
-                        <option value={"celosias de abrir"}>
-                          CELOSIAS DE ABRIR
-                        </option>{" "}
-                        <option value={"celosias corredizas"}>
-                          CELOSIAS CORREDIZAS
-                        </option>
-                      </select>
-                    </div>
-
-                    <div className="flex flex-row gap-2 w-full">
-                      <div className="flex flex-col gap-2">
+                <div>
+                  <form className="flex flex-col gap-6 text-sm">
+                    <div className="grid grid-cols-3 gap-5">
+                      <div className="flex flex-col gap-2 w-full">
                         <label
                           className="font-semibold text-gray-700 max-md:text-sm"
                           htmlFor=""
                         >
-                          ANCHO
+                          DETALLE
                         </label>
                         <input
-                          name="ancho"
+                          name="detalle"
                           onChange={handleChange}
-                          value={ancho}
-                          placeholder="ANCHO"
+                          value={detalle}
+                          placeholder="DETALLE DE LA ABERTURA - PUERTA FRENTE ETC"
                           className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
                         />
                       </div>
 
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-2 w-full">
                         <label
                           className="font-semibold text-gray-700 max-md:text-sm"
                           htmlFor=""
                         >
-                          ALTO
+                          COLOR
                         </label>
-                        <input
-                          name="alto"
+                        <select
+                          name="color"
                           onChange={handleChange}
-                          value={alto}
-                          placeholder="ALTO"
-                          className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
-                        />
+                          value={color}
+                          className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
+                        >
+                          <option>SELECCIONAR</option>
+                          <option value={"blanco"}>BLANCO</option>
+                          <option value={"negro"}>NEGRO</option>
+                          <option value={"natural"}>NATURAL</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-2 w-full">
+                        <label
+                          className="font-semibold text-gray-700 max-md:text-sm"
+                          htmlFor=""
+                        >
+                          CATEGORIA
+                        </label>
+                        <select
+                          name="categoria"
+                          onChange={handleChange}
+                          value={categoria}
+                          className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
+                        >
+                          <option>SELECCIONAR</option>
+                          <option value={"herrero"}>HERRERO</option>
+                          <option value={"modena"}>MODENA</option>
+                          <option value={"modena a30"}>MODENA A30</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-2 w-full">
+                        <label
+                          className="font-semibold text-gray-700 max-md:text-sm"
+                          htmlFor=""
+                        >
+                          TIPO
+                        </label>
+                        <select
+                          name="tipo"
+                          onChange={handleChange}
+                          value={tipo}
+                          className="py-3 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
+                        >
+                          <option>SELECCIONAR</option>
+                          <option value={"puertas"}>PUERTAS</option>
+                          <option value={"ventanas"}>VENTANAS</option>
+                          <option value={"rajas de abrir"}>
+                            RAJAS DE ABRIR
+                          </option>
+                          <option value={"paños fijo"}>PAÑOS FIJO</option>
+                          <option value={"portones"}>PORTONES</option>
+                          <option value={"puertas de abrir"}>
+                            PUERTAS DE ABRIR
+                          </option>
+                          <option value={"celosias de abrir"}>
+                            CELOSIAS DE ABRIR
+                          </option>{" "}
+                          <option value={"celosias corredizas"}>
+                            CELOSIAS CORREDIZAS
+                          </option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-row gap-2 w-full">
+                        <div className="flex flex-col gap-2">
+                          <label
+                            className="font-semibold text-gray-700 max-md:text-sm"
+                            htmlFor=""
+                          >
+                            ANCHO
+                          </label>
+                          <input
+                            name="ancho"
+                            onChange={handleChange}
+                            value={ancho}
+                            placeholder="ANCHO"
+                            className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
+                          />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                          <label
+                            className="font-semibold text-gray-700 max-md:text-sm"
+                            htmlFor=""
+                          >
+                            ALTO
+                          </label>
+                          <input
+                            name="alto"
+                            onChange={handleChange}
+                            value={alto}
+                            placeholder="ALTO"
+                            className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
+                          />
+                        </div>
                       </div>
                     </div>
-
                     <div>
                       <button
                         type="button"
                         onClick={() => openModalProductos()}
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
+                        className="text-sm bg-indigo-100 py-2 px-6 rounded-xl text-indigo-600 max-md:text-sm flex gap-2 items-center"
                       >
                         SELECCIONAR PERFILES
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776"
+                          />
+                        </svg>
                       </button>
                     </div>
 
-                    <div className="overflow-x-scroll">
-                      <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
-                        <thead>
+                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                      <table className="min-w-full w-full uppercase">
+                        <thead className="border-b-[2px] border-slate-300">
                           <tr>
                             <th className="p-3 max-md:text-xs">CODIGO</th>
                             <th className="p-3 max-md:text-xs">COLOR</th>
@@ -311,37 +348,40 @@ export const ModalCrearNuevaAbertura = () => {
                             <th className="p-3 max-md:text-xs">ELIMINAR</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y-[1px] divide-slate-300">
                           {productoSeleccionado?.map((p) => (
                             <tr key={p.id}>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.codigo}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.color}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.detalle}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.categoria}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.cantidad}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {" "}
                                 {p.totalKG.toLocaleString("arg", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
-                              <th
-                                onClick={() => deleteProducto(p.id)}
-                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
-                              >
-                                ELIMINAR
+                              <th className="p-3 max-md:text-xs text-sm uppercase cursor-pointer">
+                                <button
+                                  onClick={() => deleteProducto(p.id)}
+                                  type="button"
+                                  className="bg-red-100 text-red-700 text-sm font-normal px-4 py-2 rounded-xl"
+                                >
+                                  ELIMINAR
+                                </button>{" "}
                               </th>
                             </tr>
                           ))}
@@ -353,15 +393,29 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={openModalAccesorios}
                         type="button"
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
+                        className="text-sm bg-indigo-100 py-2 px-6 rounded-xl text-indigo-600 max-md:text-sm flex gap-2 items-center"
                       >
                         SELECCIONAR ACCESORIOS
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776"
+                          />
+                        </svg>
                       </button>
                     </div>
 
-                    <div className="overflow-x-scroll">
-                      <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
-                        <thead>
+                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                      <table className="min-w-full w-full uppercase">
+                        <thead className="border-b-[2px] border-slate-300">
                           <tr>
                             <th className="p-3 max-md:text-xs">NUMERO</th>
                             <th className="p-3 max-md:text-xs">DETALLE</th>
@@ -372,26 +426,29 @@ export const ModalCrearNuevaAbertura = () => {
                             <th className="p-3 max-md:text-xs">Eliminar</th>
                           </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="divide-y-[1px] divide-slate-300">
                           {accesorioSeleccionado?.map((p) => (
                             <tr key={p.id}>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.id}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.detalle}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.categoria}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {p.cantidad}
                               </th>
-                              <th
-                                onClick={() => deleteAccesorio(p.id)}
-                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
-                              >
-                                ELIMINAR
+                              <th className="p-3 max-md:text-xs text-sm uppercase cursor-pointer">
+                                <button
+                                  onClick={() => deleteAccesorio(p.id)}
+                                  type="button"
+                                  className="bg-red-100 text-red-700 text-sm font-normal px-4 py-2 rounded-xl"
+                                >
+                                  ELIMINAR
+                                </button>{" "}
                               </th>
                             </tr>
                           ))}
@@ -403,15 +460,29 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalVidrios()}
-                        className="text-base bg-indigo-500 py-1 px-6 rounded-lg shadow shadow-black/20 text-white font-semibold max-md:text-sm"
+                        className="text-sm bg-indigo-100 py-2 px-6 rounded-xl text-indigo-600 max-md:text-sm flex gap-2 items-center"
                       >
                         SELECCIONAR VIDRIO POR METRO
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 0 0-1.883 2.542l.857 6a2.25 2.25 0 0 0 2.227 1.932H19.05a2.25 2.25 0 0 0 2.227-1.932l.857-6a2.25 2.25 0 0 0-1.883-2.542m-16.5 0V6A2.25 2.25 0 0 1 6 3.75h3.879a1.5 1.5 0 0 1 1.06.44l2.122 2.12a1.5 1.5 0 0 0 1.06.44H18A2.25 2.25 0 0 1 20.25 9v.776"
+                          />
+                        </svg>
                       </button>
                     </div>
 
-                    <div className="overflow-x-scroll">
-                      <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 text-center">
-                        <thead>
+                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                      <table className="min-w-full w-full uppercase">
+                        <thead className="border-b-[2px] border-slate-300">
                           <tr>
                             <th className="p-3 max-md:text-xs">CODIGO</th>
                             <th className="p-3 max-md:text-xs">ANCHO</th>
@@ -424,30 +495,33 @@ export const ModalCrearNuevaAbertura = () => {
                         <tbody>
                           {vidrioSeleccionado.map((v) => (
                             <tr>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.id}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {Number(v.ancho).toLocaleString("es-ar", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {Number(v.alto).toLocaleString("es-ar", {
                                   minimumFractionDigits: 2,
                                 })}
                               </th>
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.cantidad}
                               </th>{" "}
-                              <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                              <th className="p-3 max-md:text-xs font-medium text-sm uppercase">
                                 {v.categoria}
                               </th>
-                              <th
-                                onClick={() => deleteVidrio(v.id)}
-                                className="border-[1px] border-red-300 p-3 max-md:text-xs text-sm uppercase cursor-pointer bg-red-100 text-red-600 font-semibold"
-                              >
-                                ELIMINAR
+                              <th className="p-3 max-md:text-xs text-sm uppercase cursor-pointer">
+                                <button
+                                  type="button"
+                                  onClick={() => deleteVidrio(p.id)}
+                                  className="bg-red-100 text-red-700 text-sm font-normal px-4 py-2 rounded-xl"
+                                >
+                                  ELIMINAR
+                                </button>{" "}
                               </th>
                             </tr>
                           ))}
@@ -518,9 +592,23 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         onClick={() => handleSubmitAbertura()}
                         type="button"
-                        className="font-bold bg-indigo-500 text-white py-2 px-8 rounded-lg text-center shadow max-md:text-sm"
+                        className="font-bold bg-indigo-500 text-white py-3 px-8 rounded-xl text-center shadow max-md:text-sm flex gap-2 items-center"
                       >
                         CREAR NUEVA ABERTURA
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                          />
+                        </svg>
                       </button>
                     </div>
                   </form>
@@ -539,13 +627,6 @@ export const ModalCrearNuevaAbertura = () => {
                   closeModalProductos={closeModalVidrios}
                   isOpenProductos={isOpenVidrios}
                 />
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeModal()}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

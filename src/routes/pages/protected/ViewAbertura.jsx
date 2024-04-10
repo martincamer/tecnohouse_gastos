@@ -10,6 +10,8 @@ export const ViewAbertura = () => {
   const { precios } = usePreciosContext();
   const params = useParams();
 
+  console.log(abertura);
+
   useEffect(() => {
     const obtenerData = async () => {
       const res = await obtenerUnicaAbertura(params.id);
@@ -119,8 +121,6 @@ export const ViewAbertura = () => {
     if (precioEncontrado) {
       const precioNumber = Number(precioEncontrado.precio);
       const totalMetros = Number(vidrio.metrosCuadrados);
-      // const ancho = Number(vidrio.ancho);
-      // const alto = Number(vidrio.alto);
 
       // Calcula el precio final multiplicando cantidad, ancho, alto y precio
       const precioFinal = totalMetros * precioNumber;

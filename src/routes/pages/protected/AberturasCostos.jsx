@@ -1,4 +1,3 @@
-import { AberturasIntro } from "../../../components/aberturas/AberturasIntro";
 import { CrearAberturasCategorias } from "../../../components/aberturas/CrearAberturasCategorias";
 import { ModalCrearNuevaAbertura } from "../../../components/aberturas/ModalCrearAbertura";
 import { TableAberturas } from "../../../components/aberturas/TableAberturas";
@@ -8,6 +7,8 @@ import { Search } from "../../../components/ui/Search";
 import { SearchSelectCategory } from "../../../components/ui/SearchSelectCategory";
 import { SearchSelectTipo } from "../../../components/ui/SearchSelectTipo";
 import { useAberturasContext } from "../../../context/AberturasProvider";
+import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
+import { usePerfilesContex } from "../../../context/PerfilesProvider";
 
 export const AberturasCostos = () => {
   const {
@@ -19,37 +20,177 @@ export const AberturasCostos = () => {
     tipoSeleccionado,
     colorSeleccionado,
     handleColorChange,
+    obtenerAberturas,
   } = useAberturasContext();
+
+  const { perfiles } = usePerfilesContex();
+  const { accesorios } = useAccesoriosContext();
+
+  const fechaActual = new Date();
+
   return (
-    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-5 max-md:py-0 max-md:pb-24">
-      <AberturasIntro />
+    <section className="w-full py-24 px-10 max-md:px-4 flex flex-col gap-5 max-md:py-0 max-md:pb-24">
+      {/* <AberturasIntro /> */}
+      <div className="grid grid-cols-4 gap-4">
+        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+          <div>
+            <p class="text-sm text-gray-500 uppercase max-md:text-xs">
+              Total aberturas Cargadas en el sistema
+            </p>
+
+            <p class="text-2xl font-medium text-gray-900 max-md:text-base">
+              {obtenerAberturas.length}
+            </p>
+          </div>
+
+          <div className="flex">
+            <div class="mt-1 flex gap-1 text-green-600 bg-green-200 py-2 rounded-xl px-4 items-center justify-start">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
+              </svg>
+
+              <p class="flex gap-2 text-xs">
+                <span class="font-medium">
+                  {" "}
+                  {Number(obtenerAberturas.length / 10).toFixed(2)}%{" "}
+                </span>
+
+                <span class="text-gray-500"> PORCENTAJE FINAL GENERADO </span>
+              </p>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+          <div>
+            <p class="text-sm text-gray-500 uppercase max-md:text-xs">
+              Total perfiles cargados en el sistema
+            </p>
+
+            <p class="text-2xl font-medium text-gray-900 max-md:text-base">
+              {perfiles.length}
+            </p>
+          </div>
+
+          <div className="flex">
+            <div class="mt-1 flex gap-1 text-green-600 bg-green-200 py-2 rounded-xl px-4 items-center justify-start">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
+              </svg>
+
+              <p class="flex gap-2 text-xs">
+                <span class="font-medium">
+                  {" "}
+                  {Number(perfiles.length / 10).toFixed(2)}%{" "}
+                </span>
+
+                <span class="text-gray-500"> PORCENTAJE FINAL GENERADO </span>
+              </p>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+          <div>
+            <p class="text-sm text-gray-500 uppercase max-md:text-xs">
+              Total accesorios cargados en el sistema
+            </p>
+
+            <p class="text-2xl font-medium text-gray-900 max-md:text-base">
+              {accesorios.length}
+            </p>
+          </div>
+
+          <div className="flex">
+            <div class="mt-1 flex gap-1 text-green-600 bg-green-200 py-2 rounded-xl px-4 items-center justify-start">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                />
+              </svg>
+
+              <p class="flex gap-2 text-xs">
+                <span class="font-medium">
+                  {" "}
+                  {Number(accesorios.length / 10).toFixed(2)}%{" "}
+                </span>
+
+                <span class="text-gray-500"> PORCENTAJE FINAL GENERADO </span>
+              </p>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+          <div>
+            <p class="text-sm text-gray-500 uppercase max-md:text-xs ">
+              MES Y DIA
+            </p>
+
+            <p class="text-2xl font-medium text-gray-900 max-md:text-base uppercase">
+              {fechaActual.toLocaleString("es-AR", { month: "long" })}
+            </p>
+          </div>
+
+          <div className="flex">
+            <div class="mt-1 flex gap-1 text-green-600 bg-green-200 py-2 rounded-xl px-4 items-center justify-start">
+              <p class="flex gap-2 text-xs">
+                <span class="font-medium">
+                  DIA Y HORA :{" "}
+                  {fechaActual.toLocaleString("es-AR", { hour12: "" })}
+                </span>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
       <CrearAberturasCategorias /*results={results}*/ />
-      <div className="border-slate-300 rounded-xl border-[1px] shadow py-5 px-10 flex gap-12 items-center bg-white overflow-x-scroll">
-        <div className="max-md:w-full">
-          <Search
-            variable={"Buscar por el detalle..."}
-            search={search}
-            searcher={searcher}
-          />
-        </div>
-        <div className="w-full">
-          <SearchSelectCategory
-            categoriaSeleccionada={categoriaSeleccionada}
-            handleCategoriaChange={handleCategoriaChange}
-          />
-        </div>
-        <div className="w-full">
-          <SearchSelectTipo
-            handleTipoChange={handleTipoChange}
-            tipoSeleccionado={tipoSeleccionado}
-          />
-        </div>
-        <div className="w-full">
-          <ColorFilter
-            colorSeleccionado={colorSeleccionado}
-            handleColorChange={handleColorChange}
-          />
-        </div>
+      <div className="grid grid-cols-4 gap-12 items-center">
+        <Search
+          variable={"Buscar por el detalle..."}
+          search={search}
+          searcher={searcher}
+        />
+        <SearchSelectCategory
+          categoriaSeleccionada={categoriaSeleccionada}
+          handleCategoriaChange={handleCategoriaChange}
+        />
+        <SearchSelectTipo
+          handleTipoChange={handleTipoChange}
+          tipoSeleccionado={tipoSeleccionado}
+        />
+        <ColorFilter
+          colorSeleccionado={colorSeleccionado}
+          handleColorChange={handleColorChange}
+        />
       </div>
       <TableAberturas />
       <ModalCrearNuevaAbertura />

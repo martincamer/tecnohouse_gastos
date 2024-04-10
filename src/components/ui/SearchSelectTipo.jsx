@@ -4,7 +4,7 @@ export const SearchSelectTipo = ({ handleTipoChange, tipoSeleccionado }) => {
       <select
         value={tipoSeleccionado}
         onChange={handleTipoChange}
-        className="bg-white text-sm border-[1px] border-slate-300 text-gray-700 font-bold rounded-xl shadow-black/20 shadow-md py-3 px-3 w-[230px] placeholder:text-gray-500/90 outline-none max-md:w-[160px]  max-md:text-xs"
+        className="bg-white py-2 px-4 text-sm uppercase border-[1px] border-slate-300 rounded-xl w-full"
       >
         <option>TODOS LOS TIPOS</option>
         <option value="ventanas">VENTANAS</option>

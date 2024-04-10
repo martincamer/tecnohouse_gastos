@@ -9,7 +9,6 @@ export const ModalSeleccionarCantidadPerfil = ({
   closeModalProductos,
 }) => {
   const [cantidad, setCantidad] = useState(0);
-  const [precio, setPrecio] = useState(0);
   const [largo, setLargo] = useState(0);
 
   const [totalKgFinal, setTotalKgFinal] = useState(0);
@@ -34,7 +33,7 @@ export const ModalSeleccionarCantidadPerfil = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -66,21 +65,40 @@ export const ModalSeleccionarCantidadPerfil = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-4/5 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="w-5/6 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalCantidad}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 uppercase"
+                  className="text-sm uppercase font-bold leading-6 "
                 >
-                  Elegir Cantidad Producto
+                  Elegir Cantidad perfil
                 </Dialog.Title>
 
-                <div className="overflow-x-scroll border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full">
-                  <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
-                    <thead>
+                <div className="border-slate-300 border-[1px] rounded-2xl">
+                  <table className="min-w-full w-full uppercase">
+                    <thead className="border-b-[2px] border-slate-300">
                       <tr>
-                        {/* <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th> */}
                         <th className="p-2 text-sm font-extrabold text-center max-md:text-xs">
                           Codigo
                         </th>
@@ -105,17 +123,17 @@ export const ModalSeleccionarCantidadPerfil = ({
                       {/* <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
                         {productoUnicoState.id}
                       </th> */}
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[20px]">
+                      <th className="p-2 text-sm max-md:text-xs text-center w-[20px]">
                         {productoUnicoState.codigo}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[50px]">
+                      <th className="p-2 text-sm max-md:text-xs text-center w-[50px]">
                         {productoUnicoState.detalle}
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[20px]">
+                      <th className="p-2 text-sm max-md:text-xs text-center w-[20px]">
                         {productoUnicoState.color}
                       </th>
 
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[50px]">
+                      <th className="p-2 text-sm max-md:text-xs text-center w-[50px]">
                         <div className="flex gap-5 items-center justify-center">
                           Peso neto -{" "}
                           {productoUnicoState?.peso_barra_6_mts?.toLocaleString(
@@ -133,7 +151,7 @@ export const ModalSeleccionarCantidadPerfil = ({
                           />
                         </div>
                       </th>
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[100px]">
+                      <th className=" p-2 text-sm max-md:text-xs text-center w-[100px]">
                         <input
                           onChange={(e) => setCantidad(e.target.value)}
                           type="number"
@@ -142,7 +160,7 @@ export const ModalSeleccionarCantidadPerfil = ({
                         />
                       </th>
 
-                      <th className="border-[1px] border-gray-300 p-2 text-sm max-md:text-xs text-center w-[100px]">
+                      <th className="p-2 text-sm max-md:text-xs text-center w-[100px]">
                         <input
                           onChange={(e) => setLargo(e.target.value)}
                           type="text"
@@ -155,28 +173,10 @@ export const ModalSeleccionarCantidadPerfil = ({
                 </div>
                 <div>
                   <button
-                    // onClick={() => {
-                    //   addToPerfiles(
-                    //     productoUnicoState.id,
-                    //     productoUnicoState.codigo,
-                    //     productoUnicoState.color,
-                    //     productoUnicoState.detalle,
-                    //     productoUnicoState.categoria,
-                    //     cantidad,
-                    //     totalKgFinal * cantidad,
-                    //     largo
-                    //   ),
-                    //     closeModalCantidad();
-                    // }}
                     onClick={() => {
-                      // const cantidad = parseInt(
-                      //   productoUnicoState.cantidad,
-                      //   10
-                      // );
                       const totalKG = parseFloat(totalKgFinal);
                       const largoSeleccionado = parseFloat(largo); // Assuming largo is a property of productoUnicoState
 
-                      // Calculate total KG for the given length and quantity
                       const totalKGForItem =
                         (largo / 1000) * cantidad * totalKG;
 
@@ -187,24 +187,17 @@ export const ModalSeleccionarCantidadPerfil = ({
                         productoUnicoState.detalle,
                         productoUnicoState.categoria,
                         cantidad,
-                        totalKGForItem, // Pass the calculated totalKGForItem instead of subtotal
+                        totalKGForItem,
                         largoSeleccionado
                       );
 
                       closeModalCantidad();
                     }}
-                    className="bg-secondary text-white py-2 px-2 rounded font-bold hover:shadow-md hover:shadow-black/20 hover:translate-x-1 transition-all ease-in-out uppercase text-sm"
+                    className="bg-indigo-100 text-indigo-600 py-3 px-5 rounded-xl uppercase text-sm"
                   >
                     Crear producto facturar
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer uppercase"
-                  onClick={closeModalCantidad}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

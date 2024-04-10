@@ -54,7 +54,7 @@ export const ModalSeleccionarVidrio = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -86,18 +86,35 @@ export const ModalSeleccionarVidrio = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:w-full w-3/4 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-5/6 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalProductos}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 uppercase"
+                  className="text-sm uppercase font-bold leading-6 text-gray-700"
                 >
                   Elegir Vidrio / en cm
                 </Dialog.Title>
-                {/* <Search
-                  variable={"Buscar por el codigo o detalle..."}
-                  search={search}
-                  searcher={searcher}
-                /> */}
 
                 <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow max-md:py-5 flex gap-6 w-full py-10 px-10 overflow-y-scroll">
                   <div className="flex gap-2 items-center">
@@ -171,7 +188,7 @@ export const ModalSeleccionarVidrio = ({
                 </div>
                 <div>
                   <button
-                    className="bg-indigo-500 py-2 px-10 shadow shadow-black/10 rounded-lg text-white uppercase font-semibold max-md:text-sm"
+                    className="bg-indigo-100 text-indigo-500 rounded-xl py-3 px-5 uppercase text-sm"
                     type="button"
                     onClick={() => {
                       const anchoMeters = parseFloat(ancho) / 1000; // Convert width to meters
@@ -200,86 +217,6 @@ export const ModalSeleccionarVidrio = ({
                     Crear vidrio
                   </button>
                 </div>
-                {/* <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full h-[30vh] overflow-y-scroll">
-                  <table className="border-[1px]  p-[5px] table-auto w-full rounded uppercase">
-                    <thead>
-                      <tr>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Numero
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Codigo
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Detalle
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Color
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Categoria
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Peso Barra
-                        </th>
-                        <th className="p-2 text-sm font-extrabold text-center">
-                          Seleccionar
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {perfiles.map((c) => (
-                        <tr key={c.id}>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center w-[20px]">
-                            {c.id}
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c.codigo}
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c.detalle}
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c.color}
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c.categoria}
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm text-center">
-                            {c?.peso_barra_6_mts?.toLocaleString("arg", {
-                              minimumFractionDigits: 2,
-                            })}{" "}
-                            kg
-                          </th>
-                          <th className="border-[1px] border-gray-300 p-2 text-sm w-[120px] text-center">
-                            <Link
-                              onClick={() => {
-                                openModalCantidad(),
-                                  handleSeleccionarProducto(c.id);
-                              }}
-                              className="bg-secondary py-1 px-2 text-center text-white rounded-md"
-                            >
-                              Seleccionar
-                            </Link>
-                          </th>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table> */}
-                {/* </div> */}
-                {/* <ModalSeleccionarCantidadPerfil
-                  isOpenModal={isOpenModal}
-                  closeModalCantidad={closeModalCantidad}
-                  openModalCantidad={openModalCantidad}
-                  closeModalProductos={closeModalProductos}
-                /> */}
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer uppercase"
-                  onClick={closeModalProductos}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

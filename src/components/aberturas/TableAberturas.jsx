@@ -18,6 +18,8 @@ export const TableAberturas = () => {
 
   const { accesorios } = useAccesoriosContext();
 
+  const [showPrecioSinNada, setShowPrecioSinNada] = useState(false);
+
   // Accesorios seleccionados precio final
   const calculateTotalPrice = (accesoriosSelect, accesorios) => {
     return accesoriosSelect.map((item) => {
@@ -44,8 +46,6 @@ export const TableAberturas = () => {
     const accesoriosSelect = abertura.datos.accesoriosSelect;
     return calculateTotalPrice(accesoriosSelect, accesorios);
   });
-
-  console.log(obtenerAberturas);
 
   const calculateTotalPriceTwo = (perfilesSelect, precios, vidrioSelect) => {
     // Calculate total KG for perfilesSelect items by multiplying cantidad, totalKG, and precio
@@ -197,7 +197,7 @@ export const TableAberturas = () => {
     setCurrentPage(newPage);
   };
 
-  const [applyAumento, setApplyAumento] = useState(true);
+  const [applyAumento, setApplyAumento] = useState(false);
 
   const aberturasConPreciosFinales = resultados.map((abertura) => {
     const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
@@ -271,14 +271,25 @@ export const TableAberturas = () => {
       return total + parseFloat(precio.precio);
     }, 0);
 
+    const precioSinNada =
+      vidriosPrecioTotal + accesoriosPrecioTotal + perfilesPrecioTotal;
+
     const precioFinal =
       vidriosPrecioTotal +
       accesoriosPrecioTotal +
       perfilesPrecioTotal +
       sumaPrecios;
 
-    // Calcular el 40% de totalConAumento
-    const totalConAumento = applyAumento ? precioFinal * 1.4 : precioFinal;
+    // Calcular el total dependiendo de applyAumento y showPrecioSinNada
+    let totalConAumento;
+    if (applyAumento) {
+      totalConAumento = precioFinal * 1.4;
+    } else {
+      totalConAumento = precioFinal;
+    }
+    if (!applyAumento && showPrecioSinNada) {
+      totalConAumento = precioSinNada;
+    }
 
     return {
       ...abertura,
@@ -335,6 +346,7 @@ export const TableAberturas = () => {
     newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
     setShowDetail(newShowDetail); // Actualiza el estado
   };
+
   return (
     <div>
       <div className="md:hidden max-md:flex  flex-col gap-4">
@@ -373,58 +385,81 @@ export const TableAberturas = () => {
           </div>
         ))}
       </div>{" "}
-      <div className="overflow-x-scroll max-md:hidden md:block">
-        <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 ">
-          <thead>
+      <div className="overflow-x-scroll max-md:hidden md:block border-slate-300 border-[1px] rounded-2xl hover:shadow-md transition-all ease-linear">
+        <table className="uppercase min-w-full">
+          <thead className="border-b-[2px] border-slate-300">
             <tr>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Tipo</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Detalle</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Color</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Categoria</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Ancho</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Alto</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Eliminar</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Ver</th>
+              <th className="px-4 py-4 text-sm text-left">Tipo</th>
+              <th className="px-4 py-4 text-sm text-left">Detalle</th>
+              <th className="px-4 py-4 text-sm text-left">Color</th>
+              <th className="px-4 py-4 text-sm text-left">Categoria</th>
+              <th className="px-4 py-4 text-sm text-left">AnchoXAlto</th>
+              <th className="px-4 py-4 text-sm text-left">Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y-[1px] divide-gray-300">
             {currentResults?.map((g, index) => (
-              <tr
-                className="hover:bg-slate-100 transition-all ease-in-out duration-200 cursor-pointer"
-                key={g.id}
-              >
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+              <tr className="cursor-pointer" key={g.id}>
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
                 </th>
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.detalle}
                 </th>
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.color}
                 </th>
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.categoria}
                 </th>{" "}
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
-                  {g.ancho}
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
+                  {g.ancho}x{g.alto}
                 </th>{" "}
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
-                  {g.alto}
-                </th>
                 <th
-                  onClick={() => handleEliminarAbertura(g.id)}
-                  className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase"
+                  // onClick={() => handleEliminarAbertura(g.id)}
+                  className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2"
                 >
-                  <p className="border-red-300 border-[1px] rounded-xl shadow p-[3px] bg-red-100 text-center text-red-800 cursor-pointer">
+                  <p className="cursor-pointer py-2 px-4 rounded-xl text-red-700 bg-red-100 flex gap-2 items-center">
                     ELIMINAR
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                      />
+                    </svg>
                   </p>
-                </th>
-                <th className="border-b-[1px] border-gray-300 py-4 px-3 max-md:text-xs font-medium text-sm uppercase">
                   <Link
                     to={`/aberturas/${g.id}`}
-                    className="rounded-xl shadow py-2 px-5 bg-indigo-500 text-center text-white cursor-pointer font-bold "
+                    className="cursor-pointer py-2 px-4 rounded-xl text-indigo-700 bg-indigo-100 flex gap-2 items-center"
                   >
                     Ver
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                      />
+                    </svg>
                   </Link>
                 </th>
               </tr>
@@ -451,12 +486,52 @@ export const TableAberturas = () => {
       )}
       <div className="mt-5 flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start">
         <button
-          className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2"
+          className="text-sm uppercase bg-green-100 text-green-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          onClick={() => setShowPrecioSinNada(!showPrecioSinNada)}
+        >
+          {!showPrecioSinNada
+            ? "Mostrar Precio Sin Nada"
+            : "Mostrar Precio Final"}
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </button>
+
+        {/* Botón para aplicar o quitar el aumento del 40% */}
+        <button
+          className="text-sm uppercase bg-indigo-100 text-indigo-700 px-4 rounded-xl py-2 flex gap-2 items-center"
           onClick={() => setApplyAumento(!applyAumento)}
         >
           {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
+            />
+          </svg>
         </button>
-        <button className="border-gray-300 rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2">
+        <button className="text-sm uppercase bg-orange-100 text-orange-700 px-4 rounded-xl py-2 flex gap-2 items-center">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",
@@ -468,15 +543,42 @@ export const TableAberturas = () => {
               />
             }
           >
-            {" "}
-            DESCARGAR INVENTARIO
-          </PDFDownloadLink>
+            DESCARGAR INVENTARIO PDF
+          </PDFDownloadLink>{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
         </button>
         <button
-          className="border-gray-300 rounded-md border-[1px] py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-100 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md shadow hover:shadow-black/10 hover:border-indigo-500 max-md:rounded-xl max-md:text-xs max-md:py-2"
+          className="text-sm uppercase bg-slate-200 text-slate-700 px-4 rounded-xl py-2 flex gap-2 items-center"
           onClick={downloadAberturasAsExcel}
         >
           DESCARGAR ABERTURAS EN EXCEL
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
         </button>
       </div>
     </div>

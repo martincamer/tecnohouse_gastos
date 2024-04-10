@@ -160,53 +160,40 @@ export const AberturasProvider = ({ children }) => {
       },
     });
 
-    toast.success("Creado correctamente!", {
-      position: "top-right",
+    const tipoExistente = obtenerAberturas.find(
+      (tipo) => tipo.id === res.data.id
+    );
+
+    if (!tipoExistente) {
+      // Actualizar el estado de tipos agregando el nuevo tipo al final
+      setObtenerAberturas((prevTipos) => [...prevTipos, res.data]);
+    }
+
+    toast.success("¡Abertura creada correctamente, crea la siguiente!", {
+      position: "top-center",
       autoClose: 1500,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: {
+        padding: "10px",
+        borderRadius: "15px",
+        boxShadow: "none",
+        border: "1px solid rgb(203 213 225)",
+      },
     });
 
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
-    // } catch (error) {
-    //   console.error("Error creating invoice:", error);
-    // }
+    closeModal();
   };
 
-  //PERFILES ADDTO
-  const deleteProducto = (
-    id,
-    codigo,
-    detalle,
-    color,
-    barras,
-    totalKG,
-    categoria,
-    totalPrecioUnitario
-  ) => {
-    const itemIndex = productoSeleccionado?.findIndex(
-      (item) =>
-        item.id === id &&
-        item.codigo === codigo &&
-        item.color === color &&
-        item.detalle === detalle &&
-        item.barras === barras &&
-        item.categoria === categoria &&
-        item.totalKG === totalKG &&
-        item.totalPrecioUnitario === totalPrecioUnitario
+  const deleteProducto = (id) => {
+    const updateProducto = productoSeleccionado.filter(
+      (item) => item.id !== id
     );
-
-    if (itemIndex) {
-      const newItem = [...productoSeleccionado];
-      newItem.splice(itemIndex);
-      setProductoSeleccionado(newItem);
-    }
+    setProductoSeleccionado(updateProducto);
   };
 
   const deleteToResetProductos = () => {
@@ -251,17 +238,6 @@ export const AberturasProvider = ({ children }) => {
       return item.id === id;
     });
 
-    // const productoSeleccionadoItem =
-    // if (productoSeleccionadoItem) {
-    //   setTimeout(() => {
-    //     // setErrorProducto(false);
-    //   }, 2000);
-    //   // setErrorProducto(true);
-    // } else {
-
-    //   // setErrorProducto(false);
-    // }
-
     setProductoSeleccionado([...productoSeleccionado, newProducto]);
   };
 
@@ -287,34 +263,14 @@ export const AberturasProvider = ({ children }) => {
       return item.id === id;
     });
 
-    // const productoSeleccionadoItem =
-    // if (productoSeleccionadoItem) {
-    //   setTimeout(() => {
-    //     // setErrorProducto(false);
-    //   }, 2000);
-    //   // setErrorProducto(true);
-    // } else {
-
-    //   // setErrorProducto(false);
-    // }
-
     setAccesorioSeleccionado([...accesorioSeleccionado, newProducto]);
   };
 
-  const deleteAccesorio = (id, detalle, categoria, cantidad) => {
-    const itemIndex = accesorioSeleccionado?.findIndex(
-      (item) =>
-        item.id === id &&
-        item.detalle === detalle &&
-        item.categoria === categoria &&
-        item.cantidad === cantidad
+  const deleteAccesorio = (id) => {
+    const updatedAccesorios = accesorioSeleccionado.filter(
+      (item) => item.id !== id
     );
-
-    if (itemIndex) {
-      const newItem = [...accesorioSeleccionado];
-      newItem.splice(itemIndex);
-      setAccesorioSeleccionado(newItem);
-    }
+    setAccesorioSeleccionado(updatedAccesorios);
   };
 
   const generarIdAleatorio = () => {
@@ -350,28 +306,9 @@ export const AberturasProvider = ({ children }) => {
     }
   };
 
-  const deleteVidrio = (
-    id,
-    ancho,
-    alto,
-    cantidad,
-    metrosCuadrados,
-    categoria
-  ) => {
-    const itemIndex = vidrioSeleccionado?.findIndex(
-      (item) =>
-        item.id === id &&
-        item.ancho === ancho &&
-        item.alto === alto &&
-        item.metrosCuadrados === metrosCuadrados &&
-        item.categoria === categoria
-    );
-
-    if (itemIndex) {
-      const newItem = [...vidrioSeleccionado];
-      newItem.splice(itemIndex);
-      setVidrioSeleccionado(newItem);
-    }
+  const deleteVidrio = (id) => {
+    const updateVidrio = vidrioSeleccionado.filter((item) => item.id !== id);
+    setVidrioSeleccionado(updateVidrio);
   };
 
   useEffect(() => {
