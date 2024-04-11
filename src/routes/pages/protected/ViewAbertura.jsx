@@ -3,11 +3,29 @@ import { useParams } from "react-router-dom";
 import { obtenerUnicaAbertura } from "../../../api/aberturas.api";
 import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { usePreciosContext } from "../../../context/PreciosProvider";
+import { ModalEditarAcccesorio } from "../../../components/modalAberturas/ModalEditarAccesorio";
 
 export const ViewAbertura = () => {
   const [abertura, setAbertura] = useState([]);
   const { accesorios } = useAccesoriosContext();
   const { precios } = usePreciosContext();
+
+  //modals
+  const [isOpen, setIsOpen] = useState(false);
+  const [obtenerId, setObtenerId] = useState(null);
+
+  const handleObtenerId = (id) => {
+    setObtenerId(id);
+  };
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   const params = useParams();
 
   console.log(abertura);
@@ -196,10 +214,10 @@ export const ViewAbertura = () => {
   );
 
   return (
-    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-8 max-md:py-5 max-md:pb-44">
-      <div className="border-gray-300 rounded-md border-[1px] shadow-md shadow-black/20 py-12 px-10 w-full flex flex-col gap-8 items-start max-md:shadow-none max-md:border-none max-md:py-0 max-md:px-0">
+    <section className="w-full py-24 px-5 max-md:px-4 flex flex-col gap-8 max-md:py-5 max-md:pb-44">
+      <div>
         <article className="flex items-start gap-6 max-md:flex-col max-md:gap-4">
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <p className="text-indigo-500 font-semibold text-base uppercase">
               DETALLE:{" "}
               <span className="font-normal text-gray-900">
@@ -236,7 +254,7 @@ export const ViewAbertura = () => {
             </p>
           </div>
 
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg space-y-2 h-full">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN ALUMINIO:{" "}
               <span className="font-normal text-gray-900">
@@ -304,7 +322,7 @@ export const ViewAbertura = () => {
             </p>
           </div>
 
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 shadow shadow-black/20 rounded-lg gap-4 flex flex-col">
+          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl gap-4 flex flex-col">
             <div className="h-full space-y-[0.2px]">
               {precios.map((p) => (
                 <>
@@ -446,7 +464,7 @@ export const ViewAbertura = () => {
           </div>
         </article>
 
-        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full">
+        <div className="flex flex-col  max-w-[1350px] items-start max-md:overflow-x-scroll max-md:w-full px-5">
           <div className="mb-7 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             ACCESORIOS DE LA ABERTURA
           </div>
@@ -462,6 +480,7 @@ export const ViewAbertura = () => {
               {" "}
               PRECIO FINAL
             </p>
+            <p className="text-gray-600 font-semibold w-[250px]"> EDITAR</p>
           </div>
           {abertura?.datos?.accesoriosSelect?.map((a, index) => (
             <div
@@ -487,11 +506,42 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
+              <div>
+                <button
+                  onClick={() => {
+                    handleObtenerId(a.id), openModal();
+                  }}
+                  type="button"
+                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
+                >
+                  Editar
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full">
+        <div className="mt-6 mx-6">
+          <button className="text-sm text-indigo-600 py-2 px-4 rounded-xl bg-indigo-100 hover:shadow-md transition-all ease-linear">
+            AGREGAR ACCESORIO
+          </button>
+        </div>
+
+        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full px-5 mt-8">
           <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             PERFILES DE LA ABERTURA
           </div>
@@ -505,8 +555,9 @@ export const ViewAbertura = () => {
             <p className="text-gray-600 font-semibold w-[350px]">
               PRECIO X UNIDAD
             </p>
+            <p className="text-gray-600 font-semibold w-[350px]">ACCIONES</p>
           </div>
-          {perfilesConPrecioFinal?.map((perfil, index) => (
+          {perfilesConPrecioFinal?.map((perfil) => (
             <div
               key={perfil?.id}
               className="border-b-[1px] w-full border-gray-300 flex gap-20 space-y-3 items-center hover:bg-gray-100/50 transition-all ease-in-out cursor-pointer hover:text-gray-800 text-gray-500"
@@ -536,11 +587,39 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
+              <div>
+                <button
+                  type="button"
+                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
+                >
+                  Editar
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full">
+        <div className="mt-6 mx-6">
+          <button className="text-sm text-indigo-600 py-2 px-4 rounded-xl bg-indigo-100 hover:shadow-md transition-all ease-linear">
+            AGREGAR PERFIL
+          </button>
+        </div>
+
+        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full px-5 mt-8">
           <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             VIDRIOS DE LA ABERTURA
           </div>
@@ -552,8 +631,9 @@ export const ViewAbertura = () => {
             <p className="text-gray-600 font-semibold w-[300px]">
               PRECIO FINAL
             </p>
+            <p className="text-gray-600 font-semibold w-[300px]">EDITAR</p>
           </div>
-          {vidriosConPrecioFinal?.map((perfil, index) => (
+          {vidriosConPrecioFinal?.map((perfil) => (
             <div
               key={perfil?.id}
               className="border-b-[1px] w-full border-gray-300 flex gap-20 space-y-3 items-center hover:bg-gray-100/50 transition-all ease-in-out cursor-pointer hover:text-gray-800 text-gray-500"
@@ -574,10 +654,38 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
+              <div>
+                <button
+                  type="button"
+                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
+                >
+                  Editar
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           ))}
         </div>
       </div>
+
+      <ModalEditarAcccesorio
+        obtenerId={obtenerId}
+        isOpen={isOpen}
+        closeModal={closeModal}
+      />
     </section>
   );
 };

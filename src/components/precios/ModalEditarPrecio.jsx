@@ -1,12 +1,9 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
-import {
-  crearNuevoPrecio,
-  editarPrecio,
-  obtenerPrecio,
-} from "../../api/precios.api";
+import { editarPrecio, obtenerPrecio } from "../../api/precios.api";
+import { usePreciosContext } from "../../context/PreciosProvider";
 
 export const ModalEditarPrecio = ({
   isEditarPrecio,
@@ -15,11 +12,12 @@ export const ModalEditarPrecio = ({
 }) => {
   const {
     handleSubmit,
-    control,
     formState: { errors },
     register,
     setValue,
   } = useForm();
+
+  const { precios, setPrecios } = usePreciosContext();
 
   //obtener precio
   useEffect(() => {
@@ -37,33 +35,51 @@ export const ModalEditarPrecio = ({
 
   const onSubmit = async (data) => {
     try {
-      // Limpia la cadena de precio y conviértela a número entero
       const precioUnidadNumerico = parseInt(
         data.precio.replace(/[^\d]/g, ""),
         10
       );
 
-      // Actualiza el valor en el objeto data
       data.precio = precioUnidadNumerico;
-
-      // Resto del código...
 
       const res = await editarPrecio(obtenerId, data);
 
-      toast.success("¡Precio editado correctamente!", {
-        position: "top-right",
+      const precioExistenteIndex = precios.findIndex(
+        (tipo) => tipo.id == obtenerId
+      );
+
+      setPrecios((prevTipos) => {
+        const newTipos = [...prevTipos];
+        const updatePrecio = JSON.parse(res.config.data); // Convierte el JSON a objeto
+
+        newTipos[precioExistenteIndex] = {
+          id: obtenerId,
+          precio: updatePrecio.precio,
+          categoria: updatePrecio.categoria,
+          detalle: updatePrecio.detalle,
+          color: updatePrecio.color,
+          created_at: newTipos[precioExistenteIndex].created_at,
+          updated_at: newTipos[precioExistenteIndex].updated_at,
+        };
+        return newTipos;
+      });
+      toast.success("¡Precio editado correctamente, segui editando!", {
+        position: "top-center",
         autoClose: 1500,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
       });
-
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      closeEditarPrecio();
     } catch (error) {
       console.log(error.response.data);
     }
@@ -71,7 +87,6 @@ export const ModalEditarPrecio = ({
 
   return (
     <Menu as="div" className="z-50">
-      <ToastContainer />
       <Transition appear show={isEditarPrecio} as={Fragment}>
         <Dialog
           as="div"
@@ -87,7 +102,7 @@ export const ModalEditarPrecio = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-40" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -120,6 +135,28 @@ export const ModalEditarPrecio = ({
               leaveTo="opacity-0 scale-95"
             >
               <div className="w-1/3 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeEditarPrecio}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
                   className="text-lg leading-6 text-gray-700 font-bold"
@@ -127,7 +164,10 @@ export const ModalEditarPrecio = ({
                   EDITAR EL PRECIO
                 </Dialog.Title>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-4 text-sm"
+                >
                   <div className="flex flex-col gap-2">
                     <label
                       className="uppercase font-bold text-sm"
@@ -145,7 +185,7 @@ export const ModalEditarPrecio = ({
                       })}
                       type="text"
                       placeholder="Precio"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 uppercase px-2 border-[1px] border-black/20 outline-none"
                       onChange={(e) => {
                         const inputPrecio = e.target.value;
 
@@ -183,7 +223,7 @@ export const ModalEditarPrecio = ({
                       {...register("categoria")}
                       type="text"
                       placeholder="CATEGORIA: EJ MODENA, 3 MLS, 4MLS"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 uppercase px-2 border-[1px] border-black/20 outline-none"
                     />
                   </div>
 
@@ -198,7 +238,7 @@ export const ModalEditarPrecio = ({
                       {...register("detalle")}
                       type="text"
                       placeholder="DETALLE: EJ VIDRIO, ALUMINIO"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 uppercase px-2 border-[1px] border-black/20 outline-none"
                     />
                   </div>
 
@@ -213,24 +253,17 @@ export const ModalEditarPrecio = ({
                       {...register("color")}
                       type="text"
                       placeholder="COLOR"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 uppercase px-2 border-[1px] border-black/20 outline-none"
                     />
                   </div>
 
                   <button
-                    className="bg-indigo-500 py-2 px-6 uppercase text-sm font-semibold text-white rounded-lg shadow"
+                    className="bg-indigo-200 py-2 px-6 uppercase text-sm font-normal text-indigo-700 rounded-xl shadow"
                     type="submit"
                   >
                     Editar Precio
                   </button>
                 </form>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeEditarPrecio()}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

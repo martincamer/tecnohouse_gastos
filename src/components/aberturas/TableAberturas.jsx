@@ -398,7 +398,7 @@ export const TableAberturas = () => {
             </tr>
           </thead>
           <tbody className="divide-y-[1px] divide-gray-300">
-            {currentResults?.map((g, index) => (
+            {currentResults?.map((g) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
@@ -415,11 +415,11 @@ export const TableAberturas = () => {
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.ancho}x{g.alto}
                 </th>{" "}
-                <th
-                  // onClick={() => handleEliminarAbertura(g.id)}
-                  className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2"
-                >
-                  <p className="cursor-pointer py-2 px-4 rounded-xl text-red-700 bg-red-100 flex gap-2 items-center">
+                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2">
+                  <p
+                    onClick={() => handleEliminarAbertura(g.id)}
+                    className="cursor-pointer py-2 px-4 rounded-xl text-red-700 bg-red-100 flex gap-2 items-center"
+                  >
                     ELIMINAR
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -26,6 +26,7 @@ import { PresupuestoProvider } from "./context/PresupuestoProvider";
 import { ViewPresupuesto } from "./routes/pages/protected/ViewPresupuesto";
 import { ViewPdf } from "./routes/pages/protected/ViewPdf";
 import { MenuMobile } from "./components/MenuMobile";
+import { ChangePassword } from "./routes/pages/ChangePassword";
 //import normales
 import RutaProtegida from "./layouts/RutaProtejida";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,6 +45,10 @@ function App() {
           >
             <Route index path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/cambiar-contraseña-tecnohouse"
+              element={<ChangePassword />}
+            />
           </Route>
           <Route
             element={<RutaProtegida isAllowed={isAuth} redirectTo={"/login"} />}

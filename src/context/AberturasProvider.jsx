@@ -299,7 +299,6 @@ export const AberturasProvider = ({ children }) => {
 
     // Si ya existe, podrías manejar el caso de alguna manera (por ejemplo, no agregar duplicados)
     if (productoExistente) {
-      console.log("Ya existe un producto con el mismo ID");
     } else {
       // Si no existe, agrega el nuevo producto a la lista
       setVidrioSeleccionado([...vidrioSeleccionado, newProducto]);
@@ -310,6 +309,8 @@ export const AberturasProvider = ({ children }) => {
     const updateVidrio = vidrioSeleccionado.filter((item) => item.id !== id);
     setVidrioSeleccionado(updateVidrio);
   };
+
+  console.log(vidrioSeleccionado);
 
   useEffect(() => {
     async function productoUnico() {
@@ -336,22 +337,39 @@ export const AberturasProvider = ({ children }) => {
   }, []);
 
   const handleEliminarAbertura = async (id) => {
-    await eliminarAbertura(id);
+    // Mostrar la confirmación antes de eliminar
+    const confirmacion = window.confirm(
+      "¿Estás seguro de que deseas eliminar esta abertura?"
+    );
 
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
+    // Si el usuario confirma la eliminación, proceder con la eliminación
+    if (confirmacion) {
+      await eliminarAbertura(id);
 
-    toast.error("Eliminado correctamente!", {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+      setObtenerAberturas((prevSalidas) =>
+        prevSalidas.filter((abertura) => abertura.id !== id)
+      );
+
+      toast.error(
+        "¡Abertura eliminada correctamente, no la podrás recuperar!",
+        {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          style: {
+            padding: "10px",
+            borderRadius: "15px",
+            boxShadow: "none",
+            border: "1px solid rgb(203 213 225)",
+          },
+        }
+      );
+    }
   };
 
   // SEARCH

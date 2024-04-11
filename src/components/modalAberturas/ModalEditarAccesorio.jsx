@@ -2,48 +2,19 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { crearNuevoPerfil } from "../../api/perfiles.api";
-import { usePerfilesContex } from "../../context/PerfilesProvider";
 
-export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
-  //submit crear perfil
+export const ModalEditarAcccesorio = ({ closeModal, isOpen, obtenerId }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { perfiles, setPerfiles } = usePerfilesContex();
+  console.log(obtenerId);
 
-  const crearNuevoPerfilSubmit = handleSubmit(async (data) => {
+  const submitEditarAccesorio = handleSubmit(async (data) => {
     try {
       const res = await crearNuevoPerfil(data);
-
-      const precioExistente = perfiles.find(
-        (perfil) => perfil.id === res.data.id
-      );
-
-      if (!precioExistente) {
-        // Actualizar el estado de tipos agregando el nuevo tipo al final
-        setPerfiles((prevTipos) => [...prevTipos, res.data]);
-      }
-
-      toast.success("¡Perfil creado correctamente, crea el siguiente perfil!", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        style: {
-          padding: "10px",
-          borderRadius: "15px",
-          boxShadow: "none",
-          border: "1px solid rgb(203 213 225)",
-        },
-      });
 
       closeModal();
     } catch (error) {
@@ -126,84 +97,53 @@ export const ModalCrearNuevoPerfil = ({ closeModal, isOpen }) => {
                 </div>
 
                 <div className="flex flex-col  gap-5">
-                  <div className="font-bold text-sm uppercase text-slate-700">
-                    CREAR NUEVO PERFIL
+                  <div className="font-semibold text-sm text-slate-700">
+                    EDITAR EL ACCESORIO
                   </div>
 
                   <form
-                    onSubmit={crearNuevoPerfilSubmit}
+                    onSubmit={submitEditarAccesorio}
                     className="space-y-4 text-sm"
                   >
-                    <div className="flex flex-col gap-1">
-                      <label className="font-semibold">CODIGO</label>
-                      <input
-                        {...register("codigo", { required: true })}
-                        placeholder="CODIGO DEL PERFIL"
-                        type="text"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-1">
+                    <div className="flex flex-col gap-1 ">
                       <label className="font-semibold max-md:text-sm">
-                        DETALLE
+                        CODIGO
                       </label>
                       <input
                         {...register("detalle", { required: true })}
-                        placeholder="DETALLE DEL PERFIL"
+                        placeholder="DETALLE"
                         type="text"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl hover:shadow transition-all ease-linear cursor-pointer shadow-black/10 outline-none text-sm uppercase"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <label className="font-semibold  max-md:text-sm">
+                        CATEGORIA
+                      </label>
+                      <input
+                        {...register("categoria", { required: true })}
+                        placeholder="CATEGORIA"
+                        type="text"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl hover:shadow transition-all ease-linear cursor-pointer shadow-black/10 outline-none text-sm uppercase"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold max-md:text-sm">
-                        CATEGORIA
-                      </label>
-                      <select
-                        {...register("categoria", { required: true })}
-                        className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase uppercase"
-                      >
-                        <option>SELECCIONAR</option>
-                        <option>HERRERO</option>
-                        <option>MODENA</option>
-                        <option>MADERA</option>
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base max-md:text-sm">
-                        COLOR
-                      </label>
-                      <select
-                        {...register("color", { required: true })}
-                        className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase uppercase"
-                      >
-                        <option>SELECCIONAR</option>
-                        <option>BLANCO</option>
-                        <option>NEGRO</option>
-                        <option>BLANCO ALUAR</option>
-                      </select>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <label className="font-semibold max-md:text-sm">
-                        PESO DE LA BARRA 6 MTS
-                      </label>
+                      <label className="font-semibold">CANTIDAD</label>
                       <input
-                        {...register("peso_barra_6_mts", { required: true })}
-                        placeholder="PESO NETO DE LA BARRA"
+                        {...register("cantidad", { required: true })}
+                        placeholder="CANTIDAD"
                         type="text"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl hover:shadow transition-all ease-linear cursor-pointer shadow-black/10 outline-none text-sm uppercase"
                       />
                     </div>
 
                     <div>
                       <button
-                        className="bg-indigo-100 max-md:text-xs text-indigo-600 py-2 px-8 hover:bg-indigo-500 transition-all ease-in-out rounded-xl shadow shadow-black/10 hover:text-white"
+                        className="bg-indigo-100 max-md:text-xs text-indigo-700 hover:text-white py-2 px-8 hover:bg-indigo-500 text-sm transition-all ease-in-out rounded-xl"
                         type="submit"
                       >
-                        CREAR PERFIL
+                        EDITAR EL ACCESORIO
                       </button>
                     </div>
                   </form>

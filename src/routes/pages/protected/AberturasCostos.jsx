@@ -2,13 +2,13 @@ import { CrearAberturasCategorias } from "../../../components/aberturas/CrearAbe
 import { ModalCrearNuevaAbertura } from "../../../components/aberturas/ModalCrearAbertura";
 import { TableAberturas } from "../../../components/aberturas/TableAberturas";
 import { ModalPrecios } from "../../../components/precios/ModalPrecios";
-import ColorFilter from "../../../components/ui/ColorFilter";
 import { Search } from "../../../components/ui/Search";
 import { SearchSelectCategory } from "../../../components/ui/SearchSelectCategory";
 import { SearchSelectTipo } from "../../../components/ui/SearchSelectTipo";
 import { useAberturasContext } from "../../../context/AberturasProvider";
 import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
+import ColorFilter from "../../../components/ui/ColorFilter";
 
 export const AberturasCostos = () => {
   const {

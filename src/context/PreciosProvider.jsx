@@ -36,7 +36,13 @@ export const PreciosProvider = ({ children }) => {
 
   return (
     <PreciosContext.Provider
-      value={{ isOpenPrecios, openModalPrecios, closeModalPrecios, precios }}
+      value={{
+        isOpenPrecios,
+        openModalPrecios,
+        closeModalPrecios,
+        precios,
+        setPrecios,
+      }}
     >
       {children}
     </PreciosContext.Provider>

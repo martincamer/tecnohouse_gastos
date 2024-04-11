@@ -517,7 +517,7 @@ export const ModalCrearNuevaAbertura = () => {
                               <th className="p-3 max-md:text-xs text-sm uppercase cursor-pointer">
                                 <button
                                   type="button"
-                                  onClick={() => deleteVidrio(p.id)}
+                                  onClick={() => deleteVidrio(v.id)}
                                   className="bg-red-100 text-red-700 text-sm font-normal px-4 py-2 rounded-xl"
                                 >
                                   ELIMINAR

@@ -1,8 +1,9 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import { crearNuevoPrecio } from "../../api/precios.api";
+import { usePreciosContext } from "../../context/PreciosProvider";
 
 export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
   const {
@@ -11,6 +12,8 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
     formState: { errors },
     register,
   } = useForm();
+
+  const { precios, setPrecios } = usePreciosContext();
 
   const onSubmit = async (data) => {
     try {
@@ -27,22 +30,35 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
 
       const res = await crearNuevoPrecio(data);
 
+      const precioExistente = precios.find(
+        (precio) => precio.id === res.data.id
+      );
+
+      if (!precioExistente) {
+        // Actualizar el estado de tipos agregando el nuevo tipo al final
+        setPrecios((prevTipos) => [...prevTipos, res.data]);
+      }
+
       toast.success("¡Precio creado correctamente!", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 1500,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
       });
 
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      closeCrearPrecio();
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 
@@ -64,7 +80,7 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-40" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -97,14 +113,39 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="w-1/3 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6 max-md:w-full">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeCrearPrecio}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold"
+                  className="leading-6 text-gray-700 font-bold text-sm"
                 >
-                  CREAR NUEVO PRECIO
+                  CREAR NUEVO PRECIO/CATEGORIA
                 </Dialog.Title>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-4 text-sm"
+                >
                   <div className="flex flex-col gap-2">
                     <label
                       className="uppercase font-bold text-sm"
@@ -122,7 +163,7 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
                       })}
                       type="text"
                       placeholder="Precio"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 px-2 border-[1px] border-black/20 outline-none uppercase"
                       onChange={(e) => {
                         const inputPrecio = e.target.value;
 
@@ -160,7 +201,7 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
                       {...register("categoria")}
                       type="text"
                       placeholder="CATEGORIA: EJ MODENA, 3 MLS, 4MLS"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 px-2 border-[1px] border-black/20 outline-none uppercase"
                     />
                   </div>
 
@@ -175,7 +216,7 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
                       {...register("detalle")}
                       type="text"
                       placeholder="DETALLE: EJ VIDRIO, ALUMINIO"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 px-2 border-[1px] border-black/20 outline-none uppercase"
                     />
                   </div>
 
@@ -190,24 +231,17 @@ export const CrearNuevoPrecio = ({ isCrearPrecio, closeCrearPrecio }) => {
                       {...register("color")}
                       type="text"
                       placeholder="COLOR"
-                      className="shadow-sm shadow-black/20 rounded-lg py-1 px-2 border-[1px] border-black/20 outline-none"
+                      className="shadow-sm shadow-black/20 rounded-xl py-2 px-2 border-[1px] border-black/20 outline-none uppercase"
                     />
                   </div>
 
                   <button
-                    className="bg-indigo-500 py-2 px-6 uppercase text-sm font-semibold text-white rounded-lg shadow"
+                    className="bg-indigo-200 py-2 px-6 uppercase font-normal text-indigo-600 text-sm rounded-lg shadow"
                     type="submit"
                   >
                     Crear Precio
                   </button>
                 </form>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeCrearPrecio()}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

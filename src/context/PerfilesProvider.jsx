@@ -107,6 +107,7 @@ export const PerfilesProvider = ({ children }) => {
         openModal,
         closeModal,
         perfiles,
+        setPerfiles,
         closeModalEliminar,
         openModalEliminar,
         isOpenEliminar,

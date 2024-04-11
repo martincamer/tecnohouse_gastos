@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthProvider";
 import { Label } from "../../components/formularios/Label";
 import { Input } from "../../components/formularios/Input";
@@ -48,7 +48,6 @@ export const Login = () => {
         <div className="flex flex-col gap-2">
           <Label label="Email del registro" />
           <Input
-            // registro={{ ...register("email", { required: true }) }}
             register={register}
             placeholder={"emailregistro@email.com"}
             type={"email"}
@@ -56,15 +55,19 @@ export const Login = () => {
         </div>
         <div className="flex flex-col gap-2">
           <Label label="Contraseña del registro" />
-          <Input
-            register={register}
-            // registro={{ ...register("password", { required: true }) }}
-            placeholder={""}
-            type={"password"}
-          />
+          <Input register={register} placeholder={""} type={"password"} />
         </div>
         <div>
           <Button type={"submit"} titulo={"Iniciar Sesión"} />
+        </div>
+
+        <div>
+          <Link
+            to={"/cambiar-contraseña-tecnohouse"}
+            className="text-sm text-indigo-600 underline cursor-pointer"
+          >
+            Cambiar la contraseña de la cuenta.
+          </Link>
         </div>
       </form>
     </section>

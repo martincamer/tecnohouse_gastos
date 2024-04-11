@@ -35,8 +35,6 @@ export const ModalSeleccionarVidrio = ({
     setCategoria(event.target.value);
   };
 
-  let id;
-
   return (
     <Menu as="div" className="z-50">
       <Transition appear show={isOpenProductos} as={Fragment}>
@@ -183,6 +181,7 @@ export const ModalSeleccionarVidrio = ({
                       <option>6 mls</option>
                       <option>3 mls</option>
                       <option>4 mls</option>
+                      <option>dvh 4x4</option>
                     </select>
                   </div>
                 </div>
@@ -194,8 +193,6 @@ export const ModalSeleccionarVidrio = ({
                       const anchoMeters = parseFloat(ancho) / 1000; // Convert width to meters
                       const altoMeters = parseFloat(alto) / 1000; // Convert height to meters
                       const cantidadTwo = parseInt(cantidad, 10);
-
-                      console.log(altoMeters);
 
                       // Calculate square meters for one glass
                       const metrosCuadradosUnidad = anchoMeters * altoMeters;

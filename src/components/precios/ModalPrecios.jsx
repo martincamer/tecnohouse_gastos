@@ -7,7 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { ModalEditarPrecio } from "./ModalEditarPrecio";
 
 export const ModalPrecios = () => {
-  const { isOpenPrecios, closeModalPrecios, precios } = usePreciosContext();
+  const { isOpenPrecios, closeModalPrecios, precios, setPrecios } =
+    usePreciosContext();
 
   const [obtenerId, setObtenerId] = useState("");
   let [isCrearPrecio, setIsCrearPrecio] = useState(false);
@@ -37,20 +38,26 @@ export const ModalPrecios = () => {
     try {
       const res = await eliminarPrecio(id);
 
+      setPrecios((precioPrev) =>
+        precioPrev.filter((precio) => precio.id !== id)
+      );
+
       toast.error("¡Precio eliminado correctamente!", {
-        position: "top-right",
+        position: "top-center",
         autoClose: 1500,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
       });
-
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -71,7 +78,6 @@ export const ModalPrecios = () => {
 
   return (
     <Menu as="div" className="z-50">
-      <ToastContainer />
       <Transition appear show={isOpenPrecios} as={Fragment}>
         <Dialog
           as="div"
@@ -87,7 +93,7 @@ export const ModalPrecios = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-40" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -120,106 +126,125 @@ export const ModalPrecios = () => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="w-3/5 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalPrecios}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold"
+                  className="text-sm leading-6 text-gray-700 font-bold"
                 >
-                  PRECIOS ACTUALES
+                  PRECIOS ACTUALES / ESTO VARIA DEPENDIENDO SU CATEGORIA
                 </Dialog.Title>
                 <div
                   onClick={() => openCrearPrecio()}
-                  className="text-sm bg-indigo-500 text-white inline-block px-4 py-2 rounded-lg shadow shadow-black/20 font-semibold cursor-pointer"
+                  className="text-sm bg-indigo-100 text-indigo-700 inline-block px-4 py-2 rounded-xl cursor-pointer"
                 >
-                  CREAR NUEVO VALOR
+                  CREAR NUEVO PRECIO
                 </div>
-                <div className="max-md:py-0 max-md:rounded-xl max-md:shadow-none max-md:px-0 border-[1px] border-gray-200 rounded shadow-black/10 shadow flex flex-col gap-3 w-full py-10 px-10 max-md:overflow-x-scroll">
-                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow max-md:shadow-none shadow-black/20 text-sm">
-                    <thead>
+                <div className="border-slate-300 border-[1px] hover:shadow-md transition-all ease-linear cursor-pointer rounded-xl">
+                  <table className="min-w-full uppercase text-sm">
+                    <thead className="border-b-[1px] border-slate-300">
                       <tr>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           precio
                         </th>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           categoria
                         </th>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           detalle
                         </th>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           color
                         </th>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           editar
                         </th>
-                        <th className="py-4 px-5 max-md:text-xs border-b-[1px]">
+                        <th className="py-4 px-5 max-md:text-xs font-bold text-slate-700">
                           eliminar
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y-[1px] divide-slate-200">
                       {currentResults?.map((p) => (
-                        <tr className="hover:bg-gray-100 transition-all ease-in-out cursor-pointer">
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 text-sm uppercase font-bold text-gray-800">
+                        <tr>
+                          <th className="py-4 px-5 text-sm uppercase font-bold">
                             {Number(p.precio).toLocaleString("es-ar", {
                               style: "currency",
                               currency: "ARS",
                               minimumFractionDigits: 2,
                             })}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.categoria}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.detalle}
                           </th>
-                          <th className="border-b-[1px] border-gray-300 py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-4 px-5 font-medium text-sm max-md:text-xs uppercase">
                             {p.color}
                           </th>
                           <th
                             onClick={() => {
                               handleObtenerId(p.id), openEditarPrecio();
                             }}
-                            className="border-b-[1px] py-4 px-5 font-semibold text-sm max-md:text-xs uppercase bg-indigo-500 text-white text-center"
+                            className="py-4 px-5"
                           >
-                            EDITAR
+                            <p className="bg-green-100 text-green-700 py-3 rounded-xl text-center px-4">
+                              EDITAR
+                            </p>
                           </th>
                           <th
                             onClick={() => handleEliminar(p.id)}
-                            className="border-b-[1px] border-gray-300 py-4 px-5 font-semibold text-sm max-md:text-xs uppercase bg-red-500 hover:bg-red-300 transition-all ease-in-out hover:text-red-600 text-white text-center"
+                            className="py-4 px-5"
                           >
-                            ELIMINAR
+                            <span className="bg-red-100 text-red-800 py-3 rounded-xl text-center px-4">
+                              {" "}
+                              ELIMINAR
+                            </span>
                           </th>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-
-                  {totalPages > 1 && (
-                    <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4">
-                      {Array.from({ length: totalPages }).map((_, index) => (
-                        <button
-                          key={index}
-                          className={`mx-1 px-3 py-1 rounded ${
-                            currentPage === index + 1
-                              ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20"
-                              : "bg-gray-100 shadow shadow-black/20"
-                          }`}
-                          onClick={() => handlePageChange(index + 1)}
-                        >
-                          {index + 1}
-                        </button>
-                      ))}
-                    </div>
-                  )}
                 </div>
 
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeModalPrecios()}
-                >
-                  Cerrar Ventana
-                </button>
+                {totalPages > 1 && (
+                  <div className="flex flex-wrap justify-center mt-4 mb-4 gap-1">
+                    {Array.from({ length: totalPages }).map((_, index) => (
+                      <button
+                        key={index}
+                        className={`mx-1 px-3 py-1 rounded-xl text-sm ${
+                          currentPage === index + 1
+                            ? "bg-green-500 text-white"
+                            : "bg-white border-[1px] border-slate-300"
+                        }`}
+                        onClick={() => handlePageChange(index + 1)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </Transition.Child>
           </div>
