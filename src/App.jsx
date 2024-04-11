@@ -76,11 +76,11 @@ function App() {
                 // </GastosProvider>
               }
             >
-              <Route index path="/" element={<Home />} />
+              {/* <Route index path="/" element={<Home />} /> */}
               <Route path="/perfiles" element={<Perfiles />} />
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />
-              <Route path="/aberturas" element={<AberturasCostos />} />
+              <Route path="/" element={<AberturasCostos />} />
               <Route path="/gastos/:id" element={<ViewGasto />} />
               <Route path="/ventas/:id" element={<ViewVenta />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />

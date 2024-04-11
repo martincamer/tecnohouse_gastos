@@ -1,41 +1,39 @@
-import React, { useEffect, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
-import { eliminarCategoria, obtenerCategorias } from "../../api/categorias.api";
+import { eliminarCategoria } from "../../api/categorias.api";
+import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 
 export const ModalVerCat = ({ isOpenVerCat, closeVerCategorias }) => {
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    async function loadData() {
-      const res = await obtenerCategorias();
-
-      setCategorias(res.data);
-    }
-
-    loadData();
-  }, []);
+  const { categorias, setCategorias } = useAccesoriosContext();
 
   const handleEliminarCat = async (id) => {
     try {
       await eliminarCategoria(id);
 
-      toast.error("¡Categoria eliminado correctamente!", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      setCategorias((prevSalidas) =>
+        prevSalidas.filter((abertura) => abertura.id !== id)
+      );
 
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      toast.error(
+        "¡Categoria eliminada correctamente, no la podrás recuperar!",
+        {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          style: {
+            padding: "10px",
+            borderRadius: "15px",
+            boxShadow: "none",
+            border: "1px solid rgb(203 213 225)",
+          },
+        }
+      );
     } catch (error) {
       console.log(error.response.data);
     }
@@ -91,8 +89,30 @@ export const ModalVerCat = ({ isOpenVerCat, closeVerCategorias }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeVerCategorias}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
+                  <div className="font-bold text-sm uppercase underline">
                     VER CATEGORIAS CREADAS
                   </div>
 
@@ -103,32 +123,35 @@ export const ModalVerCat = ({ isOpenVerCat, closeVerCategorias }) => {
                         key={c.id}
                       >
                         <p>{c.categoria}</p>
-                        <button
+                        {/* <button
                           className="bg-indigo-100 px-2 text-sm rounded-lg border-[1px] border-indigo-500 text-indigo-800"
                           type="button"
                         >
                           E
-                        </button>
+                        </button> */}
                         <button
-                          className="bg-red-100 px-2 text-sm rounded-lg border-[1px] border-red-400 text-red-800"
+                          className="text-red-800"
                           type="button"
                           onClick={() => handleEliminarCat(c.id)}
                         >
-                          X
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                          </svg>
                         </button>
                       </div>
                     ))}
                   </div>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeVerCategorias}
-                  >
-                    Cerrar Ventana
-                  </button>
                 </div>
               </div>
             </Transition.Child>

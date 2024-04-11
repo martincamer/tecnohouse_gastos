@@ -61,36 +61,51 @@ export const ModalEliminarPerfil = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:w-full w-1/2 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+              <div className="max-md:w-full w-1/3 inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModalEliminar}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 text-gray-700 font-bold max-md:text-sm"
+                  className="text-sm leading-6 text-gray-700 font-bold max-md:text-sm"
                 >
                   ELIMINAR PERFIL
                 </Dialog.Title>
-                <div className="border-[1px] max-md:py-4 border-gray-200 rounded shadow-black/10 shadow flex gap-3 w-full py-10 px-10">
+                <div className="flex gap-3 w-full">
                   <button
                     onClick={() => handleEliminarPerfil(obtenerParams)}
                     type="button"
-                    className="max-md:text-xs w-full bg-red-200 py-2 px-4 rounded-md shadow border-red-500 border-[1px] text-red-500 font-bold"
+                    className="text-sm uppercase text-red-700 bg-red-100 py-3 px-6 rounded-xl w-full"
                   >
                     ELIMINAR
                   </button>
                   <button
                     onClick={() => closeModalEliminar()}
                     type="button"
-                    className="max-md:text-xs w-full bg-teal-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
+                    className="text-sm uppercase text-green-700 bg-green-100 py-3 px-6 rounded-xl w-full"
                   >
                     CERRAR
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeModalEliminar()}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

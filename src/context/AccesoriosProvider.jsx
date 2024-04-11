@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { eliminarAccesorio, obtenerAccesorios } from "../api/accesorios.api";
 import { toast } from "react-toastify";
+import { obtenerCategorias } from "../api/categorias.api";
 
 export const AccesoriosContext = createContext();
 
@@ -19,6 +20,18 @@ export const AccesoriosProvider = ({ children }) => {
   //modales
   let [isOpen, setIsOpen] = useState(false);
   let [isOpenEliminar, setIsOpenEliminar] = useState(false);
+
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    async function loadData() {
+      const res = await obtenerCategorias();
+
+      setCategorias(res.data);
+    }
+
+    loadData();
+  }, []);
 
   function closeModalEliminar() {
     setIsOpenEliminar(false);
@@ -53,21 +66,27 @@ export const AccesoriosProvider = ({ children }) => {
 
   const handleEliminarAccesorio = (id) => {
     eliminarAccesorio(id);
+    setAccesorios((prevSalidas) =>
+      prevSalidas.filter((abertura) => abertura.id !== id)
+    );
 
-    toast.error("Accesorio eliminado correctamente!", {
-      position: "top-right",
+    toast.error("¡Accesorio eliminado correctamente, no la podrás recuperar!", {
+      position: "top-center",
       autoClose: 1500,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: {
+        padding: "10px",
+        borderRadius: "15px",
+        boxShadow: "none",
+        border: "1px solid rgb(203 213 225)",
+      },
     });
-
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
+    closeModalEliminar();
   };
 
   const [results, setResults] = useState([]);
@@ -111,9 +130,12 @@ export const AccesoriosProvider = ({ children }) => {
         obtenerParams,
         handleEliminarAccesorio,
         accesorios,
+        setAccesorios,
         results,
         search,
         searcher,
+        categorias,
+        setCategorias,
       }}
     >
       {children}

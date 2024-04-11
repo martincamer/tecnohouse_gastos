@@ -29,7 +29,7 @@ export const ViewPresupuesto = () => {
   const clienteCapitalized = datos?.cliente ? capitalize(datos.cliente) : "";
 
   return (
-    <section className="mx-10 my-24 max-md:my-4 max-md:mb-32 max-md:px-4 max-md:mx-3 bg-white h-full w-full rounded-xl shadow border-slate-300 border-[1px] max-md:overflow-x-scroll">
+    <section className=" h-full w-full rounded-xl py-12 max-md:overflow-x-scroll">
       <div className="max-md:px-2 flex flex-col gap-2 border-[1px] rounded-xl border-slate-300 px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
         <div>
           <p className="text-indigo-500 font-bold text-2xl max-md:text-base">
@@ -40,6 +40,8 @@ export const ViewPresupuesto = () => {
         <div className="flex items-center gap-2">
           <div>
             <PDFDownloadLink
+              target="_blank"
+              download={false}
               className="max-md:text-xs text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-[6px] rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
               fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
@@ -47,14 +49,14 @@ export const ViewPresupuesto = () => {
               Descargar presupuesto
             </PDFDownloadLink>
           </div>
-          <div>
+          {/* <div>
             <button
               className="max-md:text-xs text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-1 rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
               type="button"
             >
               Ver presupuesto
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
 

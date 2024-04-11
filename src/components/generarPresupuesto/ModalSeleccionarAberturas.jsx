@@ -1,6 +1,5 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { Fragment, useState } from "react";
 import { useAberturasContext } from "../../context/AberturasProvider";
 import { ModalSeleccionarAberturaFinal } from "./ModalSeleccionarAberturaFinal";
 import { Search } from "../ui/Search";
@@ -41,19 +40,8 @@ export const ModalSeleccionarAberturas = ({
     setCurrentPage(newPage);
   };
 
-  const [showDetail, setShowDetail] = useState(
-    Array(results.length).fill(false)
-  ); // Inicializa un array de estados locales, uno para cada fila
-
-  const toggleDetail = (index) => {
-    const newShowDetail = [...showDetail]; // Crea una copia del array de estados locales
-    newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
-    setShowDetail(newShowDetail); // Actualiza el estado
-  };
-
   return (
     <Menu as="div" className="z-50">
-      <ToastContainer />
       <Transition appear show={openSeleccionar} as={Fragment}>
         <Dialog
           as="div"
@@ -102,74 +90,62 @@ export const ModalSeleccionarAberturas = ({
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block max-md:w-full w-5/6 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <div className="mb-5">
+                <div className="mb-5 w-1/3">
                   <Search
                     variable="Buscar por el detalle..."
                     search={search}
                     searcher={searcher}
                   />
                 </div>
-                <form className="space-y-3 overflow-x-scroll">
-                  <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
-                    <thead>
+                <form className="space-y-3 overflow-x-scroll border-[1px] border-slate-300 rounded-2xl">
+                  <table className="min-w-full uppercase text-sm">
+                    <thead className="border-b-[2px] border-slate-300">
                       <tr className="text-left">
                         {/* <th className="p-3 border-b-[1px]">Numero</th> */}
-                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
                           DETALLE
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
                           MEDIDA
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
                           COLOR
                         </th>
-                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
                           CATEGORIA
                         </th>
 
-                        <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
                           Seleccionar
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {currentResults?.map((r, index) => (
+                    <tbody className="divide-y-[1px] divide-slate-300">
+                      {currentResults?.map((r) => (
                         <tr
                           key={r?.id}
                           className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
                         >
-                          {/*<th
-                            onClick={() => toggleDetail(index)}
-                            className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase md:hidden max-md:block"
-                          >
-                            {showDetail[index] ? (
-                              r.detalle
-                            ) : (
-                              <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900 md:hidden max-md:block">
-                                CLICK
-                              </span>
-                            )}
-                          </th>*/}
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.detalle}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.ancho}x{r?.alto}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.color}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             {r?.categoria}
                           </th>
-                          <th className="border-b-[1px] py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
                             <button
                               onClick={() => {
                                 handleId(r?.id),
                                   openModalSeleccionarAberturaFinal();
                               }}
                               type="button"
-                              className="bg-indigo-500 text-white px-4 py-1 text-sm max-md:text-xs rounded-lg shadow"
+                              className="bg-indigo-100 uppercase text-indigo-700 px-4 py-2 text-sm max-md:text-xs rounded-xl shadow"
                             >
                               Seleccionar
                             </button>
@@ -185,10 +161,10 @@ export const ModalSeleccionarAberturas = ({
                       <button
                         type="button"
                         key={index}
-                        className={`mx-1 px-3 py-1 rounded ${
+                        className={`mx-1 px-3 py-1 rounded-xl ${
                           currentPage === index + 1
-                            ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                            : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
+                            ? "bg-green-600 text-white"
+                            : "border-[1px] border-slate-300 shadow"
                         }`}
                         onClick={() => handlePageChange(index + 1)}
                       >
@@ -197,15 +173,6 @@ export const ModalSeleccionarAberturas = ({
                     ))}
                   </div>
                 )}
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-xl hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={() => closeModalSeleccionar()}
-                  >
-                    Cerrar Ventana
-                  </button>
-                </div>
               </div>
             </Transition.Child>
 

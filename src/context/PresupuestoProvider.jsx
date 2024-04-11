@@ -17,12 +17,24 @@ export const usePresupuestoContext = () => {
 //provider
 export const PresupuestoProvider = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [obtenerId, setObtenerId] = useState("");
   const [cliente, setCliente] = useState("");
   const [localidad, setLocalidad] = useState("");
   const [total, setTotal] = useState(0);
   const [totalCantidad, setTotalCantidad] = useState(0);
   const [productoSeleccionado, setProductoSeleccionado] = useState([]);
+
+  const [datosPresupuestos, setDatosPrepuestos] = useState([]);
+
+  //obtener datos
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      const res = await obtenerPresupuestosApi();
+
+      setDatosPrepuestos(res.data);
+    };
+
+    obtenerDatos();
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
@@ -31,10 +43,6 @@ export const PresupuestoProvider = ({ children }) => {
   function openModal() {
     setIsOpen(true);
   }
-
-  const HANDLEOBTENERID = (id) => {
-    setObtenerId(id);
-  };
 
   const generarIdAleatorio = () => {
     // Genera un número aleatorio entre 1 y 100000 y lo convierte a cadena
@@ -78,17 +86,6 @@ export const PresupuestoProvider = ({ children }) => {
     } else {
       // Si no existe, agrega el nuevo producto a la lista
       setProductoSeleccionado([...productoSeleccionado, newProducto]);
-
-      toast.success("¡Creado correctamente!", {
-        position: "top-center",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     }
   };
 
@@ -98,18 +95,40 @@ export const PresupuestoProvider = ({ children }) => {
 
     // Actualiza el estado con la nueva lista sin el producto eliminado
     setProductoSeleccionado(nuevaLista);
-
-    toast.error("¡Eliminado correctamente!", {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
   };
+
+  const [resultadosFiltrados, setResultadosFiltrados] = useState([]);
+  const [yearToSearch, setYearToSearch] = useState(new Date().getFullYear());
+  const [monthToSearch, setMonthToSearch] = useState(new Date().getMonth() + 1);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const handleFilter = () => {
+      const filteredResults = datosPresupuestos?.filter((presupuesto) => {
+        const fechaCreacion = new Date(presupuesto?.created_at);
+        const año = fechaCreacion.getFullYear();
+        const mes = fechaCreacion.getMonth() + 1;
+
+        // Filtrar por año y mes
+        const filterByDate =
+          año === parseInt(yearToSearch, 10) &&
+          mes === parseInt(monthToSearch, 10);
+
+        // Filtrar por término de búsqueda en cliente o valor total
+        const filterBySearchTerm =
+          presupuesto?.cliente
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          presupuesto?.total?.toString()?.includes(searchTerm);
+
+        return filterByDate && filterBySearchTerm;
+      });
+
+      setResultadosFiltrados(filteredResults);
+    };
+
+    handleFilter();
+  }, [yearToSearch, monthToSearch, searchTerm, datosPresupuestos]);
 
   const resultado = productoSeleccionado.map(function (e) {
     return {
@@ -137,70 +156,41 @@ export const PresupuestoProvider = ({ children }) => {
         },
       });
 
-      toast.success("Creado correctamente!", {
-        position: "top-right",
+      const tipoExistente = datosPresupuestos.find(
+        (tipo) => tipo.id === res.data.id
+      );
+
+      if (!tipoExistente) {
+        // Actualizar el estado de tipos agregando el nuevo tipo al final
+        setDatosPrepuestos((prevTipos) => [...prevTipos, res.data]);
+      }
+
+      toast.success("¡Presupuesto creado correctamente, crea el siguiente!", {
+        position: "top-center",
         autoClose: 1500,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
       });
 
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      setProductoSeleccionado([]);
+      setCliente("");
+      setLocalidad("");
+
+      closeModal();
     } catch (error) {
       console.log(error.response.data);
     }
   };
-
-  const [datosPresupuestos, setDatosPrepuestos] = useState([]);
-
-  //obtener datos
-  useEffect(() => {
-    const obtenerDatos = async () => {
-      const res = await obtenerPresupuestosApi();
-
-      setDatosPrepuestos(res.data);
-    };
-
-    obtenerDatos();
-  }, []);
-
-  const [resultadosFiltrados, setResultadosFiltrados] = useState([]);
-  const [yearToSearch, setYearToSearch] = useState(new Date().getFullYear());
-  const [monthToSearch, setMonthToSearch] = useState(new Date().getMonth() + 1);
-  const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    const handleFilter = () => {
-      const filteredResults = datosPresupuestos.filter((presupuesto) => {
-        const fechaCreacion = new Date(presupuesto.created_at);
-        const año = fechaCreacion.getFullYear();
-        const mes = fechaCreacion.getMonth() + 1;
-
-        // Filtrar por año y mes
-        const filterByDate =
-          año === parseInt(yearToSearch, 10) &&
-          mes === parseInt(monthToSearch, 10);
-
-        // Filtrar por término de búsqueda en cliente o valor total
-        const filterBySearchTerm =
-          presupuesto.cliente
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          presupuesto.total.toString().includes(searchTerm);
-
-        return filterByDate && filterBySearchTerm;
-      });
-
-      setResultadosFiltrados(filteredResults);
-    };
-
-    handleFilter();
-  }, [yearToSearch, monthToSearch, searchTerm, datosPresupuestos]);
 
   return (
     <PresupuestoContext.Provider
@@ -221,12 +211,12 @@ export const PresupuestoProvider = ({ children }) => {
         setTotalCantidad,
         crearNuevoPresupuestoSubmit,
         datosPresupuestos,
+        setDatosPrepuestos,
         resultadosFiltrados,
         yearToSearch,
         monthToSearch,
         setYearToSearch,
         setMonthToSearch,
-        // handleFilter,
         searchTerm,
         setSearchTerm,
       }}

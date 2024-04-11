@@ -17,7 +17,7 @@ export const GenerarPresupuesto = () => {
   } = usePresupuestoContext();
 
   return (
-    <section className="w-full py-24 px-12 max-md:px-4 flex flex-col gap-5 max-md:py-2 max-md:mb-28">
+    <section className="w-full py-24 px-5 max-md:px-4 flex flex-col gap-5 max-md:py-2 max-md:mb-28">
       <ToastContainer />
       <IntroPresupuesto />
       <CrearNuevosPresupuestosCats />
@@ -27,7 +27,7 @@ export const GenerarPresupuesto = () => {
             Año
           </label>
           <input
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm"
+            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm text-sm"
             type="number"
             value={yearToSearch}
             onChange={(e) => setYearToSearch(e.target.value)}
@@ -38,19 +38,19 @@ export const GenerarPresupuesto = () => {
             Mes
           </label>
           <input
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm"
+            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm text-sm"
             type="number"
             value={monthToSearch}
             onChange={(e) => setMonthToSearch(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2 w-full max-md:w-full max-md:text-xs">
+        <div className="flex flex-col gap-2 w-1/4 uppercase max-md:w-full max-md:text-xs">
           <label className="text-indigo-700 uppercase">
             Buscar por el cliente
           </label>
           <input
             placeholder="Buscar por el cliente..."
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm"
+            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm uppercase text-sm"
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

@@ -6,26 +6,15 @@ import {
   editarAccesorio,
   obtenerUnicoAccesorio,
 } from "../../api/accesorios.api";
-import { obtenerCategorias } from "../../api/categorias.api";
+import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 
 export const ModalEditarPerfil = ({
   closeEditarPerfil,
   isOpenEditar,
   obtenerId,
 }) => {
-  const [categorias, setCategorias] = useState([]);
+  const { accesorios, setAccesorios, categorias } = useAccesoriosContext();
 
-  useEffect(() => {
-    async function loadData() {
-      const res = await obtenerCategorias();
-
-      setCategorias(res.data);
-    }
-
-    loadData();
-  }, []);
-
-  //submit crear perfil
   const {
     register,
     handleSubmit,
@@ -61,22 +50,43 @@ export const ModalEditarPerfil = ({
 
       const res = await editarAccesorio(obtenerId, data);
 
-      toast.success("¡Accesorio editado correctamente!", {
-        position: "top-right",
+      const perfilExistenteIndex = accesorios.findIndex(
+        (perfil) => perfil.id == obtenerId
+      );
+
+      setAccesorios((prevTipos) => {
+        const newTipos = [...prevTipos];
+        const updatePerfil = JSON.parse(res.config.data); // Convierte el JSON a objeto
+
+        newTipos[perfilExistenteIndex] = {
+          id: obtenerId,
+          detalle: updatePerfil.detalle,
+          categoria: updatePerfil.categoria,
+          precio_unidad: updatePerfil.precio_unidad,
+          created_at: newTipos[perfilExistenteIndex].created_at,
+          updated_at: newTipos[perfilExistenteIndex].updated_at,
+        };
+        return newTipos;
+      });
+
+      toast.success("¡Accesorio editado correctamente, segui editando!", {
+        position: "top-center",
         autoClose: 1500,
-        hideProgressBar: false,
+        hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
       });
 
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
-
-      closeModal();
+      closeEditarPerfil();
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +110,7 @@ export const ModalEditarPerfil = ({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -133,28 +143,28 @@ export const ModalEditarPerfil = ({
             >
               <div className="inline-block max-md:w-full w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-indigo-500 text-lg max-md:text-base border-b-[1px] w-full border-gray-300">
+                  <div className="font-bold uppercase text-sm">
                     EDITAR ACCESORIO
                   </div>
 
                   <form
                     onSubmit={crearNuevoAccesorioSubmit}
-                    className="space-y-4"
+                    className="space-y-4 text-sm"
                   >
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base max-md:text-sm">
+                      <label className="font-semibold max-md:text-sm">
                         DETALLE
                       </label>
                       <input
                         {...register("detalle", { required: true })}
                         placeholder="DETALLE DEL PERFIL"
                         type="text"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base max-md:text-sm">
+                      <label className="font-semibold max-md:text-sm">
                         CATEGORIA
                       </label>
                       <select
@@ -163,13 +173,13 @@ export const ModalEditarPerfil = ({
                       >
                         <option>SELECCIONAR</option>
                         {categorias?.map((c) => (
-                          <option key={c.id}>{c.categoria}</option>
+                          <option>{c.categoria}</option>
                         ))}
                       </select>
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base max-md:text-sm">
+                      <label className="font-semibold max-md:text-sm">
                         PRECIO POR UNIDAD
                       </label>
                       <input
@@ -203,29 +213,19 @@ export const ModalEditarPerfil = ({
                           // Asignar el valor formateado al campo
                           e.target.value = precioFormateado;
                         }}
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
                       />
                     </div>
 
                     <div>
                       <button
-                        className="bg-indigo-500 max-md:text-sm text-white font-semibold py-2 px-8 hover:bg-teal-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
+                        className="bg-indigo-100 max-md:text-sm text-indigo-700 py-2 px-8 hover:bg-indigo-700 transition-all ease-in-out rounded-xl shadow hover:text-white shadow-black/10"
                         type="submit"
                       >
                         EDITAR ACCESORIO
                       </button>
                     </div>
                   </form>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeEditarPerfil}
-                  >
-                    Cerrar Ventana
-                  </button>
                 </div>
               </div>
             </Transition.Child>

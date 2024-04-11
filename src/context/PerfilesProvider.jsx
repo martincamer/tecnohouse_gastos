@@ -14,7 +14,6 @@ export const usePerfilesContex = () => {
 
 export const PerfilesProvider = ({ children }) => {
   const [perfiles, setPerfiles] = useState([]);
-  const [obtenerId, setObtenerId] = useState("");
   const [obtenerParams, setObtenerParams] = useState("");
   //modales
   let [isOpen, setIsOpen] = useState(false);
@@ -54,20 +53,28 @@ export const PerfilesProvider = ({ children }) => {
   const handleEliminarPerfil = (id) => {
     eliminarPerfil(id);
 
-    toast.error("¡Perfil eliminado correctamente!", {
-      position: "top-right",
+    setPerfiles((prevPerfiles) =>
+      prevPerfiles.filter((perfil) => perfil.id !== id)
+    );
+
+    toast.error("¡Perfil eliminado correctamente, no la podrás recuperar!", {
+      position: "top-center",
       autoClose: 1500,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: {
+        padding: "10px",
+        borderRadius: "15px",
+        boxShadow: "none",
+        border: "1px solid rgb(203 213 225)",
+      },
     });
 
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
+    closeModalEliminar();
   };
 
   const [results, setResults] = useState([]);

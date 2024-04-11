@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import { crearNuevoAccesorio } from "../../api/accesorios.api";
 import { obtenerCategorias } from "../../api/categorias.api";
+import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 
 export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
   const {
@@ -15,47 +16,47 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
     setValue,
   } = useForm();
 
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    async function loadData() {
-      const res = await obtenerCategorias();
-
-      setCategorias(res.data);
-    }
-
-    loadData();
-  }, []);
+  const { accesorios, setAccesorios, categorias } = useAccesoriosContext();
 
   const crearNuevoAccesorioSubmit = handleSubmit(async (data) => {
     try {
-      // Limpia la cadena de precio_unidad y conviértela a número entero
       const precioUnidadNumerico = parseInt(
         data.precio_unidad.replace(/[^\d]/g, ""),
         10
       );
 
-      // Actualiza el valor en el objeto data
       data.precio_unidad = precioUnidadNumerico;
-
-      // Resto del código...
 
       const res = await crearNuevoAccesorio(data);
 
-      toast.success("¡Accesorio creado correctamente!", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const precioExistente = accesorios.find(
+        (perfil) => perfil.id === res.data.id
+      );
 
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
+      if (!precioExistente) {
+        // Actualizar el estado de tipos agregando el nuevo tipo al final
+        setAccesorios((prevTipos) => [...prevTipos, res.data]);
+      }
+
+      toast.success(
+        "¡Accesorio creado correctamente, crea el siguiente accesorio!",
+        {
+          position: "top-center",
+          autoClose: 1500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          style: {
+            padding: "10px",
+            borderRadius: "15px",
+            boxShadow: "none",
+            border: "1px solid rgb(203 213 225)",
+          },
+        }
+      );
 
       closeModal();
     } catch (error) {
@@ -81,7 +82,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -113,32 +114,52 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-1/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModal}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <div className="flex flex-col  gap-5">
-                  <div className="font-semibold text-indigo-500 text-lg border-b-[1px] w-full border-gray-300">
+                  <div className="font-bold text-sm uppercase text-slate-700">
                     CREAR NUEVO ACCESORIO
                   </div>
 
                   <form
                     onSubmit={crearNuevoAccesorioSubmit}
-                    className="space-y-4"
+                    className="space-y-4 text-sm"
                   >
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">DETALLE</label>
+                      <label className="font-semibold">DETALLE</label>
                       <input
                         {...register("detalle", { required: true })}
                         placeholder="DETALLE DEL PERFIL"
                         type="text"
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] uppercase border-black/10 rounded-xl  shadow shadow-black/10 outline-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">
-                        CATEGORIA
-                      </label>
+                      <label className="font-semibold">CATEGORIA</label>
                       <select
                         {...register("categoria", { required: true })}
-                        className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-lg shadow shadow-black/10 outline-none uppercase"
+                        className="py-[10.5px] px-4 border-[1px] bg-white  border-black/10 rounded-xl  shadow shadow-black/10 outline-none uppercase"
                       >
                         <option>SELECCIONAR</option>
                         {categorias.map((c) => (
@@ -148,9 +169,7 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <label className="font-semibold text-base">
-                        PRECIO POR UNIDAD
-                      </label>
+                      <label className="font-semibold">PRECIO POR UNIDAD</label>
                       <input
                         type="text"
                         placeholder="Precio"
@@ -182,29 +201,19 @@ export const ModalCrearNuevoAccesorio = ({ closeModal, isOpen }) => {
                           // Asignar el valor formateado al campo
                           e.target.value = precioFormateado;
                         }}
-                        className="py-2 px-4 border-[1px] border-black/10 rounded-lg shadow shadow-black/10 outline-none"
+                        className="py-2 px-4 border-[1px] border-black/10 rounded-xl uppercase shadow shadow-black/10 outline-none"
                       />
                     </div>
 
                     <div>
                       <button
-                        className="bg-indigo-500 text-white font-semibold py-2 px-8 hover:bg-indigo-700 transition-all ease-in-out rounded-lg shadow shadow-black/10"
+                        className="bg-indigo-100 text-indigo-700 py-2 px-4 text-sm transition-all ease-in-out rounded-xl  shadow shadow-black/10"
                         type="submit"
                       >
                         CREAR ACCESORIO
                       </button>
                     </div>
                   </form>
-                </div>
-
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeModal}
-                  >
-                    Cerrar Ventana
-                  </button>
                 </div>
               </div>
             </Transition.Child>

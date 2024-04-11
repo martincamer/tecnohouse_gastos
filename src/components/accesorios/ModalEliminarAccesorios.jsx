@@ -61,36 +61,26 @@ export const ModalEliminarAccesorios = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-1/2 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
-                <Dialog.Title
-                  as="h3"
-                  className="max-md:text-base  text-lg leading-6 text-gray-700 font-bold"
-                >
+              <div className="w-1/3 max-md:w-full inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl space-y-6">
+                <Dialog.Title as="h3" className="text-sm uppercase font-bold">
                   ELIMINAR GASTO
                 </Dialog.Title>
-                <div className="border-[1px] border-gray-200 rounded shadow-black/10 shadow flex gap-3 w-full py-10 px-10">
+                <div className=" flex gap-3 w-full">
                   <button
                     onClick={() => handleEliminarAccesorio(obtenerParams)}
                     type="button"
-                    className="w-full bg-red-200 py-2 px-4 rounded-md shadow border-red-500 border-[1px] text-red-500 font-bold"
+                    className="bg-red-100 text-red-800 py-2 px-4 rounded-xl text-sm w-full"
                   >
                     ELIMINAR
                   </button>
                   <button
+                    className="bg-green-100 text-green-800 py-2 px-4 rounded-xl text-sm w-full"
                     onClick={() => closeModalEliminar()}
                     type="button"
-                    className="w-full bg-indigo-200 py-2 px-4 rounded-md shadow border-teal-950 border-[1px] text-teal-950 font-bold"
                   >
                     CERRAR
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer"
-                  onClick={() => closeModalEliminar()}
-                >
-                  Cerrar Ventana
-                </button>
               </div>
             </Transition.Child>
           </div>

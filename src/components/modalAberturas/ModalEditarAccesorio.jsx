@@ -10,8 +10,6 @@ export const ModalEditarAcccesorio = ({ closeModal, isOpen, obtenerId }) => {
     formState: { errors },
   } = useForm();
 
-  console.log(obtenerId);
-
   const submitEditarAccesorio = handleSubmit(async (data) => {
     try {
       const res = await crearNuevoPerfil(data);

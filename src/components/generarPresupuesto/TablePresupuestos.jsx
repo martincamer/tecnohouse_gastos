@@ -2,44 +2,56 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import client from "../../api/axios";
 import { toast } from "react-toastify";
+import { usePresupuestoContext } from "../../context/PresupuestoProvider";
 
 export const TablePresupuestos = ({ resultadosFiltrados }) => {
-  // const { datosPresupuestos } = usePresupuestoContext();
+  const { datosPresupuestos, setDatosPrepuestos } = usePresupuestoContext();
 
-  const itemsPerPage = 8; // Cantidad de elementos por página
+  const itemsPerPage = 15; // Cantidad de elementos por página
   const [currentPage, setCurrentPage] = useState(1);
+
+  // Supongamos que resultadosFiltrados es tu arreglo de resultados filtrados
+
+  // Ordenar resultados por fecha de creación (created_at) de manera descendente
+  const resultadosOrdenados = resultadosFiltrados.sort((a, b) => {
+    return new Date(b.created_at) - new Date(a.created_at);
+  });
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentResults = resultadosFiltrados?.slice(
+  const currentResults = resultadosOrdenados.slice(
     indexOfFirstItem,
     indexOfLastItem
   );
 
-  const totalPages = Math.ceil(resultadosFiltrados?.length / itemsPerPage);
+  const totalPages = Math.ceil(resultadosOrdenados.length / itemsPerPage);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
-
   const handleEliminar = async (id) => {
     const res = await client.delete(`/presupuestos/${id}`);
 
-    toast.error("¡Presupuesto eliminado correctamente!", {
+    setDatosPrepuestos((prevPerfiles) =>
+      prevPerfiles.filter((perfil) => perfil.id !== id)
+    );
+
+    toast.error("Presupuesto eliminado correctamente, no podras recuperarlo!", {
       position: "top-center",
       autoClose: 1500,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: {
+        padding: "10px",
+        borderRadius: "15px",
+        boxShadow: "none",
+        border: "1px solid rgb(203 213 225)",
+      },
     });
-
-    setTimeout(() => {
-      location.reload();
-    }, 1500);
-    console.log(res);
   };
 
   return (
@@ -53,11 +65,11 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
             <div className="flex justify-between gap-2">
               <div className="flex flex-col gap-2">
                 <p className="text-slate-700 text-xs font-semibold uppercase">
-                  {g.cliente}
+                  {g?.cliente}
                 </p>
 
                 <p className="text-slate-700 text-xs uppercase">
-                  {g.localidad}
+                  {g?.localidad}
                 </p>
                 <p className="text-slate-700 text-xs uppercase">
                   {new Date(g.created_at).toLocaleDateString("arg")}
@@ -75,9 +87,9 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
               </div>
               <div className="flex flex-col gap-4 items-center justify-center">
                 <span
-                  onClick={() => {
-                    handleEliminar(g?.id);
-                  }}
+                // onClick={() => {
+                //   handleEliminar(g?.id);
+                // }}
                 >
                   <span className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer">
                     ELIMINAR
@@ -96,8 +108,8 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
           </div>
         ))}
       </div>{" "}
-      <div className="overflow-x-scroll border-[1px] border-slate-30 table-auto w-full rounded-xl uppercase shadow md:block max-md:hidden">
-        <table className=" shadow-black/20 w-full rounded-xl">
+      <div className="hover:shadow-md transition-all ease-linear cursor-pointer overflow-x-scroll border-[1px] border-slate-30 table-auto w-full rounded-xl uppercase shadow md:block max-md:hidden">
+        <table className=" shadow-black/20 w-full rounded-xl text-sm uppercase">
           <thead>
             <tr className="text-center">
               <th className="p-3 max-md:text-xs border-b-[1px]">Cliente</th>
@@ -159,8 +171,10 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                 </tr>
               ))
             ) : (
-              <div className="w-full">
-                <span className="font-bold text-sm">No hay nada...</span>
+              <div className="w-full py-5 flex justify-center items-center">
+                <span className="font-bold text-sm py-5">
+                  No hay nada creado, genera un nuevo presupuesto...
+                </span>
               </div>
             )}
           </tbody>
@@ -172,10 +186,10 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
             <button
               key={index}
               type="button"
-              className={`mx-1 px-3 py-1 rounded ${
+              className={`mx-1 px-3 py-1 rounded-xl ${
                 currentPage === index + 1
-                  ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                  : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
+                  ? "bg-green-500 text-white"
+                  : "bg-white border-slate-300 border-[1px] shadow shadow-black/20 max-md:text-xs"
               }`}
               onClick={() => handlePageChange(index + 1)}
             >

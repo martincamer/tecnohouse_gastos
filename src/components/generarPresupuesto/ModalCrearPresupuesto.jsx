@@ -13,7 +13,6 @@ export const ModalCrearPresupuesto = () => {
     crearNuevoPresupuestoSubmit,
     cliente,
     localidad,
-    total,
     setCliente,
     setLocalidad,
     setTotal,
@@ -57,7 +56,6 @@ export const ModalCrearPresupuesto = () => {
 
   return (
     <Menu as="div" className="z-50">
-      {/* <ToastContainer /> */}
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -73,7 +71,7 @@ export const ModalCrearPresupuesto = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
           <div className="min-h-screen px-4 text-center">
@@ -105,7 +103,29 @@ export const ModalCrearPresupuesto = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:w-full inline-block w-2/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="max-md:w-full inline-block w-3/4 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl text-sm">
+                <div className="py-2 flex justify-end items-center px-2">
+                  <p
+                    onClick={closeModal}
+                    className="bg-red-100 text-red-700 py-2 px-2 rounded-xl cursor-pointer"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M6 18 18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </p>
+                </div>
+
                 <form className="space-y-3">
                   <div className="flex flex-col gap-2">
                     <label className="max-md:text-sm">CLIENTE</label>
@@ -113,7 +133,7 @@ export const ModalCrearPresupuesto = () => {
                       value={cliente}
                       onChange={(e) => setCliente(e.target.value)}
                       placeholder="CLIENTE"
-                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm uppercase"
                     />
                   </div>
                   <div className="flex flex-col gap-2">
@@ -122,98 +142,86 @@ export const ModalCrearPresupuesto = () => {
                       value={localidad}
                       onChange={(e) => setLocalidad(e.target.value)}
                       placeholder="LOCALIDAD"
-                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm"
+                      className="w-1/3 py-2 px-3 bg-white rounded-xl shadow border-[1px] border-slate-300 outline-none max-md:w-full max-md:text-sm uppercase"
                     />
                   </div>
                   <div className="flex flex-col gap-2 items-start">
                     <Link
                       onClick={() => openModalSeleccionar()}
-                      className="py-2 px-3 max-md:rounded-xl bg-indigo-100 rounded-lg shadow-black/10 shadow-md border-[1px] border-indigo-500 text-indigo-700 outline-none text-sm"
+                      className="py-3 px-5  text-indigo-700 bg-indigo-100 rounded-2xl outline-none text-sm uppercase"
                     >
                       Seleccionar aberturas
                     </Link>
                   </div>
 
                   <div className="h-[30vh] overflow-y-scroll">
-                    <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20">
-                      <thead>
+                    <table className="min-w-full">
+                      <thead className="border-b-[1px] border-slate-300 uppercase text-sm">
                         <tr className="text-left">
                           {/* <th className="p-3 border-b-[1px]">Numero</th> */}
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             DETALLE
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             COLOR
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             MEDIDA
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             CATEGORIA
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             CANT
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             Precio Und
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             Precio Final
                           </th>
-                          <th className="p-3 border-b-[1px] text-sm max-md:text-xs text-slate-700">
+                          <th className="p-3 text-sm max-md:text-xs text-slate-700">
                             ELIMINAR
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody className="divide-y-[1px] divide-slate-300">
                         {productoSeleccionado?.map((p, index) => (
-                          <tr
-                            key={index}
-                            className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
-                          >
-                            <th
-                              onClick={() => toggleDetail(index)}
-                              className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase"
-                            >
-                              {showDetail[index] ? (
-                                p.detalle
-                              ) : (
-                                <span className="bg-white border-slate-300 border-[1px] rounded-xl py-2 px-2 shadow text-slate-900">
-                                  CLICK
-                                </span>
-                              )}{" "}
+                          <tr key={index} className="cursor-pointer">
+                            <th className="px-3 py-5 text-[13px] uppercase">
+                              {p.detalle}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.color}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.ancho}x{p?.alto}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.categoria}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.cantidad}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-medium text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.precioUnidad?.toLocaleString("es-ar", {
                                 style: "currency",
                                 currency: "ARS",
                                 minimumFractionDigits: 2,
                               })}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-semibold text-indigo-600 text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               {p?.precioFinal?.toLocaleString("es-ar", {
                                 style: "currency",
                                 currency: "ARS",
                                 minimumFractionDigits: 2,
                               })}
                             </th>
-                            <th className="border-b-[1px] py-5 border-gray-300 px-3 max-md:text-xs font-semibold text-red-600 text-[13px] uppercase">
+                            <th className="px-3 py-5 text-[13px] uppercase">
                               <button
                                 onClick={() => eliminarAberturaPorId(p?.id)}
                                 type="button"
-                                className="bg-red-100 bg-red-100/50 px-4 py-1 border-red-500 border-[1px] rounded-lg"
+                                className="rounded-xl text-sm uppercase py-2 px-4 font-normal bg-red-100 text-red-800"
                               >
                                 Eliminar
                               </button>
@@ -225,7 +233,7 @@ export const ModalCrearPresupuesto = () => {
                   </div>
 
                   <div className="flex gap-2">
-                    <p className="text-slate-700 max-md:uppercase max-md:text-sm">
+                    <p className="text-slate-700 max-md:uppercase max-md:text-sm uppercase">
                       Total aberturas
                     </p>
                     <p className="text-indigo-600 font-semibold">
@@ -234,7 +242,7 @@ export const ModalCrearPresupuesto = () => {
                   </div>
 
                   <div className="flex gap-2">
-                    <p className="text-slate-700 max-md:uppercase max-md:text-sm">
+                    <p className="text-slate-700 max-md:uppercase max-md:text-sm uppercase">
                       Total generado
                     </p>
                     <p className="text-indigo-600 font-semibold">
@@ -250,21 +258,12 @@ export const ModalCrearPresupuesto = () => {
                     <button
                       onClick={() => crearNuevoPresupuestoSubmit()}
                       type="button"
-                      className="text-sm bg-indigo-500 px-3 py-2 text-white rounded-lg shadow-lg mt-3"
+                      className="text-sm bg-indigo-500 px-3 py-2 font-normal text-white rounded-lg shadow-lg mt-3"
                     >
                       CREAR PRESUPUESTO
                     </button>
                   </div>
                 </form>
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 duration-300 cursor-pointer max-md:text-xs"
-                    onClick={closeModal}
-                  >
-                    Cerrar Ventana
-                  </button>
-                </div>
               </div>
             </Transition.Child>
           </div>

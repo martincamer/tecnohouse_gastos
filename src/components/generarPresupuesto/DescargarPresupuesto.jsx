@@ -344,7 +344,7 @@ export const DescargarPresupuesto = ({ datos }) => {
                   fontFamily: "Montserrat",
                 }}
               >
-                Presupuesto orginal
+                PRESUPUESTO
               </Text>
               <View
                 style={{

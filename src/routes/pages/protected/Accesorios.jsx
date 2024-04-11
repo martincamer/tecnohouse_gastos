@@ -67,66 +67,90 @@ export const Accesorios = () => {
   };
 
   return (
-    <section className="w-full py-12 px-12 max-md:px-4 flex flex-col gap-20">
-      <div className="bg-white max-md:py-0 max-md:px-0 max-md:border-none max-md:shadow-none py-10 px-10 rounded-xl shadow  border-[1px] border-slate-300">
-        {/*  INTRO */}
+    <section className="w-full py-24 px-5 max-md:px-4">
+      <div className="flex flex-col gap-5 px-5">
         <div className="flex items-center justify-between max-md:flex-col max-md:gap-2">
           <p
             className="
-        text-xl font-semibold text-slate-700 max-md:text-lg max-md:underline"
+        text-xl font-semibold text-slate-700 max-md:text-lg underline"
           >
             ACCESORIOS
           </p>
-          <div className="border-[0.5px] shadow-md shadow-black/20 rounded-lg px-4 py-2 bg-white">
+          <div className="border-[1px] border-slate-300 rounded-xl py-2 px-3 shadow">
             <p
               className="
-        text-lg font-semibold text-slate-700 max-md:text-sm"
+        text-base font-semibold text-indigo-700 max-md:text-sm"
             >
               TOTAL ACCESORIOS CARGADOS: <span>{accesorios.length}</span>
             </p>
           </div>
         </div>
-        {/* FIN INTRO */}
-        <hr className="my-10 bg-indigo-500 h-[2px]" />
-        {/* CATEGORIAS */}
         <div className="flex gap-10 max-md:flex-col max-md:gap-3">
           <button
             onClick={() => openModal()}
-            className="border-gray-300 max-md:text-sm shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
+            className="bg-indigo-100 hover:bg-indigo-600 hover:text-white transition-all ease-linear text-indigo-700 py-3 px-4 rounded-xl text-sm flex gap-2 items-center"
           >
             CREAR NUEVO ACCESORIO
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+              />
+            </svg>
           </button>
 
           <button
             onClick={() => openCrearCategoria()}
-            className="border-gray-300 max-md:text-sm shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
+            className="bg-indigo-100 hover:bg-indigo-600 hover:text-white transition-all ease-linear text-indigo-700 py-3 px-4 rounded-xl text-sm flex gap-2 items-center"
           >
             CREAR NUEVA CATEGORIA
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+              />
+            </svg>
           </button>
-
-          {/* <button
-            // onClick={() => openModal()}
-            className="border-gray-300 max-md:text-sm shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
-          >
-            CREAR NUEVO COLOR
-          </button> */}
 
           <button
             onClick={() => openVerCategorias()}
-            className="border-gray-300 max-md:text-sm shadow rounded-xl border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-indigo-500/10 transition-all ease-in-out duration-400 hover:text-indigo-500 hover:shadow-md hover:shadow-black/10 hover:border-indigo-500"
+            className="bg-indigo-100 hover:bg-indigo-600 hover:text-white transition-all ease-linear text-indigo-700 py-3 px-4 rounded-xl text-sm flex gap-2 items-center"
           >
             VER CATEGORIAS
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M7.5 3.75H6A2.25 2.25 0 0 0 3.75 6v1.5M16.5 3.75H18A2.25 2.25 0 0 1 20.25 6v1.5m0 9V18A2.25 2.25 0 0 1 18 20.25h-1.5m-9 0H6A2.25 2.25 0 0 1 3.75 18v-1.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+            </svg>
           </button>
-
-          {/* <button
-            // onClick={() => openModal()}
-            className="border-gray-300 shadow rounded-md border-[1px]  py-3 px-3 flex gap-10 font-bold cursor-pointer hover:bg-teal-400 transition-all ease-in-out duration-400 hover:text-white hover:shadow-md hover:shadow-black/10 hover:border-teal-400"
-          >
-            VER COLORES
-          </button> */}
         </div>
         {/* FIN CATEGORIAS */}
-        <div className="mt-10 max-md:mt-6 max-md:w-full">
+        <div className="mt-3 w-1/4">
           <Search
             value={search}
             searcher={searcher}
@@ -181,8 +205,8 @@ export const Accesorios = () => {
           ))}
         </div>{" "}
         {/* TABLA DE PERFILES  */}
-        <div className="overflow-x-scroll max-md:hidden md:block">
-          <table className="border-[1px] p-[5px] table-auto w-full rounded uppercase shadow shadow-black/20 mt-12 text-sm bg-white">
+        <div className="overflow-x-scroll max-md:hidden md:block border-[1px] border-slate-300 hover:shadow-md rounded-2xl transition-all ease-linear cursor-pointer">
+          <table className="min-w-full">
             <thead>
               <tr>
                 <th className="p-3 max-md:text-xs text-gray-700">NUMERO</th>
@@ -218,12 +242,15 @@ export const Accesorios = () => {
                     onClick={() => {
                       handleObtenerId(p.id), openEditarPerfil();
                     }}
-                    className="border-[1px] border-gray-300 p-3 max-md:text-xs text-sm uppercase bg-indigo-300 text-indigo-800 hover:bg-indigo-500 hover:text-white transition-all ease-in-out font-semibold cursor-pointer"
+                    className="border-[1px] border-gray-300 p-3 "
                   >
-                    <button>EDITAR</button>
+                    <button className="bg-green-100 text-green-600 rounded-xl py-2 px-4 text-sm font-normal">
+                      EDITAR
+                    </button>
                   </th>
-                  <th className="border-[1px] border-gray-300 p-3 max-md:text-xs text-sm uppercase bg-red-100 text-red-600 hover:text-white hover:bg-red-500 transition-all ease-in-out  font-semibold cursor-pointer">
+                  <th className="border-[1px] border-gray-300 p-3">
                     <button
+                      className="bg-red-100 text-red-800 rounded-xl py-2 px-4 text-sm font-normal"
                       onClick={() => {
                         obtenerParamsId(p.id), openModalEliminar();
                       }}
@@ -238,14 +265,14 @@ export const Accesorios = () => {
           </table>
         </div>
         {totalPages > 1 && (
-          <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
+          <div className="flex flex-wrap justify-center mt-4 mb-4 gap-1 max-md:gap-1">
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
-                className={`mx-1 px-3 py-1 rounded ${
+                className={`mx-1 px-3 py-1 rounded-xl ${
                   currentPage === index + 1
-                    ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                    : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
+                    ? "bg-green-500 text-white"
+                    : "bg-white border-[1px] border-slate-300 shadow shadow-black/20 max-md:text-xs"
                 }`}
                 onClick={() => handlePageChange(index + 1)}
               >

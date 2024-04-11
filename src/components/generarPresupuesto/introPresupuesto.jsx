@@ -2,7 +2,6 @@ import { usePresupuestoContext } from "../../context/PresupuestoProvider";
 
 export const IntroPresupuesto = () => {
   const { resultadosFiltrados } = usePresupuestoContext();
-  console.log(resultadosFiltrados);
 
   const fechaActual = new Date();
 
