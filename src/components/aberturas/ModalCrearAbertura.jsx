@@ -200,7 +200,7 @@ export const ModalCrearNuevaAbertura = () => {
                           onChange={handleChange}
                           value={detalle}
                           placeholder="DETALLE DE LA ABERTURA - PUERTA FRENTE ETC"
-                          className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
+                          className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
                         />
                       </div>
 
@@ -306,7 +306,7 @@ export const ModalCrearNuevaAbertura = () => {
                             onChange={handleChange}
                             value={alto}
                             placeholder="ALTO"
-                            className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none"
+                            className="py-2 px-3 bg-white rounded-xl border-slate-300 max-md:text-xs border-[1px] shadow w-full outline-none uppercase"
                           />
                         </div>
                       </div>
@@ -315,7 +315,7 @@ export const ModalCrearNuevaAbertura = () => {
                       <button
                         type="button"
                         onClick={() => openModalProductos()}
-                        className="text-sm bg-indigo-100 py-2 px-6 rounded-xl text-indigo-600 max-md:text-sm flex gap-2 items-center"
+                        className="text-sm bg-indigo-100 py-2 px-6 rounded-xl text-indigo-600 max-md:text-sm flex gap-2 items-center uppercase"
                       >
                         SELECCIONAR PERFILES
                         <svg
@@ -336,16 +336,26 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="border-slate-300 border-[1px] rounded-2xl">
-                      <table className="min-w-full w-full uppercase">
-                        <thead className="border-b-[2px] border-slate-300">
+                      <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
+                        <thead>
                           <tr>
-                            <th className="p-3 max-md:text-xs">CODIGO</th>
-                            <th className="p-3 max-md:text-xs">COLOR</th>
-                            <th className="p-3 max-md:text-xs">DETALLE</th>
-                            <th className="p-3 max-md:text-xs">CATEGORIA</th>
-                            <th className="p-3 max-md:text-xs">CANTIDAD</th>
-                            <th className="p-3 max-md:text-xs">TOTAL KG</th>
-                            <th className="p-3 max-md:text-xs">ELIMINAR</th>
+                            <th className="py-3 px-3 max-md:text-xs">CODIGO</th>
+                            <th className="py-3 px-3 max-md:text-xs">COLOR</th>
+                            <th className="py-3 px-3 max-md:text-xs">
+                              DETALLE
+                            </th>
+                            <th className="py-3 px-3 max-md:text-xs">
+                              CATEGORIA
+                            </th>
+                            <th className="py-3 px-3 max-md:text-xs">
+                              CANTIDAD
+                            </th>
+                            <th className="py-3 px-3 max-md:text-xs">
+                              TOTAL KG
+                            </th>
+                            <th className="py-3 px-3 max-md:text-xs">
+                              ELIMINAR
+                            </th>
                           </tr>
                         </thead>
                         <tbody className="divide-y-[1px] divide-slate-300">
@@ -414,8 +424,8 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="border-slate-300 border-[1px] rounded-2xl">
-                      <table className="min-w-full w-full uppercase">
-                        <thead className="border-b-[2px] border-slate-300">
+                      <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
+                        <thead>
                           <tr>
                             <th className="p-3 max-md:text-xs">NUMERO</th>
                             <th className="p-3 max-md:text-xs">DETALLE</th>
@@ -481,8 +491,8 @@ export const ModalCrearNuevaAbertura = () => {
                     </div>
 
                     <div className="border-slate-300 border-[1px] rounded-2xl">
-                      <table className="min-w-full w-full uppercase">
-                        <thead className="border-b-[2px] border-slate-300">
+                      <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
+                        <thead>
                           <tr>
                             <th className="p-3 max-md:text-xs">CODIGO</th>
                             <th className="p-3 max-md:text-xs">ANCHO</th>

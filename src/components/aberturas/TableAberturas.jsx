@@ -187,11 +187,32 @@ export const TableAberturas = () => {
   const itemsPerPage = 10; // Cantidad de elementos por página
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Ordenar resultados por categoría y luego por detalle alfabéticamente
+  const sortedResultados = resultados?.sort((a, b) => {
+    if (a.categoria < b.categoria) {
+      return -1;
+    }
+    if (a.categoria > b.categoria) {
+      return 1;
+    }
+    // Si las categorías son iguales, ordenar por detalle
+    if (a.detalle < b.detalle) {
+      return -1;
+    }
+    if (a.detalle > b.detalle) {
+      return 1;
+    }
+    return 0;
+  });
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentResults = resultados?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentResults = sortedResultados?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-  const totalPages = Math.ceil(resultados?.length / itemsPerPage);
+  const totalPages = Math.ceil(sortedResultados?.length / itemsPerPage);
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);

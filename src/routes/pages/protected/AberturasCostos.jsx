@@ -9,6 +9,7 @@ import { useAberturasContext } from "../../../context/AberturasProvider";
 import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
 import ColorFilter from "../../../components/ui/ColorFilter";
+import { ToastContainer } from "react-toastify";
 
 export const AberturasCostos = () => {
   const {
@@ -31,6 +32,7 @@ export const AberturasCostos = () => {
   return (
     <section className="w-full py-24 px-10 max-md:px-4 flex flex-col gap-5 max-md:py-0 max-md:pb-24">
       {/* <AberturasIntro /> */}
+      <ToastContainer />
       <div className="grid grid-cols-4 gap-4">
         <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
           <div>

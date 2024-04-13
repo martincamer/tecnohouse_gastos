@@ -186,6 +186,17 @@ export const AberturasProvider = ({ children }) => {
       },
     });
 
+    setAccesorioSeleccionado([]);
+    setProductoSeleccionado([]);
+    setVidrioSeleccionado([]);
+
+    setDetalle("");
+    setColor("");
+    setCategoria("");
+    setTipo("");
+    setAncho("");
+    setAlto("");
+
     closeModal();
   };
 
