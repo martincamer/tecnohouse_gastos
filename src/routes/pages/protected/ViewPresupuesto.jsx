@@ -32,9 +32,11 @@ export const ViewPresupuesto = () => {
     <section className=" h-full w-full rounded-xl py-12 max-md:overflow-x-scroll">
       <div className="max-md:px-2 flex flex-col gap-2 border-[1px] rounded-xl border-slate-300 px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
         <div>
-          <p className="text-indigo-500 font-bold text-2xl max-md:text-base">
+          <p className="text-indigo-500 font-bold text-2xl max-md:text-base uppercase">
             Presupuesto N°{" "}
-            <span className="text-slate-700">0000-000{datos?.id}</span>
+            <span className="text-slate-700 uppercase">
+              0000-000{datos?.id}
+            </span>
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -42,7 +44,7 @@ export const ViewPresupuesto = () => {
             <PDFDownloadLink
               target="_blank"
               download={false}
-              className="max-md:text-xs text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-[6px] rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
+              className="bg-green-100 text-green-700 py-2 px-5 uppercase rounded-xl text-sm"
               fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
@@ -95,7 +97,7 @@ export const ViewPresupuesto = () => {
       </div>
 
       <div className=" flex flex-col gap-3 border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
-        <div className="relative">
+        <div className="relative uppercase">
           <div className="text-center">
             <p className="text-center text-indigo-700 text-lg">
               Tecnohouse Aberturas
@@ -109,7 +111,7 @@ export const ViewPresupuesto = () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 uppercase">
           <div className="border-b-[1px] border-slate-300 flex justify-between">
             <div className="flex gap-5">
               <p className="text-slate-700">Cliente</p>
@@ -193,7 +195,7 @@ export const ViewPresupuesto = () => {
         ))}
       </div>
 
-      <div className="border-[1px] rounded-xl border-slate-300 px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8">
+      <div className="border-[1px] rounded-xl border-slate-300 px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8 uppercase">
         <div className="text-slate-700 flex flex-row items-center gap-3   w-[1220px] mx-auto h-full">
           Total final{" "}
           <span className="font-semibold text-indigo-700 text-lg">

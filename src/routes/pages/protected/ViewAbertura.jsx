@@ -216,7 +216,7 @@ export const ViewAbertura = () => {
   return (
     <section className="w-full py-24 px-5 max-md:px-4 flex flex-col gap-8 max-md:py-5 max-md:pb-44">
       <div>
-        <article className="flex items-start gap-6 max-md:flex-col max-md:gap-4">
+        <article className="flex mb-5 items-start gap-6 max-md:flex-col max-md:gap-4">
           <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <p className="text-indigo-500 font-semibold text-base uppercase">
               DETALLE:{" "}
