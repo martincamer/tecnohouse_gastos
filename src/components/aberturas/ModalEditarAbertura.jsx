@@ -624,7 +624,9 @@ export const ModalEditarAbertura = ({ isOpen, closeModal, obtenerId }) => {
 
                     <div className="flex items-start">
                       <button
-                        onClick={() => handleSubmitEditarAbertura(obtenerId)}
+                        onClick={() =>
+                          handleSubmitEditarAbertura(obtenerId, closeModal)
+                        }
                         type="button"
                         className="font-bold bg-indigo-500 text-white py-3 px-8 rounded-xl text-center shadow max-md:text-sm flex gap-2 items-center"
                       >

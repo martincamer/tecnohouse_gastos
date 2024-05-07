@@ -142,7 +142,7 @@ export const AberturasProvider = ({ children }) => {
     };
   });
 
-  const handleSubmitEditarAbertura = async (id) => {
+  const handleSubmitEditarAbertura = async (id, closeModal) => {
     try {
       // Editar la abertura existente
       const res = await client.put(`/aberturas/${id}`, {
@@ -161,7 +161,7 @@ export const AberturasProvider = ({ children }) => {
 
       console.log(res);
 
-      toast.success("¡Abertura creada correctamente, crea la siguiente!", {
+      toast.success("¡Abertura editada correctamente, crea la siguiente!", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: true,
@@ -178,6 +178,19 @@ export const AberturasProvider = ({ children }) => {
         },
       });
 
+      setAccesorioSeleccionado([]);
+      setProductoSeleccionado([]);
+      setVidrioSeleccionado([]);
+
+      setDetalle("");
+      setColor("");
+      setCategoria("");
+      setTipo("");
+      setAncho("");
+      setAlto("");
+
+      closeModal();
+
       setTimeout(() => {
         location.reload();
       }, 4000);
@@ -188,7 +201,6 @@ export const AberturasProvider = ({ children }) => {
   };
 
   const handleSubmitAbertura = async () => {
-    // try {
     // Crear factura nueva
     const res = await crearAbertura({
       detalle: detalle,
