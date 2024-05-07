@@ -7,7 +7,7 @@ import { PDFDownloadLink } from "@react-pdf/renderer";
 import { DownloadPDFButton } from "../pdf/DownloadPDFButton";
 import * as XLSX from "xlsx";
 
-export const TableAberturas = () => {
+export const TableAberturas = ({ openModal, handleId }) => {
   const {
     obtenerAberturas,
     handleEliminarAbertura,
@@ -437,6 +437,15 @@ export const TableAberturas = () => {
                   {g.ancho}x{g.alto}
                 </th>{" "}
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2">
+                  <p
+                    onClick={() => {
+                      handleId(g.id), openModal();
+                    }}
+                    className="cursor-pointer py-2 px-4 rounded-xl text-green-700 bg-green-100 flex gap-2 items-center"
+                  >
+                    Editar
+                  </p>
+
                   <p
                     onClick={() => handleEliminarAbertura(g.id)}
                     className="cursor-pointer py-2 px-4 rounded-xl text-red-700 bg-red-100 flex gap-2 items-center"

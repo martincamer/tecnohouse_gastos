@@ -480,7 +480,6 @@ export const ViewAbertura = () => {
               {" "}
               PRECIO FINAL
             </p>
-            <p className="text-gray-600 font-semibold w-[250px]"> EDITAR</p>
           </div>
           {abertura?.datos?.accesoriosSelect?.map((a, index) => (
             <div
@@ -506,31 +505,6 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
-              <div>
-                <button
-                  onClick={() => {
-                    handleObtenerId(a.id), openModal();
-                  }}
-                  type="button"
-                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
-                >
-                  Editar
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
           ))}
         </div>
@@ -555,7 +529,6 @@ export const ViewAbertura = () => {
             <p className="text-gray-600 font-semibold w-[350px]">
               PRECIO X UNIDAD
             </p>
-            <p className="text-gray-600 font-semibold w-[350px]">ACCIONES</p>
           </div>
           {perfilesConPrecioFinal?.map((perfil) => (
             <div
@@ -587,28 +560,6 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
-              <div>
-                <button
-                  type="button"
-                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
-                >
-                  Editar
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
           ))}
         </div>
@@ -631,7 +582,6 @@ export const ViewAbertura = () => {
             <p className="text-gray-600 font-semibold w-[300px]">
               PRECIO FINAL
             </p>
-            <p className="text-gray-600 font-semibold w-[300px]">EDITAR</p>
           </div>
           {vidriosConPrecioFinal?.map((perfil) => (
             <div
@@ -654,28 +604,6 @@ export const ViewAbertura = () => {
                   minimumFractionDigits: 2,
                 })}
               </p>
-              <div>
-                <button
-                  type="button"
-                  className="uppercase text-sm text-green-700 py-2 px-4 rounded-xl bg-green-100 hover:shadow-md transition-all ease-linear flex gap-2 items-center justify-center"
-                >
-                  Editar
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
           ))}
         </div>

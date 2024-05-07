@@ -32,22 +32,12 @@ export const Navbar = () => {
         } mx-auto`}
       >
         <div className="flex gap-4 items-center max-md:hidden">
-          {/* <Link
-            to={"/"}
-            className="text-2xl font-semibold text-indigo-500 max-md:text-lg"
-          >
-            Tecnohouse <span className="text-gray-700">Aberturas.</span>
-          </Link> */}
           <div
             onClick={() => setClickProvider(!clickProvider)}
             className="cursor-pointer"
           >
             {!clickProvider ? (
-              <BiMenu
-                // onClick={handleClick}
-
-                className="text-primary text-[40px] hover:bg-white rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:block hidden"
-              />
+              <BiMenu className="text-primary text-[40px] hover:bg-white rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:block hidden" />
             ) : (
               <IoClose className="text-primary text-[38px] hover:bg-white rounded-full py-[5px] transition-all ease-in-out duration-300 max-md:block hidden" />
             )}
@@ -56,7 +46,7 @@ export const Navbar = () => {
         {isAuth ? (
           ""
         ) : (
-          <div className="font-normal text-2xl uppercase text-indigo-500">
+          <div className="font-normal text-2xl uppercase text-indigo-500 hidden">
             Administración De Gastos
           </div>
         )}

@@ -10,6 +10,8 @@ import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
 import ColorFilter from "../../../components/ui/ColorFilter";
 import { ToastContainer } from "react-toastify";
+import { ModalEditarAbertura } from "../../../components/aberturas/ModalEditarAbertura";
+import { useState } from "react";
 
 export const AberturasCostos = () => {
   const {
@@ -28,6 +30,16 @@ export const AberturasCostos = () => {
   const { accesorios } = useAccesoriosContext();
 
   const fechaActual = new Date();
+
+  const [obtenerId, setObtenerId] = useState("");
+
+  const handleId = (id) => setObtenerId(id);
+
+  const [isOpen, setOpen] = useState(false);
+
+  const openModal = () => setOpen(true);
+
+  const closeModal = () => setOpen(false);
 
   return (
     <section className="w-full py-24 px-10 max-md:px-4 flex flex-col gap-5 max-md:py-0 max-md:pb-24">
@@ -194,8 +206,13 @@ export const AberturasCostos = () => {
           handleColorChange={handleColorChange}
         />
       </div>
-      <TableAberturas />
+      <TableAberturas openModal={openModal} handleId={handleId} />
       <ModalCrearNuevaAbertura />
+      <ModalEditarAbertura
+        obtenerId={obtenerId}
+        closeModal={closeModal}
+        isOpen={isOpen}
+      />
       <ModalPrecios />
     </section>
   );

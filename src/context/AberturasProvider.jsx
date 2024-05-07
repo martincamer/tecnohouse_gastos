@@ -7,6 +7,7 @@ import {
   obtenerAberturasApi,
 } from "../api/aberturas.api";
 import { toast } from "react-toastify";
+import client from "../api/axios";
 
 export const AberturasContext = createContext();
 
@@ -141,7 +142,50 @@ export const AberturasProvider = ({ children }) => {
     };
   });
 
-  const result = [vidrioSelect, accesoriosSelect, perfilesSelect];
+  const handleSubmitEditarAbertura = async (id) => {
+    try {
+      // Editar la abertura existente
+      const res = await client.put(`/aberturas/${id}`, {
+        detalle: detalle,
+        color: color,
+        categoria: categoria,
+        ancho: ancho,
+        alto: alto,
+        tipo: tipo,
+        datos: {
+          perfilesSelect,
+          accesoriosSelect,
+          vidrioSelect,
+        },
+      });
+
+      console.log(res);
+
+      toast.success("¡Abertura creada correctamente, crea la siguiente!", {
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: {
+          padding: "10px",
+          borderRadius: "15px",
+          boxShadow: "none",
+          border: "1px solid rgb(203 213 225)",
+        },
+      });
+
+      setTimeout(() => {
+        location.reload();
+      }, 4000);
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al crear/editar la abertura.");
+    }
+  };
 
   const handleSubmitAbertura = async () => {
     // try {
@@ -490,6 +534,16 @@ export const AberturasProvider = ({ children }) => {
         deleteVidrio,
         colorSeleccionado,
         handleColorChange,
+        setVidrioSeleccionado,
+        setProductoSeleccionado,
+        setAccesorioSeleccionado,
+        handleSubmitEditarAbertura,
+        setColor,
+        setTipo,
+        setAncho,
+        setAlto,
+        setCategoria,
+        setDetalle,
       }}
     >
       {children}

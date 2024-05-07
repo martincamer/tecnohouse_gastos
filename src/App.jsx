@@ -6,12 +6,7 @@ import { Navbar } from "./components/Navbar";
 import { NotFound } from "./routes/pages/protected/NotFound";
 import { Login } from "./routes/pages/Login";
 import { Register } from "./routes/pages/Register";
-import { Home } from "./routes/pages/protected/Home";
-import { Gastos } from "./routes/pages/protected/Gastos";
 import { ViewGasto } from "./routes/pages/protected/ViewGasto";
-import { GastosProvider } from "./context/GastosProvider";
-import { Ventas } from "./routes/pages/protected/Ventas";
-import { VentasProvider } from "./context/VentasProvider";
 import { ViewVenta } from "./routes/pages/protected/ViewVenta";
 import { AberturasCostos } from "./routes/pages/protected/AberturasCostos";
 import { AberturasProvider } from "./context/AberturasProvider";
@@ -55,8 +50,6 @@ function App() {
           >
             <Route
               element={
-                // <GastosProvider>
-                //   <VentasProvider>
                 <AberturasProvider>
                   <PerfilesProvider>
                     <AccesoriosProvider>
@@ -72,15 +65,12 @@ function App() {
                     </AccesoriosProvider>
                   </PerfilesProvider>
                 </AberturasProvider>
-                //   </VentasProvider>
-                // </GastosProvider>
               }
             >
-              {/* <Route index path="/" element={<Home />} /> */}
+              <Route index path="/" element={<AberturasCostos />} />
               <Route path="/perfiles" element={<Perfiles />} />
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />
-              <Route path="/" element={<AberturasCostos />} />
               <Route path="/gastos/:id" element={<ViewGasto />} />
               <Route path="/ventas/:id" element={<ViewVenta />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
