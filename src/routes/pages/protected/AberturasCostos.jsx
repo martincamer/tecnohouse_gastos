@@ -43,10 +43,9 @@ export const AberturasCostos = () => {
 
   return (
     <section className="w-full py-24 px-10 max-md:px-4 flex flex-col gap-5 max-md:py-0 max-md:pb-24">
-      {/* <AberturasIntro /> */}
       <ToastContainer />
-      <div className="grid grid-cols-4 gap-4">
-        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+      <div className="grid grid-cols-4 gap-4 mb-5">
+        <article class="rounded-xl shadow-xl bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
           <div>
             <p class="text-sm text-gray-500 uppercase max-md:text-xs">
               Total aberturas Cargadas en el sistema
@@ -85,7 +84,7 @@ export const AberturasCostos = () => {
             </div>
           </div>
         </article>
-        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+        <article class="rounded-xl shadow-xl bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
           <div>
             <p class="text-sm text-gray-500 uppercase max-md:text-xs">
               Total perfiles cargados en el sistema
@@ -124,7 +123,7 @@ export const AberturasCostos = () => {
             </div>
           </div>
         </article>
-        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+        <article class="rounded-xl shadow-xl bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
           <div>
             <p class="text-sm text-gray-500 uppercase max-md:text-xs">
               Total accesorios cargados en el sistema
@@ -163,7 +162,7 @@ export const AberturasCostos = () => {
             </div>
           </div>
         </article>
-        <article class="rounded-xl border border-slate-300 bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
+        <article class="rounded-xl shadow-xl bg-white p-6 h-full hover:shadow-md transition-all ease-linear cursor-pointer justify-center flex flex-col gap-1">
           <div>
             <p class="text-sm text-gray-500 uppercase max-md:text-xs ">
               MES Y DIA

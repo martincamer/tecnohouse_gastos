@@ -30,7 +30,7 @@ export const ViewPresupuesto = () => {
 
   return (
     <section className=" h-full w-full rounded-xl py-12 max-md:overflow-x-scroll">
-      <div className="max-md:px-2 flex flex-col gap-2 border-[1px] rounded-xl border-slate-300 px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
+      <div className="bg-white max-md:px-2 flex flex-col gap-2 shadow-xl rounded-xl px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
         <div>
           <p className="text-indigo-500 font-bold text-2xl max-md:text-base uppercase">
             Presupuesto N°{" "}
@@ -39,30 +39,22 @@ export const ViewPresupuesto = () => {
             </span>
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 mt-2">
           <div>
             <PDFDownloadLink
               target="_blank"
               download={false}
-              className="bg-green-100 text-green-700 py-2 px-5 uppercase rounded-xl text-sm"
+              className="bg-green-500 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
               fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
               Descargar presupuesto
             </PDFDownloadLink>
           </div>
-          {/* <div>
-            <button
-              className="max-md:text-xs text-sm bg-indigo-100 border-indigo-500 border-[1px] px-4 py-1 rounded-lg text-indigo-700 transiton-all ease-in-out duration-200 cursor-pointer"
-              type="button"
-            >
-              Ver presupuesto
-            </button>
-          </div> */}
         </div>
       </div>
 
-      <div className="flex flex-row justify-between border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className="flex flex-row justify-between shadow-xl bg-white rounded-xl px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="flex flex-col gap-2">
           <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3 max-md:text-sm">
             TOTAL PRESUPUESTADO
@@ -90,13 +82,13 @@ export const ViewPresupuesto = () => {
 
         <div className="flex flex-col gap-2">
           <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3 max-md:text-sm">
-            ESTADO
+            {/* ESTADO */}
             <span className="text-slate-700 text-base">{""}</span>
           </p>
         </div>
       </div>
 
-      <div className=" flex flex-col gap-3 border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className=" flex flex-col gap-3 rounded-xl shadow-xl bg-white px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="relative uppercase">
           <div className="text-center">
             <p className="text-center text-indigo-700 text-lg">
@@ -141,7 +133,7 @@ export const ViewPresupuesto = () => {
         </div>
       </div>
 
-      <div className=" flex flex-col gap-3 border-[1px] rounded-xl border-slate-300 px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
+      <div className=" flex flex-col gap-3 rounded-xl shadow-xl bg-white px-10 py-5 mb-12 mt-8 w-[1220px] mx-auto h-full">
         <div className="flex gap-5">
           <div className="w-1/3 font-bold text-slate-700 text-sm">DETALLE</div>
           <div className="w-1/5 font-bold text-slate-700 text-sm">COLOR</div>
@@ -195,7 +187,7 @@ export const ViewPresupuesto = () => {
         ))}
       </div>
 
-      <div className="border-[1px] rounded-xl border-slate-300 px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8 uppercase">
+      <div className="bg-white shadow-xl rounded-xl px-10 py-5 w-[1220px] mx-auto h-full mb-12 mt-8 uppercase">
         <div className="text-slate-700 flex flex-row items-center gap-3   w-[1220px] mx-auto h-full">
           Total final{" "}
           <span className="font-semibold text-indigo-700 text-lg">

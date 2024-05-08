@@ -59,7 +59,7 @@ export const ModalCrearPresupuesto = () => {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
+          className="fixed inset-0 z-10 overflow-y-auto h-full"
           onClose={closeModal}
         >
           <Transition.Child
@@ -74,7 +74,7 @@ export const ModalCrearPresupuesto = () => {
             <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
-          <div className="min-h-screen px-4 text-center">
+          <div className="h-full px-4 text-center w-full">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -84,10 +84,9 @@ export const ModalCrearPresupuesto = () => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" />
+              <Dialog.Overlay className="fixed inset-0 bg-white h-full max-h-full" />
             </Transition.Child>
 
-            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -103,7 +102,7 @@ export const ModalCrearPresupuesto = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:w-full inline-block w-3/4 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl text-sm">
+              <div className="w-full h-full inline-block py-2 px-2 text-left align-middle transition-all transform bg-white space-y-6">
                 <div className="py-2 flex justify-end items-center px-2">
                   <p
                     onClick={closeModal}
@@ -128,7 +127,9 @@ export const ModalCrearPresupuesto = () => {
 
                 <form className="space-y-3">
                   <div className="flex flex-col gap-2">
-                    <label className="max-md:text-sm">CLIENTE</label>
+                    <label className="max-md:text-sm">
+                      CLIENTE/NOMBRE-APELLIDO
+                    </label>
                     <input
                       value={cliente}
                       onChange={(e) => setCliente(e.target.value)}
@@ -137,7 +138,9 @@ export const ModalCrearPresupuesto = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-2">
-                    <label className="max-md:text-sm">LOCALIDAD</label>
+                    <label className="max-md:text-sm">
+                      LOCALIDAD/PROVINCIA
+                    </label>
                     <input
                       value={localidad}
                       onChange={(e) => setLocalidad(e.target.value)}
@@ -154,7 +157,7 @@ export const ModalCrearPresupuesto = () => {
                     </Link>
                   </div>
 
-                  <div className="h-[30vh] overflow-y-scroll">
+                  <div className="h-[50vh] overflow-y-scroll scroll-bar">
                     <table className="min-w-full">
                       <thead className="border-b-[1px] border-slate-300 uppercase text-sm">
                         <tr className="text-left">
@@ -254,7 +257,7 @@ export const ModalCrearPresupuesto = () => {
                     </p>
                   </div>
 
-                  <div>
+                  <div className="mb-5">
                     <button
                       onClick={() => crearNuevoPresupuestoSubmit()}
                       type="button"

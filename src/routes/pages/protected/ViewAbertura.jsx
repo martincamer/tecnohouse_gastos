@@ -217,7 +217,7 @@ export const ViewAbertura = () => {
     <section className="w-full py-24 px-5 max-md:px-4 flex flex-col gap-8 max-md:py-5 max-md:pb-44">
       <div>
         <article className="flex mb-5 items-start gap-6 max-md:flex-col max-md:gap-4">
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
+          <div className="bg-white py-10 px-10 shadow-xl transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <p className="text-indigo-500 font-semibold text-base uppercase">
               DETALLE:{" "}
               <span className="font-normal text-gray-900">
@@ -254,7 +254,7 @@ export const ViewAbertura = () => {
             </p>
           </div>
 
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
+          <div className="bg-white py-10 px-10 shadow-xl transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <p className="text-indigo-500 font-semibold text-base uppercase">
               TOTAL EN ALUMINIO:{" "}
               <span className="font-normal text-gray-900">
@@ -321,8 +321,7 @@ export const ViewAbertura = () => {
               </span>
             </p>
           </div>
-
-          <div className="bg-gray-100/20 py-10 px-10 border-[1px] border-gray-300 hover:shadow-md transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl gap-4 flex flex-col">
+          <div className="bg-white py-10 px-10 shadow-xl transition-all ease-linears cursor-pointer shadow-black/20 rounded-2xl space-y-2 h-full">
             <div className="h-full space-y-[0.2px]">
               {precios.map((p) => (
                 <>
@@ -464,7 +463,7 @@ export const ViewAbertura = () => {
           </div>
         </article>
 
-        <div className="flex flex-col  max-w-[1350px] items-start max-md:overflow-x-scroll max-md:w-full px-5">
+        <div className="flex flex-col  max-w-[1350px] items-start max-md:overflow-x-scroll max-md:w-full px-10 bg-white py-10 rounded-xl shadow-xl">
           <div className="mb-7 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             ACCESORIOS DE LA ABERTURA
           </div>
@@ -509,13 +508,7 @@ export const ViewAbertura = () => {
           ))}
         </div>
 
-        <div className="mt-6 mx-6">
-          <button className="text-sm text-indigo-600 py-2 px-4 rounded-xl bg-indigo-100 hover:shadow-md transition-all ease-linear">
-            AGREGAR ACCESORIO
-          </button>
-        </div>
-
-        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full px-5 mt-8">
+        <div className=" flex flex-col w-full items-start max-w-[1350px] px-10 bg-white py-10 rounded-xl shadow-xl mt-5">
           <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             PERFILES DE LA ABERTURA
           </div>
@@ -564,13 +557,7 @@ export const ViewAbertura = () => {
           ))}
         </div>
 
-        <div className="mt-6 mx-6">
-          <button className="text-sm text-indigo-600 py-2 px-4 rounded-xl bg-indigo-100 hover:shadow-md transition-all ease-linear">
-            AGREGAR PERFIL
-          </button>
-        </div>
-
-        <div className="flex flex-col w-full items-start max-w-[1350px] max-md:overflow-x-scroll max-md:w-full px-5 mt-8">
+        <div className="flex flex-col w-full items-start max-w-[1350px] px-10 bg-white py-10 rounded-xl shadow-xl mt-5">
           <div className="mb-6 text-lg font-bold text-gray-800 border-b-2 border-indigo-400">
             VIDRIOS DE LA ABERTURA
           </div>

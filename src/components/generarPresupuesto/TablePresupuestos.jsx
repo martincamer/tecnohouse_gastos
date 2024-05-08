@@ -108,50 +108,99 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
           </div>
         ))}
       </div>{" "}
-      <div className="hover:shadow-md transition-all ease-linear cursor-pointer overflow-x-scroll border-[1px] border-slate-30 table-auto w-full rounded-xl uppercase shadow md:block max-md:hidden">
-        <table className=" shadow-black/20 w-full rounded-xl text-sm uppercase">
+      <div className="transition-all ease-linear cursor-pointer w-full rounded-xl uppercase md:block max-md:hidden bg-white shadow-xl">
+        <table className="w-full rounded-xl text-sm uppercase table">
           <thead>
-            <tr className="text-center">
-              <th className="p-3 max-md:text-xs border-b-[1px]">Cliente</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Localidad</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">fecha</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Cantidades</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Total</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]">Eliminar</th>
-              <th className="p-3 max-md:text-xs border-b-[1px]"></th>
+            <tr className="">
+              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
+                Cliente
+              </th>
+              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
+                Localidad
+              </th>
+              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
+                fecha
+              </th>
+              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
+                Cantidades
+              </th>
+              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
+                Total
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-3">
             {currentResults.length > 0 ? (
               currentResults?.map((g) => (
-                <tr
-                  className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-center"
-                  key={g.id}
-                >
-                  <th className="border-b-[1px] py-5 max-md:text-xs  border-gray-300 px-3 font-medium text-sm uppercase">
+                <tr className="cursor-pointer" key={g.id}>
+                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
                     {g?.cliente}
                   </th>
-                  <th className="border-b-[1px] py-5 max-md:text-xs  border-gray-300 px-3 font-medium text-sm uppercase">
+                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
                     {g?.localidad}
                   </th>
-                  <th className="border-b-[1px] py-5 max-md:text-xs  border-gray-300 px-3 font-medium text-sm uppercase">
+                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
                     {new Date(g.created_at).toLocaleDateString("arg")}
                   </th>
-                  <th className="border-b-[1px] py-5 max-md:text-xs  border-gray-300 px-3 text-indigo-700 text-sm uppercase font-semibold">
+                  <th className="py-5 max-md:text-xs px-3 text-indigo-700 text-sm uppercase font-semibold">
                     {g?.totalcantidad}
                   </th>
-                  <th className="border-b-[1px] py-5 max-md:text-xs  border-gray-300 px-3 text-indigo-700 text-sm uppercase font-semibold">
+                  <th className="py-5 max-md:text-xs px-3 text-indigo-700 text-sm uppercase font-semibold">
                     {Number(g?.total).toLocaleString("es-ar", {
                       style: "currency",
                       currency: "ARS",
                       minimumFractionDigits: 2,
                     })}
                   </th>
-                  <th
+                  <th>
+                    <div className="dropdown dropdown-bottom dropdown-end">
+                      <div
+                        tabIndex={0}
+                        role="button"
+                        className="hover:bg-gray-300 py-2 px-2 transition-all text-gray-600 rounded-md"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="currentColor"
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                          />
+                        </svg>
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52 border capitalize"
+                      >
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              handleEliminar(g?.id);
+                            }}
+                          >
+                            Eliminar presupuesto
+                          </button>
+                        </li>
+                        <li>
+                          <Link to={`/presupuesto/${g.id}`}>
+                            Ver presupuesto
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </th>
+                  {/* <th
                     onClick={() => {
                       handleEliminar(g?.id);
                     }}
-                    className="border-b-[1px] border-gray-300 px-3 max-md:text-xs  font-medium text-sm uppercase"
+                    className="px-3 max-md:text-xs  font-medium text-sm uppercase"
                   >
                     <p className="border-red-200 border-[1px] rounded-xl shadow py-2 max-md:px-2 bg-red-100 text-center text-red-800 cursor-pointer">
                       ELIMINAR
@@ -159,7 +208,7 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                   </th>
                   <th
                     onClick={() => obtenerParamsId(g.id)}
-                    className="border-b-[1px] border-gray-300 px-3 max-md:text-xs "
+                    className="px-3 max-md:text-xs "
                   >
                     <Link
                       className="bg-indigo-500 rounded-xl shadow px-6 py-2  text-center text-white cursor-pointer"
@@ -167,7 +216,7 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                     >
                       Ver
                     </Link>
-                  </th>
+                  </th> */}
                 </tr>
               ))
             ) : (

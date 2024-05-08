@@ -114,8 +114,8 @@ export const Sidebar = () => {
             <div
               key={path}
               className={`${location.pathname === path && "bg-indigo-500"} ${
-                click ? "px-4 py-3" : "py-2 px-4 rounded-none"
-              } w-full py-3 px-4 rounded-xl max-md:px-4`}
+                click ? "px-4 py-3" : "py-2 px-4 rounded-none  mx-2"
+              } py-3 px-4 rounded-xl max-md:px-4`}
             >
               <div className="t group flex items-center max-md:justify-center gap-4  transition-all ease duration-300">
                 <Link

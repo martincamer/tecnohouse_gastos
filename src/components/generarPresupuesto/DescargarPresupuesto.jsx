@@ -238,60 +238,6 @@ export const DescargarPresupuesto = ({ datos }) => {
                 }}
                 src={logo}
               />
-              {/* <Text
-                style={{
-                  fontSize: "10px",
-                  fontWeight: "bold",
-                  fontFamily: "Montserrat",
-                  textTransform: "capitalize",
-                }}
-              >
-              </Text> */}
-              {/* <View
-                style={{
-                  fontSize: "8px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "row",
-                  gap: "3px",
-                }}
-              >
-                <Text style={{ fontSize: "7px", fontFamily: "Montserrat" }}>
-                  <Text
-                    style={{
-                      fontSize: "7px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "semibold",
-                    }}
-                  >
-                    Empresa:
-                  </Text>{" "}
-                  Tecnohouse
-                </Text>
-              </View>
-              <View
-                style={{
-                  fontSize: "6px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "row",
-                  gap: "3px",
-                }}
-              >
-                <Text style={{ fontSize: "7px", fontFamily: "Montserrat" }}>
-                  <Text
-                    style={{
-                      fontSize: "7px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "semibold",
-                    }}
-                  >
-                    Email:
-                  </Text>{" "}
-                </Text>
-              </View> */}
             </View>
             <View
               style={{
@@ -428,37 +374,10 @@ export const DescargarPresupuesto = ({ datos }) => {
                       fontSize: "8px",
                       fontFamily: "Montserrat",
                       fontWeight: "semibold",
-                    }}
-                  >
-                    DOMICILIO
-                  </Text>{" "}
-                  <Text
-                    style={{
-                      fontSize: "8px",
-                      fontFamily: "Montserrat",
-                      textTransform: "uppercase",
-                      color: "#000",
-                    }}
-                  >
-                    {/* {unicoPresupuesto?.clientes?.domicilio}{" "} */}-
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "3px",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: "8px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "semibold",
                       textTransform: "capitalize",
                     }}
                   >
-                    LOCALIDAD
+                    LOCALIDAD/PROVINCIA
                   </Text>{" "}
                   <Text
                     style={{

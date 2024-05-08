@@ -21,7 +21,7 @@ export const GenerarPresupuesto = () => {
       <ToastContainer />
       <IntroPresupuesto />
       <CrearNuevosPresupuestosCats />
-      <div className="border-gray-300 rounded-xl border-[1px] shadow-md shadow-black/20 py-5 px-10 flex gap-12 items-center max-md:flex-col max-md:gap-2 max-md:items-start max-md:w-full max-md:px-4">
+      <div className="bg-white rounded-xl shadow-xl shadow-black/10 py-5 px-5 flex gap-12 items-center max-md:flex-col max-md:gap-2 max-md:items-start max-md:w-full max-md:px-4">
         <div className="flex flex-col gap-2">
           <label className="text-indigo-700 uppercase max-md:w-full max-md:text-xs">
             Año

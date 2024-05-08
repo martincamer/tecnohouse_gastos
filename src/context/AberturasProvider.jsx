@@ -159,8 +159,6 @@ export const AberturasProvider = ({ children }) => {
         },
       });
 
-      console.log(res);
-
       toast.success("¡Abertura editada correctamente, crea la siguiente!", {
         position: "top-center",
         autoClose: 1500,

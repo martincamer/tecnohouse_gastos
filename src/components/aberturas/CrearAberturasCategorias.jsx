@@ -11,7 +11,7 @@ export const CrearAberturasCategorias = (/*{ results }*/) => {
   const { openModalPrecios } = usePreciosContext();
 
   return (
-    <div className="py-4 px-10 flex gap-12 max-md:border-[1px] max-md:border-slate-300 max-md:shadow max-md:rounded-xl max-md:py-4 mx-auto w-full bg-white max-md:flex-col max-md:items-start max-md:px-4 max-md:gap-2">
+    <div className="py-4 px-4 flex gap-2 bg-white shadow-xl mb-3 rounded-xl">
       <button
         onClick={() => openModal()}
         className="bg-indigo-100 text-indigo-600 py-2 px-4 rounded-2xl text-sm flex gap-2 items-center hover:bg-indigo-500 hover:text-white hover:shadow-md transition-all ease-linear"

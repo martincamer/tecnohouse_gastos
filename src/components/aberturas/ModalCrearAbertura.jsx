@@ -112,7 +112,7 @@ export const ModalCrearNuevaAbertura = () => {
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog
           as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
+          className="fixed inset-0 z-10 overflow-y-auto h-full"
           onClose={closeModal}
         >
           <Transition.Child
@@ -127,7 +127,7 @@ export const ModalCrearNuevaAbertura = () => {
             <div className="fixed inset-0 bg-black bg-opacity-10" />
           </Transition.Child>
 
-          <div className="min-h-screen px-4 text-center">
+          <div className="h-full px-4 text-center w-full">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -137,10 +137,9 @@ export const ModalCrearNuevaAbertura = () => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0" />
+              <Dialog.Overlay className="fixed inset-0 bg-white h-full max-h-full" />
             </Transition.Child>
 
-            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -156,7 +155,7 @@ export const ModalCrearNuevaAbertura = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="w-4/5 max-md:w-full inline-block p-6 my-8 text-left align-middle transition-all transform bg-white shadow-3xl rounded-2xl space-y-6">
+              <div className="w-full h-full inline-block py-2 px-2 text-left align-middle transition-all transform bg-white shadow-3xl space-y-6">
                 <div className="py-2 flex justify-end items-center px-2">
                   <p
                     onClick={closeModal}
@@ -335,7 +334,7 @@ export const ModalCrearNuevaAbertura = () => {
                       </button>
                     </div>
 
-                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                    <div className="border-slate-300 border-[1px] rounded-2xl h-[30vh] overflow-y-scroll scroll-bar">
                       <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
                         <thead>
                           <tr>
@@ -423,7 +422,7 @@ export const ModalCrearNuevaAbertura = () => {
                       </button>
                     </div>
 
-                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                    <div className="border-slate-300 border-[1px] rounded-2xl h-[30vh] overflow-y-scroll scroll-bar">
                       <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
                         <thead>
                           <tr>
@@ -490,7 +489,7 @@ export const ModalCrearNuevaAbertura = () => {
                       </button>
                     </div>
 
-                    <div className="border-slate-300 border-[1px] rounded-2xl">
+                    <div className="border-slate-300 border-[1px] rounded-2xl scroll-bar">
                       <table className="min-w-full w-full uppercase divide-y-2 divide-slate-300">
                         <thead>
                           <tr>
@@ -598,7 +597,7 @@ export const ModalCrearNuevaAbertura = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-start">
+                    <div className="flex items-start mb-3">
                       <button
                         onClick={() => handleSubmitAbertura()}
                         type="button"

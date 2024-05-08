@@ -406,20 +406,21 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </div>
         ))}
       </div>{" "}
-      <div className="overflow-x-scroll max-md:hidden md:block border-slate-300 border-[1px] rounded-2xl hover:shadow-md transition-all ease-linear">
-        <table className="uppercase min-w-full">
-          <thead className="border-b-[2px] border-slate-300">
+      <div className="max-md:hidden md:block rounded-xl shadow-xl hover:shadow-md transition-all ease-linear bg-white">
+        <table className="uppercase min-w-full table">
+          <thead className="">
             <tr>
               <th className="px-4 py-4 text-sm text-left">Tipo</th>
               <th className="px-4 py-4 text-sm text-left">Detalle</th>
               <th className="px-4 py-4 text-sm text-left">Color</th>
               <th className="px-4 py-4 text-sm text-left">Categoria</th>
               <th className="px-4 py-4 text-sm text-left">AnchoXAlto</th>
+              <th className="px-4 py-4 text-sm text-left">Precio</th>
               <th className="px-4 py-4 text-sm text-left">Acciones</th>
             </tr>
           </thead>
-          <tbody className="divide-y-[1px] divide-gray-300">
-            {currentResults?.map((g) => (
+          <tbody className="">
+            {currentResults?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
@@ -436,61 +437,96 @@ export const TableAberturas = ({ openModal, handleId }) => {
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.ancho}x{g.alto}
                 </th>{" "}
+                <th>
+                  {aberturasConPreciosFinales[
+                    index
+                  ]?.totalConAumento.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}
+                </th>
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2">
-                  <p
-                    onClick={() => {
-                      handleId(g.id), openModal();
-                    }}
-                    className="cursor-pointer py-2 px-4 rounded-xl text-green-700 bg-green-100 flex gap-2 items-center"
-                  >
-                    Editar
-                  </p>
+                  <div className="dropdown dropdown-bottom dropdown-end">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="hover:bg-gray-300 py-2 px-2 transition-all text-gray-600 rounded-md"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                        />
+                      </svg>
+                    </div>
 
-                  <p
-                    onClick={() => handleEliminarAbertura(g.id)}
-                    className="cursor-pointer py-2 px-4 rounded-xl text-red-700 bg-red-100 flex gap-2 items-center"
-                  >
-                    ELIMINAR
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content z-[1] menu p-2 shadow-xl border bg-base-100 rounded-box w-52"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-                      />
-                    </svg>
-                  </p>
-                  <Link
-                    to={`/aberturas/${g.id}`}
-                    className="cursor-pointer py-2 px-4 rounded-xl text-indigo-700 bg-indigo-100 flex gap-2 items-center"
-                  >
-                    Ver
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                      />
-                    </svg>
-                  </Link>
+                      <li>
+                        <p
+                          onClick={() => {
+                            handleId(g.id), openModal();
+                          }}
+                        >
+                          Editar
+                        </p>
+                      </li>
+                      <li>
+                        <p onClick={() => handleEliminarAbertura(g.id)}>
+                          ELIMINAR
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                            />
+                          </svg>
+                        </p>
+                      </li>
+                      <li>
+                        <Link to={`/aberturas/${g.id}`}>
+                          Ver
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                            />
+                          </svg>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </th>
               </tr>
             ))}

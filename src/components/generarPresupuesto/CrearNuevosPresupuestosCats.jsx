@@ -8,7 +8,7 @@ export const CrearNuevosPresupuestosCats = () => {
       <button
         type="button"
         onClick={() => openModal()}
-        className="hover:bg-green-500 hover:text-white transition-all ease-linear bg-green-100 text-green-700 py-3 px-5 rounded-xl hover:shadow-md text-sm flex gap-2 items-center"
+        className="bg-green-500 text-white font-semibold py-3 px-5 rounded-xl hover:shadow-md text-sm flex gap-2 items-center"
       >
         CREAR NUEVA PRESUPUESTO
         <svg

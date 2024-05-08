@@ -6,7 +6,7 @@ export const IntroPresupuesto = () => {
   const fechaActual = new Date();
 
   return (
-    <div className="border-slate-300 rounded-xl border-[1px] shadow-md shadow-black/20 py-5 px-10 flex justify-between items-center max-md:flex-col max-md:gap-2 max-md:items-start max-md:shadow-none max-md:border-none max-md:px-4 max-md:py-0">
+    <div className="bg-white rounded-xl shadow-xl py-5 px-5 flex justify-between items-center max-md:flex-col max-md:gap-2 max-md:items-start max-md:shadow-none max-md:border-none max-md:px-4 max-md:py-0">
       <div className="text-xl font-bold text-gray-700 max-md:text-base max-md:w-full max-md:underline">
         GENERAR NUEVOS PRESUPUESTOS TECNOHOUSE
       </div>

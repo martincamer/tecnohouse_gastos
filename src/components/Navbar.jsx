@@ -60,7 +60,7 @@ export const Navbar = () => {
                   </div>
                   <Link
                     onClick={() => signout()}
-                    className="text-[15px] max-md:text-sm max-md:font-bold max-md:py-1 font-semibold transition-all ease-in-out duration-300 bg-indigo-50/10 border-[1px] border-indigo-500 px-8 rounded-2xl py-2 text-indigo-500 hover:shadow-md hover:shadow-black/20 hover:scale-[1.02]"
+                    className="text-[15px] max-md:text-sm max-md:font-bold max-md:py-1 font-semibold transition-all ease-in-out duration-300 bg-indigo-50/10 border-[1px] border-indigo-500 px-8 rounded-2xl py-2 text-indigo-500 hover:shadow-md hover:shadow-black/20 hover:scale-[1.02] bg-white"
                     //o={path}
                     key={path}
                   >
