@@ -220,7 +220,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
   const [applyAumento, setApplyAumento] = useState(false);
 
-  const aberturasConPreciosFinales = sortedResultados.map((abertura) => {
+  const aberturasConPreciosFinales = currentResults.map((abertura) => {
     const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
       const precioVidrio = precios.find(
         (precio) => precio.categoria === vidrio.categoria
