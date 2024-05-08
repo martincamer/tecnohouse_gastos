@@ -205,33 +205,31 @@ export const Accesorios = () => {
           ))}
         </div>{" "}
         {/* TABLA DE PERFILES  */}
-        <div className="overflow-x-scroll max-md:hidden md:block border-[1px] border-slate-300 hover:shadow-md rounded-2xl transition-all ease-linear cursor-pointer">
-          <table className="min-w-full">
+        <div className="max-md:hidden md:block bg-white shadow-xl rounded-2xl transition-all ease-linear cursor-pointer">
+          <table className="min-w-full table">
             <thead>
               <tr>
-                <th className="p-3 max-md:text-xs text-gray-700">NUMERO</th>
-                <th className="p-3 max-md:text-xs text-gray-700">DETALLE</th>
-                <th className="p-3 max-md:text-xs text-gray-700">CATEGORIA</th>
-                <th className="p-3 max-md:text-xs text-gray-700">
-                  PRECIO X UNIDAD
-                </th>
-                <th className="p-3 max-md:text-xs text-gray-700">EDITAR</th>
-                <th className="p-3 max-md:text-xs text-gray-700">ELIMINAR</th>
+                <th className="p-3 text-sm text-gray-500">NUMERO</th>
+                <th className="p-3 text-sm text-gray-500">DETALLE</th>
+                <th className="p-3 text-sm text-gray-500">CATEGORIA</th>
+                <th className="p-3 text-sm text-gray-500">PRECIO X UNIDAD</th>
+                <th className="p-3 text-sm text-gray-500">EDITAR</th>
+                <th className="p-3 text-sm text-gray-500">ELIMINAR</th>
               </tr>
             </thead>
             <tbody>
               {currentResults?.map((p) => (
                 <tr>
-                  <th className="border-[1px] border-gray-300 p-3 max-md:text-xs text-sm uppercase text-indigo-500 font-semibold">
+                  <th className="p-3 max-md:text-xs text-sm uppercase font-semibold">
                     {p?.id}
                   </th>
-                  <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                  <th className="p-3 max-md:text-xs font-bold text-sm uppercase">
                     {p?.detalle}
                   </th>
-                  <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                  <th className="p-3 max-md:text-xs font-bold text-sm uppercase">
                     {p.categoria}
                   </th>
-                  <th className="border-[1px] border-gray-300 p-3 max-md:text-xs font-medium text-sm uppercase">
+                  <th className="p-3 max-md:text-xs font-bold text-sm uppercase">
                     {Number(p.precio_unidad).toLocaleString("es-ar", {
                       style: "currency",
                       currency: "ARS",
@@ -242,13 +240,13 @@ export const Accesorios = () => {
                     onClick={() => {
                       handleObtenerId(p.id), openEditarPerfil();
                     }}
-                    className="border-[1px] border-gray-300 p-3 "
+                    className="p-3 "
                   >
                     <button className="bg-green-100 text-green-600 rounded-xl py-2 px-4 text-sm font-normal">
                       EDITAR
                     </button>
                   </th>
-                  <th className="border-[1px] border-gray-300 p-3">
+                  <th className="p-3">
                     <button
                       className="bg-red-100 text-red-800 rounded-xl py-2 px-4 text-sm font-normal"
                       onClick={() => {
@@ -265,14 +263,14 @@ export const Accesorios = () => {
           </table>
         </div>
         {totalPages > 1 && (
-          <div className="flex flex-wrap justify-center mt-4 mb-4 gap-1 max-md:gap-1">
+          <div className="flex flex-wrap justify-center mt-4 mb-4">
             {Array.from({ length: totalPages }).map((_, index) => (
               <button
                 key={index}
                 className={`mx-1 px-3 py-1 rounded-xl ${
                   currentPage === index + 1
-                    ? "bg-green-500 text-white"
-                    : "bg-white border-[1px] border-slate-300 shadow shadow-black/20 max-md:text-xs"
+                    ? "bg-indigo-500 border border-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
+                    : "bg-white shadow shadow-black/20 max-md:text-xs"
                 }`}
                 onClick={() => handlePageChange(index + 1)}
               >
@@ -281,7 +279,6 @@ export const Accesorios = () => {
             ))}
           </div>
         )}
-        {/* FIN TABLA */}
       </div>
       <ModalCrearNuevoAccesorio isOpen={isOpen} closeModal={closeModal} />
       <ModalEliminarAccesorios />

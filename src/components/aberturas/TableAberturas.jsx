@@ -326,6 +326,112 @@ export const TableAberturas = ({ openModal, handleId }) => {
     };
   });
 
+  const aberturasConPreciosFinalesDos = resultados.map((abertura) => {
+    const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
+      const precioVidrio = precios.find(
+        (precio) => precio.categoria === vidrio.categoria
+      );
+      const precio = precioVidrio
+        ? vidrio.metrosCuadrados * precioVidrio.precio
+        : 0;
+      return {
+        ...vidrio,
+        precio,
+      };
+    });
+
+    const accesoriosConPrecio = abertura.datos.accesoriosSelect.map(
+      (accesorio) => {
+        const accesorioEncontrado = accesorios.find(
+          (a) => a.detalle === accesorio.detalle
+        );
+        const precio = accesorioEncontrado
+          ? accesorioEncontrado.precio_unidad * accesorio.cantidad
+          : 0;
+        return {
+          ...accesorio,
+          precio,
+        };
+      }
+    );
+    const perfilesConPrecio = abertura.datos.perfilesSelect.map((perfil) => {
+      const precioPerfil = precios.find(
+        (precio) =>
+          precio.categoria.toLowerCase() === perfil.categoria.toLowerCase()
+      );
+      const precio = precioPerfil ? perfil.totalKG * precioPerfil.precio : 0;
+      return {
+        ...perfil,
+        precio,
+      };
+    });
+
+    const vidriosPrecioTotal = vidriosConPrecio.reduce(
+      (total, vidrio) => total + vidrio.precio,
+      0
+    );
+    const accesoriosPrecioTotal = accesoriosConPrecio.reduce(
+      (total, accesorio) => total + accesorio.precio,
+      0
+    );
+    const perfilesPrecioTotal = perfilesConPrecio.reduce(
+      (total, perfil) => total + perfil.precio,
+      0
+    );
+
+    // Filtrar los precios que coinciden con las categorías a sumar
+    const categoriasAsumar = [
+      "luz",
+      "agua",
+      "produccion",
+      "wifi",
+      "alquiler",
+      "gasto adicional",
+    ];
+
+    const preciosASumar = precios.filter((precio) =>
+      categoriasAsumar.includes(precio.categoria)
+    );
+
+    // Calcular la suma de los precios
+    const sumaPrecios = preciosASumar.reduce((total, precio) => {
+      return total + parseFloat(precio.precio);
+    }, 0);
+
+    const precioSinNada =
+      vidriosPrecioTotal + accesoriosPrecioTotal + perfilesPrecioTotal;
+
+    const precioFinal =
+      vidriosPrecioTotal +
+      accesoriosPrecioTotal +
+      perfilesPrecioTotal +
+      sumaPrecios;
+
+    // Calcular el total dependiendo de applyAumento y showPrecioSinNada
+    let totalConAumento;
+    if (applyAumento) {
+      totalConAumento = precioFinal * 1.4;
+    } else {
+      totalConAumento = precioFinal;
+    }
+    if (!applyAumento && showPrecioSinNada) {
+      totalConAumento = precioSinNada;
+    }
+
+    return {
+      ...abertura,
+      datos: {
+        ...abertura.datos,
+        vidrioSelect: vidriosConPrecio,
+        accesoriosSelect: accesoriosConPrecio,
+        perfilesSelect: perfilesConPrecio,
+      },
+      precioFinal,
+      totalConAumento,
+      sumaPrecios,
+    };
+  });
+
   const fechaActual = new Date();
 
   const downloadAberturasAsExcel = () => {
@@ -534,14 +640,14 @@ export const TableAberturas = ({ openModal, handleId }) => {
         </table>
       </div>
       {totalPages > 1 && (
-        <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
+        <div className="flex flex-wrap justify-center mt-4 mb-4">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}
-              className={`mx-1 px-3 py-1 rounded ${
+              className={`mx-1 px-3 py-1 rounded-xl ${
                 currentPage === index + 1
-                  ? "bg-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                  : "bg-gray-100 shadow shadow-black/20 max-md:text-xs"
+                  ? "bg-indigo-500 border border-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
+                  : "bg-white shadow shadow-black/20 max-md:text-xs"
               }`}
               onClick={() => handlePageChange(index + 1)}
             >
@@ -605,7 +711,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             )}`}
             document={
               <DownloadPDFButton
-                aberturasConPreciosFinales={aberturasConPreciosFinales}
+                aberturasConPreciosFinales={aberturasConPreciosFinalesDos}
               />
             }
           >
