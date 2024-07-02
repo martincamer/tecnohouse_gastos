@@ -20,11 +20,18 @@ export const ModalSeleccionarAberturaFinal = ({
 
   const { addToAbertura } = usePresupuestoContext();
 
+  const [detalle, setDetalle] = useState("");
+  const [ancho, setAncho] = useState("");
+  const [alto, setAlto] = useState("");
+
   useEffect(() => {
     const obtenerData = async () => {
       const res = await obtenerUnicaAbertura(obtenerId);
 
       setAbertura(res.data);
+      setDetalle(res.data.detalle);
+      setAncho(res.data.ancho);
+      setAlto(res.data.alto);
     };
 
     obtenerData();
@@ -186,26 +193,6 @@ export const ModalSeleccionarAberturaFinal = ({
     0
   );
 
-  // Suma el precio total de la abertura con los precios adicionales
-
-  // // Suma el precio total de la abertura con los precios adicionales
-  // const precioFinalAberturaSin = precioTotalAbertura + precioTotalAdicionales;
-
-  // const calculateFinalPrice = () => {
-  //   const additionalCostMultiplier = applyAdditionalCost ? 1.4 : 1.0;
-  //   return (
-  //     (precioTotalAbertura + precioTotalAdicionales) * additionalCostMultiplier
-  //   );
-  // };
-
-  // const precioFinalAbertura = calculateFinalPrice();
-
-  // const finalPrice = calculateFinalPrice() * cantidad;
-
-  // const toggleAdditionalCost = () => {
-  //   setApplyAdditionalCost(!applyAdditionalCost);
-  // };
-
   const [includeAdditionalPrice, setIncludeAdditionalPrice] = useState(false);
 
   let finalPrice;
@@ -218,11 +205,12 @@ export const ModalSeleccionarAberturaFinal = ({
       ? precioTotalAbertura + precioTotalAdicionales
       : precioTotalAbertura;
 
-    const additionalCostMultiplier = parseFloat(porciento); //applyAdditionalCost ? 1.4 : 1.0;
+    const additionalCostMultiplier = Number(porciento); //applyAdditionalCost ? 1.4 : 1.0;
 
     precioFinalAbertura = precioTotal * additionalCostMultiplier;
 
-    finalPrice = Number(precioTotal) + Number(precioFinalAbertura) * cantidad;
+    finalPrice =
+      Number(precioTotal) + Number(precioFinalAbertura) * Number(cantidad);
 
     return finalPrice;
   };
@@ -314,11 +302,30 @@ export const ModalSeleccionarAberturaFinal = ({
                   </h2>
 
                   <div className="mb-4 max-md:flex-col max-md:flex max-md:gap-1">
-                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2">
+                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2 items-center">
                       DETALLE -
-                      <span className="text-slate-700 uppercase max-md:text-sm">
+                      {/* <span className="text-slate-700 uppercase max-md:text-sm">
                         {abertura?.detalle}
-                      </span>
+                      </span> */}
+                      <input
+                        value={detalle || ""}
+                        onChange={(e) => setDetalle(e.target.value)}
+                        className="border rounded-xl py-1.5 text-center"
+                      />
+                    </h3>
+                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2 items-center">
+                      ANCHOXALTO -
+                      <input
+                        value={ancho || ""}
+                        onChange={(e) => setAncho(e.target.value)}
+                        className="border rounded-xl py-1.5 text-center"
+                      />
+                      x{" "}
+                      <input
+                        value={alto || ""}
+                        onChange={(e) => setAlto(e.target.value)}
+                        className="border rounded-xl py-1.5 text-center"
+                      />
                     </h3>
                     <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2">
                       CATEGORIA -
@@ -481,11 +488,11 @@ export const ModalSeleccionarAberturaFinal = ({
                       type="button"
                       onClick={() => {
                         addToAbertura(
-                          abertura?.detalle,
+                          detalle,
                           abertura?.categoria,
                           abertura?.color,
-                          abertura?.ancho,
-                          abertura?.alto,
+                          ancho,
+                          alto,
                           cantidad,
                           precioFinalAbertura,
                           finalPrice
