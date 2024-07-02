@@ -211,16 +211,20 @@ export const ModalSeleccionarAberturaFinal = ({
   let finalPrice;
   let precioFinalAbertura;
 
+  const [porciento, setPorciento] = useState(0);
+
   const calculateFinalPrice = () => {
     const precioTotal = includeAdditionalPrice
       ? precioTotalAbertura + precioTotalAdicionales
       : precioTotalAbertura;
-    const additionalCostMultiplier = applyAdditionalCost ? 1.4 : 1.0;
+
+    const additionalCostMultiplier = parseFloat(porciento); //applyAdditionalCost ? 1.4 : 1.0;
 
     precioFinalAbertura = precioTotal * additionalCostMultiplier;
-    finalPrice = precioTotal * additionalCostMultiplier * cantidad;
 
-    return precioTotal * additionalCostMultiplier * cantidad;
+    finalPrice = Number(precioTotal) + Number(precioFinalAbertura) * cantidad;
+
+    return finalPrice;
   };
 
   const toggleAdditionalCost = () => {
@@ -397,6 +401,21 @@ export const ModalSeleccionarAberturaFinal = ({
                       value={cantidad}
                       type="number"
                       placeholder="Ingresa la cantidad"
+                      className="px-4 bg-white border-[1px] border-slate-300 py-2 rounded-xl text-sm shadow-sm shadow-slate-400 outline-none uppercase"
+                    />
+                  </div>
+                  <div className="mt-4 flex flex-col items-start gap-2">
+                    <label
+                      htmlFor=""
+                      className="text-indigo-500 max-md:uppercase max-md:font-bold uppercase"
+                    >
+                      Seleccionar el porciento a agregar a la abertura
+                    </label>
+                    <input
+                      onChange={(e) => setPorciento(e.target.value)}
+                      value={porciento}
+                      type="text"
+                      placeholder="Ingresa la %0.60"
                       className="px-4 bg-white border-[1px] border-slate-300 py-2 rounded-xl text-sm shadow-sm shadow-slate-400 outline-none uppercase"
                     />
                   </div>

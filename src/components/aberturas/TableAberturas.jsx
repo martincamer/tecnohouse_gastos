@@ -207,6 +207,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
   const currentResults = sortedResultados?.slice(
     indexOfFirstItem,
     indexOfLastItem
@@ -220,7 +221,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
   const [applyAumento, setApplyAumento] = useState(false);
 
-  const aberturasConPreciosFinales = currentResults.map((abertura) => {
+  const aberturasConPreciosFinales = resultados.map((abertura) => {
     const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
       const precioVidrio = precios.find(
         (precio) => precio.categoria === vidrio.categoria
@@ -476,7 +477,104 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
   return (
     <div>
-      <div className="md:hidden max-md:flex  flex-col gap-4">
+      <div className="flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start mb-4">
+        <button
+          className="text-sm uppercase bg-green-100 text-green-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          onClick={() => setShowPrecioSinNada(!showPrecioSinNada)}
+        >
+          {!showPrecioSinNada
+            ? "Mostrar Precio Sin Nada"
+            : "Mostrar Precio Final"}
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+            />
+          </svg>
+        </button>
+
+        {/* Botón para aplicar o quitar el aumento del 40% */}
+        <button
+          className="text-sm uppercase bg-indigo-100 text-indigo-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          onClick={() => setApplyAumento(!applyAumento)}
+        >
+          {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
+            />
+          </svg>
+        </button>
+        <button className="text-sm uppercase bg-orange-100 text-orange-700 px-4 rounded-xl py-2 flex gap-2 items-center">
+          <PDFDownloadLink
+            fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
+              "es-AR",
+              { month: "long" }
+            )}`}
+            document={
+              <DownloadPDFButton
+                aberturasConPreciosFinales={aberturasConPreciosFinalesDos}
+              />
+            }
+          >
+            DESCARGAR INVENTARIO PDF
+          </PDFDownloadLink>{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
+        </button>
+        <button
+          className="text-sm uppercase bg-slate-200 text-slate-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          onClick={downloadAberturasAsExcel}
+        >
+          DESCARGAR ABERTURAS EN EXCEL
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="md:hidden max-md:flex flex-col gap-4">
         {currentResults?.map((g, index) => (
           <div
             className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
@@ -512,7 +610,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </div>
         ))}
       </div>{" "}
-      <div className="max-md:hidden md:block rounded-xl shadow-xl hover:shadow-md transition-all ease-linear bg-white">
+      <div className="max-md:hidden md:block rounded-xl shadow-md hover:shadow-md transition-all ease-linear bg-white">
         <table className="uppercase min-w-full table">
           <thead className="">
             <tr>
@@ -526,7 +624,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </tr>
           </thead>
           <tbody className="">
-            {currentResults?.map((g, index) => (
+            {resultados?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
                   {g.tipo}
@@ -639,7 +737,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </tbody>
         </table>
       </div>
-      {totalPages > 1 && (
+      {/* {totalPages > 1 && (
         <div className="flex flex-wrap justify-center mt-4 mb-4">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
@@ -655,104 +753,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </button>
           ))}
         </div>
-      )}
-      <div className="mt-5 flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start">
-        <button
-          className="text-sm uppercase bg-green-100 text-green-700 px-4 rounded-xl py-2 flex gap-2 items-center"
-          onClick={() => setShowPrecioSinNada(!showPrecioSinNada)}
-        >
-          {!showPrecioSinNada
-            ? "Mostrar Precio Sin Nada"
-            : "Mostrar Precio Final"}
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
-        </button>
-
-        {/* Botón para aplicar o quitar el aumento del 40% */}
-        <button
-          className="text-sm uppercase bg-indigo-100 text-indigo-700 px-4 rounded-xl py-2 flex gap-2 items-center"
-          onClick={() => setApplyAumento(!applyAumento)}
-        >
-          {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z"
-            />
-          </svg>
-        </button>
-        <button className="text-sm uppercase bg-orange-100 text-orange-700 px-4 rounded-xl py-2 flex gap-2 items-center">
-          <PDFDownloadLink
-            fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
-              "es-AR",
-              { month: "long" }
-            )}`}
-            document={
-              <DownloadPDFButton
-                aberturasConPreciosFinales={aberturasConPreciosFinalesDos}
-              />
-            }
-          >
-            DESCARGAR INVENTARIO PDF
-          </PDFDownloadLink>{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-            />
-          </svg>
-        </button>
-        <button
-          className="text-sm uppercase bg-slate-200 text-slate-700 px-4 rounded-xl py-2 flex gap-2 items-center"
-          onClick={downloadAberturasAsExcel}
-        >
-          DESCARGAR ABERTURAS EN EXCEL
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-            />
-          </svg>
-        </button>
-      </div>
+      )} */}
     </div>
   );
 };

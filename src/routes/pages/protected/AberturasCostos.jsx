@@ -8,10 +8,10 @@ import { SearchSelectTipo } from "../../../components/ui/SearchSelectTipo";
 import { useAberturasContext } from "../../../context/AberturasProvider";
 import { useAccesoriosContext } from "../../../context/AccesoriosProvider";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
-import ColorFilter from "../../../components/ui/ColorFilter";
 import { ToastContainer } from "react-toastify";
 import { ModalEditarAbertura } from "../../../components/aberturas/ModalEditarAbertura";
 import { useState } from "react";
+import ColorFilter from "../../../components/ui/ColorFilter";
 
 export const AberturasCostos = () => {
   const {

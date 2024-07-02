@@ -27,21 +27,11 @@ export const Login = () => {
 
   return (
     <section className="max-md:px-4 h-screen flex justify-center items-center w-full gap-2">
-      <div
-        className="w-full h-full bg-gradient-to-br from-indigo-700 to-orange-400"
-        // style={{
-        //   objectFit: "cover",
-        //   backgroundRepeat: "no-repeat",
-        //   height: "100%",
-        //   width: "100%",
-        //   background:
-        //     "url(https://images.pexels.com/photos/583848/pexels-photo-583848.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",
-        // }}
-      ></div>
+      <div className="w-full h-full bg-gradient-to-br from-indigo-700 to-orange-400"></div>
       <div className="w-full">
         <form
           onSubmit={onSubmit}
-          className="max-md:w-full flex w-1/2 flex-col gap-4 bg-white shadow-2xl px-10 py-10 rounded-xl mx-auto"
+          className="max-md:w-full flex w-1/2 flex-col gap-4 bg-white shadow-md px-10 py-10 rounded-xl mx-auto"
         >
           <div className="flex justify-center text-slate-700">
             <h4 className="flex flex-col gap-1 justify-center items-center">
