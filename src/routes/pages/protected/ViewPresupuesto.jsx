@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { obtenerUnicosPresupuestos } from "../../../api/presupuesto";
 import { useEffect, useState } from "react";
 import { PDFDownloadLink } from "@react-pdf/renderer";
@@ -19,7 +19,6 @@ export const ViewPresupuesto = () => {
 
   const fechaOriginal = new Date(datos.created_at);
 
-  // Sumar 5 días a la fecha original
   const fechaSumada = new Date(fechaOriginal);
   fechaSumada.setDate(fechaSumada.getDate() + 5);
 
@@ -29,7 +28,21 @@ export const ViewPresupuesto = () => {
   const clienteCapitalized = datos?.cliente ? capitalize(datos.cliente) : "";
 
   return (
-    <section className=" h-full w-full rounded-xl py-12 max-md:overflow-x-scroll">
+    <section className="w-full h-full">
+      <div className="bg-white mb-4 h-10 flex">
+        <Link
+          to={"/presupuestos"}
+          className="bg-blue-100 flex h-full px-4 justify-center items-center font-bold text-indigo-600"
+        >
+          Inicio
+        </Link>{" "}
+        <Link
+          to={"/"}
+          className="bg-indigo-500 flex h-full px-4 justify-center items-center font-bold text-white"
+        >
+          Presupuesto generado n° {params.id}
+        </Link>
+      </div>
       <div className="bg-white max-md:px-2 flex flex-col gap-2 shadow-xl rounded-xl px-10 py-5 mt-12 w-[1220px] mx-auto h-full">
         <div>
           <p className="text-indigo-500 font-bold text-2xl max-md:text-base uppercase">

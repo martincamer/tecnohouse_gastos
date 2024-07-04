@@ -2,7 +2,6 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { Search } from "../ui/Search";
 import { Link } from "react-router-dom";
-// import { useFacturaContext } from "../../context/FacturaProvider";
 import { useAberturasContext } from "../../context/AberturasProvider";
 import { usePerfilesContex } from "../../context/PerfilesProvider";
 import { ModalSeleccionarCantidadPerfil } from "./ModalSeleccionarCantidadPerfil";

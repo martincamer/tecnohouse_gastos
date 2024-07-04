@@ -27,18 +27,18 @@ export const ModalSeleccionarAberturas = ({
     setObtenerId(id);
   };
 
-  const itemsPerPage = 5; // Cantidad de elementos por página
-  const [currentPage, setCurrentPage] = useState(1);
+  // const itemsPerPage = 5; // Cantidad de elementos por página
+  // const [currentPage, setCurrentPage] = useState(1);
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(results?.length / itemsPerPage);
+  // const totalPages = Math.ceil(results?.length / itemsPerPage);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
+  // const handlePageChange = (newPage) => {
+  //   setCurrentPage(newPage);
+  // };
 
   return (
     <Menu as="div" className="z-50">
@@ -97,55 +97,46 @@ export const ModalSeleccionarAberturas = ({
                     searcher={searcher}
                   />
                 </div>
-                <form className="space-y-3 overflow-x-scroll border-[1px] border-slate-300 rounded-2xl">
-                  <table className="min-w-full uppercase text-sm">
+                <form className="overflow-y-scroll h-[50vh] scroll-bar">
+                  <table className="table">
                     <thead className="border-b-[2px] border-slate-300">
                       <tr className="text-left">
                         {/* <th className="p-3 border-b-[1px]">Numero</th> */}
-                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
+                        <th className="py-5 uppercase text-indigo-600">
                           DETALLE
                         </th>
-                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
+                        <th className="py-5 uppercase text-indigo-600">
                           MEDIDA
                         </th>
-                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
+                        <th className="py-5 uppercase text-indigo-600">
                           COLOR
                         </th>
-                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
+                        <th className="py-5 uppercase text-indigo-600">
                           CATEGORIA
                         </th>
 
-                        <th className="p-3 text-sm max-md:text-xs text-slate-700">
+                        <th className="py-5 uppercase text-indigo-600">
                           Seleccionar
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y-[1px] divide-slate-300">
-                      {currentResults?.map((r) => (
-                        <tr
-                          key={r?.id}
-                          className="cursor-pointer hover:bg-slate-100 transiton-all ease-in-out duration-100 text-left"
-                        >
-                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
-                            {r?.detalle}
-                          </th>
-                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                    <tbody className="uppercase text-xs">
+                      {results?.map((r) => (
+                        <tr key={r?.id} className="">
+                          <th className="">{r?.detalle}</th>
+                          <th className="">
                             {r?.ancho}x{r?.alto}
                           </th>
-                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
-                            {r?.color}
-                          </th>
-                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
-                            {r?.categoria}
-                          </th>
-                          <th className="py-5 border-gray-300 px-3 font-medium text-sm max-md:text-xs uppercase">
+                          <th className="">{r?.color}</th>
+                          <th className="">{r?.categoria}</th>
+                          <th className="">
                             <button
                               onClick={() => {
                                 handleId(r?.id),
                                   openModalSeleccionarAberturaFinal();
                               }}
                               type="button"
-                              className="bg-indigo-100 uppercase text-indigo-700 px-4 py-2 text-sm max-md:text-xs rounded-xl shadow"
+                              className="text-xs bg-indigo-500 py-1 px-6 rounded text-white hover:shadow-md transition-all"
                             >
                               Seleccionar
                             </button>
@@ -155,7 +146,7 @@ export const ModalSeleccionarAberturas = ({
                     </tbody>
                   </table>
                 </form>
-                {totalPages > 1 && (
+                {/* {totalPages > 1 && (
                   <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
                     {Array.from({ length: totalPages }).map((_, index) => (
                       <button
@@ -172,7 +163,7 @@ export const ModalSeleccionarAberturas = ({
                       </button>
                     ))}
                   </div>
-                )}
+                )} */}
               </div>
             </Transition.Child>
 

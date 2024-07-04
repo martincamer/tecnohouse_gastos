@@ -195,9 +195,10 @@ export const ModalSeleccionarAberturaFinal = ({
   const [includeAdditionalPrice, setIncludeAdditionalPrice] = useState(false);
 
   let finalPrice;
-  let precioFinalAbertura;
 
   const [porciento, setPorciento] = useState(0);
+
+  let precioFinalAbertura = 0; // Declaración global
 
   const calculateFinalPrice = () => {
     const precioTotal = includeAdditionalPrice
@@ -205,14 +206,29 @@ export const ModalSeleccionarAberturaFinal = ({
       : precioTotalAbertura;
 
     // Convertir porciento a número o establecerlo en 0 si no está definido
-    const additionalCostMultiplier = Number(porciento) || 0;
+    const additionalCostMultiplier = Number(porciento);
 
-    precioFinalAbertura = precioTotal * additionalCostMultiplier;
+    precioFinalAbertura = Number(precioTotal) * additionalCostMultiplier;
 
-    finalPrice = Number(precioTotal + precioFinalAbertura) * Number(cantidad);
+    finalPrice = Number(Number(precioFinalAbertura)) * Number(cantidad);
 
     return finalPrice;
   };
+
+  const precioTotalNew = includeAdditionalPrice
+    ? precioTotalAbertura + precioTotalAdicionales
+    : precioTotalAbertura;
+
+  const totalNew =
+    precioTotalNew * (Number(porciento) || 0) +
+    (Number(porciento) === 0 ? precioTotalNew : 0);
+
+  const finalNew = Number(totalNew) * Number(cantidad);
+
+  console.log("newss", finalNew);
+  console.log("new", totalNew);
+
+  // Ahora puedes usar precioFinalAbertura fuera de la función calculateFinalPrice
 
   const toggleAdditionalCost = () => {
     setApplyAdditionalCost(!applyAdditionalCost);
@@ -271,7 +287,7 @@ export const ModalSeleccionarAberturaFinal = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="max-md:h-[60vh] max-md:overflow-y-scroll max-md:w-full inline-block w-1/2 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <div className="max-md:h-[60vh] max-md:overflow-y-scroll max-md:w-full inline-block w-2/3 p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
                 <div className="py-2 flex justify-end items-center px-2">
                   <p
                     onClick={closeModalSeleccionarAberturaFinal}
@@ -300,40 +316,37 @@ export const ModalSeleccionarAberturaFinal = ({
                   </h2>
 
                   <div className="mb-4 max-md:flex-col max-md:flex max-md:gap-1">
-                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2 items-center">
-                      DETALLE -
-                      {/* <span className="text-slate-700 uppercase max-md:text-sm">
-                        {abertura?.detalle}
-                      </span> */}
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                      Detalle -
                       <input
                         value={detalle || ""}
                         onChange={(e) => setDetalle(e.target.value)}
-                        className="border rounded-xl py-1.5 text-center"
+                        className="border px-2 w-1/2 py-1.5 text-center outline-none"
                       />
                     </h3>
-                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2 items-center">
-                      ANCHOXALTO -
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                      AltoxAncho -
                       <input
                         value={ancho || ""}
                         onChange={(e) => setAncho(e.target.value)}
-                        className="border rounded-xl py-1.5 text-center"
+                        className="border outline-none py-1.5 text-center"
                       />
                       x{" "}
                       <input
                         value={alto || ""}
                         onChange={(e) => setAlto(e.target.value)}
-                        className="border rounded-xl py-1.5 text-center"
+                        className="border outline-none py-1.5 text-center"
                       />
                     </h3>
-                    <h3 className="flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 font-normal mb-2">
-                      CATEGORIA -
-                      <span className="text-slate-700 uppercase max-md:text-sm">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                      Categoria -
+                      <span className="text-slate-700 capitalize max-md:text-sm">
                         {abertura?.categoria}
                       </span>
                     </h3>
-                    <h3 className="flex gap-2 max-md:flex-col max-md:gap-1 text-base text-indigo-500 font-normal mb-2">
-                      COLOR -
-                      <span className="text-slate-700 uppercase max-md:text-sm">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                      Color -
+                      <span className="text-slate-700 capitalize max-md:text-sm">
                         {abertura?.color}
                       </span>
                     </h3>
@@ -346,10 +359,10 @@ export const ModalSeleccionarAberturaFinal = ({
                       Totales
                     </h3>
                     <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
-                      <span className="max-md:uppercase max-md:text-sm uppercase">
+                      <span className="max-md:uppercase max-md:text-sm font-bold">
                         Total Abertura
                       </span>
-                      <span className="text-indigo-700">
+                      <span className="text-indigo-500 font-bold">
                         {precioTotalAbertura.toLocaleString("es-ar", {
                           style: "currency",
                           currency: "ARS",
@@ -358,39 +371,15 @@ export const ModalSeleccionarAberturaFinal = ({
                       </span>
                     </div>
                     <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
-                      <span className="max-md:uppercase max-md:text-sm uppercase">
+                      <span className="max-md:uppercase max-md:text-sm font-bold">
                         Total Adicionales
                       </span>
-                      <span className="text-indigo-700">
+                      <span className="text-indigo-500 font-bold">
                         {precioTotalAdicionales.toLocaleString("es-ar", {
                           style: "currency",
                           currency: "ARS",
                           minimumFractionDigits: 2,
                         })}
-                      </span>
-                    </div>
-                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
-                      <span className="max-md:uppercase max-md:text-sm uppercase">
-                        Precio Final Abertura (sin adicional)
-                      </span>
-                      <span className="text-indigo-700">
-                        {/* {precioFinalAberturaSin.toLocaleString("es-ar", {
-                          style: "currency",
-                          currency: "ARS",
-                          minimumFractionDigits: 2,
-                        })} */}
-                      </span>
-                    </div>
-                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-3 max-md:gap-1">
-                      <span className="max-md:uppercase max-md:text-sm uppercase">
-                        Precio Final Abertura (con 40% adicional)
-                      </span>
-                      <span className="text-indigo-700 font-semibold">
-                        {/* {precioFinalAbertura.toLocaleString("es-ar", {
-                          style: "currency",
-                          currency: "ARS",
-                          minimumFractionDigits: 2,
-                        })} */}
                       </span>
                     </div>
                   </div>
@@ -406,7 +395,7 @@ export const ModalSeleccionarAberturaFinal = ({
                       value={cantidad}
                       type="number"
                       placeholder="Ingresa la cantidad"
-                      className="px-4 bg-white border-[1px] border-slate-300 py-2 rounded-xl text-sm shadow-sm shadow-slate-400 outline-none uppercase"
+                      className="px-4 border py-2 outline-none text-sm font-semibold"
                     />
                   </div>
                   <div className="mt-4 flex flex-col items-start gap-2">
@@ -421,7 +410,7 @@ export const ModalSeleccionarAberturaFinal = ({
                       value={porciento}
                       type="text"
                       placeholder="Ingresa la %0.60"
-                      className="px-4 bg-white border-[1px] border-slate-300 py-2 rounded-xl text-sm shadow-sm shadow-slate-400 outline-none uppercase"
+                      className="px-4 border py-2 outline-none text-sm font-semibold"
                     />
                   </div>
                   <div>
@@ -429,26 +418,26 @@ export const ModalSeleccionarAberturaFinal = ({
                       <button
                         type="button"
                         onClick={toggleIncludeAdditionalPrice}
-                        className="bg-indigo-500 mt-5 text-white py-3 px-4 rounded-xl text-sm shadow-lg uppercase max-md:text-sm"
+                        className="bg-indigo-500 mt-5 text-white py-3 px-4 rounded font-semibold text-sm shadow-md max-md:text-sm"
                       >
                         {includeAdditionalPrice
                           ? "Ocultar precios adicionales"
                           : "Mostrar precios adicionales"}
                       </button>
-                      <button
+                      {/* <button
                         type="button"
                         onClick={toggleAdditionalCost}
                         className="bg-green-500 mt-5 text-white py-3 px-4 rounded-xl text-sm shadow-lg uppercase max-md:text-sm"
                       >
                         {applyAdditionalCost ? "Quitar 40%" : "Aplicar 40%"}
-                      </button>
+                      </button> */}
                     </div>
                     <div className="flex flex-col gap-2 mt-5 bg-white border-[1px] border-slate-300 rounded-xl py-3 px-6 text-slate-700 uppercase text-sm shadow">
                       <p>
                         Precio total de la abertura:{" "}
                         <span className="font-bold">
                           {" "}
-                          {precioTotalAbertura.toLocaleString("es-ar", {
+                          {totalNew.toLocaleString("es-ar", {
                             style: "currency",
                             currency: "ARS",
                             minimumFractionDigits: 2,
@@ -471,7 +460,7 @@ export const ModalSeleccionarAberturaFinal = ({
                       <p>
                         Precio final:{" "}
                         <span className="font-bold text-indigo-600">
-                          {calculateFinalPrice().toLocaleString("es-ar", {
+                          {finalNew.toLocaleString("es-ar", {
                             style: "currency",
                             currency: "ARS",
                             minimumFractionDigits: 2,
@@ -492,13 +481,13 @@ export const ModalSeleccionarAberturaFinal = ({
                           ancho,
                           alto,
                           cantidad,
-                          precioFinalAbertura,
-                          finalPrice
+                          Number(totalNew),
+                          finalNew
                         ),
                           closeModalSeleccionarAberturaFinal();
                         closeModalSeleccionar();
                       }}
-                      className="bg-indigo-500 text-white py-3 px-4 rounded-xl text-sm shadow-lg uppercase max-md:text-sm"
+                      className="text-sm bg-orange-500 py-2 px-5 rounded-full text-white font-bold hover:bg-indigo-500 transition-all hover:shadow-md"
                     >
                       Generar abertura
                     </button>
