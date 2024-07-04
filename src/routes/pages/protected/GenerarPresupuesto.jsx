@@ -4,6 +4,7 @@ import { IntroPresupuesto } from "../../../components/generarPresupuesto/introPr
 import { ModalCrearPresupuesto } from "../../../components/generarPresupuesto/ModalCrearPresupuesto";
 import { TablePresupuestos } from "../../../components/generarPresupuesto/TablePresupuestos";
 import { usePresupuestoContext } from "../../../context/PresupuestoProvider";
+import { Link } from "react-router-dom";
 
 export const GenerarPresupuesto = () => {
   const {
@@ -17,17 +18,30 @@ export const GenerarPresupuesto = () => {
   } = usePresupuestoContext();
 
   return (
-    <section className="w-full py-24 px-5 max-md:px-4 flex flex-col gap-5 max-md:py-2 max-md:mb-28">
-      <ToastContainer />
+    <section className="flex flex-col gap-2 w-full">
+      <div className="bg-white mb-4 h-10 flex">
+        <Link
+          to={"/"}
+          className="bg-blue-100 flex h-full px-4 justify-center items-center font-bold text-indigo-600"
+        >
+          Inicio
+        </Link>{" "}
+        <Link
+          to={"/presupuestos"}
+          className="bg-indigo-500 flex h-full px-4 justify-center items-center font-bold text-white"
+        >
+          Presupuestos
+        </Link>
+      </div>
       <IntroPresupuesto />
       <CrearNuevosPresupuestosCats />
-      <div className="bg-white rounded-xl shadow-xl shadow-black/10 py-5 px-5 flex gap-12 items-center max-md:flex-col max-md:gap-2 max-md:items-start max-md:w-full max-md:px-4">
+      <div className="mx-5 my-5 bg-white flex gap-2 items-center py-5 px-5 font-bold text-sm">
         <div className="flex flex-col gap-2">
           <label className="text-indigo-700 uppercase max-md:w-full max-md:text-xs">
             Año
           </label>
           <input
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm text-sm"
+            className="outline-none border border-indigo-500 py-1.5 px-2 rounded"
             type="number"
             value={yearToSearch}
             onChange={(e) => setYearToSearch(e.target.value)}
@@ -38,7 +52,7 @@ export const GenerarPresupuesto = () => {
             Mes
           </label>
           <input
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm text-sm"
+            className="outline-none border border-indigo-500 py-1.5 px-2 rounded"
             type="number"
             value={monthToSearch}
             onChange={(e) => setMonthToSearch(e.target.value)}
@@ -48,13 +62,29 @@ export const GenerarPresupuesto = () => {
           <label className="text-indigo-700 uppercase">
             Buscar por el cliente
           </label>
-          <input
-            placeholder="Buscar por el cliente..."
-            className="bg-white py-2 px-2 rounded-xl shadow outline-none text-slate-800 border-slate-300 border-[1px] max-md:text-sm uppercase text-sm"
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <div className="bg-white flex  border border-indigo-500 py-1 px-2 rounded font-semibold text-sm capitalize outline-none">
+            <input
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full placeholder:text-gray-500/90 outline-none"
+              placeholder="Buscar por cliente.."
+            />
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
       <TablePresupuestos resultadosFiltrados={resultadosFiltrados} />

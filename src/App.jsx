@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route
             element={<RutaProtegida isAllowed={!isAuth} redirectTo={"/"} />}
@@ -55,7 +55,7 @@ function App() {
                     <AccesoriosProvider>
                       <PreciosProvider>
                         <PresupuestoProvider>
-                          <main className="flex gap-2 h-full">
+                          <main className="flex  h-full">
                             <MenuMobile />
                             <Sidebar />
                             <Outlet />

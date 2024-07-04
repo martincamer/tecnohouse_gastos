@@ -1,6 +1,5 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import { usePreciosContext } from "../../context/PreciosProvider";
 import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 import { obtenerUnicaAbertura } from "../../api/aberturas.api";
@@ -205,12 +204,12 @@ export const ModalSeleccionarAberturaFinal = ({
       ? precioTotalAbertura + precioTotalAdicionales
       : precioTotalAbertura;
 
-    const additionalCostMultiplier = Number(porciento); //applyAdditionalCost ? 1.4 : 1.0;
+    // Convertir porciento a número o establecerlo en 0 si no está definido
+    const additionalCostMultiplier = Number(porciento) || 0;
 
     precioFinalAbertura = precioTotal * additionalCostMultiplier;
 
-    finalPrice =
-      Number(precioTotal) + Number(precioFinalAbertura) * Number(cantidad);
+    finalPrice = Number(precioTotal + precioFinalAbertura) * Number(cantidad);
 
     return finalPrice;
   };
@@ -225,7 +224,6 @@ export const ModalSeleccionarAberturaFinal = ({
 
   return (
     <Menu as="div" className="z-50">
-      <ToastContainer />
       <Transition appear show={seleccionarAberturaFinal} as={Fragment}>
         <Dialog
           as="div"

@@ -4,17 +4,35 @@ export const SearchSelectTipo = ({ handleTipoChange, tipoSeleccionado }) => {
       <select
         value={tipoSeleccionado}
         onChange={handleTipoChange}
-        className="bg-white py-2 px-4 text-sm uppercase border-[1px] border-slate-300 rounded-xl w-full"
+        className="border border-indigo-500 py-1 px-2 rounded font-semibold text-sm capitalize outline-none"
       >
-        <option>TODOS LOS TIPOS</option>
-        <option value="ventanas">VENTANAS</option>
-        <option value="puertas">PUERTAS</option>
-        <option value="rajas de abrir">RAJAS DE ABRIR</option>
-        <option value="paños fijo">PAÑOS FIJO</option>
-        <option value="portones">PORTONES</option>
-        <option value="celosias de abrir">CELOSIAS DE ABRIR</option>
-        <option value="celosias corredizas">CELOSIAS CORREDIZAS</option>
-        <option value="puertas de abrir">PUERTAS DE ABRIR</option>
+        <option className="font-bold text-indigo-500" value="">
+          Todos los tipos
+        </option>
+        <option className="font-semibold" value="ventanas">
+          Ventanas
+        </option>
+        <option className="font-semibold" value="puertas">
+          Puertas
+        </option>
+        <option className="font-semibold" value="rajas de abrir">
+          Rajas de abrir
+        </option>
+        <option className="font-semibold" value="paños fijo">
+          Paños fijos
+        </option>
+        <option className="font-semibold" value="portones">
+          Portones
+        </option>
+        <option className="font-semibold" value="celosias de abrir">
+          Celosias de abrir
+        </option>
+        <option className="font-semibold" value="celosias corredizas">
+          CEelosias corredizas
+        </option>
+        <option className="font-semibold" value="puertas de abrir">
+          Puertas de abrir
+        </option>
       </select>
     </div>
   );

@@ -7,11 +7,17 @@ export const SearchSelectCategory = ({
       <select
         value={categoriaSeleccionada}
         onChange={handleCategoriaChange}
-        className="bg-white py-2 px-4 text-sm uppercase border-[1px] border-slate-300 rounded-xl w-full"
+        className="border border-indigo-500 py-1 px-2 rounded font-semibold text-sm capitalize outline-none"
       >
-        <option>TODAS LAS CATEGORIAS</option>
-        <option value="herrero">HERRERO</option>
-        <option value="modena">MODENA</option>
+        <option className="font-bold text-indigo-500" value="">
+          Todas las categorias
+        </option>
+        <option className="font-semibold" value="herrero">
+          Herrero
+        </option>
+        <option className="font-semibold" value="modena">
+          Modena
+        </option>
       </select>
     </div>
   );

@@ -9,11 +9,17 @@ const ColorFilter = ({ colorSeleccionado, handleColorChange }) => {
         id="colorFilter"
         value={colorSeleccionado}
         onChange={handleColorChange}
-        className="bg-white py-2 px-4 text-sm uppercase border-[1px] border-slate-300 rounded-xl w-full"
+        className="border border-indigo-500 py-1 px-2 rounded font-semibold text-sm capitalize outline-none"
       >
-        <option value="">TODOS LOS COLORES</option>
+        <option className="font-bold text-indigo-500" value="">
+          Todos los colores
+        </option>
         {colores.map((color) => (
-          <option key={color} value={color.toLowerCase()}>
+          <option
+            className="font-semibold"
+            key={color}
+            value={color.toLowerCase()}
+          >
             {color}
           </option>
         ))}

@@ -4,6 +4,7 @@ import { ModalEliminarPerfil } from "../../../components/perfiles/ModalEliminarP
 import { Search } from "../../../components/ui/Search";
 import { usePerfilesContex } from "../../../context/PerfilesProvider";
 import { ModalEditarPerfil } from "../../../components/perfiles/ModalEditarPerfil";
+import { Link } from "react-router-dom";
 
 export const Perfiles = () => {
   const {
@@ -33,41 +34,24 @@ export const Perfiles = () => {
     setObtenerId(id);
   };
 
-  const itemsPerPage = 8; // Cantidad de elementos por página
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(results?.length / itemsPerPage);
-
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
   return (
-    <section className="w-full py-24 px-5 max-md:px-4 max-md:py-2">
-      <div className="flex flex-col gap-8 px-5">
-        {/*  INTRO */}
-        <div className="flex items-center justify-between max-md:flex-col max-md:gap-2 px-12">
-          <p
-            className="
-        text-xl font-semibold text-slate-700 max-md:text-lg underline"
-          >
-            PERFILES CARGADOS/CREADOS
-          </p>
-          <div className="border-[0.5px] shadow rounded-xl px-4 py-2 bg-white">
-            <p
-              className="
-        text-base font-semibold text-indigo-700 max-md:text-sm"
-            >
-              TOTAL PERFILES CARGADOS: <span>{perfiles.length}</span>
-            </p>
-          </div>
-        </div>
-        {/* FIN CATEGORIAS */}
-        <div className="flex gap-5 items-center">
+    <section className="w-full pb-24">
+      <div className="bg-white mb-4 h-10 flex">
+        <Link
+          to={"/"}
+          className="bg-blue-100 flex h-full px-4 justify-center items-center font-bold text-indigo-600"
+        >
+          Inicio
+        </Link>{" "}
+        <Link
+          to={"/perfiles"}
+          className="bg-indigo-500 flex h-full px-4 justify-center items-center font-bold text-white"
+        >
+          Perfiles
+        </Link>
+      </div>
+      <div className="flex flex-col gap-5 mx-10 mt-10">
+        <div className="flex gap-2 items-center max-md:flex-col max-md:gap-3 bg-white py-5 px-5 ">
           <div className="w-1/4">
             <Search
               value={search}
@@ -79,78 +63,34 @@ export const Perfiles = () => {
           <div>
             <button
               onClick={() => openModal()}
-              className="text-sm uppercase py-2 px-6 rounded-xl bg-green-500 text-white hover:shadow-md transition-all ease-linear"
+              className="bg-indigo-500 px-5 rounded text-white font-semibold text-sm hover:shadow transition-all outline-none py-1.5 flex gap-2 items-center"
             >
               CREAR NUEVO PERFIL
             </button>
           </div>
         </div>
-        {/* TABLA DE PERFILES  */}
-        <div className="md:hidden max-md:flex  flex-col gap-4 max-md:mt-3">
-          {currentResults?.map((g, index) => (
-            <div
-              className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
-              key={index}
-            >
-              <div className="flex justify-between gap-2">
-                <div className="flex flex-col gap-2">
-                  <p className="text-slate-700 text-xs font-semibold uppercase">
-                    {g.codigo}
-                  </p>
 
-                  <p className="text-slate-700 text-xs uppercase">
-                    {g.detalle}
-                  </p>
-                  <p className="text-slate-700 text-xs uppercase">{g.color}</p>
-                  <p className="text-slate-700 text-xs uppercase">
-                    {g.peso_barra_6_mts}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-4 items-center justify-center">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleObtenerId(g.id), openEditarPerfil();
-                    }}
-                    className="border-indigo-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-indigo-100 text-center text-indigo-800 cursor-pointer"
-                  >
-                    EDITAR
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      obtenerParamsId(g.id), openModalEliminar();
-                    }}
-                    className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer"
-                  >
-                    ELIMINAR
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>{" "}
-        <div className="w-full bg-white rounded-xl shadow-xl">
-          <table className="min-w-full text-sm uppercase table">
+        <div className="bg-white uppercase">
+          <table className=" table">
             <thead>
               <tr>
-                <th className="p-3 text-sm text-gray-700">CODIGO</th>
-                <th className="p-3 text-sm text-gray-700">DETALLE</th>
-                <th className="p-3 text-sm text-gray-700">COLOR</th>
-                <th className="p-3 text-sm text-gray-700">CATEGORIA</th>
-                <th className="p-3 text-sm text-gray-700">PESO NETO BARRA</th>
-                <th className="p-3 text-sm text-gray-700">EDITAR</th>
-                <th className="p-3 text-sm text-gray-700">ELIMINAR</th>
+                <th className="py-5 text-indigo-600">CODIGO</th>
+                <th className="py-5 text-indigo-600">DETALLE</th>
+                <th className="py-5 text-indigo-600">COLOR</th>
+                <th className="py-5 text-indigo-600">CATEGORIA</th>
+                <th className="py-5 text-indigo-600">PESO NETO BARRA</th>
+                <th className="py-5 text-indigo-600">EDITAR</th>
+                <th className="py-5 text-indigo-600">ELIMINAR</th>
               </tr>
             </thead>
-            <tbody>
-              {currentResults?.map((p) => (
+            <tbody className="text-xs">
+              {results?.map((p) => (
                 <tr className="cursor-pointer">
-                  <th className="p-3 uppercase font-semibold">{p?.codigo}</th>
-                  <th className="p-3 uppercase">{p?.detalle}</th>
-                  <th className="p-3 uppercase">{p.color}</th>
-                  <th className="p-3 uppercase">{p.categoria}</th>
-                  <th className="p-3 uppercase">{p.peso_barra_6_mts}</th>
+                  <th>{p?.codigo}</th>
+                  <th>{p?.detalle}</th>
+                  <th>{p.color}</th>
+                  <th>{p.categoria}</th>
+                  <th>{p.peso_barra_6_mts}</th>
                   <th
                     onClick={() => {
                       handleObtenerId(p.id), openEditarPerfil();
@@ -158,9 +98,10 @@ export const Perfiles = () => {
                     className="p-3 uppercase cursor-pointer text-center"
                   >
                     <button
-                      className="bg-green-100 text-green-700 rounded-xl py-2 px-6 font-normal"
+                      className="bg-indigo-500 py-1.5 px-6 rounded text-white font-semibold"
                       type="button"
                     >
+                      {" "}
                       EDITAR
                     </button>
                   </th>
@@ -168,10 +109,9 @@ export const Perfiles = () => {
                     onClick={() => {
                       obtenerParamsId(p.id), openModalEliminar();
                     }}
-                    className="p-3 uppercase cursor-pointer"
                   >
                     <button
-                      className="bg-red-100 text-red-800 rounded-xl py-2 px-6 font-normal"
+                      className="bg-red-500 py-1.5 px-6 rounded text-white font-semibold"
                       type="button"
                     >
                       ELIMINAR
@@ -182,23 +122,6 @@ export const Perfiles = () => {
             </tbody>
           </table>
         </div>
-        {totalPages > 1 && (
-          <div className="flex flex-wrap justify-center mt-4 mb-4">
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <button
-                key={index}
-                className={`mx-1 px-3 py-1 rounded-xl ${
-                  currentPage === index + 1
-                    ? "bg-indigo-500 border border-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                    : "bg-white shadow shadow-black/20 max-md:text-xs"
-                }`}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        )}
       </div>
       <ModalCrearNuevoPerfil isOpen={isOpen} closeModal={closeModal} />
       <ModalEliminarPerfil />

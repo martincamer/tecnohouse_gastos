@@ -55,97 +55,27 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
   };
 
   return (
-    <div>
-      <div className="md:hidden max-md:flex  flex-col gap-4">
-        {currentResults?.map((g, index) => (
-          <div
-            className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
-            key={index}
-          >
-            <div className="flex justify-between gap-2">
-              <div className="flex flex-col gap-2">
-                <p className="text-slate-700 text-xs font-semibold uppercase">
-                  {g?.cliente}
-                </p>
-
-                <p className="text-slate-700 text-xs uppercase">
-                  {g?.localidad}
-                </p>
-                <p className="text-slate-700 text-xs uppercase">
-                  {new Date(g.created_at).toLocaleDateString("arg")}
-                </p>
-                <p className="text-slate-700 text-xs uppercase">
-                  {g?.totalcantidad}
-                </p>
-                <p className="text-green-600 font-bold text-xs uppercase">
-                  {Number(g?.total).toLocaleString("es-ar", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 2,
-                  })}
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 items-center justify-center">
-                <span
-                // onClick={() => {
-                //   handleEliminar(g?.id);
-                // }}
-                >
-                  <span className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer">
-                    ELIMINAR
-                  </span>
-                </span>
-
-                <Link
-                  to={`/presupuesto/${g.id}`}
-                  onClick={() => obtenerParamsId(g.id)}
-                  className="rounded-xl uppercase shadow py-2 px-6 text-xs bg-indigo-500 text-center text-white cursor-pointer"
-                >
-                  Ver
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>{" "}
-      <div className="transition-all ease-linear cursor-pointer w-full rounded-xl uppercase md:block max-md:hidden bg-white shadow-xl">
-        <table className="w-full rounded-xl text-sm uppercase table">
+    <div className="pb-20 mx-5">
+      <div className="bg-white">
+        <table className="table">
           <thead>
             <tr className="">
-              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
-                Cliente
-              </th>
-              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
-                Localidad
-              </th>
-              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
-                fecha
-              </th>
-              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
-                Cantidades
-              </th>
-              <th className="p-3 max-md:text-xs font-bold text-sm text-gray-400">
-                Total
-              </th>
+              <th className="py-5 text-indigo-500 uppercase">Cliente</th>
+              <th className="py-5 text-indigo-500 uppercase">Localidad</th>
+              <th className="py-5 text-indigo-500 uppercase">fecha</th>
+              <th className="py-5 text-indigo-500 uppercase">Cantidades</th>
+              <th className="py-5 text-indigo-500 uppercase">Total</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-3">
+          <tbody>
             {currentResults.length > 0 ? (
               currentResults?.map((g) => (
                 <tr className="cursor-pointer" key={g.id}>
-                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
-                    {g?.cliente}
-                  </th>
-                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
-                    {g?.localidad}
-                  </th>
-                  <th className="py-5 max-md:text-xs px-3 font-medium text-sm uppercase">
-                    {new Date(g.created_at).toLocaleDateString("arg")}
-                  </th>
-                  <th className="py-5 max-md:text-xs px-3 text-indigo-700 text-sm uppercase font-semibold">
-                    {g?.totalcantidad}
-                  </th>
-                  <th className="py-5 max-md:text-xs px-3 text-indigo-700 text-sm uppercase font-semibold">
+                  <th>{g?.cliente}</th>
+                  <th>{g?.localidad}</th>
+                  <th>{new Date(g.created_at).toLocaleDateString("arg")}</th>
+                  <th>{g?.totalcantidad}</th>
+                  <th>
                     {Number(g?.total).toLocaleString("es-ar", {
                       style: "currency",
                       currency: "ARS",
@@ -176,7 +106,7 @@ export const TablePresupuestos = ({ resultadosFiltrados }) => {
                       </div>
                       <ul
                         tabIndex={0}
-                        className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-box w-52 border capitalize"
+                        className="dropdown-content z-[1] menu p-2 shadow-xl bg-base-100 rounded-none text-xs w-52 border capitalize"
                       >
                         <li>
                           <button

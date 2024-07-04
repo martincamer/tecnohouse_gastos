@@ -476,10 +476,10 @@ export const TableAberturas = ({ openModal, handleId }) => {
   };
 
   return (
-    <div>
+    <div className="mx-5 pb-20">
       <div className="flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start mb-4">
         <button
-          className="text-sm uppercase bg-green-100 text-green-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          className="text-sm font-semibold bg-rose-500 rounded text-white px-5 py-2 flex gap-2 items-center"
           onClick={() => setShowPrecioSinNada(!showPrecioSinNada)}
         >
           {!showPrecioSinNada
@@ -504,10 +504,10 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
         {/* Botón para aplicar o quitar el aumento del 40% */}
         <button
-          className="text-sm uppercase bg-indigo-100 text-indigo-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          className="text-sm font-semibold bg-indigo-500 rounded text-white px-5 py-2 flex gap-2 items-center"
           onClick={() => setApplyAumento(!applyAumento)}
         >
-          {!applyAumento ? "AGREGAR AUMENTO DEL 40%" : "SACAR AUMENTO DEL 40%"}
+          {!applyAumento ? "Agregar el 40%" : "Sacar el 40%"}
 
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -524,7 +524,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             />
           </svg>
         </button>
-        <button className="text-sm uppercase bg-orange-100 text-orange-700 px-4 rounded-xl py-2 flex gap-2 items-center">
+        <button className="text-sm font-semibold bg-green-500 rounded text-white px-5 py-2 flex gap-2 items-center">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",
@@ -536,7 +536,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
               />
             }
           >
-            DESCARGAR INVENTARIO PDF
+            Descargar inventario
           </PDFDownloadLink>{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -554,10 +554,10 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </svg>
         </button>
         <button
-          className="text-sm uppercase bg-slate-200 text-slate-700 px-4 rounded-xl py-2 flex gap-2 items-center"
+          className="text-sm font-semibold bg-orange-500 rounded text-white px-5 py-2 flex gap-2 items-center"
           onClick={downloadAberturasAsExcel}
         >
-          DESCARGAR ABERTURAS EN EXCEL
+          Descargar en formato excel
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -574,7 +574,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </svg>
         </button>
       </div>
-      <div className="md:hidden max-md:flex flex-col gap-4">
+      {/* <div className="md:hidden max-md:flex flex-col gap-4">
         {currentResults?.map((g, index) => (
           <div
             className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
@@ -609,36 +609,28 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </div>
           </div>
         ))}
-      </div>{" "}
-      <div className="max-md:hidden md:block rounded-xl shadow-md hover:shadow-md transition-all ease-linear bg-white">
-        <table className="uppercase min-w-full table">
+      </div>{" "} */}
+      <div className="bg-white">
+        <table className="uppercase table">
           <thead className="">
             <tr>
-              <th className="px-4 py-4 text-sm text-left">Tipo</th>
-              <th className="px-4 py-4 text-sm text-left">Detalle</th>
-              <th className="px-4 py-4 text-sm text-left">Color</th>
-              <th className="px-4 py-4 text-sm text-left">Categoria</th>
-              <th className="px-4 py-4 text-sm text-left">AnchoXAlto</th>
-              <th className="px-4 py-4 text-sm text-left">Precio</th>
-              <th className="px-4 py-4 text-sm text-left">Acciones</th>
+              <th className="py-5 text-indigo-600">Tipo</th>
+              <th className="py-5 text-indigo-600">Detalle</th>
+              <th className="py-5 text-indigo-600">Color</th>
+              <th className="py-5 text-indigo-600">Categoria</th>
+              <th className="py-5 text-indigo-600">AnchoXAlto</th>
+              <th className="py-5 text-indigo-600">Precio</th>
+              <th className="py-5 text-indigo-600">Acciones</th>
             </tr>
           </thead>
-          <tbody className="">
+          <tbody className="text-xs">
             {resultados?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
-                  {g.tipo}
-                </th>
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
-                  {g.detalle}
-                </th>
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
-                  {g.color}
-                </th>
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
-                  {g.categoria}
-                </th>{" "}
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase">
+                <th className="">{g.tipo}</th>
+                <th className="">{g.detalle}</th>
+                <th className="">{g.color}</th>
+                <th className="">{g.categoria}</th>{" "}
+                <th className="">
                   {g.ancho}x{g.alto}
                 </th>{" "}
                 <th>
@@ -650,7 +642,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
                     minimumFractionDigits: 2,
                   })}
                 </th>
-                <th className="py-4 px-4 text-left max-md:text-xs font-medium text-sm uppercase flex space-x-2">
+                <th className="">
                   <div className="dropdown dropdown-bottom dropdown-end">
                     <div
                       tabIndex={0}
@@ -675,7 +667,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
 
                     <ul
                       tabIndex={0}
-                      className="dropdown-content z-[1] menu p-2 shadow-xl border bg-base-100 rounded-box w-52"
+                      className="dropdown-content z-[1] menu p-2 shadow border bg-base-100 rounded-none w-52 text-xs"
                     >
                       <li>
                         <p

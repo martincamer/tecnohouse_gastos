@@ -6,7 +6,7 @@
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background-color: #f1f1f1a6;
+  background-color: #ecf0f1;
   &::-webkit-scrollbar {
     width: 10px; /* Ancho de la barra de desplazamiento */
     border-radius: 2px; /* Bordes redondeados */
