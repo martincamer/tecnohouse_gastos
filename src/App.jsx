@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
 import { Gastos } from "./routes/pages/protected/Gastos";
 import { GastosProvider } from "./context/GastosProvider";
+import { Proveedores } from "./routes/pages/protected/Proveedores";
 
 function App() {
   const { isAuth } = useAuth();
@@ -74,8 +75,8 @@ function App() {
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />
               <Route path="/gastos" element={<Gastos />} />
-              {/* <Route path="/gastos/:id" element={<ViewGasto />} /> */}
-              {/* <Route path="/ventas/:id" element={<ViewVenta />} /> */}
+              <Route path="/proveedores" element={<Proveedores />} />
+
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
               <Route path="/presupuesto/:id" element={<ViewPresupuesto />} />
             </Route>

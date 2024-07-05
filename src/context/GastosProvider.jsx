@@ -1,6 +1,7 @@
 //imports
 import { createContext, useContext, useEffect, useState } from "react";
 import { eliminarGasto, obtenerGastosMensuales } from "../api/gastos";
+import client from "../api/axios";
 
 // import axios from "../api/axios";
 // import { toast } from "react-toastify";
@@ -20,12 +21,25 @@ export const useGastosContext = () => {
 //provider
 export const GastosProvider = ({ children }) => {
   const [gastos, setGastos] = useState([]);
+  const [proveedores, setProveedores] = useState([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await client.get("/proveedores");
+
+      setProveedores(res.data);
+    };
+
+    loadData();
+  }, []);
 
   return (
     <GastosContext.Provider
       value={{
         gastos,
         setGastos,
+        proveedores,
+        setProveedores,
       }}
     >
       {children}
