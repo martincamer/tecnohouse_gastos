@@ -55,7 +55,7 @@ export const Sidebar = () => {
       ),
     },
     {
-      name: "GASTOS/compras",
+      name: "GASTOS",
       path: "/gastos",
       icon: (
         <svg
@@ -75,7 +75,27 @@ export const Sidebar = () => {
       ),
     },
     {
-      name: "Proveedores",
+      name: "PAGOS",
+      path: "/pagos",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "PROVEEDORES",
       path: "/proveedores",
       icon: (
         <svg
@@ -90,6 +110,26 @@ export const Sidebar = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
+          />
+        </svg>
+      ),
+    },
+    {
+      name: "PRODUCCIÓN",
+      path: "/aberturas-resumen",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 4.5v15m6-15v15m-10.875 0h15.75c.621 0 1.125-.504 1.125-1.125V5.625c0-.621-.504-1.125-1.125-1.125H4.125C3.504 4.5 3 5.004 3 5.625v12.75c0 .621.504 1.125 1.125 1.125Z"
           />
         </svg>
       ),

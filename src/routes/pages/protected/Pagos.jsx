@@ -1,17 +1,15 @@
 import { Link } from "react-router-dom";
 import { useGastosContext } from "../../../context/GastosProvider";
-import { ModalCrearGasto } from "../../../components/gastos/ModalCrearGasto";
 import { useState } from "react";
 import { formatearFecha } from "../../../helpers/formatearFecha";
 import { formatearDinero } from "../../../helpers/formatearDinero";
-import client from "../../../api/axios";
-import { toast } from "react-toastify";
 import { ModalNuevoProveedor } from "../../../components/proveedores/ModalNuevoProveedor";
-// import { SearchSelect } from "../../../components/ui/SearchSelect";
-// import { SearchSelectAnio } from "../../../components/ui/SearchSelectAnio";
+import { ModalCrearPago } from "../../../components/gastos/ModalCrearPago";
+import { toast } from "react-toastify";
+import client from "../../../api/axios";
 
-export const Gastos = () => {
-  const { gastos, proveedores, setProveedores } = useGastosContext();
+export const Pagos = () => {
+  const { proveedores, setProveedores } = useGastosContext();
 
   const handleEliminar = async (nombreProveedor, idComprobante) => {
     const res = await client.delete(
@@ -84,9 +82,9 @@ export const Gastos = () => {
     // Parsear comprobantes si existen
     let comprobantes = [];
 
-    if (proveedor.comprobantes) {
+    if (proveedor.comprobantes_pagos) {
       try {
-        comprobantes = JSON.parse(proveedor.comprobantes);
+        comprobantes = JSON.parse(proveedor.comprobantes_pagos);
       } catch (error) {
         console.error(
           `Error al parsear comprobantes para ${proveedor.proveedor}`,
@@ -195,8 +193,6 @@ export const Gastos = () => {
     });
   });
 
-  console.log("asd", comprobantesCargados);
-
   return (
     <section className="w-full flex flex-col gap-4">
       <div className="bg-white mb-4 h-10 flex">
@@ -207,24 +203,24 @@ export const Gastos = () => {
           Inicio
         </Link>{" "}
         <Link
-          to={"/gastos"}
+          to={"/pagos"}
           className="bg-indigo-500 flex h-full px-4 justify-center items-center font-bold text-white"
         >
-          Gastos/compras de la fabrica
+          Pagos/comprobantes
         </Link>
       </div>
 
       <div className="mx-5 my-5 px-10 py-5 bg-white">
         <p className="font-semibold text-orange-500 text-lg">
-          Crear nuevos gastos/compras, lleva el controll de ellas y analiza tu
-          fabrica.
+          Crear nuevos pagos/comprobantes, lleva el controll de ellas y analiza
+          tu fabrica.
         </p>
       </div>
       <div className="grid grid-cols-4 gap-4 mb-5 bg-white py-5 px-5 mx-5">
         <article class="py-5 px-5 border">
           <div className="flex flex-col gap-1">
             <p class="text-sm text-gray-500 font-semibold">
-              Gastos generados hasta el momento.
+              Pagos generados hasta el momento.
             </p>
 
             <p class="text-2xl font-bold text-gray-900 max-md:text-base">
@@ -235,7 +231,7 @@ export const Gastos = () => {
         <article class="py-5 px-5 border">
           <div className="flex flex-col gap-1">
             <p class="text-sm text-gray-500 font-semibold">
-              Total en gastos/ordenes generados.
+              Total en pagos/comprobantes generados.
             </p>
 
             <p class="text-2xl font-bold text-gray-900 max-md:text-base">
@@ -251,12 +247,12 @@ export const Gastos = () => {
       <div className="bg-white mx-5 py-5 px-5 flex gap-2">
         <button
           onClick={() =>
-            document.getElementById("my_modal_crear_gasto").showModal()
+            document.getElementById("my_modal_crear_pago").showModal()
           }
           type="button"
           className="bg-indigo-500 px-5 rounded text-white font-semibold text-sm hover:shadow transition-all outline-none py-2"
         >
-          Crear nuevos gastos/compras
+          Crear nuevos pagos
         </button>{" "}
         <button
           onClick={() =>
@@ -322,7 +318,7 @@ export const Gastos = () => {
               <th className="py-5">Referencia</th>
               <th className="py-5">Proveedor</th>
               <th className="py-5">Fecha</th>
-              <th className="py-5">Total</th>
+              <th className="py-5">Total del pago</th>
               <th className="py-5">Acciones</th>
             </tr>
           </thead>
@@ -330,7 +326,7 @@ export const Gastos = () => {
         </table>
       </div>
 
-      <ModalCrearGasto />
+      <ModalCrearPago />
 
       <ImageModal
         isVisible={isModalVisible}

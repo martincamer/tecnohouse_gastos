@@ -26,6 +26,8 @@ import { ToastContainer } from "react-toastify";
 import { Gastos } from "./routes/pages/protected/Gastos";
 import { GastosProvider } from "./context/GastosProvider";
 import { Proveedores } from "./routes/pages/protected/Proveedores";
+import { Pagos } from "./routes/pages/protected/Pagos";
+import { AberturasResumen } from "./routes/pages/protected/AberturasResumen";
 
 function App() {
   const { isAuth } = useAuth();
@@ -75,8 +77,9 @@ function App() {
               <Route path="/accesorios" element={<Accesorios />} />
               <Route path="/presupuestos" element={<GenerarPresupuesto />} />
               <Route path="/gastos" element={<Gastos />} />
+              <Route path="/pagos" element={<Pagos />} />
               <Route path="/proveedores" element={<Proveedores />} />
-
+              <Route path="/aberturas-resumen" element={<AberturasResumen />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
               <Route path="/presupuesto/:id" element={<ViewPresupuesto />} />
             </Route>

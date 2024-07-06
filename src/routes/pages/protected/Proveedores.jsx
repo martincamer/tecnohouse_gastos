@@ -105,7 +105,6 @@ export const Proveedores = () => {
 
       <div className=" bg-white mx-5 mb-20">
         <table className="table">
-          {/* head */}
           <thead>
             <tr className="uppercase text-indigo-600">
               <th className="py-5">Referencia</th>
