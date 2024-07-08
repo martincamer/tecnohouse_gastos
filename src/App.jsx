@@ -28,6 +28,8 @@ import { GastosProvider } from "./context/GastosProvider";
 import { Proveedores } from "./routes/pages/protected/Proveedores";
 import { Pagos } from "./routes/pages/protected/Pagos";
 import { AberturasResumen } from "./routes/pages/protected/AberturasResumen";
+import { EmpleadosProvider } from "./context/EmpleadosProvider";
+import { Empleados } from "./routes/pages/protected/Empleados";
 
 function App() {
   const { isAuth } = useAuth();
@@ -58,12 +60,14 @@ function App() {
                       <AccesoriosProvider>
                         <PreciosProvider>
                           <PresupuestoProvider>
-                            <main className="flex  h-full">
-                              <ToastContainer />
-                              <MenuMobile />
-                              <Sidebar />
-                              <Outlet />
-                            </main>
+                            <EmpleadosProvider>
+                              <main className="flex  h-full">
+                                <ToastContainer />
+                                <MenuMobile />
+                                <Sidebar />
+                                <Outlet />
+                              </main>
+                            </EmpleadosProvider>
                           </PresupuestoProvider>
                         </PreciosProvider>
                       </AccesoriosProvider>
@@ -82,6 +86,7 @@ function App() {
               <Route path="/aberturas-resumen" element={<AberturasResumen />} />
               <Route path="/aberturas/:id" element={<ViewAbertura />} />
               <Route path="/presupuesto/:id" element={<ViewPresupuesto />} />
+              <Route path="/empleados" element={<Empleados />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

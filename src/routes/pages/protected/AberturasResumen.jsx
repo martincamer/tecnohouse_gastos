@@ -10,19 +10,19 @@ export const AberturasResumen = () => {
   const { produccion } = useGastosContext();
   const { handleObtenerId, idObtenida } = useObtenerId();
 
-  // Obtener el primer día del mes actual
-  const today = new Date();
+  // // Obtener el primer día del mes actual
+  // const today = new Date();
 
-  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  // const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  // const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
 
-  // Convertir las fechas en formato YYYY-MM-DD para los inputs tipo date
-  const fechaInicioPorDefecto = firstDayOfMonth.toISOString().split("T")[0];
-  const fechaFinPorDefecto = lastDayOfMonth.toISOString().split("T")[0];
+  // // Convertir las fechas en formato YYYY-MM-DD para los inputs tipo date
+  // const fechaInicioPorDefecto = firstDayOfMonth.toISOString().split("T")[0];
+  // const fechaFinPorDefecto = lastDayOfMonth.toISOString().split("T")[0];
 
   // Estado inicial de las fechas con el rango del mes actual
-  const [fechaInicio, setFechaInicio] = useState(fechaInicioPorDefecto);
-  const [fechaFin, setFechaFin] = useState(fechaFinPorDefecto);
+  const [fechaInicio, setFechaInicio] = useState("");
+  const [fechaFin, setFechaFin] = useState("");
 
   const handleFechaInicioChange = (e) => {
     setFechaInicio(e.target.value);
@@ -32,13 +32,13 @@ export const AberturasResumen = () => {
     setFechaFin(e.target.value);
   };
 
-  let filteredData;
+  let filteredData = produccion; // Inicialmente, muestra todos los datos
 
-  // Filtrar por rango de fechas
+  // Filtrar por rango de fechas si las fechas están definidas
   if (fechaInicio && fechaFin) {
     const fechaInicioObj = new Date(fechaInicio);
     const fechaFinObj = new Date(fechaFin);
-    filteredData = produccion?.filter((item) => {
+    filteredData = produccion.filter((item) => {
       const fechaOrden = new Date(item.created_at);
       return fechaOrden >= fechaInicioObj && fechaOrden <= fechaFinObj;
     });
@@ -90,7 +90,7 @@ export const AberturasResumen = () => {
             </p>
 
             <p class="text-2xl font-bold text-gray-900 max-md:text-base">
-              {filteredData.length}
+              {filteredData?.length}
             </p>
           </div>
         </article>
@@ -147,7 +147,7 @@ export const AberturasResumen = () => {
               value={fechaInicio}
               onChange={handleFechaInicioChange}
               type="date"
-              className="outline-none text-slate-600 w-full max-md:text-sm uppercase bg-white"
+              className="outline-none text-slate-600 w-full max-md:text-sm bg-white"
               placeholder="Fecha de inicio"
             />
           </div>
@@ -157,7 +157,7 @@ export const AberturasResumen = () => {
               value={fechaFin}
               onChange={handleFechaFinChange}
               type="date"
-              className="outline-none text-slate-600 w-full max-md:text-sm uppercase bg-white"
+              className="outline-none text-slate-600 w-full max-md:text-sm bg-white"
               placeholder="Fecha fin"
             />
           </div>

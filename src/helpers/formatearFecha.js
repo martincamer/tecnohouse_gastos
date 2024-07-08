@@ -7,3 +7,10 @@ export const formatearFecha = (fecha) =>
     minute: "2-digit",
     second: "2-digit",
   });
+
+export const formatearFechaDos = (fecha) =>
+  new Date(fecha).toLocaleString("es-AR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
