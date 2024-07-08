@@ -135,12 +135,8 @@ export const ModalCrearPago = () => {
             ✕
           </button>
         </form>
-        <h3 className="font-bold text-lg text-indigo-500">
-          Crear nuevo gasto/orden
-        </h3>
-        <p className="py-1">
-          En esta sección podras crear tu nuevo gasto/orden.
-        </p>
+        <h3 className="font-bold text-lg text-indigo-500">Crear nuevo pago</h3>
+        <p className="py-1">En esta sección podras crear tu nuevo pago.</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
           <div className="flex gap-2 items-end">

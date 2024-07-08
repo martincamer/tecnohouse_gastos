@@ -138,7 +138,7 @@ export const Pagos = () => {
           <td>{formatearFecha(comprobante.fecha)}</td>
           <td>
             <div className="flex">
-              <p className="bg-violet-500 py-1 px-3 rounded text-white">
+              <p className="bg-indigo-500 py-1 px-3 rounded text-white">
                 {formatearDinero(Number(comprobante.total))}
               </p>
             </div>
