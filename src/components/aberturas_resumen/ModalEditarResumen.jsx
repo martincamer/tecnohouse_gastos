@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ModalNuevoProveedor } from "../proveedores/ModalNuevoProveedor";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { useGastosContext } from "../../context/GastosProvider";
 import client from "../../api/axios";
 
-export const ModalCrearResumen = () => {
-  const { register, handleSubmit, reset } = useForm();
+export const ModalEditarResumen = ({ idObtenida }) => {
+  const { register, handleSubmit, setValue } = useForm();
+
+  useEffect(() => {
+    const loadData = async () => {
+      const res = await client.get(`/produccion/${idObtenida}`);
+      setValue("total_salidas", res.data.total_salidas);
+      setValue("total_stock", res.data.total_stock);
+      setValue("numero_necesario", res.data.numero_necesario);
+    };
+    loadData();
+  }, [idObtenida]);
+
+  const { setProduccion } = useGastosContext();
 
   const onSubmit = async (formData) => {
     try {
-      // Creamos el objeto del producto con todos los datos y la URL de la imagen
       const dataResumen = {
         ...formData,
       };
 
-      const res = await client.post(`/resumen`, dataResumen);
+      const res = await client.put(`/produccion/${idObtenida}`, dataResumen);
 
-      toast.success("Pago cargado correctamente!", {
+      setProduccion(res.data.todosLosRegistros);
+
+      toast.success("Resumen editado correctamente", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: true,
@@ -30,16 +44,14 @@ export const ModalCrearResumen = () => {
         },
       });
 
-      document.getElementById("my_modal_crear_resumen").close();
-
-      reset();
+      document.getElementById("my_modal_editar_resumen").close();
     } catch (error) {
       console.error("Error creating product:", error);
     }
   };
 
   return (
-    <dialog id="my_modal_crear_resumen" className="modal">
+    <dialog id="my_modal_editar_resumen" className="modal">
       <div className="modal-box max-w-xl">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
@@ -48,9 +60,9 @@ export const ModalCrearResumen = () => {
           </button>
         </form>
         <h3 className="font-bold text-lg text-indigo-500">
-          Crear nuevo resumen de entregas y stock
+          Actualizar el resumen de entregas y stock
         </h3>
-        <p className="py-1">En esta sección podras crear tu nuevo resumen.</p>
+        <p className="py-1">En esta sección podras actualizar tus resumenes.</p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
           <div className="flex-col flex gap-2 w-full">
@@ -91,7 +103,7 @@ export const ModalCrearResumen = () => {
               type="submit"
               className="bg-orange-500 py-2 px-6 text-white font-semibold text-sm rounded-full hover:bg-indigo-500 transition-all hover:shadow-md"
             >
-              Guardar el resumen del mes
+              Actualizar el resumen del mes
             </button>
           </div>
         </form>
