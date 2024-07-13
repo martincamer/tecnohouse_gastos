@@ -257,7 +257,7 @@ export const AberturasProvider = ({ children }) => {
   const deleteProducto = (id) => {
     // Crear una copia de productoSeleccionado antes de filtrarla
     const updateProducto = productoSeleccionado.filter(
-      (item) => item.id === id
+      (item) => item.id !== id
     );
 
     // Actualizar el estado con la copia filtrada
