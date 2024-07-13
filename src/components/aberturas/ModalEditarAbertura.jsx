@@ -131,6 +131,8 @@ export const ModalEditarAbertura = ({ isOpen, closeModal, obtenerId }) => {
     }
   }, [precios, vidrioSeleccionado]);
 
+  console.log("pp", productoSeleccionado);
+
   return (
     <Menu as="div" className="z-50">
       <Transition appear show={isOpen} as={Fragment}>
