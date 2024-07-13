@@ -182,6 +182,7 @@ export const ModalSeleccionarVidrio = ({
                       <option>3 mls</option>
                       <option>4 mls</option>
                       <option>dvh 4x4</option>
+                      <option>laminado 3+3</option>
                     </select>
                   </div>
                 </div>
