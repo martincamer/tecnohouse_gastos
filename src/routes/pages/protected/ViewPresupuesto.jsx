@@ -59,7 +59,7 @@ export const ViewPresupuesto = () => {
               // target="_blank"
               // download={false}
               className="bg-green-500 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
-              fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
+              fileName={`${clienteCapitalized} PRESUPUESTO-0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
               Descargar aberturas completo
@@ -70,7 +70,7 @@ export const ViewPresupuesto = () => {
               // target="_blank"
               // download={false}
               className="bg-blue-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
-              fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
+              fileName={`${clienteCapitalized} COMPROBANTE-0000-000${datos?.id}`}
               document={<DescargarComprobante datos={datos} />}
             >
               Descargar comprobante
