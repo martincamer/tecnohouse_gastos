@@ -41,9 +41,30 @@ export const ModalCrearPresupuesto = () => {
     0
   );
 
-  setTotalCantidad(cantidadTotal);
-  setTotal(precioFinalTotal);
+  const [operacion, setOperacion] = useState("descuento");
+  const [porcentaje, setPorcentaje] = useState(0);
 
+  const handleOperacionChange = (e) => {
+    setOperacion(e.target.value);
+  };
+
+  const handlePorcentajeChange = (e) => {
+    const valor = parseFloat(e.target.value);
+    if (!isNaN(valor)) {
+      setPorcentaje(valor);
+    }
+  };
+
+  // Calcula el total final dependiendo de la operación seleccionada
+  let totalFinal = precioFinalTotal;
+  if (operacion === "descuento") {
+    totalFinal *= (100 - porcentaje) / 100; // Aplica descuento
+  } else if (operacion === "suma") {
+    totalFinal *= (100 + porcentaje) / 100; // Suma porcentaje adicional
+  }
+
+  setTotal(totalFinal);
+  setTotalCantidad(cantidadTotal);
   const [showDetail, setShowDetail] = useState(
     Array(productoSeleccionado.length).fill(false)
   ); // Inicializa un array de estados locales, uno para cada fila
@@ -210,6 +231,51 @@ export const ModalCrearPresupuesto = () => {
                     </table>
                   </div>
 
+                  <div className="flex gap-4 items-center">
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        id="descuento"
+                        name="operacion"
+                        value="descuento"
+                        checked={operacion === "descuento"}
+                        onChange={handleOperacionChange}
+                        className="mr-2"
+                      />
+                      <label htmlFor="descuento">Aplicar descuento</label>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        id="suma"
+                        name="operacion"
+                        value="suma"
+                        checked={operacion === "suma"}
+                        onChange={handleOperacionChange}
+                        className="mr-2"
+                      />
+                      <label htmlFor="suma">Sumar porcentaje</label>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 font-semibold">
+                    <label
+                      htmlFor="porcentaje"
+                      className="text-slate-700 max-md:uppercase max-md:text-sm uppercase"
+                    >
+                      {operacion === "descuento"
+                        ? "Porcentaje de descuento"
+                        : "Porcentaje a sumar"}
+                    </label>
+                    <input
+                      id="porcentaje"
+                      type="number"
+                      value={porcentaje}
+                      onChange={handlePorcentajeChange}
+                      className="border py-2 px-3 text-sm font-semibold w-1/3 outline-none"
+                    />
+                  </div>
+
                   <div className="flex gap-2 font-semibold">
                     <p className="text-slate-700 max-md:uppercase max-md:text-sm uppercase">
                       Total aberturas
@@ -224,7 +290,7 @@ export const ModalCrearPresupuesto = () => {
                       Total generado
                     </p>
                     <p className="text-indigo-600 font-semibold">
-                      {precioFinalTotal?.toLocaleString("es-ar", {
+                      {totalFinal?.toLocaleString("es-ar", {
                         style: "currency",
                         currency: "ARS",
                         minimumFractionDigits: 2,
@@ -232,7 +298,7 @@ export const ModalCrearPresupuesto = () => {
                     </p>
                   </div>
 
-                  <div className="mb-5">
+                  <div className="pb-10">
                     <button
                       onClick={() => crearNuevoPresupuestoSubmit()}
                       type="button"

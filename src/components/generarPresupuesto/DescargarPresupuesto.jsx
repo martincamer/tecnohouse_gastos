@@ -340,7 +340,7 @@ export const DescargarPresupuesto = ({ datos }) => {
                       fontWeight: "semibold",
                     }}
                   >
-                    CLIENTE
+                    CLIENTE/NUMERO CONTRATO
                   </Text>{" "}
                   <Text
                     style={{
@@ -362,7 +362,7 @@ export const DescargarPresupuesto = ({ datos }) => {
                     </Text>
                   </Text>
                 </View>
-                <View
+                {/* <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -398,7 +398,7 @@ export const DescargarPresupuesto = ({ datos }) => {
                       {datos?.localidad}
                     </Text>
                   </Text>
-                </View>
+                </View> */}
                 {/* <View
                   style={{
                     display: "flex",
