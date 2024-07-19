@@ -146,28 +146,30 @@ export const ModalCrearPresupuesto = () => {
                   </p>
                 </div>
 
-                <form className="space-y-3">
-                  <div className="flex flex-col gap-2">
-                    <label className="font-semibold">
-                      Nombre y apellido del cliente
-                    </label>
-                    <input
-                      value={cliente}
-                      onChange={(e) => setCliente(e.target.value)}
-                      placeholder="Cliente"
-                      className="border py-2 px-3 text-sm font-semibold w-1/3 outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="font-semibold">
-                      Localidad y provincia del cliente
-                    </label>
-                    <input
-                      value={localidad}
-                      onChange={(e) => setLocalidad(e.target.value)}
-                      placeholder="Localidad/provincia"
-                      className="border py-2 px-3 text-sm font-semibold w-1/3 outline-none"
-                    />
+                <form className="space-y-6">
+                  <div className="grid grid-cols-5 gap-4">
+                    <div className="flex flex-col gap-2">
+                      <label className="font-semibold">
+                        Nombre y apellido del cliente
+                      </label>
+                      <input
+                        value={cliente}
+                        onChange={(e) => setCliente(e.target.value)}
+                        placeholder="Cliente"
+                        className="border py-2 px-3 text-sm font-semibold outline-none rounded-md border-gray-300"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <label className="font-semibold">
+                        Localidad y provincia del cliente
+                      </label>
+                      <input
+                        value={localidad}
+                        onChange={(e) => setLocalidad(e.target.value)}
+                        placeholder="Localidad/provincia"
+                        className="border py-2 px-3 text-sm font-semibold outline-none rounded-md border-gray-300"
+                      />
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2 items-start">
                     <Link

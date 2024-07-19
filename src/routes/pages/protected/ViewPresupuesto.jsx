@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { obtenerUnicosPresupuestos } from "../../../api/presupuesto";
 import { useEffect, useState } from "react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { DescargarPresupuesto } from "../../../components/generarPresupuesto/DescargarPresupuesto";
+import { DescargarComprobante } from "../../../components/generarPresupuesto/DescargarComprobante";
 
 export const ViewPresupuesto = () => {
   const params = useParams();
@@ -55,13 +56,24 @@ export const ViewPresupuesto = () => {
         <div className="flex items-center gap-2 mt-2">
           <div>
             <PDFDownloadLink
-              target="_blank"
-              download={false}
+              // target="_blank"
+              // download={false}
               className="bg-green-500 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
               fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
-              Descargar presupuesto
+              Descargar aberturas completo
+            </PDFDownloadLink>
+          </div>
+          <div>
+            <PDFDownloadLink
+              // target="_blank"
+              // download={false}
+              className="bg-blue-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
+              fileName={`${clienteCapitalized} Presupuesto N° 0000-000${datos?.id}`}
+              document={<DescargarComprobante datos={datos} />}
+            >
+              Descargar comprobante
             </PDFDownloadLink>
           </div>
         </div>
@@ -222,6 +234,9 @@ export const ViewPresupuesto = () => {
           </span>
         </div>
       </div>
+      {/* <PDFViewer className="mx-10 my-10 w-full h-screen">
+        <DescargarComprobante datos={datos} />
+      </PDFViewer> */}
     </section>
   );
 };
