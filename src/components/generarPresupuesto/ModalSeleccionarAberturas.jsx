@@ -7,7 +7,6 @@ import { Search } from "../ui/Search";
 export const ModalSeleccionarAberturas = ({
   openSeleccionar,
   closeModalSeleccionar,
-  closeModal,
 }) => {
   const { results, search, searcher } = useAberturasContext();
 
@@ -26,19 +25,6 @@ export const ModalSeleccionarAberturas = ({
   const handleId = (id) => {
     setObtenerId(id);
   };
-
-  // const itemsPerPage = 5; // Cantidad de elementos por página
-  // const [currentPage, setCurrentPage] = useState(1);
-
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const currentResults = results?.slice(indexOfFirstItem, indexOfLastItem);
-
-  // const totalPages = Math.ceil(results?.length / itemsPerPage);
-
-  // const handlePageChange = (newPage) => {
-  //   setCurrentPage(newPage);
-  // };
 
   return (
     <Menu as="div" className="z-50">
@@ -73,7 +59,6 @@ export const ModalSeleccionarAberturas = ({
               <Dialog.Overlay className="fixed inset-0" />
             </Transition.Child>
 
-            {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="inline-block h-screen align-middle"
               aria-hidden="true"
@@ -101,7 +86,6 @@ export const ModalSeleccionarAberturas = ({
                   <table className="table">
                     <thead className="border-b-[2px] border-slate-300">
                       <tr className="text-left">
-                        {/* <th className="p-3 border-b-[1px]">Numero</th> */}
                         <th className="py-5 uppercase text-indigo-600">
                           DETALLE
                         </th>
@@ -114,56 +98,47 @@ export const ModalSeleccionarAberturas = ({
                         <th className="py-5 uppercase text-indigo-600">
                           CATEGORIA
                         </th>
-
                         <th className="py-5 uppercase text-indigo-600">
                           Seleccionar
                         </th>
                       </tr>
                     </thead>
                     <tbody className="uppercase text-xs">
-                      {results?.map((r) => (
-                        <tr key={r?.id} className="">
-                          <th className="">{r?.detalle}</th>
-                          <th className="">
-                            {r?.ancho}x{r?.alto}
-                          </th>
-                          <th className="">{r?.color}</th>
-                          <th className="">{r?.categoria}</th>
-                          <th className="">
-                            <button
-                              onClick={() => {
-                                handleId(r?.id),
-                                  openModalSeleccionarAberturaFinal();
-                              }}
-                              type="button"
-                              className="text-xs bg-indigo-500 py-1 px-6 rounded text-white hover:shadow-md transition-all"
-                            >
-                              Seleccionar
-                            </button>
-                          </th>
-                        </tr>
-                      ))}
+                      {results
+                        ?.sort((a, b) => {
+                          // Ordenar por detalle (orden alfabético ascendente)
+                          if (a.detalle < b.detalle) return -1;
+                          if (a.detalle > b.detalle) return 1;
+                          // Si son iguales por detalle, ordenar por categoría (orden alfabético ascendente)
+                          if (a.categoria < b.categoria) return -1;
+                          if (a.categoria > b.categoria) return 1;
+                          return 0;
+                        })
+                        .map((r) => (
+                          <tr key={r?.id} className="">
+                            <th className="">{r?.detalle}</th>
+                            <th className="">
+                              {r?.ancho}x{r?.alto}
+                            </th>
+                            <th className="">{r?.color}</th>
+                            <th className="">{r?.categoria}</th>
+                            <th className="">
+                              <button
+                                onClick={() => {
+                                  handleId(r?.id),
+                                    openModalSeleccionarAberturaFinal();
+                                }}
+                                type="button"
+                                className="text-xs bg-indigo-500 py-1 px-6 rounded text-white hover:shadow-md transition-all"
+                              >
+                                Seleccionar
+                              </button>
+                            </th>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 </form>
-                {/* {totalPages > 1 && (
-                  <div className="flex flex-wrap justify-center mt-4 mb-4 gap-4 max-md:gap-1">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                      <button
-                        type="button"
-                        key={index}
-                        className={`mx-1 px-3 py-1 rounded-xl ${
-                          currentPage === index + 1
-                            ? "bg-green-600 text-white"
-                            : "border-[1px] border-slate-300 shadow"
-                        }`}
-                        onClick={() => handlePageChange(index + 1)}
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div>
-                )} */}
               </div>
             </Transition.Child>
 

@@ -21,6 +21,7 @@ export const ModalSeleccionarAberturaFinal = ({
 
   const [detalle, setDetalle] = useState("");
   const [ancho, setAncho] = useState("");
+  const [color, setColor] = useState("");
   const [alto, setAlto] = useState("");
 
   useEffect(() => {
@@ -29,6 +30,7 @@ export const ModalSeleccionarAberturaFinal = ({
 
       setAbertura(res.data);
       setDetalle(res.data.detalle);
+      setColor(res.data.color);
       setAncho(res.data.ancho);
       setAlto(res.data.alto);
     };
@@ -215,20 +217,25 @@ export const ModalSeleccionarAberturaFinal = ({
     return finalPrice;
   };
 
+  // const precioTotalNew = includeAdditionalPrice
+  //   ? precioTotalAbertura + precioTotalAdicionales
+  //   : precioTotalAbertura;
+
+  // const totalNew =
+  //   precioTotalNew * (Number(porciento) || 0) +
+  //   (Number(porciento) === 0 ? precioTotalNew : 0);
+
+  // // *= (100 + porcentaje) / 100;
+
+  // const finalNew = Number(totalNew) * Number(cantidad);
+
   const precioTotalNew = includeAdditionalPrice
     ? precioTotalAbertura + precioTotalAdicionales
     : precioTotalAbertura;
 
-  const totalNew =
-    precioTotalNew * (Number(porciento) || 0) +
-    (Number(porciento) === 0 ? precioTotalNew : 0);
+  const totalNew = precioTotalNew * ((100 + Number(porciento)) / 100);
 
   const finalNew = Number(totalNew) * Number(cantidad);
-
-  console.log("newss", finalNew);
-  console.log("new", totalNew);
-
-  // Ahora puedes usar precioFinalAbertura fuera de la función calculateFinalPrice
 
   const toggleAdditionalCost = () => {
     setApplyAdditionalCost(!applyAdditionalCost);
@@ -316,77 +323,51 @@ export const ModalSeleccionarAberturaFinal = ({
                   </h2>
 
                   <div className="mb-4 max-md:flex-col max-md:flex max-md:gap-1">
-                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-sm text-indigo-500 mb-2 items-center">
                       Detalle -
                       <input
                         value={detalle || ""}
                         onChange={(e) => setDetalle(e.target.value)}
-                        className="border px-2 w-1/2 py-1.5 text-center outline-none"
+                        className="border px-2 w-1/2 py-1.5 text-center outline-none rounded-md border-gray-300"
                       />
                     </h3>
-                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-sm text-indigo-500 mb-2 items-center">
                       AltoxAncho -
                       <input
                         value={ancho || ""}
                         onChange={(e) => setAncho(e.target.value)}
-                        className="border outline-none py-1.5 text-center"
+                        className="border outline-none py-1.5 text-center rounded-md text-sm border-gray-300"
                       />
                       x{" "}
                       <input
                         value={alto || ""}
                         onChange={(e) => setAlto(e.target.value)}
-                        className="border outline-none py-1.5 text-center"
+                        className="border outline-none py-1.5 text-center rounded-md text-sm border-gray-300"
                       />
                     </h3>
-                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-indigo-500 mb-2 items-center text-sm">
                       Categoria -
                       <span className="text-slate-700 capitalize max-md:text-sm">
                         {abertura?.categoria}
                       </span>
                     </h3>
-                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-base text-indigo-500 mb-2 items-center">
+                    <h3 className="font-semibold flex max-md:flex-col max-md:gap-1 gap-2 text-sm text-indigo-500 mb-2 items-center">
                       Color -
-                      <span className="text-slate-700 capitalize max-md:text-sm">
+                      {/* <span className="text-slate-700 capitalize max-md:text-sm">
                         {abertura?.color}
-                      </span>
+                      </span> */}
+                      <input
+                        value={color || ""}
+                        onChange={(e) => setColor(e.target.value)}
+                        className="border outline-none py-1.5 text-center rounded-md text-sm border-gray-300"
+                      />
                     </h3>
                   </div>
 
-                  {/* Repite la estructura anterior para vidrios y accesorios */}
-
-                  <div className="mt-4 w-2/3">
-                    <h3 className="text-base uppercase font-bold mb-4 max-md:text-base max-md:uppercase max-md:underline">
-                      Totales
-                    </h3>
-                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
-                      <span className="max-md:uppercase max-md:text-sm font-bold">
-                        Total Abertura
-                      </span>
-                      <span className="text-indigo-500 font-bold">
-                        {precioTotalAbertura.toLocaleString("es-ar", {
-                          style: "currency",
-                          currency: "ARS",
-                          minimumFractionDigits: 2,
-                        })}
-                      </span>
-                    </div>
-                    <div className="flex max-md:flex-col max-md:items-start justify-between items-center mb-2">
-                      <span className="max-md:uppercase max-md:text-sm font-bold">
-                        Total Adicionales
-                      </span>
-                      <span className="text-indigo-500 font-bold">
-                        {precioTotalAdicionales.toLocaleString("es-ar", {
-                          style: "currency",
-                          currency: "ARS",
-                          minimumFractionDigits: 2,
-                        })}
-                      </span>
-                    </div>
-                  </div>
                   <div className="mt-4 flex flex-col items-start gap-2">
                     <label
                       htmlFor=""
-                      className="text-indigo-500 max-md:uppercase max-md:font-bold uppercase"
+                      className="text-indigo-500 text-sm font-bold"
                     >
                       Seleccionar cantidad
                     </label>
@@ -395,13 +376,13 @@ export const ModalSeleccionarAberturaFinal = ({
                       value={cantidad}
                       type="number"
                       placeholder="Ingresa la cantidad"
-                      className="px-4 border py-2 outline-none text-sm font-semibold"
+                      className="px-4 border py-2 outline-none text-sm font-semibold rounded-md border-gray-300"
                     />
                   </div>
                   <div className="mt-4 flex flex-col items-start gap-2">
                     <label
                       htmlFor=""
-                      className="text-indigo-500 max-md:uppercase max-md:font-bold uppercase"
+                      className="text-indigo-500 text-sm font-bold"
                     >
                       Seleccionar el porciento a agregar a la abertura
                     </label>
@@ -410,7 +391,7 @@ export const ModalSeleccionarAberturaFinal = ({
                       value={porciento}
                       type="text"
                       placeholder="Ingresa la %0.60"
-                      className="px-4 border py-2 outline-none text-sm font-semibold"
+                      className="px-4 border py-2 outline-none text-sm font-semibold rounded-md border-gray-300"
                     />
                   </div>
                   <div>
@@ -432,7 +413,7 @@ export const ModalSeleccionarAberturaFinal = ({
                         {applyAdditionalCost ? "Quitar 40%" : "Aplicar 40%"}
                       </button> */}
                     </div>
-                    <div className="flex flex-col gap-2 mt-5 bg-white border-[1px] border-slate-300 rounded-xl py-3 px-6 text-slate-700 uppercase text-sm shadow">
+                    <div className="flex flex-col gap-2 mt-5 bg-white border-[1px] border-slate-300 rounded-xl py-3 px-6 text-slate-700  text-sm shadow font-medium capitalize">
                       <p>
                         Precio total de la abertura:{" "}
                         <span className="font-bold">
@@ -447,7 +428,7 @@ export const ModalSeleccionarAberturaFinal = ({
                       {includeAdditionalPrice && (
                         <p>
                           Precio total de los adicionales:{" "}
-                          <span className="font-bold">
+                          <span className="font-bold text-green-500">
                             {precioTotalAdicionales.toLocaleString("es-ar", {
                               style: "currency",
                               currency: "ARS",
@@ -477,7 +458,7 @@ export const ModalSeleccionarAberturaFinal = ({
                         addToAbertura(
                           detalle,
                           abertura?.categoria,
-                          abertura?.color,
+                          color,
                           ancho,
                           alto,
                           cantidad,

@@ -242,7 +242,9 @@ export const ModalCrearPresupuesto = () => {
                         onChange={handleOperacionChange}
                         className="mr-2"
                       />
-                      <label htmlFor="descuento">Aplicar descuento</label>
+                      <label className="text-sm font-bold" htmlFor="descuento">
+                        Aplicar descuento
+                      </label>
                     </div>
                     <div className="flex items-center">
                       <input
@@ -254,7 +256,9 @@ export const ModalCrearPresupuesto = () => {
                         onChange={handleOperacionChange}
                         className="mr-2"
                       />
-                      <label htmlFor="suma">Sumar porcentaje</label>
+                      <label className="text-sm font-bold" htmlFor="suma">
+                        Sumar porcentaje
+                      </label>
                     </div>
                   </div>
 
