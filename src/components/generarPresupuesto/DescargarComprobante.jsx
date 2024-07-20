@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
   row: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
+    gap: 12,
+    // alignItems: "center",
+    // alignContent: "center",
+    // justifyContent: "center",
     // borderTop: "0.5px solid #000",
     borderBottom: "0.3px solid #000",
     width: "92%",
@@ -53,9 +54,10 @@ const styles = StyleSheet.create({
   rowTwo: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
-    alignContent: "center",
-    justifyContent: "center",
+    gap: 12,
+    // alignItems: "center",
+    // alignContent: "center",
+    // justifyContent: "center",
     borderBottom: "0.3px solid #000",
     width: "92%",
   },
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   },
   // So Declarative and unDRY 👌
   row1: {
-    width: "100px",
+    width: "100%",
     // borderRight: "0.5px solid #000",
     // borderLeft: "0.5px solid #000",
     paddingTop: 8,
@@ -97,8 +99,6 @@ const styles = StyleSheet.create({
   },
   rowCant: {
     width: "20px",
-    // borderRight: "0.5px solid #000",
-    // borderLeft: "0.5px solid #000",
     paddingTop: 8,
     paddingBottom: 8,
     textAlign: "center",
@@ -108,9 +108,19 @@ const styles = StyleSheet.create({
     fontWeight: "semibold",
     color: "#000",
   },
-
+  rowCantDos: {
+    width: "100%",
+    paddingTop: 8,
+    paddingBottom: 8,
+    textAlign: "center",
+    height: "100%",
+    fontSize: "8px",
+    fontFamily: "Montserrat",
+    fontWeight: "semibold",
+    color: "#000",
+  },
   row3: {
-    width: "100px",
+    width: "100%",
     fontSize: "7px",
     fontFamily: "Montserrat",
     paddingTop: 8,
@@ -122,6 +132,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     height: "100%",
     textTransform: "uppercase",
+    fontWeight: "semibold",
   },
 
   rowCantTree: {
@@ -137,6 +148,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     height: "100%",
     textTransform: "uppercase",
+    fontWeight: "semibold",
   },
   row4: {
     width: "50%",
@@ -225,6 +237,24 @@ export const DescargarComprobante = ({ datos }) => {
   const fechaSumada = new Date(fechaOriginal);
   fechaSumada.setDate(fechaSumada.getDate() + 5);
 
+  const aberturasFinal = datos?.datos?.resultado.reduce(
+    (total, item) => total + parseInt(item.gastoUnidadSinAddicional, 10),
+    0
+  );
+
+  const gastoAdicionalEmpresa = datos?.datos?.resultado.reduce(
+    (total, item) => total + parseInt(item.costoEmpresaGastos, 10),
+    0
+  );
+
+  const categoria = datos?.datos?.resultado
+    ?.map((p) => p.categoria)
+    .filter((value, index, self) => self.indexOf(value) === index);
+
+  const color = datos?.datos?.resultado
+    ?.map((p) => p.color)
+    .filter((value, index, self) => self.indexOf(value) === index);
+
   return (
     <Document pageMode="fullScreen">
       <Page size={"A4"} style={styles.content}>
@@ -242,7 +272,7 @@ export const DescargarComprobante = ({ datos }) => {
                 src={logo}
               />
             </View>
-            {/* <View
+            <View
               style={{
                 border: "0.6px solid black",
                 width: "50px",
@@ -266,14 +296,14 @@ export const DescargarComprobante = ({ datos }) => {
               </Text>
               <Text
                 style={{
-                  height: "39px",
+                  height: "53px",
                   borderRight: "0.5px solid black",
                   position: "absolute",
                   top: "37px",
                   left: "23px",
                 }}
               ></Text>
-            </View> */}
+            </View>
             <View style={styles.content_uno}>
               <Text
                 style={{
@@ -281,10 +311,10 @@ export const DescargarComprobante = ({ datos }) => {
                   fontFamily: "Montserrat",
                   fontWeight: "semibold",
                   textTransform: "uppercase",
-                  color: "#279ca4",
+                  color: "#000",
                 }}
               >
-                {/* N° 0000- {datos?.id} */}
+                N° 0000- {datos?.id}
               </Text>
               <Text
                 style={{
@@ -293,7 +323,7 @@ export const DescargarComprobante = ({ datos }) => {
                   fontFamily: "Montserrat",
                 }}
               >
-                COMPROBANTE ABERTURAS
+                PRESUPUESTO ABERTURAS
               </Text>
               <View
                 style={{
@@ -343,7 +373,7 @@ export const DescargarComprobante = ({ datos }) => {
                       fontWeight: "semibold",
                     }}
                   >
-                    CLIENTE/NUMERO CONTRATO
+                    NOMBRE Y APELLIDO
                   </Text>{" "}
                   <Text
                     style={{
@@ -365,7 +395,7 @@ export const DescargarComprobante = ({ datos }) => {
                     </Text>
                   </Text>
                 </View>
-                {/* <View
+                <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -377,17 +407,16 @@ export const DescargarComprobante = ({ datos }) => {
                       fontSize: "8px",
                       fontFamily: "Montserrat",
                       fontWeight: "semibold",
-                      textTransform: "capitalize",
                     }}
                   >
-                    LOCALIDAD/PROVINCIA
+                    NUMERO DE CONTRATO
                   </Text>{" "}
                   <Text
                     style={{
                       fontSize: "8px",
-                      textTransform: "uppercase",
                       fontFamily: "Montserrat",
-                      color: "#000",
+                      textTransform: "uppercase",
+                      color: "rgb(55 65 81)",
                     }}
                   >
                     <Text
@@ -401,8 +430,17 @@ export const DescargarComprobante = ({ datos }) => {
                       {datos?.localidad}
                     </Text>
                   </Text>
-                </View> */}
-                {/* <View
+                </View>
+              </View>
+            </View>{" "}
+            <View style={styles.content_row}>
+              <View
+                style={{
+                  display: "flex",
+                  gap: "5px",
+                }}
+              >
+                <View
                   style={{
                     display: "flex",
                     flexDirection: "row",
@@ -414,73 +452,16 @@ export const DescargarComprobante = ({ datos }) => {
                       fontSize: "8px",
                       fontFamily: "Montserrat",
                       fontWeight: "semibold",
-                      textTransform: "capitalize",
                     }}
                   >
-                    PROVINCIA
+                    LINEA DE ABERTURAS
                   </Text>{" "}
-                  <Text
-                    style={{
-                      fontSize: "8px",
-                      textTransform: "capitalize",
-                      fontFamily: "Montserrat",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: "8px",
-                        fontFamily: "Montserrat",
-                        textTransform: "uppercase",
-                        color: "#279ca4",
-                      }}
-                    >
-                      {datos?.clientes?.provincia}
-                    </Text>{" "}
-                  </Text>
-                </View> */}
-              </View>
-              <View
-                style={{
-                  display: "flex",
-                  gap: "4px",
-                }}
-              >
-                {/* <View>
-                  <Text
-                    style={{
-                      fontSize: "8px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "semibold",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    CONDICIÓN DE VENTA -
-                  </Text>
-                </View> */}
-                {/* <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "3",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: "8px",
-                      fontFamily: "Montserrat",
-                      fontWeight: "semibold",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    FECHA DE VENCIMIENTO
-                  </Text>
                   <Text
                     style={{
                       fontSize: "8px",
                       fontFamily: "Montserrat",
                       textTransform: "uppercase",
-                      color: "#000",
+                      color: "rgb(55 65 81)",
                     }}
                   >
                     <Text
@@ -491,58 +472,73 @@ export const DescargarComprobante = ({ datos }) => {
                         color: "#000",
                       }}
                     >
-                      {fechaSumada.toLocaleDateString("es-AR")}
-                    </Text>{" "}
+                      {categoria}
+                    </Text>
                   </Text>
-                </View> */}
-                {/* <View>
+                </View>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "3px",
+                  }}
+                >
                   <Text
                     style={{
                       fontSize: "8px",
                       fontFamily: "Montserrat",
                       fontWeight: "semibold",
-                      textTransform: "capitalize",
                     }}
                   >
-                    CONDICIÓN -
+                    COLOR DE ABERTURAS
+                  </Text>{" "}
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      textTransform: "uppercase",
+                      color: "rgb(55 65 81)",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: "8px",
+                        fontFamily: "Montserrat",
+                        textTransform: "uppercase",
+                        color: "#000",
+                      }}
+                    >
+                      {color}
+                    </Text>
                   </Text>
-                </View> */}
+                </View>
               </View>
             </View>
-
-            {/* <View style={styles.row}>
-              <Text style={styles.rowCant}>Cant.</Text>
-              <Text style={styles.row1}>Detalle.</Text>
-              <Text style={styles.row1}>Medida</Text>
-              <Text style={styles.row1}>Color</Text>
-              <Text style={styles.row1}> Precio x und</Text>
-              <Text style={styles.row1}> Precio final</Text>
-            </View>
-
-            {datos?.datos?.resultado.map((p) => (
-              <View key={p.nobmre} style={styles.rowTwo}>
-                <Text style={styles.rowCantTree}>{p.cantidad}</Text>
-                <Text style={styles.row3}>{p.detalle}</Text>
-                <Text style={styles.row3}>
-                  {p.ancho}x{p?.alto}
-                </Text>
-                <Text style={styles.row3}>{p.color}</Text>
-                <Text style={styles.row3}>
-                  {p?.precioUnidad?.toLocaleString("es-ar", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 2,
-                  })}
-                </Text>
-                <Text style={styles.row3}>
-                  {p?.precioFinal?.toLocaleString("es-ar", {
-                    style: "currency",
-                    currency: "ARS",
-                    minimumFractionDigits: 2,
-                  })}
-                </Text>
+            <View
+              style={{
+                marginTop: "10px",
+                width: "90%",
+              }}
+            >
+              <View style={styles.row}>
+                <Text style={styles.rowCant}>Cant.</Text>
+                {/* <Text style={styles.row1}>Color</Text>
+                <Text style={styles.row1}>Categoria.</Text> */}
+                <Text style={styles.row1}>Detalle.</Text>
+                <Text style={styles.row1}>Medida</Text>
               </View>
-            ))} */}
+              {datos?.datos?.resultado.map((p) => (
+                <View key={p.nobmre} style={styles.rowTwo}>
+                  <Text style={styles.rowCantTree}>{p.cantidad}</Text>
+                  {/* <Text style={styles.row3}>{p.categoria}</Text>
+                  <Text style={styles.row3}>{p.color}</Text> */}
+                  <Text style={styles.row3}>{p.detalle}</Text>
+                  <Text style={styles.row3}>
+                    {p.ancho}x{p?.alto}
+                  </Text>
+                </View>
+              ))}
+            </View>
           </View>
 
           <View style={styles.content_footer}>
@@ -612,6 +608,359 @@ export const DescargarComprobante = ({ datos }) => {
                   currency: "ARS",
                   minimumFractionDigits: 2,
                 })}{" "}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Page>{" "}
+      {/* page gastos */}
+      <Page size={"A4"} style={styles.content}>
+        <View
+          style={{
+            border: "1px solid #000",
+          }}
+        >
+          <View
+            style={{
+              width: "84%",
+              margin: "30px auto 10px auto",
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              border: "0.8px solid black",
+              borderRadius: "3px",
+              padding: "0px 0px 20px 0px",
+            }}
+          >
+            <View
+              style={{
+                padding: "10px 20px",
+              }}
+            >
+              <Image
+                style={{
+                  width: "80px",
+                }}
+                src={logo}
+              />
+            </View>
+
+            <View
+              style={{
+                padding: "10px 20px",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "10px",
+                  fontWeight: "semibold",
+                  fontFamily: "Montserrat",
+                }}
+              >
+                GASTOS DE LAS ABERTURAS COSTO.
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
+              width: "88%",
+              margin: "0 auto",
+            }}
+          >
+            <View style={styles.content_row}>
+              <View
+                style={{
+                  display: "flex",
+                  gap: "5px",
+                }}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "3px",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "semibold",
+                    }}
+                  >
+                    LINEA DE ABERTURAS
+                  </Text>{" "}
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      textTransform: "uppercase",
+                      color: "rgb(55 65 81)",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: "8px",
+                        fontFamily: "Montserrat",
+                        textTransform: "uppercase",
+                        color: "#000",
+                      }}
+                    >
+                      {categoria}
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "3px",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "semibold",
+                    }}
+                  >
+                    COLOR DE ABERTURAS
+                  </Text>{" "}
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      textTransform: "uppercase",
+                      color: "rgb(55 65 81)",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: "8px",
+                        fontFamily: "Montserrat",
+                        textTransform: "uppercase",
+                        color: "#000",
+                      }}
+                    >
+                      {color}
+                    </Text>
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          <View style={styles.table}>
+            <View style={styles.content_row}>
+              <View
+                style={{
+                  display: "flex",
+                  gap: "5px",
+                }}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "3px",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: "8px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "semibold",
+                    }}
+                  >
+                    TABLA DE GASTOS ABERTURAS
+                  </Text>{" "}
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.row}>
+              <Text style={styles.rowCant}>Cant.</Text>
+              {/* <Text style={styles.row1}>Categoria.</Text> */}
+              <Text style={styles.row1}>Detalle.</Text>
+              <Text style={styles.row1}>Medida</Text>
+              {/* <Text style={styles.row1}>Color</Text> */}
+              <Text style={styles.row1}>Precio costo</Text>
+              <Text style={styles.row1}> Precio x unidad</Text>
+            </View>
+
+            {datos?.datos?.resultado.map((p) => (
+              <View key={p.nobmre} style={styles.rowTwo}>
+                <Text style={styles.rowCantTree}>{p.cantidad}</Text>
+                {/* <Text style={styles.row3}>{p.categoria}</Text> */}
+                <Text style={styles.row3}>{p.detalle}</Text>
+                <Text style={styles.row3}>
+                  {p.ancho}x{p?.alto}
+                </Text>
+                {/* <Text style={styles.row3}>{p.color}</Text> */}
+                <Text style={styles.row3}>
+                  {p?.gastoUnidadSinAddicional?.toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}
+                </Text>
+                <Text style={styles.row3}>
+                  {Number(
+                    parseFloat(p?.gastoUnidadSinAddicional) *
+                      parseFloat(p?.cantidad)
+                  ).toLocaleString("es-ar", {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  })}
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          <View style={styles.content_footer}>
+            {" "}
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "5px",
+                margin: "0px 10px",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "normal",
+                }}
+              >
+                TOTAL DE ABERTURAS
+              </Text>
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  textTransform: "uppercase",
+                  color: "#000",
+                }}
+              >
+                {Number(
+                  datos?.datos?.resultado.reduce(
+                    (total, item) => total + parseInt(item.cantidad, 10),
+                    0
+                  )
+                )}{" "}
+              </Text>
+            </View>{" "}
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "5px",
+                margin: "0px 10px",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "normal",
+                }}
+              >
+                ABERTURAS SIN ADICIONAL GASTOS DE LA EMPRESA
+              </Text>
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  textTransform: "uppercase",
+                  color: "#000",
+                }}
+              >
+                {" "}
+                {Number(aberturasFinal).toLocaleString("es-ar", {
+                  style: "currency",
+                  currency: "ARS",
+                  minimumFractionDigits: 2,
+                })}
+              </Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "5px",
+                margin: "0px 10px",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "normal",
+                }}
+              >
+                GASTO ADICIONAL LUZ,AGUA,PRODUCCIÓN,ETC SUMADO AL COSTO FINAL
+              </Text>
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  textTransform: "uppercase",
+                  color: "#000",
+                }}
+              >
+                {" "}
+                {Number(gastoAdicionalEmpresa).toLocaleString("es-ar", {
+                  style: "currency",
+                  currency: "ARS",
+                  minimumFractionDigits: 2,
+                })}
+              </Text>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "5px",
+                margin: "0px 10px",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                }}
+              >
+                TOTAL FINAL
+              </Text>
+              <Text
+                style={{
+                  fontSize: "8px",
+                  fontFamily: "Montserrat",
+                  fontWeight: "semibold",
+                  textTransform: "uppercase",
+                  color: "#000",
+                }}
+              >
+                {" "}
+                {Number(aberturasFinal + gastoAdicionalEmpresa).toLocaleString(
+                  "es-ar",
+                  {
+                    style: "currency",
+                    currency: "ARS",
+                    minimumFractionDigits: 2,
+                  }
+                )}
               </Text>
             </View>
           </View>

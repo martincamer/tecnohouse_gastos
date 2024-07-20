@@ -58,7 +58,10 @@ export const PresupuestoProvider = ({ children }) => {
     alto,
     cantidad,
     precioUnidad,
-    precioFinal
+    precioFinal,
+    precioUnidadCostoEmpresa,
+    costoEmpresaGastos,
+    gastoUnidadSinAddicional
   ) => {
     // Genera un nuevo ID aleatorio
     const newId = generarIdAleatorio();
@@ -73,6 +76,9 @@ export const PresupuestoProvider = ({ children }) => {
       cantidad,
       precioUnidad,
       precioFinal,
+      precioUnidadCostoEmpresa,
+      costoEmpresaGastos,
+      gastoUnidadSinAddicional,
     };
 
     // Verifica si ya existe un producto con el mismo ID
@@ -141,6 +147,9 @@ export const PresupuestoProvider = ({ children }) => {
       color: e.color,
       precioFinal: e.precioFinal,
       precioUnidad: e.precioUnidad,
+      precioUnidadCostoEmpresa: e.precioUnidadCostoEmpresa,
+      costoEmpresaGastos: e.costoEmpresaGastos,
+      gastoUnidadSinAddicional: e.gastoUnidadSinAddicional,
     };
   });
 

@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
-import { obtenerUnicosPresupuestos } from "../../../api/presupuesto";
-import { useEffect, useState } from "react";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { DescargarPresupuesto } from "../../../components/generarPresupuesto/DescargarPresupuesto";
 import { DescargarComprobante } from "../../../components/generarPresupuesto/DescargarComprobante";
+import { obtenerUnicosPresupuestos } from "../../../api/presupuesto";
+import { useEffect, useState } from "react";
 
 export const ViewPresupuesto = () => {
   const params = useParams();
@@ -102,13 +102,6 @@ export const ViewPresupuesto = () => {
                 minimumFractionDigits: 2,
               })}
             </span>
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <p className="text-indigo-500 font-semibold text-lg flex flex-col gpa-3 max-md:text-sm">
-            {/* ESTADO */}
-            <span className="text-slate-700 text-base">{""}</span>
           </p>
         </div>
       </div>

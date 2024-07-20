@@ -15,7 +15,7 @@ export const ModalSeleccionarAberturaFinal = ({
   const [cantidad, setCantidad] = useState(0);
   const { accesorios } = useAccesoriosContext();
   const { precios } = usePreciosContext();
-  const [applyAdditionalCost, setApplyAdditionalCost] = useState(true);
+  // const [applyAdditionalCost, setApplyAdditionalCost] = useState(true);
 
   const { addToAbertura } = usePresupuestoContext();
 
@@ -65,26 +65,6 @@ export const ModalSeleccionarAberturaFinal = ({
     accesorios
   );
 
-  // Accesorios seleccionados precio final
-  const calculateTotalUnidad = (accesoriosSelect, accesorios) => {
-    return accesoriosSelect?.map((item) => {
-      const accesorioItem = accesorios?.find(
-        (acc) => acc.detalle === item.detalle
-      );
-
-      if (accesorioItem) {
-        const precio_unidad = parseFloat(accesorioItem.precio_unidad);
-
-        return {
-          ...item,
-          totalPrecio: precio_unidad, // Assigning unit price directly
-        };
-      }
-
-      return item;
-    });
-  };
-
   // Función para buscar el precio por categoría (insensible a mayúsculas y minúsculas)
   const buscarPrecioPorCategoria = (categoria) => {
     const categoriaLowerCase = categoria.toLowerCase();
@@ -119,11 +99,11 @@ export const ModalSeleccionarAberturaFinal = ({
     (perfil) => calcularPrecioFinal(perfil)
   );
 
-  // Calcula el precio total sumando los precios finales de todos los perfiles
-  const precioTotal = perfilesConPrecioFinal?.reduce(
-    (total, perfil) => total + (perfil?.precioFinal || 0),
-    0
-  );
+  // // Calcula el precio total sumando los precios finales de todos los perfiles
+  // const precioTotal = perfilesConPrecioFinal?.reduce(
+  //   (total, perfil) => total + (perfil?.precioFinal || 0),
+  //   0
+  // );
 
   // Función para calcular el precio final para cada vidrio
   const calcularPrecioFinalVidrio = (vidrio) => {
@@ -132,8 +112,6 @@ export const ModalSeleccionarAberturaFinal = ({
     if (precioEncontrado) {
       const precioNumber = Number(precioEncontrado.precio);
       const totalMetros = Number(vidrio.metrosCuadrados);
-      // const ancho = Number(vidrio.ancho);
-      // const alto = Number(vidrio.alto);
 
       // Calcula el precio final multiplicando cantidad, ancho, alto y precio
       const precioFinal = totalMetros * precioNumber;
@@ -174,8 +152,6 @@ export const ModalSeleccionarAberturaFinal = ({
   const precioTotalAbertura =
     precioTotalPerfiles + precioTotalAccesorios + precioTotalVidrios;
 
-  console.log("Precio total de la abertura:", precioTotalAbertura);
-
   // Filtra los precios adicionales relevantes (luz, agua, empleados)
   const preciosAdicionalesFiltrados = precios.filter((precioAdicional) =>
     [
@@ -196,50 +172,17 @@ export const ModalSeleccionarAberturaFinal = ({
 
   const [includeAdditionalPrice, setIncludeAdditionalPrice] = useState(false);
 
-  let finalPrice;
-
   const [porciento, setPorciento] = useState(0);
-
-  let precioFinalAbertura = 0; // Declaración global
-
-  const calculateFinalPrice = () => {
-    const precioTotal = includeAdditionalPrice
-      ? precioTotalAbertura + precioTotalAdicionales
-      : precioTotalAbertura;
-
-    // Convertir porciento a número o establecerlo en 0 si no está definido
-    const additionalCostMultiplier = Number(porciento);
-
-    precioFinalAbertura = Number(precioTotal) * additionalCostMultiplier;
-
-    finalPrice = Number(Number(precioFinalAbertura)) * Number(cantidad);
-
-    return finalPrice;
-  };
-
-  // const precioTotalNew = includeAdditionalPrice
-  //   ? precioTotalAbertura + precioTotalAdicionales
-  //   : precioTotalAbertura;
-
-  // const totalNew =
-  //   precioTotalNew * (Number(porciento) || 0) +
-  //   (Number(porciento) === 0 ? precioTotalNew : 0);
-
-  // // *= (100 + porcentaje) / 100;
-
-  // const finalNew = Number(totalNew) * Number(cantidad);
 
   const precioTotalNew = includeAdditionalPrice
     ? precioTotalAbertura + precioTotalAdicionales
     : precioTotalAbertura;
 
+  console.log("asdasd", precioTotalNew);
+
   const totalNew = precioTotalNew * ((100 + Number(porciento)) / 100);
 
   const finalNew = Number(totalNew) * Number(cantidad);
-
-  const toggleAdditionalCost = () => {
-    setApplyAdditionalCost(!applyAdditionalCost);
-  };
 
   const toggleIncludeAdditionalPrice = () => {
     setIncludeAdditionalPrice(!includeAdditionalPrice);
@@ -463,7 +406,10 @@ export const ModalSeleccionarAberturaFinal = ({
                           alto,
                           cantidad,
                           Number(totalNew),
-                          finalNew
+                          finalNew,
+                          precioTotalNew,
+                          precioTotalAdicionales,
+                          precioTotalAbertura
                         ),
                           closeModalSeleccionarAberturaFinal();
                         closeModalSeleccionar();

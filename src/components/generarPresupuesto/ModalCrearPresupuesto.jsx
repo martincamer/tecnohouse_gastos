@@ -161,15 +161,15 @@ export const ModalCrearPresupuesto = () => {
                     </div>
                     <div className="flex flex-col gap-2">
                       <label className="font-semibold">
-                        Localidad y provincia del cliente
+                        Numero de contrato
                       </label>
                       <input
                         value={localidad}
                         onChange={(e) => setLocalidad(e.target.value)}
-                        placeholder="Localidad/provincia"
+                        placeholder="N° de contrato"
                         className="border py-2 px-3 text-sm font-semibold outline-none rounded-md border-gray-300"
                       />
-                    </div>
+                    </div>{" "}
                   </div>
                   <div className="flex flex-col gap-2 items-start">
                     <Link
