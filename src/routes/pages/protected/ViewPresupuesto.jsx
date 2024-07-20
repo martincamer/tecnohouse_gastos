@@ -62,7 +62,7 @@ export const ViewPresupuesto = () => {
               fileName={`${clienteCapitalized} PRESUPUESTO-0000-000${datos?.id}`}
               document={<DescargarPresupuesto datos={datos} />}
             >
-              Descargar aberturas completo
+              Presupuesto aberturas.
             </PDFDownloadLink>
           </div>
           <div>
@@ -70,10 +70,10 @@ export const ViewPresupuesto = () => {
               // target="_blank"
               // download={false}
               className="bg-blue-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
-              fileName={`${clienteCapitalized} COMPROBANTE-0000-000${datos?.id}`}
+              fileName={`${clienteCapitalized} PRESUPUESTO+GASTOS-0000-000${datos?.id}`}
               document={<DescargarComprobante datos={datos} />}
             >
-              Descargar comprobante
+              Descargar Anexo aberturas presupuesto.
             </PDFDownloadLink>
           </div>
         </div>
