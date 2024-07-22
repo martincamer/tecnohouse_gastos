@@ -4,6 +4,7 @@ import { DescargarPresupuesto } from "../../../components/generarPresupuesto/Des
 import { DescargarComprobante } from "../../../components/generarPresupuesto/DescargarComprobante";
 import { obtenerUnicosPresupuestos } from "../../../api/presupuesto";
 import { useEffect, useState } from "react";
+import { DescargarComprobantePrecio } from "../../../components/generarPresupuesto/DescargarComprobantePrecio";
 
 export const ViewPresupuesto = () => {
   const params = useParams();
@@ -69,11 +70,22 @@ export const ViewPresupuesto = () => {
             <PDFDownloadLink
               // target="_blank"
               // download={false}
-              className="bg-blue-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
+              className="bg-rose-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
               fileName={`${clienteCapitalized} PRESUPUESTO+GASTOS-0000-000${datos?.id}`}
               document={<DescargarComprobante datos={datos} />}
             >
               Descargar Anexo aberturas presupuesto.
+            </PDFDownloadLink>
+          </div>
+          <div>
+            <PDFDownloadLink
+              // target="_blank"
+              // download={false}
+              className="bg-indigo-600 text-white font-semibold py-2 px-5 uppercase rounded-xl text-sm"
+              fileName={`${clienteCapitalized} COMPROBANTE-0000-000${datos?.id}`}
+              document={<DescargarComprobantePrecio datos={datos} />}
+            >
+              Descargar Comprobante costo.
             </PDFDownloadLink>
           </div>
         </div>
@@ -217,7 +229,7 @@ export const ViewPresupuesto = () => {
           </span>
         </div>
 
-        <div className="text-slate-700 flex flex-row items-center gap-3   w-[1220px] mx-auto h-full">
+        <div className="text-slate-700 flex flex-row items-center gap-3 w-[1220px] mx-auto h-full">
           Total aberturas
           <span className="font-semibold text-indigo-700 text-lg">
             {datos?.datos?.resultado.reduce(
@@ -228,7 +240,7 @@ export const ViewPresupuesto = () => {
         </div>
       </div>
       {/* <PDFViewer className="mx-10 my-10 w-full h-screen">
-        <DescargarComprobante datos={datos} />
+        <DescargarComprobantePrecio datos={datos} />
       </PDFViewer> */}
     </section>
   );

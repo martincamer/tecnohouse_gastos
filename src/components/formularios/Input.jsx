@@ -6,7 +6,7 @@ export const Input = ({ type, placeholder, register }) => {
       {...register(type, { required: true })}
       type={type}
       placeholder={placeholder}
-      className="rounded-xl py-[8px] px-2 w-full shadow border-slate-300 border-[1px] outline-none placeholder:text-sm"
+      className="rounded-xl py-[8px] px-2 w-full border-slate-300 border-[1px] outline-none placeholder:text-sm"
     />
   );
 };
