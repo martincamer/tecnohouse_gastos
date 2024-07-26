@@ -476,10 +476,21 @@ export const TableAberturas = ({ openModal, handleId }) => {
     setShowDetail(newShowDetail); // Actualiza el estado
   };
 
-  // Suponiendo que `resultados` es el array de datos
-  const ordenadosPorDetalle = resultados?.sort((a, b) => {
+  // Supongamos que `resultados` es el array de datos
+  const ordenadosPorDetalleAnchoAlto = resultados?.sort((a, b) => {
+    // Comparar por detalle
     if (a.detalle < b.detalle) return -1;
     if (a.detalle > b.detalle) return 1;
+
+    // Si el detalle es el mismo, comparar por ancho
+    if (a.ancho < b.ancho) return -1;
+    if (a.ancho > b.ancho) return 1;
+
+    // Si el ancho también es el mismo, comparar por alto
+    if (a.alto < b.alto) return -1;
+    if (a.alto > b.alto) return 1;
+
+    // Si todos los valores son iguales
     return 0;
   });
 
