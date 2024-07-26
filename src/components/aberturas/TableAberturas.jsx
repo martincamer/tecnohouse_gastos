@@ -328,7 +328,16 @@ export const TableAberturas = ({ openModal, handleId }) => {
     };
   });
 
-  const aberturasConPreciosFinalesDos = resultados.map((abertura) => {
+  const resultadosOrdenados = resultados?.sort((a, b) => {
+    const detalleA = (a.detalle || "").toLowerCase();
+    const detalleB = (b.detalle || "").toLowerCase();
+
+    if (detalleA < detalleB) return -1;
+    if (detalleA > detalleB) return 1;
+    return 0;
+  });
+
+  const aberturasConPreciosFinalesDos = resultadosOrdenados.map((abertura) => {
     const vidriosConPrecio = abertura.datos.vidrioSelect.map((vidrio) => {
       const precioVidrio = precios.find(
         (precio) => precio.categoria === vidrio.categoria
@@ -475,15 +484,6 @@ export const TableAberturas = ({ openModal, handleId }) => {
     newShowDetail[index] = !newShowDetail[index]; // Cambia el estado para la fila correspondiente
     setShowDetail(newShowDetail); // Actualiza el estado
   };
-
-  const resultadosOrdenados = resultados?.sort((a, b) => {
-    const detalleA = (a.detalle || "").toLowerCase();
-    const detalleB = (b.detalle || "").toLowerCase();
-
-    if (detalleA < detalleB) return -1;
-    if (detalleA > detalleB) return 1;
-    return 0;
-  });
 
   return (
     <div className="mx-5 pb-20">
