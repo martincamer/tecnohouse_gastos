@@ -476,21 +476,10 @@ export const TableAberturas = ({ openModal, handleId }) => {
     setShowDetail(newShowDetail); // Actualiza el estado
   };
 
-  // Supongamos que `resultados` es el array de datos
-  const ordenadosPorDetalleAnchoAlto = resultados?.sort((a, b) => {
-    // Comparar por detalle
+  // Suponiendo que `resultados` es el array de datos
+  const ordenadosPorDetalle = resultados?.sort((a, b) => {
     if (a.detalle < b.detalle) return -1;
     if (a.detalle > b.detalle) return 1;
-
-    // Si el detalle es el mismo, comparar por ancho
-    if (a.ancho < b.ancho) return -1;
-    if (a.ancho > b.ancho) return 1;
-
-    // Si el ancho también es el mismo, comparar por alto
-    if (a.alto < b.alto) return -1;
-    if (a.alto > b.alto) return 1;
-
-    // Si todos los valores son iguales
     return 0;
   });
 
@@ -634,7 +623,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </tr>
           </thead>
           <tbody className="text-xs">
-            {ordenadosPorDetalleAnchoAlto?.map((g, index) => (
+            {ordenadosPorDetalle?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="">{g.tipo}</th>
                 <th className="">{g.detalle}</th>
