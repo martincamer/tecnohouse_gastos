@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { usePreciosContext } from "../../context/PreciosProvider";
 import { useAccesoriosContext } from "../../context/AccesoriosProvider";
 import { useState } from "react";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { DownloadPDFButton } from "../pdf/DownloadPDFButton";
 import * as XLSX from "xlsx";
 
@@ -14,6 +14,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
     results: resultados,
   } = useAberturasContext();
 
+  const [porcentaje, setPorcentaje] = useState(0);
   const { precios } = usePreciosContext();
 
   const { accesorios } = useAccesoriosContext();
@@ -475,6 +476,13 @@ export const TableAberturas = ({ openModal, handleId }) => {
     setShowDetail(newShowDetail); // Actualiza el estado
   };
 
+  // Suponiendo que `resultados` es el array de datos
+  const ordenadosPorDetalle = resultados?.sort((a, b) => {
+    if (a.detalle < b.detalle) return -1;
+    if (a.detalle > b.detalle) return 1;
+    return 0;
+  });
+
   return (
     <div className="mx-5 pb-20">
       <div className="flex gap-5 max-md:gap-2 max-md:flex-col max-md:text-sm max-md:items-start mb-4">
@@ -524,7 +532,27 @@ export const TableAberturas = ({ openModal, handleId }) => {
             />
           </svg>
         </button>
-        <button className="text-sm font-semibold bg-green-500 rounded text-white px-5 py-2 flex gap-2 items-center">
+        <button
+          onClick={() => document.getElementById("my_modal_pdf").showModal()}
+          className="text-sm font-semibold bg-green-500 rounded text-white px-5 py-2 flex gap-2 items-center"
+        >
+          Descargar inventario PDF
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+            />
+          </svg>
+        </button>
+        {/* <button className="text-sm font-semibold bg-green-500 rounded text-white px-5 py-2 flex gap-2 items-center">
           <PDFDownloadLink
             fileName={`Aberturas Precios ${fechaActual?.toLocaleString(
               "es-AR",
@@ -552,7 +580,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
               d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
             />
           </svg>
-        </button>
+        </button> */}
         <button
           className="text-sm font-semibold bg-orange-500 rounded text-white px-5 py-2 flex gap-2 items-center"
           onClick={downloadAberturasAsExcel}
@@ -573,43 +601,14 @@ export const TableAberturas = ({ openModal, handleId }) => {
             />
           </svg>
         </button>
+
+        <input
+          className="border border-gray-300 rounded-md px-2 text-sm font-bold outline-none"
+          type="text"
+          value={porcentaje}
+          onChange={(e) => setPorcentaje(e.target.value)}
+        />
       </div>
-      {/* <div className="md:hidden max-md:flex flex-col gap-4">
-        {currentResults?.map((g, index) => (
-          <div
-            className="rounded-xl bg-white shadow border-[1px] border-slate-300 py-2 px-3"
-            key={index}
-          >
-            <div className="flex justify-between gap-2">
-              <div className="flex flex-col gap-2">
-                <p className="text-slate-700 text-xs font-semibold uppercase">
-                  {g.tipo} {g.categoria}
-                </p>
-
-                <p className="text-slate-700 text-xs uppercase">{g.detalle}</p>
-                <p className="text-slate-700 text-xs uppercase">{g.color}</p>
-                <p className="text-slate-700 text-xs uppercase">
-                  {g.ancho}x{g.alto}
-                </p>
-              </div>
-              <div className="flex flex-col gap-4 items-center justify-center">
-                <span onClick={() => handleEliminarAbertura(g.id)}>
-                  <span className="border-red-300 border-[1px] rounded-xl shadow py-2 px-4 text-xs bg-red-100 text-center text-red-800 cursor-pointer">
-                    ELIMINAR
-                  </span>
-                </span>
-
-                <Link
-                  to={`/aberturas/${g.id}`}
-                  className="rounded-xl uppercase shadow py-2 px-6 text-xs bg-indigo-500 text-center text-white cursor-pointer"
-                >
-                  Ver
-                </Link>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>{" "} */}
       <div className="bg-white">
         <table className="uppercase table">
           <thead className="">
@@ -624,7 +623,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </tr>
           </thead>
           <tbody className="text-xs">
-            {resultados?.map((g, index) => (
+            {ordenadosPorDetalle?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="">{g.tipo}</th>
                 <th className="">{g.detalle}</th>
@@ -729,23 +728,34 @@ export const TableAberturas = ({ openModal, handleId }) => {
           </tbody>
         </table>
       </div>
-      {/* {totalPages > 1 && (
-        <div className="flex flex-wrap justify-center mt-4 mb-4">
-          {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              className={`mx-1 px-3 py-1 rounded-xl ${
-                currentPage === index + 1
-                  ? "bg-indigo-500 border border-indigo-500 hover:bg-slate-700 transition-all ease-in-out text-white shadow shadow-black/20 max-md:text-xs"
-                  : "bg-white shadow shadow-black/20 max-md:text-xs"
-              }`}
-              onClick={() => handlePageChange(index + 1)}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
-      )} */}
+
+      <ModalVerPdf
+        porcentaje={porcentaje}
+        aberturasConPreciosFinales={aberturasConPreciosFinalesDos}
+      />
     </div>
+  );
+};
+
+import React from "react";
+
+export const ModalVerPdf = ({ porcentaje, aberturasConPreciosFinales }) => {
+  return (
+    <dialog id="my_modal_pdf" className="modal">
+      <div className="modal-box h-full max-w-4xl rounded-md py-12">
+        <form method="dialog">
+          {/* if there is a button in form, it will close the modal */}
+          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
+        </form>
+        <PDFViewer className="h-full w-full">
+          <DownloadPDFButton
+            porcentaje={porcentaje}
+            aberturasConPreciosFinales={aberturasConPreciosFinales}
+          />
+        </PDFViewer>
+      </div>
+    </dialog>
   );
 };

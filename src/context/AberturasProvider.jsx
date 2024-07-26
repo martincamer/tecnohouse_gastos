@@ -189,9 +189,7 @@ export const AberturasProvider = ({ children }) => {
 
       closeModal();
 
-      setTimeout(() => {
-        location.reload();
-      }, 4000);
+      setObtenerAberturas(res.data);
     } catch (error) {
       console.error(error);
       toast.error("Error al crear/editar la abertura.");
@@ -214,14 +212,7 @@ export const AberturasProvider = ({ children }) => {
       },
     });
 
-    const tipoExistente = obtenerAberturas.find(
-      (tipo) => tipo.id === res.data.id
-    );
-
-    if (!tipoExistente) {
-      // Actualizar el estado de tipos agregando el nuevo tipo al final
-      setObtenerAberturas((prevTipos) => [...prevTipos, res.data]);
-    }
+    setObtenerAberturas(res.data);
 
     toast.success("¡Abertura creada correctamente, crea la siguiente!", {
       position: "top-center",

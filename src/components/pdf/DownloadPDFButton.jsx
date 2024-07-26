@@ -13,17 +13,23 @@ import montserratBold from "../../fonts/Montserrat-Bold.ttf";
 import montserratSemiBold from "../../fonts/Montserrat-SemiBold.ttf";
 import montserratRegular from "../../fonts/Montserrat-Regular.ttf";
 
-export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
+export const DownloadPDFButton = ({
+  aberturasConPreciosFinales,
+  porcentaje,
+}) => {
   const fechaActual = new Date();
 
-  // Agrupar aberturas por tipo (ventana o puerta)
-  const aberturasPorTipo = aberturasConPreciosFinales.reduce(
+  // Agrupar aberturas por tipo y luego por categoría
+  const aberturasPorTipoYCategoria = aberturasConPreciosFinales.reduce(
     (acc, abertura) => {
-      const tipo = abertura.tipo; // Asegúrate de tener el campo 'tipo' en tus datos
+      const { tipo, categoria } = abertura; // Asegúrate de tener los campos 'tipo' y 'categoria' en tus datos
       if (!acc[tipo]) {
-        acc[tipo] = [];
+        acc[tipo] = {};
       }
-      acc[tipo].push(abertura);
+      if (!acc[tipo][categoria]) {
+        acc[tipo][categoria] = [];
+      }
+      acc[tipo][categoria].push(abertura);
       return acc;
     },
     {}
@@ -31,185 +37,263 @@ export const DownloadPDFButton = ({ aberturasConPreciosFinales }) => {
 
   return (
     <Document>
-      {Object.entries(aberturasPorTipo).map(([tipo, aberturas], pageIndex) => (
-        <Page key={pageIndex} size="A4" style={styles.body}>
-          <Image
-            style={{
-              width: "100px",
-            }}
-            src={logo}
-          />
-          <View style={styles.tecnohouse_intro}>
-            <Text style={styles.titleTwo}>TECNOHOUSE FABRICA ABERTURAS</Text>
-            <Text style={styles.title_two}>LISTA DE PRECIOS</Text>
-          </View>
-          <View style={styles.tecnohouse_intro}>
-            {/* ... Resto del contenido ... */}
-            <Text
-              style={{
-                fontFamily: "Montserrat",
-                fontWeight: "bold",
-                fontSize: "10px",
-                textTransform: "uppercase",
-              }}
-            >
-              Fecha Actual
-            </Text>
-            <Text
-              style={{
-                fontFamily: "Montserrat",
-                fontWeight: "normal",
-                fontSize: "10px",
-                textTransform: "uppercase",
-                textDecoration: "underline",
-              }}
-            >
-              {fechaActual?.toLocaleString("es-AR", { month: "long" })},{" "}
-              {fechaActual?.toLocaleString("es-AR", { year: "numeric" })}
-            </Text>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-              borderRadius: "2px",
-              borderStyle: "solid",
-              borderWidth: "1px",
-              borderColor: "gray",
-              padding: "20px 20px",
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  fontFamily: "Montserrat",
-                  fontWeight: "semibold",
-                  fontSize: "14px",
-                  color: "#bf616a",
-                  marginBottom: "10px",
-                }}
+      {Object.entries(aberturasPorTipoYCategoria).map(
+        ([tipo, categorias], tipoIndex) =>
+          Object.entries(categorias).map(
+            ([categoria, aberturas], categoriaIndex) => (
+              <Page
+                key={`${tipoIndex}-${categoriaIndex}`}
+                size="A4"
+                style={styles.body}
               >
-                {tipo.toUpperCase()}
-              </Text>
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <Text
+                <Image
                   style={{
-                    width: "68%",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    fontFamily: "Montserrat",
-                    fontSize: "8px",
+                    width: "100px",
                   }}
-                >
-                  Detalle
-                </Text>
-                <Text
-                  style={{
-                    width: "20%",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    fontFamily: "Montserrat",
-                    fontSize: "8px",
-                  }}
-                >
-                  Linea
-                </Text>
-                <Text
-                  style={{
-                    width: "20%",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    fontFamily: "Montserrat",
-                    fontSize: "8px",
-                  }}
-                >
-                  Color
-                </Text>
-                <Text
-                  style={{
-                    width: "20%",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    fontFamily: "Montserrat",
-                    fontSize: "8px",
-                  }}
-                >
-                  Precio Und
-                </Text>
-              </View>
-              {aberturas.map((abertura, index) => (
-                <View key={index}>
-                  <View
+                  src={logo}
+                />
+                <View style={styles.tecnohouse_intro}>
+                  <Text style={styles.titleTwo}>
+                    TECNOHOUSE FABRICA ABERTURAS
+                  </Text>
+                  <Text style={styles.title_two}>LISTA DE PRECIOS</Text>
+                </View>
+                <View style={styles.tecnohouse_intro}>
+                  <Text
                     style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      borderBottom: "1px",
-                      borderStyle: "solid",
-                      borderBottomWidth: "0.8px",
-                      padding: "5px",
+                      fontFamily: "Montserrat",
+                      fontWeight: "bold",
+                      fontSize: "10px",
+                      textTransform: "uppercase",
                     }}
                   >
+                    Fecha Actual
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "Montserrat",
+                      fontWeight: "normal",
+                      fontSize: "10px",
+                      textTransform: "uppercase",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {fechaActual?.toLocaleString("es-AR", { month: "long" })},{" "}
+                    {fechaActual?.toLocaleString("es-AR", { year: "numeric" })}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    borderRadius: "2px",
+                    borderStyle: "solid",
+                    borderWidth: "1px",
+                    borderColor: "gray",
+                    padding: "20px 20px",
+                  }}
+                >
+                  <View>
                     <Text
                       style={{
-                        width: "68%",
-                        fontWeight: "normal",
-                        textTransform: "uppercase",
                         fontFamily: "Montserrat",
-                        fontSize: "7px",
+                        fontWeight: "semibold",
+                        fontSize: "14px",
+                        color: "#bf616a",
+                        marginBottom: "10px",
                       }}
                     >
-                      {abertura.detalle}
+                      {tipo.toUpperCase()} - {categoria.toUpperCase()}
                     </Text>
-                    <Text
+                    <View
                       style={{
-                        width: "20%",
-                        fontWeight: "normal",
-                        textTransform: "uppercase",
-                        fontFamily: "Montserrat",
-                        fontSize: "7px",
+                        display: "flex",
+                        flexDirection: "row",
+                        borderBottom: "1px",
+                        borderStyle: "solid",
+                        borderBottomWidth: "0.8px",
+                        padding: "5px",
                       }}
                     >
-                      {abertura.categoria}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "20%",
-                        fontWeight: "normal",
-                        textTransform: "uppercase",
-                        fontFamily: "Montserrat",
-                        fontSize: "7px",
-                      }}
-                    >
-                      {abertura.color}
-                    </Text>
-                    <Text
-                      style={{
-                        width: "20%",
-                        fontWeight: "normal",
-                        textTransform: "uppercase",
-                        fontFamily: "Montserrat",
-                        fontSize: "7px",
-                      }}
-                    >
-                      {abertura.totalConAumento.toLocaleString("es-ar", {
-                        style: "currency",
-                        currency: "ARS",
-                        minimumFractionDigits: 2,
-                      })}
-                    </Text>
+                      <Text
+                        style={{
+                          width: "68%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Detalle
+                      </Text>
+                      <Text
+                        style={{
+                          width: "20%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Medida
+                      </Text>
+                      <Text
+                        style={{
+                          width: "20%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Linea
+                      </Text>
+                      {/* <Text
+                        style={{
+                          width: "20%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Color
+                      </Text> */}
+                      <Text
+                        style={{
+                          width: "20%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Precio Und
+                      </Text>{" "}
+                      <Text
+                        style={{
+                          width: "20%",
+                          fontWeight: "bold",
+                          textTransform: "uppercase",
+                          fontFamily: "Montserrat",
+                          fontSize: "8px",
+                        }}
+                      >
+                        Precio con %
+                      </Text>
+                    </View>
+                    {aberturas.map((abertura, index) => (
+                      <View key={index}>
+                        <View
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            borderBottom: "1px",
+                            borderStyle: "solid",
+                            borderBottomWidth: "0.8px",
+                            padding: "5px",
+                          }}
+                        >
+                          <Text
+                            style={{
+                              width: "68%",
+                              fontWeight: "semibold",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {abertura.detalle}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "20%",
+                              fontWeight: "normal",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {abertura.ancho}x{abertura.alto}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "20%",
+                              fontWeight: "normal",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {abertura.categoria}
+                          </Text>
+                          {/* <Text
+                            style={{
+                              width: "20%",
+                              fontWeight: "normal",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {abertura.color}
+                          </Text> */}
+                          <Text
+                            style={{
+                              width: "20%",
+                              fontWeight: "normal",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {abertura.totalConAumento.toLocaleString("es-ar", {
+                              style: "currency",
+                              currency: "ARS",
+                              minimumFractionDigits: 2,
+                            })}
+                          </Text>
+                          <Text
+                            style={{
+                              width: "20%",
+                              fontWeight: "bold",
+                              textTransform: "uppercase",
+                              fontFamily: "Montserrat",
+                              fontSize: "7px",
+                            }}
+                          >
+                            {(() => {
+                              // Convertir el porcentaje a decimal (e.g., 98% -> 0.98)
+                              const porcentajeDecimal =
+                                Number(porcentaje) / 100;
+
+                              // Calcular el monto del aumento (aumento = valorOriginal * porcentajeDecimal)
+                              const aumento =
+                                Number(abertura.totalConAumento) *
+                                porcentajeDecimal;
+
+                              // Calcular el nuevo total (nuevoTotal = valorOriginal + aumento)
+                              const nuevoTotal =
+                                Number(abertura.totalConAumento) + aumento;
+
+                              // Formatear el nuevo total como moneda
+                              return nuevoTotal.toLocaleString("es-ar", {
+                                style: "currency",
+                                currency: "ARS",
+                                minimumFractionDigits: 2,
+                              });
+                            })()}
+                          </Text>
+                        </View>
+                      </View>
+                    ))}
                   </View>
                 </View>
-              ))}
-            </View>
-          </View>
-        </Page>
-      ))}
+              </Page>
+            )
+          )
+      )}
     </Document>
   );
 };
@@ -281,8 +365,6 @@ const styles = StyleSheet.create({
   },
   rowTwo: {
     flexDirection: "row",
-    // borderBottomWidth: 1,
-    // borderBottomColor: "#000",
     alignItems: "center",
     height: 30,
     fontSize: 12,
@@ -299,5 +381,3 @@ const styles = StyleSheet.create({
     fontWeight: "semibold",
   },
 });
-
-// ReactPDF.render(<Quixote />);
