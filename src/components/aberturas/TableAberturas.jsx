@@ -634,7 +634,7 @@ export const TableAberturas = ({ openModal, handleId }) => {
             </tr>
           </thead>
           <tbody className="text-xs">
-            {ordenadosPorDetalle?.map((g, index) => (
+            {ordenadosPorDetalleAnchoAlto?.map((g, index) => (
               <tr className="cursor-pointer" key={g.id}>
                 <th className="">{g.tipo}</th>
                 <th className="">{g.detalle}</th>
