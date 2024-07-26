@@ -476,12 +476,10 @@ export const TableAberturas = ({ openModal, handleId }) => {
     setShowDetail(newShowDetail); // Actualiza el estado
   };
 
-  const resultadosOrdenados = resultados?.sort((a, b) => {
-    const detalleA = (a.detalle || "").toLowerCase();
-    const detalleB = (b.detalle || "").toLowerCase();
-
-    if (detalleA < detalleB) return -1;
-    if (detalleA > detalleB) return 1;
+  // Suponiendo que `resultados` es el array de datos
+  const ordenadosPorDetalle = resultados?.sort((a, b) => {
+    if (a.detalle < b.detalle) return -1;
+    if (a.detalle > b.detalle) return 1;
     return 0;
   });
 
